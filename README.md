@@ -1,3 +1,6 @@
+# TaskEase
+This is my first Startup, let's give value to people!
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
