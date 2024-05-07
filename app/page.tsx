@@ -1,9 +1,10 @@
 import Image from "next/image";
+import Footer from "@/app/ui/footer";
 
 export default function Home() {
 
   return (
-    <>
+    <div className="flex flex-col gap-10 mx-32">
       <header>
         <h1>TaskEase Title</h1>
       </header>
@@ -12,9 +13,7 @@ export default function Home() {
         <div>main</div>
       </main>
 
-      <footer>
-        <div>footer</div>
-      </footer>
-    </>
+      <Footer />
+    </div>
   )
 }
