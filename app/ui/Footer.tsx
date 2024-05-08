@@ -49,7 +49,7 @@ function Footer() {
             className="h-5 self-center"
             alt="Heart emoji"
           />
-          <p className='self-center'>&nbsp;by <a href="">Antoni</a>&nbsp;</p>
+          <p className='self-center'>&nbsp;by <a className="underline text-primaryColor hover:no-underline hover:text-primary2Color" href="">Antoni</a>&nbsp;</p>
           <Image
             src="/me.png"
             width={20}
