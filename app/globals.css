@@ -34,13 +34,13 @@ body {
 
 ::-moz-selection {
   background: #01cdf1;
-  color: white;
+  color: black;
 }
 ::-webkit-selection {
   background: #01cdf1;
-  color: white;
+  color: black;
 }
 ::selection {
   background: #01cdf1;
-  color: white;
+  color: black;
 }

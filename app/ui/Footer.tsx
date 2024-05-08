@@ -1,4 +1,5 @@
 import Image from "next/image"
+import Link from 'next/link'
 
 function Footer() {
   return (
@@ -13,9 +14,9 @@ function Footer() {
       <section className='grid grid-cols-3 mt-12 mb-20'>
         <div className='flex flex-col gap-2'>
           <h3 className='mb-5'>PRODUCT</h3>
-          <a className="hover:underline w-fit" href="">Guide</a> {/* or Web App */}
-          <a className="hover:underline w-fit" href="">Pricing</a>
-          <a className="hover:underline w-fit" href="">Updates</a>
+          <Link className="hover:underline w-fit" href="">Guide</Link> {/* or Web App */}
+          <Link className="hover:underline w-fit" href="">Pricing</Link>
+          <Link className="hover:underline w-fit" href="">Updates</Link>
         </div>
         <div>
           <div className='flex flex-col gap-2'>
@@ -32,8 +33,8 @@ function Footer() {
         <div>
           <div className='flex flex-col gap-2'>
             <h3 className='mb-5'>LEGAL</h3>
-            <a className="hover:underline w-fit" href="">Terms of services</a>
-            <a className="hover:underline w-fit" href="">Privacy policy</a>
+            <Link className="hover:underline w-fit" href="">Terms of services</Link>
+            <Link className="hover:underline w-fit" href="/privacy-policy">Privacy policy</Link>
           </div>
         </div>
       </section>
@@ -49,7 +50,7 @@ function Footer() {
             className="h-5 self-center"
             alt="Heart emoji"
           />
-          <p className='self-center'>&nbsp;by <a className="underline text-primaryColor hover:no-underline hover:text-primary2Color" href="">Antoni</a>&nbsp;</p>
+          <p className='self-center'>&nbsp;by <Link className="underline text-primaryColor hover:no-underline hover:text-primary2Color" href="https://twitter.com/AntoniBLopez">Antoni</Link>&nbsp;</p>
           <Image
             src="/me.png"
             width={20}

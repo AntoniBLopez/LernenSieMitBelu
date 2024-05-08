@@ -17,9 +17,13 @@ const config: Config = {
         'primaryColor': '#01b7ff', // blue oscuro
         'primary2Color': '#01cdf1', // cian
         'primaryDarkColor': '#008ba4', // cian oscuro
+        'bluishIconsColor': '#1d9bf0',
+      },
+      backgroundColor: {
         'blackColor': '#212121', // black claro
+        'bluishBlackColor': '#202327', // bluish black claro | Probar si contrasta mejor este con el azul o el black claro
         'black2Color': '#171717', // black oscuro
-        'selectedColor': '#171717', // black oscuro
+        'bluishSelectedColor': '#031018',
       }
     },
   },
