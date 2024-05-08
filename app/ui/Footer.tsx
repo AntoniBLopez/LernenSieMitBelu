@@ -22,11 +22,11 @@ function Footer() {
           <div className='flex flex-col gap-2'>
             <h3 className='mb-5'>SOCIAL</h3>
             <Image
-              src="/icons/socialmedia/twitter.svg"
+              src="/icons/socialmedia/whiteX.svg"
               width={25}
               height={25}
               className="hover:cursor-pointer hover:scale-125"
-              alt="Twitter logo"
+              alt="X social media logo"
             />
           </div>
         </div>

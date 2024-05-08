@@ -1,9 +1,22 @@
-
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Privacypolicy() {
+
+
   return (
     <div className="w-full h-full bg-bluishBlackColor">
-      <section className="flex flex-col gap-10 mx-[30%] py-16">
+      <section className="flex flex-col gap-8 mx-[30%] py-16">
+        <Link href={"/"} className="w-fit">
+          <Image
+            // onMouseOver={ }
+            src="/icons/whiteBackArrow.png"
+            width={30}
+            height={30}
+            className="text-black"
+            alt="Go back to homepage arrow icon"
+          />
+        </Link>
         <h1>Privacy Policy</h1>
         <div>
           {/* Corregir parrafo y dividirlo en dos ya que es muy grande comparado con los demas */}
