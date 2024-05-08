@@ -31,3 +31,16 @@ body {
     text-wrap: balance;
   }
 }
+
+::-moz-selection {
+  background: #01cdf1;
+  color: white;
+}
+::-webkit-selection {
+  background: #01cdf1;
+  color: white;
+}
+::selection {
+  background: #01cdf1;
+  color: white;
+}
