@@ -33,8 +33,8 @@ function Footer() {
         <div>
           <div className='flex flex-col gap-2'>
             <h3 className='mb-5'>LEGAL</h3>
-            <Link className="hover:underline w-fit" href="">Terms of services</Link>
-            <Link className="hover:underline w-fit" href="/privacy-policy">Privacy policy</Link>
+            <Link className="hover:underline w-fit" href="/legal/tos">Terms of services</Link>
+            <Link className="hover:underline w-fit" href="/legal/privacy">Privacy policy</Link>
           </div>
         </div>
       </section>
