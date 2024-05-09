@@ -6,7 +6,8 @@ export default function Privacypolicy() {
 
   return (
     <div className="w-full h-full bg-bluishBlackColor">
-      <section className="flex flex-col gap-8 mx-[30%] py-16">
+      <div className="w-full h-full px-6">
+      <section className="flex flex-col gap-8 max-w-xl mx-auto py-16">
         <Link href={"/"} className="w-fit">
           <Image
             src="/icons/whiteBackArrow.png"
@@ -46,6 +47,8 @@ export default function Privacypolicy() {
           <div className="text-sm">legal@taskease.click</div>
         </div>
       </section>
+      </div>
+
     </div>
   )
 }
