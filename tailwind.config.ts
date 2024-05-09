@@ -30,6 +30,13 @@ const config: Config = {
         desktop: '8rem',
         tablet: '6rem',
         mobile: '4rem',
+        fixed: '1.5rem',
+      },
+      screens: {
+        'mobile': '440px',
+        'tablet': '640px',
+        'laptop': '1024px',
+        'desktop': '1280px',
       },
     },
   },

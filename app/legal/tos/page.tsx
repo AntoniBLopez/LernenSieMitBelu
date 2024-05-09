@@ -4,19 +4,18 @@ import Link from "next/link"
 export default function ToS() {
   return (
     <div className="w-full h-full bg-bluishBlackColor">
-      <div className="w-full h-full px-6">
+      <div className="w-full h-full px-fixed">
         <section className="flex flex-col gap-8 max-w-xl mx-auto py-16">
           <Link href={"/"} className="w-fit">
             <Image
               src="/icons/whiteBackArrow.png"
               width={30}
               height={30}
-              className="text-black"
               alt="Go back to homepage arrow icon"
             />
           </Link>
-          <h1 className="text-3xl text-grayColor font-bold">Terms and Conditions</h1>
-          <div className="text-grayColor">
+          <h1 className="text-3xl font-bold">Terms and Conditions</h1>
+          <div>
             <h3 className="text-xl">1. Introduction</h3>
             By accessing or using the Service, you agree to be bound by these Terms and Conditions.
             <br />
