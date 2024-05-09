@@ -10,7 +10,7 @@ export default function Footer() {
           <div className='flex flex-col gap-2'>
             <h3 className='mb-2'>PRODUCT</h3>
             <Link className="hover:underline w-fit" href="">Guide</Link> {/* or Web App */}
-            <Link className="hover:underline w-fit" href="">Pricing</Link>
+            <Link className="hover:underline w-fit" href="#pricing">Pricing</Link>
             <Link className="hover:underline w-fit" href="">Updates</Link>
           </div>
           <div className='flex flex-col gap-2 '>
