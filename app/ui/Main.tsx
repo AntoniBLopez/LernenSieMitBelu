@@ -1,13 +1,27 @@
 
 export default function Main() {
   return (
-    <div className="w-full h-full px-fixed bg-bluishBlackColor">
+    <main className="h-fit w-full">
+      <div className="px-fixed w-full h-fit bg-bluishBlackColor">
+        <div className="h-[250px] py-10">
 
+          <h1>Main 1</h1>
+        </div>
+      </div>
 
-      <main className="flex flex-col h-[1000px]">
+      <div className="px-fixed w-full h-fit bg-black2Color">
+        <div className="h-[250px] py-10">
 
-        <div>Main</div>
-      </main>
-    </div>
+          <h1>Main 2</h1>
+        </div>
+      </div>
+
+      <div className="px-fixed w-full h-fit bg-bluishBlackColor">
+        <div className="h-[250px] py-10">
+
+          <h1>Main 3</h1>
+        </div>
+      </div>
+    </main>
   )
 }
