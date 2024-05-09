@@ -18,10 +18,10 @@ export default function Privacypolicy() {
         </Link>
         <h1 className="text-3xl text-grayColor font-bold">Privacy Policy</h1>
         <div className="text-grayColor">
-          {/* Corregir parrafo y dividirlo en dos ya que es muy grande comparado con los demas */}
           At Task Ease, safeguarding your privacy is our priority. When you engage with our web application and visit our website at https://www.taskease.click, we collect various types of information to optimize your experience and improve our services. This could encompass a range of data, including but not limited to your name, email address, payment details for subscription processing, and any other information voluntarily provided during your interaction with our platform.
           <br />
           <br />
+
           Rest assured, we handle your information with utmost care and respect for your privacy. We do not disclose your personal data to third parties without your explicit consent, except when necessary for the functioning of our application or to fulfill legal requirements.
           <br />
           <br />
