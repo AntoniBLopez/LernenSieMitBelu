@@ -9,7 +9,6 @@ export default function Privacypolicy() {
       <section className="flex flex-col gap-8 mx-[30%] py-16">
         <Link href={"/"} className="w-fit">
           <Image
-            // onMouseOver={ }
             src="/icons/whiteBackArrow.png"
             width={30}
             height={30}
