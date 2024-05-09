@@ -21,13 +21,15 @@ function Footer() {
         <div>
           <div className='flex flex-col gap-2'>
             <h3 className='mb-5'>SOCIAL</h3>
-            <Image
-              src="/icons/socialmedia/whiteX.svg"
-              width={25}
-              height={25}
-              className="hover:cursor-pointer hover:scale-125"
-              alt="X social media logo"
-            />
+            <Link href={"https://twitter.com/taskease_click"} target="_blank">
+              <Image
+                src="/icons/socialmedia/whiteX.svg"
+                width={25}
+                height={25}
+                className="hover:cursor-pointer hover:scale-125"
+                alt="X social media logo"
+              />
+            </Link>
           </div>
         </div>
         <div>

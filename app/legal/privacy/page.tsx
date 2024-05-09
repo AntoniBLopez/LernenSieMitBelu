@@ -43,7 +43,7 @@ export default function Privacypolicy() {
           <br />
 
           This policy is effective as of 09 May 2024.
-          <div className="text-sm">contact@taskease.click</div>
+          <div className="text-sm">legal@taskease.click</div>
         </div>
       </section>
     </div>
