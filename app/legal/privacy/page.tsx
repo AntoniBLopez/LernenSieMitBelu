@@ -17,8 +17,8 @@ export default function Privacypolicy() {
             alt="Go back to homepage arrow icon"
           />
         </Link>
-        <h1>Privacy Policy</h1>
-        <div>
+        <h1 className="text-3xl text-grayColor font-bold">Privacy Policy</h1>
+        <div className="text-grayColor">
           {/* Corregir parrafo y dividirlo en dos ya que es muy grande comparado con los demas */}
           At Task Ease, safeguarding your privacy is our priority. When you engage with our web application and visit our website at https://www.taskease.click, we collect various types of information to optimize your experience and improve our services. This could encompass a range of data, including but not limited to your name, email address, payment details for subscription processing, and any other information voluntarily provided during your interaction with our platform.
           <br />
@@ -44,9 +44,7 @@ export default function Privacypolicy() {
           <br />
 
           This policy is effective as of 09 May 2024.
-          <br />
-
-          contact@taskease.click
+          <div className="text-sm">contact@taskease.click</div>
         </div>
       </section>
     </div>

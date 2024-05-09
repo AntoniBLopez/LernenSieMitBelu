@@ -18,6 +18,7 @@ const config: Config = {
         'primary2Color': '#01cdf1', // cian
         'primaryDarkColor': '#008ba4', // cian oscuro
         'bluishIconsColor': '#1d9bf0',
+        'grayColor': '#cfcfcf',
       },
       backgroundColor: {
         'blackColor': '#212121', // black claro
