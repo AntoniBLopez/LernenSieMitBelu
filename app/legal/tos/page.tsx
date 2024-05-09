@@ -6,7 +6,7 @@ export default function ToS() {
     <div className="w-full h-full bg-bluishBlackColor">
       <div className="w-full h-full px-fixed">
         <section className="flex flex-col gap-8 max-w-xl mx-auto py-16">
-          <Link href={"/"} className="w-fit">
+          <Link href={"/#footer"} className="w-fit">
             <Image
               src="/icons/whiteBackArrow.png"
               width={30}
