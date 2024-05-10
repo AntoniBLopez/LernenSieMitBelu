@@ -6,12 +6,13 @@ export default function Footer() {
     <div className="w-full h-full px-fixed bg-bluishBlackColor">
       <footer className="pb-12 max-w-3xl mx-auto" id='footer'>
       <div className='w-auto mb-12 h-px lg:h-px bg-slate-700' />
-        <section className='grid grid-cols-3 max-mobile:gap-10 mb-20 max-mobile:grid-cols-2'>
+        <section className='grid grid-cols-3 mb-20 max-mobile:gap-10 max-mobile:grid-cols-2'>
           <div className='flex flex-col gap-2'>
             <h3 className='mb-2'>PRODUCT</h3>
             <Link className="hover:underline w-fit" href="">Guide</Link> {/* or Web App */}
             <Link className="hover:underline w-fit" href="#pricing">Pricing</Link>
             <Link className="hover:underline w-fit" href="">Updates</Link>
+            <Link className="hover:underline w-fit" href="/support">Support</Link>
           </div>
           <div className='flex flex-col gap-2 '>
             <h3 className='mb-2'>SOCIAL</h3>
