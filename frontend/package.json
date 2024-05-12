@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "start-server": "NODE_ENV=production node server.js",
+    "server-dev": "node dev",
+    "server-start": "NODE_ENV=production node server.js",
     "lint": "next lint"
   },
   "dependencies": {
@@ -14,6 +15,7 @@
     "@next/env": "^14.2.3",
     "@react-oauth/google": "^0.12.1",
     "@vercel/analytics": "^1.2.2",
+    "express": "^4.19.2",
     "googleapis": "^105.0.0",
     "next": "14.2.3",
     "next-plausible": "^3.12.0",
