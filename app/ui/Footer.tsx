@@ -18,7 +18,7 @@ export default function Footer() {
             <h3 className='mb-2'>SOCIAL</h3>
             <Link className="w-fit" href={"https://twitter.com/taskease_click"} target="_blank">
               <Image
-                src="/icons/socialmedia/whiteX.svg"
+                src="/logos/socialmedia/whiteX.svg"
                 width={25}
                 height={25}
                 className="hover:cursor-pointer hover:scale-125"
