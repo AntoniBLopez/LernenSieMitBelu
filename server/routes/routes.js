@@ -30,7 +30,7 @@ router.post('/create-tokens', async (req, res, next) => {
 
 router.post('/create-event', async (req, res, next) => {
   try {
-    
+    // this is the event you want to create
   } catch (error) {
     next(error)
   }
