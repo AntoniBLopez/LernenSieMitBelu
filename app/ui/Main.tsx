@@ -3,16 +3,20 @@ import { googleLogout, useGoogleLogin, hasGrantedAllScopesGoogle } from '@react-
 // googleLogout()
 import Image from "next/image"
 import { useState } from 'react'
-// import axios from 'axios'
+import axios from 'axios'
 
 export default function Main() {
 
   const [tokenResponse, setTokenResponse] = useState<any>('')
 
   const login = useGoogleLogin({
-    onSuccess: codeResponse => {
-      setTokenResponse(codeResponse)
-      console.log(codeResponse)
+    onSuccess: response => {
+      console.log(response)
+      const { code } = response
+      axios.post('http://localhost:4000/api/create-tokens', { code })
+        .then(res => console.log(res.data))
+        .catch(err => console.log(err.message))
+      setTokenResponse(response)
     },
     onError: error => console.log(error),
     flow: 'auth-code',
