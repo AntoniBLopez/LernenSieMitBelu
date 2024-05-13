@@ -5,9 +5,7 @@ import { GoogleOAuthProvider } from '@react-oauth/google'
 
 
 export default function Home() {
-  const clientId = process.env.CLIENT_ID_DEV_ENV || ''
-
-  console.log(clientId)
+  const clientId = process.env.GOOGLE_CLIENT_ID || ''
 
   return (
     <GoogleOAuthProvider clientId={`${clientId}`}>

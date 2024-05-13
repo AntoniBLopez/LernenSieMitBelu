@@ -41,7 +41,7 @@ export default function Main() {
             <h1>Main 1 - Headline</h1>
             <button className='flex flex-row bg-white gap-2 py-2 px-3 rounded-md text-black hover:opacity-80' onClick={() => login()}>
               <Image className='self-center' src={'/logos/google.png'} alt='Google logo' width={20} height={20} />
-              Sign in & Authorize Calendar
+              Sign in & Authorize calendar
             </button>
           </div>
           <div className="w-[50%] h-full">
