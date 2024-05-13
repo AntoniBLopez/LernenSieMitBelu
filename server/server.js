@@ -1,9 +1,8 @@
-require("dotenv").config() //  doesn't work, i don't know why
+require("dotenv").config()
 const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
-// const routes = require('./routes/routes.js')
 const createError = require('http-errors')
 const cors = require('cors')
 
