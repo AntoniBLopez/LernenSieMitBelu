@@ -19,7 +19,7 @@ export default function Main() {
               </span>
             </h1>
 
-            <p className='text-base opacity-90 max-w-[34rem]'>Get organized using the &quot;time blocking&quot; technique in seconds, synchronized with Google Calendars in the fastest and easiest way ever seen.</p>
+            <p className='text-base opacity-90 max-w-[36rem]'>Get organized using the &quot;time blocking&quot; technique, synchronized with Google Calendars in the fastest and easiest way ever seen.</p>
           </div>
           <div className="w-[50%] h-full">
             <h1>
