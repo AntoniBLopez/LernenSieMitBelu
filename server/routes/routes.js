@@ -20,17 +20,72 @@ router.get('/', async (req, res, next) => {
 router.post('/create-tokens', async (req, res, next) => {
   try {
     const { code } = req.body
-    /* Keep safe the refresh token TOKENS.REFRESH_TOKEN and save it in your database */
+    console.log(code, 'code')
     const { tokens } = await oauth2Client.getToken(code)
+    /* Keep safe the refresh token: tokens.refresh_token and save it in your database */
+    console.log(tokens.refresh_token, 'tokens.refresh_token')
     res.send(tokens)
   } catch (error) {
     next(error)
   }
 })
 
+// router.post('/create-calendar', async (req, res, next) => {
+//   try {
+//     const { name } = req.body
+//     const calendar = google.calendar('v3')
+//     // calendar.calendars.insert
+
+//     oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
+//     const response = await calendar.calendars.insert({
+//       auth: oauth2Client,
+//       calendarId: name,
+//       resource: {
+//         summary: name,
+//         timeZone: 'America/Los_Angeles'
+//       }
+//     })
+//     res.send(response)
+//   } catch (error) {
+//     next(error)
+//   }
+// })
+
 router.post('/create-event', async (req, res, next) => {
   try {
     // this is the event you want to create
+    console.log('inside create-event')
+    console.log(req.body, 'req.body')
+    const {
+      summary,
+      description,
+      location,
+      startDate,
+      endDate
+    } = req.body
+
+    oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN })
+    console.log(REFRESH_TOKEN, 'REFRESH_TOKEN')
+    const calendar = google.calendar('v3')
+
+    const response = await calendar.events.insert({
+      auth: oauth2Client,
+      calendarId: 'primary',
+      // resource: {
+      requestBody: {
+        summary,
+        description,
+        location,
+        colorId: '7', /* Color id: 1. blue, 2. green, 3. purple, 4. red, 5. yellow, 6. orange, 7. turquoise, 8. gray 9. bold blue 10. bold green 11. bold red  */
+        start: {
+          dateTime: new Date(startDate)
+        },
+        end: {
+          dateTime: new Date(endDate)
+        }
+      }
+    })
+    res.send(response)
   } catch (error) {
     next(error)
   }

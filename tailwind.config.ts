@@ -25,12 +25,14 @@ const config: Config = {
         'bluishBlackColor': '#202327', // bluish black claro | Probar si contrasta mejor este con el azul o el black claro
         'black2Color': '#171717', // black oscuro
         'bluishSelectedColor': '#031018',
+        'blockColor': '#01cdf1',
       },
       spacing: {
         desktop: '8rem',
         tablet: '6rem',
         mobile: '4rem',
         fixed: '1.5rem',
+        fixedDesktop: '6rem',
       },
       screens: {
         'mobile': '440px',
