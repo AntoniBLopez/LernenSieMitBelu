@@ -14,18 +14,14 @@ const config: Config = {
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       textColor: {
-        'primaryColor': '#01b7ff', // blue oscuro
-        'primary2Color': '#01cdf1', // cian
-        'primaryDarkColor': '#008ba4', // cian oscuro
-        'bluishIconsColor': '#1d9bf0',
+        'primaryColor': '#50c9a4', // blue oscuro
         'grayColor': '#cfcfcf',
       },
       backgroundColor: {
-        'blackColor': '#212121', // black claro
-        'bluishBlackColor': '#202327', // bluish black claro | Probar si contrasta mejor este con el azul o el black claro
-        'black2Color': '#171717', // black oscuro
+        // 'bgColor': '#f7fcf9',
+        'bgColor': '#f2f2f2',
+        'bgPrimaryColor': '#50c9a4',
         'bluishSelectedColor': '#031018',
-        'blockColor': '#01cdf1',
       },
       spacing: {
         desktop: '8rem',

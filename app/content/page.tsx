@@ -1,7 +1,8 @@
+import React from 'react'
 
 function page() {
   return (
-    <div>Cards</div>
+    <div>Home</div>
   )
 }
 

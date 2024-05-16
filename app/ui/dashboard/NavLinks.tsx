@@ -16,13 +16,13 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   { name: 'Home', href: '/', icon: HomeIcon },
-  { name: 'FlashCards', href: '/ui/content/flashcards', icon: ClipboardIcon },
+  { name: 'Flashcards', href: '/content/flashcards', icon: ClipboardIcon },
   {
     name: 'Match',
-    href: '/ui/content/match',
+    href: '/content/match',
     icon: ArrowsPointingInIcon,
   },
-  { name: 'MultipleChoice', href: '/ui/content/multipleChoice', icon: UserGroupIcon },
+  { name: 'Multiple Choice', href: '/content/multiplechoice', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
