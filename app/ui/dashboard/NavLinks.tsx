@@ -22,7 +22,7 @@ const links = [
     href: '/ui/content/match',
     icon: ArrowsPointingInIcon,
   },
-  { name: 'Customers', href: '/dashboard/customers', icon: UserGroupIcon },
+  { name: 'MultipleChoice', href: '/ui/content/multipleChoice', icon: UserGroupIcon },
 ];
 
 export default function NavLinks() {
