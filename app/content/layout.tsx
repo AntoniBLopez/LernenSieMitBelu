@@ -1,0 +1,24 @@
+import Image from 'next/image'
+import Link from 'next/link'
+import React from 'react'
+
+function layout({ children }: { pageName: string, children: React.ReactNode }) {
+  return (
+    <>
+      <header className='mx-contentMargin mt-12 mb-5'>
+        <Link href={"/"} className="w-fit">
+          <Image
+            src="/icons/leftArrow.png"
+            width={30}
+            height={30}
+            alt="Go back to homepage arrow icon"
+            className='hover:scale-110'
+          />
+        </Link>
+      </header>
+      <div>{children}</div>
+    </>
+  )
+}
+
+export default layout

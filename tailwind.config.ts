@@ -29,6 +29,7 @@ const config: Config = {
         mobile: '4rem',
         fixed: '1.5rem',
         fixedDesktop: '6rem',
+        contentMargin: '6rem',
       },
       screens: {
         'mobile': '440px',
