@@ -1,8 +1,10 @@
-import React from 'react'
+import SideNav from '../ui/dashboard/SideNav'
 
 function page() {
   return (
-    <div>Home</div>
+    <main>
+      <h1>Content Home</h1>
+    </main>
   )
 }
 

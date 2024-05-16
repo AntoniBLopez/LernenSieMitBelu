@@ -4,7 +4,7 @@ import React from 'react'
 
 function page() {
   return (
-    <main>
+    <main className='flex flex-col w-full h-full gap-5'>
       <Link href={"/"} className="w-fit">
         <Image
           src="/icons/leftArrow.png"
@@ -14,7 +14,7 @@ function page() {
           alt="Go back to homepage arrow icon"
         />
       </Link>
-      <h1>Flashcards</h1>
+      <h1 className='text-3xl font-bold text-center'>Flashcards</h1>
     </main>
   )
 }

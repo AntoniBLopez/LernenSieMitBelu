@@ -38,7 +38,7 @@ export default function Footer() {
           <div className="flex flex-row justify-center ">
             <p className='self-center'>Build with&nbsp;</p>
             <Image
-              src="/icons/whiteHeart.png"
+              src="/icons/heart.png"
               width={20}
               height={20}
               className="h-5 self-center"
