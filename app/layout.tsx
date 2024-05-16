@@ -7,7 +7,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Task Ease",
+  title: "Lernen Sie Mit Belu",
   description: "It is an app to add tasks to a calendar that syncs with Google Calendars, in which you can organize your week and scale it to a monthly, quarterly, semi-annual or annual level.",
 };
 
