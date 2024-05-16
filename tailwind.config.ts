@@ -15,7 +15,7 @@ const config: Config = {
       },
       textColor: {
         'primaryColor': '#50c9a4',
-        'grayColor': '#cfcfcf',
+        'grayColor': '#696969',
       },
       backgroundColor: {
         // 'bgColor': '#f7fcf9',

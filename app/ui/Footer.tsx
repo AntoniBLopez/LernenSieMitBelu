@@ -5,12 +5,12 @@ export default function Footer() {
   return (
     <div className="w-full h-full px-fixed bg-bluishBlackColor">
       <footer className="pb-12 max-w-3xl mx-auto" id='footer'>
-      <div className='w-auto mb-12 h-px lg:h-px bg-slate-700' />
+        <div className='w-auto mb-12 h-px lg:h-px bg-slate-700' />
         <section className='grid grid-cols-3 mb-20 max-mobile:gap-10 max-mobile:grid-cols-2'>
           <div className='flex flex-col gap-2'>
             <h3 className='mb-2 font-bold'>PRODUCT</h3>
             <Link className="hover:underline w-fit" href="">Guide</Link> {/* or Web App */}
-            <Link className="hover:underline w-fit" href="#pricing">Pricing</Link>
+            <Link className="hover:underline w-fit" href="#pricing">Preisgestaltung</Link>
             <Link className="hover:underline w-fit" href="">Updates</Link>
             <Link className="hover:underline w-fit" href="/support">Support</Link>
           </div>
@@ -28,8 +28,10 @@ export default function Footer() {
           </div>
           <div className='flex flex-col gap-2'>
             <h3 className='mb-2 font-bold'>LEGAL</h3>
-            <Link className="hover:underline w-fit" href="/legal/tos">Terms of services</Link>
-            <Link className="hover:underline w-fit" href="/legal/privacy">Privacy policy</Link>
+            <div className="flex flex-col gap-2 text-black">
+              <Link className="hover:underline w-fit" href="/legal/tos">Terms of services</Link>
+              <Link className="hover:underline w-fit" href="/legal/privacy">Privacy policy</Link>
+            </div>
           </div>
         </section>
 
@@ -53,7 +55,7 @@ export default function Footer() {
               alt="My profile picture"
             />
           </div>
-          <p className='self-center'>Copyright © 2024 - All rights reserved</p>
+          <p className='self-center'>Urheberrechte © 2024 - Alle Rechte vorbehalten.</p>
           {/* IF NECESSARY */}
           {/* <p>Logo by Freepik - Flaticon</p> */}
         </section>
