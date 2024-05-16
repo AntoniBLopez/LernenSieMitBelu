@@ -46,7 +46,7 @@ export default function Footer() {
             />
             <p className='self-center'>&nbsp;by <Link className="underline text-primaryColor hover:no-underline hover:text-primary2Color" href="https://twitter.com/AntoniBLopez" target="_blank">Antoni</Link>&nbsp;</p>
             <Image
-              src="/logos/me.png"
+              src="/me.png"
               width={20}
               height={20}
               className="rounded-full self-center h-5"
