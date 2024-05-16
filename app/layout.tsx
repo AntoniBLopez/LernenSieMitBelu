@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Lernen Sie Mit Belu",
-  description: "It is an app to add tasks to a calendar that syncs with Google Calendars, in which you can organize your week and scale it to a monthly, quarterly, semi-annual or annual level.",
+  description: "Lernen Sie Spanisch, indem Sie Aufgaben auf die einfachste, schnellste und einfachste Art und Weise erledigen, die es je gab.",
 };
 
 export default function RootLayout({
@@ -17,13 +17,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <PlausibleProvider domain='taskease.click' >
+    // <PlausibleProvider domain='taskease.click' > INCORPORAR CON EL DOMINIO ADECUADO
       <html lang="en">
         <body className={inter.className}>
           {children}
           <Analytics />
         </body>
       </html>
-    </PlausibleProvider>
+    // </PlausibleProvider>
   );
 }
