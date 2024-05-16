@@ -10,7 +10,6 @@ function page() {
           src="/icons/leftArrow.png"
           width={30}
           height={30}
-          className="text-black"
           alt="Go back to homepage arrow icon"
         />
       </Link>

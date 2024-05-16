@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 0, 0, 0;
+  /* --foreground-rgb: 0, 0, 0; */
+  --foreground: '#f2f2f2';
   --background-rgb: 242, 242, 242;
   /* --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255; */
@@ -11,7 +12,8 @@
 
 @media (prefers-color-scheme: light) {
   :root {
-    --foreground-rgb: 207, 207, 207;
+    /* --foreground-rgb: 207, 207, 207; */
+    --foreground: '#f2f2f2';
     --background-rgb: 242, 242, 242;
     /* --background-start-rgb: 0, 0, 0;
     --background-end-rgb: 0, 0, 0; */
@@ -19,7 +21,8 @@
 }
 
 body {
-  color: rgb(var(--foreground-rgb));
+  /* color: rgb(var(--foreground-rgb)); */
+  color: var(--foreground);
   background: rgb(var(--background-rgb));
   /* background: linear-gradient(
       to bottom,
@@ -36,14 +39,16 @@ body {
 }
 
 ::-moz-selection {
-  background: #01cdf1;
-  color: black;
+  background: #50c9a4;
+  color: '#f2f2f2';
 }
+
 ::-webkit-selection {
-  background: #01cdf1;
-  color: black;
+  background: #50c9a4;
+  color: '#f2f2f2';
 }
+
 ::selection {
-  background: #01cdf1;
-  color: black;
+  background: #50c9a4;
+  color: '#f2f2f2';
 }
