@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-function page() {
+function Page() {
   return (
     <main className='flex flex-col gap-5'>
       <h1 className='text-3xl font-bold text-center'>Match</h1>
@@ -9,4 +9,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

@@ -21,7 +21,8 @@ const config: Config = {
         // 'bgColor': '#f7fcf9',
         'bgColor': '#f2f2f2',
         'bgPrimaryColor': '#50c9a4',
-        'bluishSelectedColor': '#031018',
+        'selectedColor': '#adf7e1',
+        // 'selectedColor': '#cafced',
       },
       spacing: {
         desktop: '8rem',

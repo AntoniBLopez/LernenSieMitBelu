@@ -34,7 +34,6 @@ router.get('/data', async (req, res, next) => {
     const dataPath = path.join(__dirname, '../data.json')
     const rawData = fs.readFileSync(dataPath, 'utf8')
     const obj = JSON.parse(rawData)
-    console.log(obj, 'data')
     res.send(obj)
 
 

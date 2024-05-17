@@ -1,6 +1,6 @@
 import SideNav from '../ui/dashboard/SideNav'
 
-function page() {
+function Page() {
   return (
     <main>
       <h1>Content Home</h1>
@@ -8,4 +8,4 @@ function page() {
   )
 }
 
-export default page
+export default Page

@@ -4,8 +4,8 @@ import React from 'react'
 
 function layout({ children }: { pageName: string, children: React.ReactNode }) {
   return (
-    <>
-      <header className='mx-contentMargin mt-12 mb-5'>
+    <div className='flex flex-col mx-contentMargin'>
+      <header className='mt-12 mb-5'>
         <Link href={"/"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"
@@ -16,8 +16,8 @@ function layout({ children }: { pageName: string, children: React.ReactNode }) {
           />
         </Link>
       </header>
-      <div>{children}</div>
-    </>
+      {children}
+    </div>
   )
 }
 
