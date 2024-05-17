@@ -1,5 +1,7 @@
 require('dotenv').config()
 const router = require('express').Router()
+const fs = require('fs')
+const path = require('path')
 // const { create } = require('domain')
 // const { google } = require('googleapis')
 
@@ -27,12 +29,19 @@ router.post('/create-tokens', async (req, res, next) => {
   }
 })
 
-router.post('/create', async (req, res, next) => {
+router.get('/data', async (req, res, next) => {
   try {
-    const {
-      summary,
-    } = req.body
-    res.send(response)
+    const dataPath = path.join(__dirname, '../data.json')
+    const rawData = fs.readFileSync(dataPath, 'utf8')
+    const obj = JSON.parse(rawData)
+    console.log(obj, 'data')
+    res.send(obj)
+
+
+    // const {
+    //   summary,
+    // } = req.body
+    // res.send(response)
   } catch (error) {
     next(error)
   }
