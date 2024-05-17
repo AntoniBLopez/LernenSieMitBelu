@@ -23,14 +23,14 @@ function Page() {
   return (
     <main className='flex flex-col gap-10'>
       <h1 className='text-3xl font-bold text-center'>Multiple Choice</h1>
-      <div className='flex flex-col gap-5'>
+      <div className='flex flex-col h-[60vh] justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
         <div className='flex flex-col gap-2'>
           <p className='opacity-50 font-medium'>Definition</p>
           <div className='font-bold'>Español</div>
         </div>
-        <div className='flex flex-col gap-5'>
+        <div className='flex flex-col gap-4 tablet:mb-5'>
           <p className='font-bold text-grayColor'>Choose matching term</p>
-          <section className='grid grid-cols-2 gap-5'>
+          <section className='grid grid-cols-1 tablet:grid-cols-2 gap-2 tablet:gap-5'>
             {
               data.map((el: any, index) => {
                 if (el['nacionalidades']) {

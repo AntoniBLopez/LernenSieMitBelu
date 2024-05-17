@@ -31,7 +31,7 @@ router.post('/create-tokens', async (req, res, next) => {
 
 router.get('/data', async (req, res, next) => {
   try {
-    const dataPath = path.join(__dirname, '../data.json')
+    const dataPath = path.join(__dirname, '../data/a1.json')
     const rawData = fs.readFileSync(dataPath, 'utf8')
     const obj = JSON.parse(rawData)
     res.send(obj)
