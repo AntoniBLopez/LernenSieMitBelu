@@ -4,7 +4,7 @@ import React from 'react'
 
 function layout({ children }: { pageName: string, children: React.ReactNode }) {
   return (
-    <div className='flex flex-col mx-contentMargin'>
+    <div className='flex flex-col mx-mobile tablet:mx-tablet max-mx-contentMargin'>
       <header className='mt-12 mb-5'>
         <Link href={"/"} className="w-fit">
           <Image

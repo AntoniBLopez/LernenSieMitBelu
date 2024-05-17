@@ -26,8 +26,8 @@ const config: Config = {
       },
       spacing: {
         desktop: '8rem',
-        tablet: '6rem',
-        mobile: '4rem',
+        tablet: '4rem',
+        mobile: '2rem',
         fixed: '1.5rem',
         fixedDesktop: '6rem',
         contentMargin: '6rem',
