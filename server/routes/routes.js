@@ -2,6 +2,7 @@ require('dotenv').config()
 const router = require('express').Router()
 const fs = require('fs')
 const path = require('path')
+const { GetAllUsers } = require('../db/queries')
 // const { create } = require('domain')
 // const { google } = require('googleapis')
 
@@ -16,7 +17,8 @@ const path = require('path')
 // )
 
 router.get('/', async (req, res, next) => {
-  res.send({ message: 'Awesome api server!' })
+  const query = GetAllUsers
+  res.status(201).send({ users: query })
 })
 
 router.post('/create-tokens', async (req, res, next) => {
