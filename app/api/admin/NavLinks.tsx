@@ -1,13 +1,10 @@
 'use client';
 
 import {
-  UserGroupIcon,
-  HomeIcon,
-  DocumentDuplicateIcon,
+  PlusIcon,
+  ArrowUturnLeftIcon,
   ClipboardIcon,
   ArrowsPointingInIcon,
-  AdjustmentsHorizontalIcon,
-  PaperAirplaneIcon
 
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -17,9 +14,9 @@ import clsx from 'clsx';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Home', href: '/', icon: HomeIcon },
-  { name: 'Admin', href: '/api/admin', icon: AdjustmentsHorizontalIcon },
-  { name: 'API', href: '/api/dev', icon: PaperAirplaneIcon },
+  { name: 'Back to Home', href: '/', icon: ArrowUturnLeftIcon },
+  { name: 'Add Level', href: '/api/admin/level', icon: PlusIcon },
+  { name: 'Add Topic', href: '/api/admin/level', icon: ArrowsPointingInIcon, },
 ];
 
 export default function NavLinks() {

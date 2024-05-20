@@ -12,8 +12,8 @@ export default function Header() {
       className="rounded-full"
       alt="Site icon"
       />
-      <Link href="/content" className="font-bold hover:underline">Pricing</Link>
-      <Link href="/content" className="font-bold hover:underline">LOG IN</Link>
+      <Link href="/" className="font-bold hover:underline">Pricing</Link>
+      <Link href="/" className="font-bold hover:underline">LOG IN</Link>
     </header>
   )
 }
