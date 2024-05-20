@@ -18,6 +18,7 @@ function Page() {
         console.log(error, 'error')
       })
     console.log(data, 'data')
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (
