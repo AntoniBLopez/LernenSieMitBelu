@@ -18,7 +18,7 @@ function Page() {
         console.log(error, 'error')
       })
     console.log(data, 'data')
-  }, [])
+  })
 
   return (
     <main className='flex flex-col gap-10'>
