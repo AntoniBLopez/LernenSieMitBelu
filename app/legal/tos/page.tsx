@@ -8,7 +8,7 @@ export default function ToS() {
         <section className="flex flex-col gap-8 max-w-xl mx-auto py-16">
           <Link href={"/#footer"} className="w-fit">
             <Image
-              src="/icons/whiteBackArrow.png"
+              src="/icons/leftArrow.png"
               width={30}
               height={30}
               alt="Go back to homepage arrow icon"
