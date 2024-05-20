@@ -16,7 +16,7 @@ function Page() {
             alt="Go back to homepage arrow icon"
           />
         </Link>
-        <h1 className={`text-2xl text-primaryColor`}>Add new topic (B1, B2...)</h1>
+        <h1 className={`text-2xl text-primaryColor`}>Add new topic</h1>
         <form action="">
           <div className="flex flex-row gap-5">
             <label
