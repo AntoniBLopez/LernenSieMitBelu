@@ -11,7 +11,7 @@ function Page() {
   useEffect(() => {
     axios.get(process.env.NODE_ENV === 'development'
       ? 'http://localhost:4000/api/data'
-      : 'https://lernen-sie-mit-belu.vercel.app/api/data'
+      : 'api/data'
     )
       .then((response) => {
         setData(response.data)
@@ -22,7 +22,7 @@ function Page() {
       })
     axios.get(process.env.NODE_ENV === 'development'
       ? 'http://localhost:4000/api/users'
-      : 'https://lernen-sie-mit-belu.vercel.app/api/users'
+      : '/api/users'
     )
       .then((response) => {
         console.log("All the users response:", response.data)
