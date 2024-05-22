@@ -1,4 +1,5 @@
-require("dotenv").config()
+const path = require('path')
+require('dotenv').config({ path: path.resolve(__dirname, '/.env.server') })
 const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
@@ -15,7 +16,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
 app.use(helmet.contentSecurityPolicy({ // Set the CSP policy
   directives: {
     defaultSrc: ["'self'"],
-    connectSrc: ["'self'", "http://taskease.click"],
+    connectSrc: ["'self'", "https://lernen-sie-mit-belu.vercel.app/"], /* CHANGE WHEN ADDED THE DOMAIN */
   }
 }))
 /* Logs HTTP requests arriving to the server in the console */
