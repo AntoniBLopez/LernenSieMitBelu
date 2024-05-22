@@ -9,7 +9,10 @@ function Page() {
   const [spainData, setSpainData] = useState('')
 
   useEffect(() => {
-    axios.get('http://localhost:4000/api/data')
+    axios.get(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000/api/data'
+      : 'https://lernen-sie-mit-belu.vercel.app/api/data'
+    )
       .then((response) => {
         setData(response.data)
         console.log(response, 'response')
@@ -18,7 +21,7 @@ function Page() {
         console.log(error, 'error')
       })
     console.log(data, 'data')
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   return (

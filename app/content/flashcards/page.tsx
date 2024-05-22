@@ -6,7 +6,10 @@ import axios from 'axios'
 function Page() {
 
   const handleData = () => {
-    axios.get('http://localhost:4000/api/data')
+    axios.get(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000/api/data'
+      : 'https://lernen-sie-mit-belu.vercel.app/api/data'
+    )
       .then((response) => {
         console.log(response, 'response')
       })
