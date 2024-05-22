@@ -23,8 +23,11 @@ app.use(helmet.contentSecurityPolicy({ // Set the CSP policy
 app.use(morgan("common"))
 app.use(bodyParser.json({ limit: "30mb", extended: true }))
 app.use(bodyParser.urlencoded({ limit: "30mb", extended: true }))
-/* Allows cross origin requests, REMOVE BEFORE PRODUCTION */
-app.use(cors())
+/* Allows cross origin requests */
+app.use(cors()) // REMOVE FOR PRODUCTION
+// app.use(cors({ // ADD FOR PRODUCTION
+//   origin: 'https://lernen-sie-mit-belu.vercel.app'
+// }))
 
 
 app.get('/', (req, res, next) => {

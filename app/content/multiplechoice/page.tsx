@@ -20,6 +20,17 @@ function Page() {
       .catch((error) => {
         console.log(error, 'error')
       })
+    axios.get(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000/api/users'
+      : 'https://lernen-sie-mit-belu.vercel.app/api/users'
+    )
+      .then((response) => {
+        console.log("All the users response:", response.data)
+        console.log(response, 'response')
+      })
+      .catch((error) => {
+        console.log(error, 'error')
+      })
     console.log(data, 'data')
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
