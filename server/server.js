@@ -16,7 +16,7 @@ app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }))
 app.use(helmet.contentSecurityPolicy({ // Set the CSP policy
   directives: {
     defaultSrc: ["'self'"],
-    connectSrc: ["'self'", "https://lernen-sie-mit-belu.vercel.app/"], /* CHANGE WHEN ADDED THE DOMAIN */
+    connectSrc: ["'self'", "https://lernen-sie-mit-belu.vercel.app/"], /* CHANGE THE URL WHEN ADDED THE DOMAIN */
   }
 }))
 /* Logs HTTP requests arriving to the server in the console */
