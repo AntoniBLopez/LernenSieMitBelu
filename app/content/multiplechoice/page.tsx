@@ -9,10 +9,7 @@ function Page() {
   const [spainData, setSpainData] = useState('')
 
   useEffect(() => {
-    axios.get(process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000/api/data'
-      : '/api/api/data'
-    )
+    axios.get(`http://localhost:${process.env.PORT}/api/data`)
       .then((response) => {
         setData(response.data)
         console.log(response, 'response')
@@ -20,10 +17,11 @@ function Page() {
       .catch((error) => {
         console.log(error, 'error')
       })
-    axios.get(process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000/api/users'
-      : '/api/api/users'
-    )
+    // axios.get(process.env.NODE_ENV === 'development'
+    //   ? 'http://localhost:4000/api/users'
+    //   : '/api/users'
+    // )
+    axios.get(`http://localhost:${process.env.PORT}/api/users`)
       .then((response) => {
         console.log("All the users response:", response.data)
         console.log(response, 'response')
