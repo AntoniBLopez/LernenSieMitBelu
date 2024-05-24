@@ -4,7 +4,7 @@ const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
 const bodyParser = require('body-parser')
-const createError = require('http-errors')
+// const createError = require('http-errors')
 const cors = require('cors')
 
 const app = express()
@@ -30,16 +30,16 @@ app.use(cors()) // REMOVE FOR PRODUCTION
 // }))
 
 
-app.get('/', (req, res, next) => {
-  res.send({ message: 'Awesome server!' })
-})
-app.use('/api', require('../app/api/route.js'))
-app.use((req, res, next) => {
-  next(createError.NotFound())
-})
-app.use((err, req, res, next) => {
-  res.status(err.status || 500).send({ status: err.status || 500, message: err.message })
-})
+// app.get('/', (req, res, next) => {
+//   res.send({ message: 'Awesome server!' })
+// })
+// app.use('/api', require('../app/api/route.js'))
+// app.use((req, res, next) => {
+//   next(createError.NotFound())
+// })
+// app.use((err, req, res, next) => {
+//   res.status(err.status || 500).send({ status: err.status || 500, message: err.message })
+// })
 
 const PORT = process.env.PORT || 3333
 app.listen(PORT, () => { console.log(`> App listening on port: http://localhost:${PORT}`) })
