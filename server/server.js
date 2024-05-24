@@ -1,5 +1,5 @@
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '/.env.server') })
+// const path = require('path')
+require('dotenv').config()
 const express = require('express')
 const morgan = require('morgan')
 const helmet = require('helmet')
@@ -33,7 +33,7 @@ app.use(cors()) // REMOVE FOR PRODUCTION
 app.get('/', (req, res, next) => {
   res.send({ message: 'Awesome server!' })
 })
-app.use('/api', require('./routes/routes.js'))
+app.use('/api', require('../app/api/route.js'))
 app.use((req, res, next) => {
   next(createError.NotFound())
 })

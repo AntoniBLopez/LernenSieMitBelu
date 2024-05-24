@@ -6,10 +6,12 @@ import Option from '@/app/widgets/Option'
 function Page() {
 
   const [data, setData] = useState([])
-  const [spainData, setSpainData] = useState('')
 
   useEffect(() => {
-    axios.get(`http://localhost:${process.env.PORT}/api/data`)
+    axios.get(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000/api/data'
+      : '/api/data'
+    )
       .then((response) => {
         setData(response.data)
         console.log(response, 'response')
@@ -17,11 +19,11 @@ function Page() {
       .catch((error) => {
         console.log(error, 'error')
       })
-    // axios.get(process.env.NODE_ENV === 'development'
-    //   ? 'http://localhost:4000/api/users'
-    //   : '/api/users'
-    // )
-    axios.get(`http://localhost:${process.env.PORT}/api/users`)
+    // axios.get(`http://localhost:${process.env.PORT}/api/users`)
+    axios.get(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:4000/api/users'
+      : '/api/users'
+    )
       .then((response) => {
         console.log("All the users response:", response.data)
         console.log(response, 'response')
@@ -45,6 +47,8 @@ function Page() {
           <p className='font-bold text-grayColor'>Choose matching term</p>
           <section className='grid grid-cols-1 tablet:grid-cols-2 gap-2 tablet:gap-5'>
             {
+              data.length > 0
+              &&
               data.map((el: any, index) => {
                 if (el['nacionalidades']) {
                   return el.nacionalidades.Español.map((el: string, index: Key) => {

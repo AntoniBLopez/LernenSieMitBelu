@@ -1,6 +1,6 @@
 const { createPool } = require('mysql2/promise')
-const path = require('path')
-require('dotenv').config({ path: path.resolve(__dirname, '../.env.server') })
+// const path = require('path')
+require('dotenv').config()
 
 const connection = createPool({
   host: process.env.NODE_ENV === 'development' ? process.env.DEV_DB_HOST : process.env.DB_HOST,
