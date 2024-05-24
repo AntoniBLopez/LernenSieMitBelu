@@ -1,20 +1,20 @@
 const connection = require('./connection')
 
 const GetUsers = async () => {
-  const [query] = await connection.execute('SELECT * FROM user')
-  return query
+  const [rows] = await connection.execute('SELECT * FROM user')
+  return rows
 }
 const GetLevels = async () => {
-  const [query] = await connection.execute('SELECT * FROM level')
-  return query
+  const [rows] = await connection.execute('SELECT * FROM level')
+  return rows
 }
 const PostUser = async (name, email, passwordHash) => {
-  const [query] = await connection.execute('INSERT INTO user (name, email, password_hash) VALUES (?, ?, ?)', [name, email, passwordHash])
-  return query
+  const [response] = await connection.execute('INSERT INTO user (name, email, password_hash) VALUES (?, ?, ?)', [name, email, passwordHash])
+  return response
 }
 const PostLevel = async (name) => {
-  const [query] = await connection.execute('INSERT INTO level (name) VALUES (?)', [name])
-  return query
+  const [response] = await connection.execute('INSERT INTO level (name) VALUES (?)', [name])
+  return response
 }
 
 module.exports = {
