@@ -8,18 +8,33 @@ const GetLevels = async () => {
   const [rows] = await connection.execute('SELECT * FROM level')
   return rows
 }
+const GetTopics = async () => {
+  const [rows] = await connection.execute('SELECT topics FROM level', [level])
+  return rows
+}
+const GetTopicsByLevel = async (level) => {
+  const [rows] = await connection.execute('SELECT topics FROM level WHERE name = ?', [level])
+  return rows
+}
 const PostUser = async (name, email, passwordHash) => {
   const [response] = await connection.execute('INSERT INTO user (name, email, password_hash) VALUES (?, ?, ?)', [name, email, passwordHash])
   return response
 }
-const PostLevel = async (name) => {
-  const [response] = await connection.execute('INSERT INTO level (name) VALUES (?)', [name])
+// const PostLevel = async (name) => {
+//   const [response] = await connection.execute('INSERT INTO level (name) VALUES (?)', [name])
+//   return response
+// }
+const PostTopic = async (name, topic) => {
+  const [response] = await connection.execute('UPDATE level SET topics = ? WHERE name = ?', [topic, name])
   return response
 }
 
 module.exports = {
   GetUsers,
   GetLevels,
+  GetTopics,
+  GetTopicsByLevel,
   PostUser,
-  PostLevel
+  // PostLevel,
+  PostTopic
 }

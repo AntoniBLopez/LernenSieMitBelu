@@ -18,9 +18,10 @@ const config: Config = {
         'grayColor': '#696969',
       },
       backgroundColor: {
+        'primaryColor': '#50c9a4',
+        'primaryColorDark': '#34ba91',
         // 'bgColor': '#f7fcf9',
         'bgColor': '#f2f2f2',
-        'bgPrimaryColor': '#50c9a4',
         'selectedColor': '#adf7e1',
         // 'selectedColor': '#cafced',
       },

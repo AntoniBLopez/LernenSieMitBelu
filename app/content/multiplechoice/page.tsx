@@ -9,7 +9,7 @@ function Page() {
 
   useEffect(() => {
     axios.get(process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000/api/data'
+      ? 'http://localhost:3000/api/data'
       : '/api/data'
     )
       .then((response) => {
@@ -19,9 +19,8 @@ function Page() {
       .catch((error) => {
         console.log(error, 'error')
       })
-    // axios.get(`http://localhost:${process.env.PORT}/api/users`)
     axios.get(process.env.NODE_ENV === 'development'
-      ? 'http://localhost:4000/api/users'
+      ? 'http://localhost:3000/api/users'
       : '/api/users'
     )
       .then((response) => {

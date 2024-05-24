@@ -7,8 +7,17 @@ export async function GET() {
   try {
     const data = await GetUsers()
     return Response.json({ users: data })
-  } catch (error) {
+  } catch (error: any) {
     return Response.json({ error: error.message, message: 'here in error' })
+  }
+  // createError.NotFound()
+}
+export async function POST(request: Request) {
+  try {
+    // const data = await GetUsers()
+    // return Response.json({ users: data })
+  } catch (error: any) {
+    // return Response.json({ error: error.message, message: 'here in error' })
   }
   // createError.NotFound()
 }
