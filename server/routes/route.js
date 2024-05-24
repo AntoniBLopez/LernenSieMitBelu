@@ -2,7 +2,7 @@ const router = require('express').Router()
 const fs = require('fs')
 const path = require('path')
 const bcrypt = require('bcrypt')
-const { GetUsers, GetLevels, PostUser, PostLevel } = require('../db/queries')
+const { GetUsers, GetLevels, PostUser, PostLevel } = require('../../app/lib/db/queries')
 
 router.get('/', async (req, res, next) => {
   res.status(206).json({ message: '/api endpoint server is running' })
