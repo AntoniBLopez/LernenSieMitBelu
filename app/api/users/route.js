@@ -4,7 +4,11 @@ import { GetUsers } from '../../lib/db/queries'
 
 export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAMICOS, SI SON ESTATICOS Y NO VAN A CAMBIAR, QUITARLO
 export async function GET() {
+  try {
+    const data = await GetUsers()
+    return Response.json({ users: data })
+  } catch (error) {
+    return Response.json({ error: error.message, message: 'here in error' })
+  }
   // createError.NotFound()
-  const data = await GetUsers()
-  return Response.json({ users: data })
 }
