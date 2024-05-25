@@ -23,7 +23,7 @@ function Page() {
   const [topic, setTopic] = useState('')
   const [spanishWord, setSpanishWord] = useState('')
   const [germanWord, setGermanWord] = useState('')
-  const [loading, setLoading] = useState(false)
+  // const [loading, setLoading] = useState(false)
 
   useEffect(() => {
     getTopics(setTopicsByLevel, level)
@@ -41,7 +41,6 @@ function Page() {
   }, [level])
 
   const handleSubmit = (e: any) => {
-    setLoading(true)
     e.preventDefault()
 
     axios.post(process.env.NODE_ENV === 'development'
@@ -64,7 +63,6 @@ function Page() {
         console.log(error, 'error')
       })
     console.log('Submitted')
-    setLoading(false)
   }
 
   return (
