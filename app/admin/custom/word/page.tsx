@@ -36,6 +36,7 @@ function Page() {
     //     console.log(error, 'error')
     //   })
     console.log('Topic', topic, 'Level', level)
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [topic])
 
   const handleSubmit = (e: any) => {
