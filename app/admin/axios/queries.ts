@@ -6,7 +6,6 @@ export const getTopics = async (setData: any, level: string) => {
     : `/api/topics?level=${level}`,
   )
     .then((response) => {
-      console.log(response.data.response[0].topics, 'Dentro de response')
       setData(response.data.response[0].topics)
     })
     .catch((error) => {

@@ -38,7 +38,6 @@ function Page() {
 
   useEffect(() => {
     getTopics(setTopicsByLevel, level)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level])
 
   const handleSubmit = (e: any) => {
