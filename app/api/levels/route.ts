@@ -1,12 +1,13 @@
 import { GetLevels } from '../../lib/db/queries'
 // const createError = require('http-errors')
-
-
 export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAMICOS, SI SON ESTATICOS Y NO VAN A CAMBIAR, QUITARLO
+
+
 export async function GET() {
   try {
+    console.log('GET')
     const data = await GetLevels()
-    return Response.json({ users: data })
+    return Response.json({ levels: data })
   } catch (error: any) {
     return Response.json({ error: error.message, message: 'here in error' })
   }

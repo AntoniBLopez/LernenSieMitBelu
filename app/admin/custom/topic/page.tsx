@@ -1,21 +1,33 @@
 'use client'
 
-import { useState } from "react"
+import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
+import { getLevels } from "../../axios/queries"
+
+interface Level {
+  name: string;
+  topics: {
+    [key: string]: string[] | null;
+  };
+}
 
 function Page() {
-
+  const [levelsData, setLevelsData] = useState([])
   const [topic, setTopic] = useState('')
   const [level, setLevel] = useState('A1')
+
+  useEffect(() => {
+    getLevels(setLevelsData)
+  }, [])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
     axios.post(process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000/api/topic'
-      : '/api/topic',
+      ? 'http://localhost:3000/api/topics'
+      : '/api/topics',
       {
         level,
         topic,
@@ -23,6 +35,7 @@ function Page() {
     )
       .then((response) => {
         console.log(response, 'response')
+        getLevels(setLevelsData)
       })
       .catch((error) => {
         console.log(error, 'error')
@@ -47,7 +60,7 @@ function Page() {
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
           <div className="flex flex-row">
             <label htmlFor="" className="self-start font-semibold">
-              Level:&nbsp;
+              Choose the level:&nbsp;&nbsp;&nbsp;
             </label>
             <select className="w-fit" name="level" id="select" value={level} onChange={(e) => setLevel(e.target.value)}>
               <option value="A1">A1</option>
@@ -97,20 +110,46 @@ function Page() {
             </button>
           </div>
         </form>
-        <div className="flex flex-col gap-5">
-          <div className='w-auto h-px lg:h-px bg-slate-700' />
-          <table>
-            <thead>
-              <tr>
-                <th>Topics</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>-&gt; Naturaleza</td>
-              </tr>
-            </tbody>
-          </table>
+        <div>
+          <div className='w-full h-px bg-slate-700' />
+        </div>
+        <div className="grid grid-cols-2 gap-5">
+          {
+            levelsData.map((level: Level, index: number) => (
+              <div key={index} className="text-start">
+                <h1 className="font-bold self-start text-primaryColor">{level.name}</h1>
+                <table>
+                  <thead>
+                    <tr className="flex">
+                      <th className="self-start">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topics</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr className="flex flex-col">
+                      {level.topics !== null &&
+                        Object.keys(level.topics)
+                          .filter((topic): topic is string => topic !== null)
+                          .map((topic: string, index: number) => {
+                            return (
+                              <React.Fragment key={index}>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{topic}</td>
+                                {level.topics[topic] !== null &&
+                                  level.topics[topic]!.map((objectWord: string | null, wordIndex: number) => {
+                                    return (
+                                      <td key={wordIndex}>-&gt; {objectWord}</td>
+                                    )
+                                  })
+                                }
+                              </React.Fragment>
+                            )
+                          })
+                      }
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            ))
+          }
         </div>
       </div>
     </div>

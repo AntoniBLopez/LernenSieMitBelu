@@ -8,11 +8,7 @@ const GetLevels = async () => {
   const [rows] = await connection.execute('SELECT * FROM level')
   return rows
 }
-const GetTopics = async () => {
-  const [rows] = await connection.execute('SELECT topics FROM level', [level])
-  return rows
-}
-const GetTopicsByLevel = async (level) => {
+const GetTopics = async (level) => {
   const [rows] = await connection.execute('SELECT topics FROM level WHERE name = ?', [level])
   return rows
 }
@@ -33,7 +29,6 @@ module.exports = {
   GetUsers,
   GetLevels,
   GetTopics,
-  GetTopicsByLevel,
   PostUser,
   // PostLevel,
   PostTopic
