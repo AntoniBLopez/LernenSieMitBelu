@@ -6,44 +6,66 @@ import Link from "next/link"
 import axios from "axios"
 import { getTopics } from "../../axios/queries"
 
-function Page() {
+interface ObjectWord {
+  word: string[] | null;
+  known_by_0: string[] | null;
+  known_by_1: string[] | null;
+  known_by_2: string[] | null;
+}
 
+interface TopicsByLevel {
+  [key: string]: ObjectWord[] | undefined;
+}
+
+function Page() {
   const [level, setLevel] = useState('A1')
-  const [topic, setTopic] = useState({})
-  const [word, setWord] = useState('')
+  const [topicsByLevel, setTopicsByLevel] = useState<TopicsByLevel>({})
+  const [topic, setTopic] = useState('')
+  const [spanishWord, setSpanishWord] = useState('')
+  const [germanWord, setGermanWord] = useState('')
+  const [loading, setLoading] = useState(false)
 
   useEffect(() => {
-    getTopics(setTopic, level)
+    getTopics(setTopicsByLevel, level)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+  useEffect(() => {
+    if (topic) return
+    const firstTopic = Object.keys(topicsByLevel)[0]
+    setTopic(firstTopic)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicsByLevel])
 
   useEffect(() => {
-
-    // axios.post(process.env.NODE_ENV === 'development'
-    //   ? 'http://localhost:3000/api/topics'
-    //   : '/api/topics',
-    //   {
-    //     level,
-    //     topic,
-    //   }
-    // )
-    //   .then((response) => {
-    //     console.log(response, 'response')
-    //     getTopics(setTopic, level)
-    //     console.log(topic, 'topic')
-    //   })
-    //   .catch((error) => {
-    //     console.log(error, 'error')
-    //   })
-    console.log('Topic', topic, 'Level', level)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [topic])
+    getTopics(setTopicsByLevel, level)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [level])
 
   const handleSubmit = (e: any) => {
+    setLoading(true)
     e.preventDefault()
 
-
+    axios.post(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000/api/words'
+      : '/api/words',
+      {
+        level,
+        topic,
+        spanishWord,
+        germanWord,
+      }
+    )
+      .then((response) => {
+        console.log(response, 'response')
+        getTopics(setTopicsByLevel, level)
+        setSpanishWord('')
+        setGermanWord('')
+      })
+      .catch((error) => {
+        console.log(error, 'error')
+      })
     console.log('Submitted')
+    setLoading(false)
   }
 
   return (
@@ -78,13 +100,13 @@ function Page() {
               <label htmlFor="" className="self-start font-semibold">
                 Choose the topic:&nbsp;&nbsp;&nbsp;
               </label>
-              <select className="w-fit" name="level" id="select" value={level} onChange={(e) => setTopic(e.target.value)}>
+              <select className="w-fit" name="topics" id="select" value={topic} onChange={(e) => setTopic(e.target.value)}>
                 {
-                  Object.keys(topic).length > 0
+                  Object.keys(topicsByLevel).length > 0
                   &&
-                  Object.keys(topic).map((topic: string, index: number) => {
+                  Object.keys(topicsByLevel).map((topicWord: string, index: number) => {
                     return (
-                      <option key={index} value={topic}>{topic}</option>
+                      <option key={index} value={topicWord}>{topicWord}</option>
                     )
                   })
                 }
@@ -93,32 +115,35 @@ function Page() {
             <div className="flex flex-row gap-2">
               <label
                 className="block font-bold text-gray-900 self-center whitespace-nowrap"
-                htmlFor="topic"
+                htmlFor="germanWord"
               >
-                Spanish Word:
+                Add German Word:
               </label>
               <input
-                id="topic"
+                id="germanWord"
                 type="text"
-                name="topic"
-                placeholder="A2"
+                name="germanWord"
+                placeholder="Spanien"
+                value={germanWord}
+                onChange={(e) => setGermanWord(e.target.value)}
                 className="py-2 px-3"
                 required
               />
             </div>
-
             <div className="flex flex-row gap-2">
               <label
                 className="block font-bold text-gray-900 self-center whitespace-nowrap"
-                htmlFor="topic"
+                htmlFor="spanishWord"
               >
-                German Word:
+                Add Spanish Word:
               </label>
               <input
-                id="topic"
+                id="spanishWord"
                 type="text"
-                name="topic"
-                placeholder="A2"
+                name="spanishWord"
+                placeholder="Español"
+                value={spanishWord}
+                onChange={(e) => setSpanishWord(e.target.value)}
                 className="py-2 px-3"
                 required
               />
@@ -150,12 +175,26 @@ function Page() {
           <table>
             <thead>
               <tr>
-                <th>Levels</th>
+                <th>Topic</th>
               </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>-&gt; A1</td>
+              <tr className="flex flex-col">
+                <td>{topic}</td>
+                <td className="underline font-medium">Words</td>
+                {
+                  Object.keys(topicsByLevel).length > 0
+                  &&
+                  topicsByLevel[topic]
+                  &&
+                  topicsByLevel[topic]?.map((topicWord: ObjectWord, index: number) => {
+                    if (topicWord !== null && topicWord.word !== null) return (
+                      <td key={index}>
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{topicWord.word[0]} -&gt; {topicWord.word[1]}
+                      </td>
+                    )
+                  })
+                }
               </tr>
             </tbody>
           </table>

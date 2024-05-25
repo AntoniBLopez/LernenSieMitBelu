@@ -9,8 +9,14 @@ import { getLevels } from "../../axios/queries"
 interface Level {
   name: string;
   topics: {
-    [key: string]: string[] | null;
+    [key: string]: ObjectWord[] | null;
   };
+}
+interface ObjectWord {
+  word: string[] | null;
+  known_by_0: string[] | null;
+  known_by_1: string[] | null;
+  known_by_2: string[] | null;
 }
 
 function Page() {
@@ -46,7 +52,7 @@ function Page() {
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col max-w-xl mx-auto h-screen my-10 gap-7 text-center" id="pricing">
+      <div className="flex flex-col max-w-xl mx-auto h-fit mt-10 mb-20 gap-7 text-center" id="pricing">
         <Link href={"/admin"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"
@@ -113,7 +119,7 @@ function Page() {
         <div>
           <div className='w-full h-px bg-slate-700' />
         </div>
-        <div className="grid grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 tablet:grid-cols-2 gap-5">
           {
             levelsData.map((level: Level, index: number) => (
               <div key={index} className="text-start">
@@ -132,11 +138,12 @@ function Page() {
                           .map((topic: string, index: number) => {
                             return (
                               <React.Fragment key={index}>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{topic}</td>
+                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {topic}</td>
                                 {level.topics[topic] !== null &&
-                                  level.topics[topic]!.map((objectWord: string | null, wordIndex: number) => {
+                                  level.topics[topic]!.map((objectWord: ObjectWord, wordIndex: number) => {
+                                    if (objectWord === null || objectWord.word === null) return null
                                     return (
-                                      <td key={wordIndex}>-&gt; {objectWord}</td>
+                                      <td key={wordIndex}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{objectWord.word[0]} -&gt; {objectWord.word[1]}</td>
                                     )
                                   })
                                 }
