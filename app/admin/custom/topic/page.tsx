@@ -5,32 +5,27 @@ import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
 import { getLevels } from "../../axios/queries"
-
-interface Level {
-  name: string;
-  topics: {
-    [key: string]: ObjectWord[] | null;
-  };
-}
-interface ObjectWord {
-  word: string[] | null;
-  known_by_0: string[] | null;
-  known_by_1: string[] | null;
-  known_by_2: string[] | null;
-}
+import { getLevelsAndDispatchToStore } from "@/app/lib/features/levels/utils"
+import { useAppSelector, useAppDispatch } from "@/app/lib/hooks"
+import { RootState } from "@/app/lib/store"
+import { WordsTraduction } from "@/types"
 
 function Page() {
-  const [levelsData, setLevelsData] = useState([])
   const [topic, setTopic] = useState('')
   const [level, setLevel] = useState('A1')
 
+  const dispatch = useAppDispatch()
+  const store = useAppSelector((state: RootState) => state.levels.data)
+
   useEffect(() => {
-    getLevels(setLevelsData)
+    if (Object.keys(store).length === 0) {
+      getLevelsAndDispatchToStore(dispatch)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
     axios.post(process.env.NODE_ENV === 'development'
       ? 'http://localhost:3000/api/topics'
       : '/api/topics',
@@ -41,7 +36,7 @@ function Page() {
     )
       .then((response) => {
         console.log(response, 'response')
-        getLevels(setLevelsData)
+        getLevelsAndDispatchToStore(dispatch)
       })
       .catch((error) => {
         console.log(error, 'error')
@@ -121,41 +116,45 @@ function Page() {
         </div>
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-5">
           {
-            levelsData.map((level: Level, index: number) => (
-              <div key={index} className="text-start">
-                <h1 className="font-bold self-start text-primaryColor">{level.name}</h1>
-                <table>
-                  <thead>
-                    <tr className="flex">
-                      <th className="self-start">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topics</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr className="flex flex-col">
-                      {level.topics !== null &&
-                        Object.keys(level.topics)
-                          .filter((topic): topic is string => topic !== null)
-                          .map((topic: string, index: number) => {
-                            return (
-                              <React.Fragment key={index}>
-                                <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {topic}</td>
-                                {level.topics[topic] !== null &&
-                                  level.topics[topic]!.map((objectWord: ObjectWord, wordIndex: number) => {
-                                    if (objectWord === null || objectWord.word === null) return null
-                                    return (
-                                      <td key={wordIndex}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{objectWord.word[0]} -&gt; {objectWord.word[1]}</td>
-                                    )
-                                  })
-                                }
-                              </React.Fragment>
-                            )
-                          })
-                      }
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            ))
+            Object.keys(store).length > 0
+            &&
+            Object.keys(store).map((key: string, index: number) => {
+              return(
+                <div key={index} className="text-start">
+                  <h1 className="font-bold self-start text-primaryColor">{store[key].name}</h1>
+                  <table>
+                    <thead>
+                      <tr className="flex">
+                        <th className="self-start">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topics</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr className="flex flex-col">
+                        {store[key].topics !== null &&
+                          Object.keys(store[key].topics)
+                            .filter((topic): topic is string => topic !== null)
+                            .map((topic: string, index: number) => {
+                              return (
+                                <React.Fragment key={index}>
+                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {topic}</td>
+                                  {store[key].topics[topic] !== null &&
+                                    store[key].topics[topic]!.map((objectWord: WordsTraduction, wordIndex: number) => {
+                                      if (objectWord === null || objectWord.word === null) return null
+                                      return (
+                                        <td key={wordIndex}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{objectWord.word[0]} -&gt; {objectWord.word[1]}</td>
+                                      )
+                                    })
+                                  }
+                                </React.Fragment>
+                              )
+                            })
+                        }
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              )
+            })
           }
         </div>
       </div>

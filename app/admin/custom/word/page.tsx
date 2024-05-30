@@ -5,9 +5,9 @@ import { WordsTraduction } from "@/types"
 import Image from "next/image"
 import Link from "next/link"
 import { RootState } from "@/app/lib/store"
-import { postWord } from "../../axios/queries"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/levels/utils"
+import axios from "axios"
 
 function Page() {
   const [level, setLevel] = useState('A1')
@@ -45,17 +45,26 @@ function Page() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
-    postWord({
-      level,
-      topic,
-      spanishWord,
-      germanWord,
-      setSpanishWord,
-      setGermanWord,
-      getLevelsAndDispatchToStore,
-      dispatch,
-    })
+    axios.post(process.env.NODE_ENV === 'development'
+      ? 'http://localhost:3000/api/words'
+      : '/api/words',
+      {
+        level,
+        topic,
+        spanishWord,
+        germanWord,
+      }
+    )
+      .then((response) => {
+        console.log(response, 'response')
+        setSpanishWord('')
+        setGermanWord('')
+        getLevelsAndDispatchToStore(dispatch)
+      })
+      .catch((error) => {
+        console.log(error, 'error')
+        throw error
+      })
     console.log('Submitted')
   }
 

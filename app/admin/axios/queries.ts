@@ -18,7 +18,6 @@ export const getLevels = async (): Promise<Levels> => {
     }
 
     const result = response.data.levels.reduce(reducer, initialValue)
-    console.log(result, 'result')
     return result
   } catch (error) {
     console.log(error, 'error')
@@ -39,27 +38,3 @@ export const getLevels = async (): Promise<Levels> => {
 //       console.log(error, 'error')
 //     })
 // }
-
-
-export const postWord = async ({ level, topic, spanishWord, germanWord, setSpanishWord, setGermanWord, getLevelsAndDispatchToStore, dispatch }: any) => {
-  axios.post(process.env.NODE_ENV === 'development'
-      ? 'http://localhost:3000/api/words'
-      : '/api/words',
-      {
-        level,
-        topic,
-        spanishWord,
-        germanWord,
-      }
-    )
-      .then((response) => {
-        console.log(response, 'response')
-        setSpanishWord('')
-        setGermanWord('')
-        getLevelsAndDispatchToStore(dispatch)
-      })
-      .catch((error) => {
-        console.log(error, 'error')
-        throw error
-      })
-}
