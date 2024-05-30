@@ -38,7 +38,6 @@ function Page() {
     if (Object.keys(store).length > 0 && Object.keys(store[level].topics).length > 0) {
       const firstTopic = Object.keys(store[level].topics)[0]
       setTopic(firstTopic)
-      console.log(store, 'store')
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [level])
