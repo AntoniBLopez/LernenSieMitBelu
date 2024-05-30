@@ -18,6 +18,7 @@ export const getLevels = async (): Promise<Levels> => {
     }
 
     const result = response.data.levels.reduce(reducer, initialValue)
+    console.log(result, 'GET levels query')
     return result
   } catch (error) {
     console.log(error, 'error')
