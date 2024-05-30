@@ -5,7 +5,6 @@ export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAM
 
 export async function GET() {
   try {
-    console.log('GET')
     const data = await GetLevels()
     return Response.json({ levels: data })
   } catch (error: any) {

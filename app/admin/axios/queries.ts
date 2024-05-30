@@ -1,3 +1,4 @@
+import { Levels } from "@/types"
 import axios from "axios"
 
 export const getTopics = async (setData: any, level: string) => {
@@ -13,12 +14,21 @@ export const getTopics = async (setData: any, level: string) => {
     })
 }
 
-export const getLevels = async (setData: any) => {
+export const getLevels = async () => {
   axios.get(process.env.NODE_ENV === 'development'
     ? 'http://localhost:3000/api/levels'
     : '/api/levels')
     .then((response) => {
-      setData(response.data.levels)
+      const initialValue = {};
+      const reducer = function (accumulator: any, element: any, index: any) {
+        return {
+          ...accumulator,
+          [ element.name ]: element
+        }
+      }
+      const result = response.data.levels.reduce(reducer, initialValue)
+      console.log(result, 'result')
+      return result
     })
     .catch((error) => {
       console.log(error, 'error')

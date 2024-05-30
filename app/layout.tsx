@@ -1,8 +1,8 @@
+import type { GetServerSideProps, Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react"
-import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import PlausibleProvider from 'next-plausible'
 import "./globals.css";
+import StoreProvider from "./StoreProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,14 +16,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
-    // <PlausibleProvider domain='taskease.click' > INCORPORAR CON EL DOMINIO ADECUADO
-      <html lang="en">
-        <body className={inter.className}>
+    <html lang="en">
+      <body className={inter.className}>
+        <StoreProvider>
           {children}
-          <Analytics />
-        </body>
-      </html>
-    // </PlausibleProvider>
+        </StoreProvider>
+        <Analytics />
+      </body>
+    </html >
   );
 }

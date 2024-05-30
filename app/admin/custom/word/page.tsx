@@ -1,31 +1,25 @@
 'use client'
 
 import { useEffect, useState } from "react"
+import { WordsTraduction, Topics } from "@/types"
 import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
+import { RootState } from "@/app/lib/store"
+import { useAppSelector } from "@/app/lib/hooks"
 import { getTopics } from "../../axios/queries"
 
-interface ObjectWord {
-  word: string[] | null;
-  known_by_0: string[] | null;
-  known_by_1: string[] | null;
-  known_by_2: string[] | null;
-}
-
-interface TopicsByLevel {
-  [key: string]: ObjectWord[] | undefined;
-}
-
 function Page() {
+  const store = useAppSelector((state: RootState) => state.levels.data)
   const [level, setLevel] = useState('A1')
-  const [topicsByLevel, setTopicsByLevel] = useState<TopicsByLevel>({})
+  const [topicsByLevel, setTopicsByLevel] = useState<Topics>({})
   const [topic, setTopic] = useState('')
   const [spanishWord, setSpanishWord] = useState('')
   const [germanWord, setGermanWord] = useState('')
   // const [loading, setLoading] = useState(false)
 
   useEffect(() => {
+    console.log(store, 'store')
     getTopics(setTopicsByLevel, level)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -109,6 +103,7 @@ function Page() {
                 }
               </select>
             </div>
+            {store}
             <div className="flex flex-row gap-2">
               <label
                 className="block font-bold text-gray-900 self-center whitespace-nowrap"
@@ -184,7 +179,7 @@ function Page() {
                   &&
                   topicsByLevel[topic]
                   &&
-                  topicsByLevel[topic]?.map((topicWord: ObjectWord, index: number) => {
+                  topicsByLevel[topic]?.map((topicWord: WordsTraduction, index: number) => {
                     if (topicWord !== null && topicWord.word !== null) return (
                       <td key={index}>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{topicWord.word[0]} -&gt; {topicWord.word[1]}
