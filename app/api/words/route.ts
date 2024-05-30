@@ -24,7 +24,6 @@ export async function POST(request: Request) {
         known_by_2: [],
       }
     )
-    console.log(topics[0].topics[topic])
     const data = await PostTopic(level, topics[0].topics)
     return Response.json({ response: data })
   } catch (error: any) {
