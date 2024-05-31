@@ -4,8 +4,7 @@ import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
-import { getLevels } from "../../axios/queries"
-import { getLevelsAndDispatchToStore } from "@/app/lib/features/levels/utils"
+import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { useAppSelector, useAppDispatch } from "@/app/lib/hooks"
 import { RootState } from "@/app/lib/store"
 import { WordsTraduction } from "@/types"
@@ -15,7 +14,7 @@ function Page() {
   const [level, setLevel] = useState('A1')
 
   const dispatch = useAppDispatch()
-  const store = useAppSelector((state: RootState) => state.levels.data)
+  const store = useAppSelector((state: RootState) => state.store.levels)
 
   useEffect(() => {
     if (Object.keys(store).length === 0) {
@@ -47,7 +46,7 @@ function Page() {
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col max-w-xl mx-auto h-fit mt-10 mb-20 gap-7 text-center" id="pricing">
+      <div className="flex flex-col max-w-xl mx-auto h-fit mt-10 mb-20 gap-7 text-center">
         <Link href={"/admin"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"

@@ -6,7 +6,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
-import { getLevelsAndDispatchToStore } from "@/app/lib/features/levels/utils"
+import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import axios from "axios"
 
 function Page() {
@@ -15,7 +15,7 @@ function Page() {
   const [germanWord, setGermanWord] = useState('')
   const [spanishWord, setSpanishWord] = useState('')
 
-  const store = useAppSelector((state: RootState) => state.levels.data)
+  const store = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
@@ -69,7 +69,7 @@ function Page() {
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col max-w-xl mx-auto h-screen my-10 gap-7 text-center" id="pricing">
+      <div className="flex flex-col max-w-xl mx-auto h-screen my-10 gap-7 text-center">
         <Link href={"/admin"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"

@@ -1,5 +1,5 @@
 
-function Option({ name }: { name: string }) {
+function Option({ name }: { name: string | number }) {
   return (
     <div className="
       border-2

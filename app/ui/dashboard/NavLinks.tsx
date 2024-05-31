@@ -15,7 +15,7 @@ import clsx from 'clsx';
 const links = [
   { name: 'Home', href: '/', icon: HomeIcon },
   { name: 'Admin', href: '/admin', icon: AdjustmentsHorizontalIcon },
-  { name: 'API', href: '/admin/dev', icon: PaperAirplaneIcon },
+  { name: 'API', href: '/ui/course', icon: PaperAirplaneIcon },
 ];
 
 export default function NavLinks() {

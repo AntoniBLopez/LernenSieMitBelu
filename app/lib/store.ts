@@ -1,12 +1,12 @@
 'use client'
 
 import { configureStore } from '@reduxjs/toolkit'
-import levelsReducer from './features/levels/levelsSlice'
+import stateReducer from './features/state/stateSlice'
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
-      levels: levelsReducer
+      store: stateReducer
     },
   })
 }

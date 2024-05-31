@@ -1,5 +1,5 @@
 import { getLevels } from "@/app/admin/axios/queries"
-import { initializeLevels } from "./levelsSlice"
+import { initializeLevels } from "@/app/lib/features/state/stateSlice"
 
 
 export const getLevelsAndDispatchToStore = async (dispatch: any) => {
