@@ -23,8 +23,8 @@ const config: Config = {
         'primaryColorDark': '#34ba91',
         // 'bgColor': '#f7fcf9',
         'bgColor': '#f2f2f2',
-        'selectedColor': '#adf7e1',
-        // 'selectedColor': '#cafced',
+        'selectedPrimaryColor': '#adf7e1',
+        'selectedColor': '#ebebeb',
       },
       spacing: {
         desktop: '8rem',

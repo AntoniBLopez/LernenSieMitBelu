@@ -30,7 +30,7 @@ function Option({ name, showMessage, isCorrect }: { name: string | number, showM
           :
           `opacity-50 hover:bg-none ${isCorrect ? 'border-green-400' : 'border-gray-200'}`
         :
-        'hover:bg-selectedColor hover:cursor-pointer hover:font-medium hover:border-slate-300'
+        'hover:bg-selectedPrimaryColor hover:cursor-pointer hover:font-medium hover:border-slate-300'
       }
       border-2
       rounded-lg

@@ -92,7 +92,7 @@ function Page() {
             <div className='text-lg'>{words.length > 0 ? words[cardNumber - 1][1] : 'loading...'}</div>
           </div>
           <div className='flex flex-col gap-4 tablet:mb-5'>
-            <p className={`font-bold opacity-50 ${showMessage ? isCorrect ? 'font-medium opacity-100 text-green-500' : 'font-medium opacity-100 text-red-500' : ''}`}>{showMessage ? isCorrect ? correctMessage[randomNumber] : wrongMessage[randomNumber] : 'Choose matching term'}</p>
+            <p className={`${showMessage ? isCorrect ? 'font-medium opacity-100 text-green-500' : 'font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomNumber] : wrongMessage[randomNumber] : 'Choose matching term'}</p>
             <section className='grid grid-cols-1 tablet:grid-cols-2 gap-2 tablet:gap-5'>
               {
                 words.length > 0
@@ -112,6 +112,18 @@ function Page() {
               </div>
             </section>
           </div>
+        </div>
+        <div className='
+            self-center
+            font-bold
+            text-grayColor
+            hover:cursor-pointer
+            hover:bg-selectedColor
+            rounded-full
+            py-2
+            px-4
+            '>
+          {showMessage && 'Next'}
         </div>
       </section>
     </main>
