@@ -1,17 +1,43 @@
+'use client'
+import { useState } from 'react'
 
-function Option({ name }: { name: string | number }) {
+function Option({ name, showMessage, isCorrect }: { name: string | number, showMessage: boolean, isCorrect: boolean }) {
+
+  const [clicked, setClicked] = useState(false)
+
+  const handleClick = () => {
+    if (showMessage) return
+    setClicked(true)
+  }
+
   return (
-    <div className="
+    <div onClick={handleClick} className={`
+      ${clicked
+        ?
+        isCorrect
+          ?
+          'border-green-500 font-medium'
+          :
+          'border-red-500 font-medium'
+        :
+        'border-gray-200'
+      }
+      ${showMessage
+        ?
+        clicked
+          ?
+          'opacity-100 hover:bg-none'
+          :
+          `opacity-50 hover:bg-none ${isCorrect ? 'border-green-400' : 'border-gray-200'}`
+        :
+        'hover:bg-selectedColor hover:cursor-pointer hover:font-medium hover:border-slate-300'
+      }
       border-2
-      border-gray-200
-      rounded-lg p-2
-      hover:bg-selectedColor
-      hover:cursor-pointer
-      hover:font-medium
-      hover:border-slate-300
-    ">
+      rounded-lg
+      p-2
+    `}>
       {name}
-    </div>
+    </div >
   )
 }
 

@@ -21,7 +21,7 @@ function TopicCard({ topic, terms }: { topic: string, terms: number }) {
         </footer>
       </div>
       {/* <div className='w-full h-1 rounded-full bg-gradient-to-r from-green-400 to-blue-400 opacity-60'></div> */}
-      <div className='w-full h-1 rounded-full bg-gradient-to-r from-green-400 to-blue-400 opacity-0 group-hover:opacity-60 transition-opacity duration-200'></div>
+      <div className='w-full h-1 rounded-br-full rounded-bl-full bg-gradient-to-r from-green-400 to-blue-400 opacity-0 group-hover:opacity-80 transition-opacity duration-200'></div>
     </Link>
   )
 }

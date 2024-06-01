@@ -28,31 +28,35 @@ function Course() {
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col h-fit my-10 gap-7">
-        <Link href={"/"} className="w-fit">
-          <Image
-            src="/icons/leftArrow.png"
-            width={30}
-            height={30}
-            className="text-black"
-            alt="Go back to homepage arrow icon"
-          />
-        </Link>
-        <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
-          <AcademicCapIcon className="size-8 text-primaryColor" />
-          <span className="content-end">&nbsp;A1 course</span>
-        </h1>
+      <div className="flex flex-col h-fit my-10 gap-10">
+        <header className="flex flex-col gap-5">
+          <Link href={"/"} className="w-fit">
+            <Image
+              src="/icons/leftArrow.png"
+              width={30}
+              height={30}
+              className="text-black"
+              alt="Go back to homepage arrow icon"
+            />
+          </Link>
+          <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
+            <AcademicCapIcon className="size-8 text-primaryColor" />
+            <span className="content-end">&nbsp;A1 course</span>
+          </h1>
+        </header>
 
-        <span className="text-primaryColor font-medium text-base">Topics</span>
-        <section className="flex flex-col gap-2">
-          {
-            Object.keys(store).length > 0
-            &&
-            Object.keys(store[userLevel].topics).map((topic: string, index: number) => {
-              return <TopicCard key={index} topic={topic} terms={store[userLevel].topics[topic].length} />
-            })
-          }
-        </section>
+        <main className="flex flex-col gap-2">
+          <span className="text-primaryColor font-medium text-base">Topics</span>
+          <section className="flex flex-col gap-2">
+            {
+              Object.keys(store).length > 0
+              &&
+              Object.keys(store[userLevel].topics).map((topic: string, index: number) => {
+                return <TopicCard key={index} topic={topic} terms={store[userLevel].topics[topic].length} />
+              })
+            }
+          </section>
+        </main>
       </div>
     </div>
   )
