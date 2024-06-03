@@ -29,8 +29,8 @@ export const extractLevelsData = async (): Promise<Levels> => {
   try {
     const response = await axios.get(
       process.env.NODE_ENV === 'development'
-        ? 'http://localhost:3000/api/extractlevelsdata'
-        : '/api/extractlevelsdata'
+        ? 'http://localhost:3000/api/levels'
+        : '/api/levels'
     )
     console.log(response.data, 'GET extractlevelsdata query')
     return response.data
