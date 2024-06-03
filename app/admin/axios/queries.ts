@@ -25,6 +25,20 @@ export const getLevels = async (): Promise<Levels> => {
     throw error // manage error where getLevels is called
   }
 }
+export const extractLevelsData = async (): Promise<Levels> => {
+  try {
+    const response = await axios.get(
+      process.env.NODE_ENV === 'development'
+        ? 'http://localhost:3000/api/extractlevelsdata'
+        : '/api/extractlevelsdata'
+    )
+    console.log(response.data, 'GET extractlevelsdata query')
+    return response.data
+  } catch (error) {
+    console.log(error, 'error')
+    throw error // manage error where getLevels is called
+  }
+}
 
 
 // export const getTopics = async (setData: any, level: string) => {
