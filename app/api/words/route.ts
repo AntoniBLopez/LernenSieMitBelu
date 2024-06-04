@@ -1,32 +1,33 @@
-import { GetTopics, PostTopic } from '../../lib/db/queries'
+import { connectDB } from '@/app/lib/db/connection'
+import Levels from '@/app/lib/db/models/levels'
+import { NextResponse } from 'next/server'
 export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAMICOS, SI SON ESTATICOS Y NO VAN A CAMBIAR, QUITARLO
 
-// export async function GET(request: Request) {
-//   try {
-//     const url = new URL(request.url);
-//     const level = url.searchParams.get('level');
-//     console.log(level, 'level')
-//     const data: any = await GetTopics(level)
-//     return Response.json({ response: data })
-//   } catch (error: any) {
-//     return Response.json({ error: error.message, message: 'here in error' })
-//   }
-// }
 export async function POST(request: Request) {
   try {
-    const { level, topic, spanishWord, germanWord } = await request.json()
-    const topics: any = await GetTopics(level)
-    topics[0].topics[topic].push(
+    await connectDB()
+    const { level, topic, germanWord, spanishWord } = await request.json()
+    const levelData = await Levels.findOne({ level })
+
+    if (levelData.topics[topic].find((word: any) => word.word[0] === germanWord)) {
+      return NextResponse.json({ message: 'Word already exists', error: 'Word already exists' })
+    }
+
+    levelData.topics[topic].push(
       {
-        word: [spanishWord, germanWord],
+        word: [germanWord, spanishWord],
         known_by_0: [],
         known_by_1: [],
         known_by_2: [],
+        known_by_3: [],
+        known_by_4: [],
       }
     )
-    const data = await PostTopic(level, topics[0].topics)
-    return Response.json({ response: data })
+
+    console.log(levelData.topics, 'levelData.topics')
+    const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
+    return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })
   } catch (error: any) {
-    return Response.json({ error: error.message, message: 'Error to post level' })
+    return NextResponse.json({ error: error.message, message: 'Error to post level' })
   }
 }

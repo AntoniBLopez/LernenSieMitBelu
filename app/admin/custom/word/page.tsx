@@ -1,7 +1,7 @@
 'use client'
 
 import { useEffect, useState } from "react"
-import { WordsTraduction } from "@/types"
+import { Level, Levels, WordsTraduction } from "@/types"
 import Image from "next/image"
 import Link from "next/link"
 import { RootState } from "@/app/lib/store"
@@ -10,37 +10,42 @@ import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import axios from "axios"
 
 function Page() {
-  const [level, setLevel] = useState('A1')
+  const levelsStore = useAppSelector((state: RootState) => state.store.levels)
+  const dispatch = useAppDispatch()
+
+  const [levelName, setLevelName] = useState('A1')
+  const [actualLevelData, setActualLevelData] = useState<any>(levelsStore.length > 0 ? levelsStore.find((obj: Level) => obj.level === levelName) : {})
   const [topic, setTopic] = useState('')
   const [germanWord, setGermanWord] = useState('')
   const [spanishWord, setSpanishWord] = useState('')
+  const [wordCreated, setWordCreated] = useState(false)
 
-  const store = useAppSelector((state: RootState) => state.store.levels)
-  const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (Object.keys(store).length === 0) {
+    if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    if (Object.keys(store).length > 0 && Object.keys(store[level].topics).length > 0 && topic === '') {
-      const firstTopic = Object.keys(store[level].topics)[0]
-      setTopic(firstTopic)
-      console.log(store, 'store')
+    if (levelsStore.length > 0 && wordCreated) {
+      setActualLevelData(levelsStore.find((obj: Level) => obj.level === levelName))
+    } else if (levelsStore.length > 0 && levelName !== actualLevelData.level) {
+      setActualLevelData(levelsStore.find((obj: Level) => obj.level === levelName))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [store])
+  }, [levelName, levelsStore])
 
   useEffect(() => {
-    if (Object.keys(store).length > 0 && Object.keys(store[level].topics).length > 0) {
-      const firstTopic = Object.keys(store[level].topics)[0]
+    if (wordCreated) {
+      setWordCreated(false)
+    } else if (levelsStore.length > 0) {
+      const firstTopic = Object.keys(actualLevelData.topics)[0]
       setTopic(firstTopic)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [level])
+  }, [actualLevelData])
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
@@ -48,16 +53,17 @@ function Page() {
       ? 'http://localhost:3000/api/words'
       : '/api/words',
       {
-        level,
+        level: levelName,
         topic,
-        spanishWord,
         germanWord,
+        spanishWord,
       }
     )
       .then((response) => {
-        console.log(response, 'response')
+        console.log(response.data, 'response')
         setSpanishWord('')
         setGermanWord('')
+        setWordCreated(true)
         getLevelsAndDispatchToStore(dispatch)
       })
       .catch((error) => {
@@ -86,7 +92,7 @@ function Page() {
               <label htmlFor="" className="self-start font-semibold">
                 Choose the level:&nbsp;&nbsp;&nbsp;
               </label>
-              <select className="w-fit" name="level" id="select" value={level} onChange={(e) => setLevel(e.target.value)}>
+              <select className="w-fit" name="levelName" id="select" value={levelName} onChange={(e) => setLevelName(e.target.value)}>
                 <option value="A1">A1</option>
                 <option value="A2">A2</option>
                 <option value="B1">B1</option>
@@ -101,11 +107,11 @@ function Page() {
               </label>
               <select className="w-fit" name="topics" id="select" value={topic} onChange={(e) => setTopic(e.target.value)}>
                 {
-                  Object.keys(store).length > 0
+                  Object.keys(actualLevelData).length > 0
                   &&
-                  Object.keys(store[level].topics).length > 0
+                  Object.keys(actualLevelData.topics).length > 0
                   &&
-                  Object.keys(store[level].topics).map((topicWord: string, index: number) => {
+                  Object.keys(actualLevelData.topics).map((topicWord: string, index: number) => {
                     return (
                       <option key={index} value={topicWord}>{topicWord}</option>
                     )
@@ -184,13 +190,13 @@ function Page() {
                 <td>{topic}</td>
                 <td className="underline font-medium">Words</td>
                 {
-                  Object.keys(store).length > 0
+                  Object.keys(actualLevelData).length > 0
                   &&
-                  Object.keys(store[level].topics).length > 0
+                  Object.keys(actualLevelData.topics).length > 0
                   &&
-                  store[level].topics[topic]
+                  actualLevelData.topics[topic]
                   &&
-                  store[level].topics[topic]?.map((topicWord: WordsTraduction, index: number) => {
+                  actualLevelData.topics[topic]?.map((topicWord: WordsTraduction, index: number) => {
                     if (topicWord !== null && topicWord.word !== null) return (
                       <td key={index}>
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{topicWord.word[0]} -&gt; {topicWord.word[1]}

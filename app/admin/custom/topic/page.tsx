@@ -7,17 +7,17 @@ import axios from "axios"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { useAppSelector, useAppDispatch } from "@/app/lib/hooks"
 import { RootState } from "@/app/lib/store"
-import { WordsTraduction } from "@/types"
+import { Level, WordsTraduction } from "@/types"
 
 function Page() {
   const [topic, setTopic] = useState('')
   const [level, setLevel] = useState('A1')
 
   const dispatch = useAppDispatch()
-  const store = useAppSelector((state: RootState) => state.store.levels)
+  const levelsStore = useAppSelector((state: RootState) => state.store.levels)
 
   useEffect(() => {
-    if (Object.keys(store).length === 0) {
+    if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -46,7 +46,7 @@ function Page() {
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col max-w-xl mx-auto h-fit mt-10 mb-20 gap-7 text-center">
+      <div className="flex flex-col max-w-3xl mx-auto h-fit mt-10 mb-20 gap-7 text-center">
         <Link href={"/admin"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"
@@ -71,7 +71,7 @@ function Page() {
               <option value="C2">C2</option>
             </select>
           </div>
-          <div className="flex flex-row gap-5">
+          <div className="flex flex-col tablet:flex-row gap-5">
             <label
               className="block font-bold text-gray-900 self-center whitespace-nowrap"
               htmlFor="topic"
@@ -115,12 +115,12 @@ function Page() {
         </div>
         <div className="grid grid-cols-1 tablet:grid-cols-2 gap-5">
           {
-            Object.keys(store).length > 0
+            levelsStore.length > 0
             &&
-            Object.keys(store).map((key: string, index: number) => {
-              return(
+            levelsStore.map((level: Level, index: number) => {
+              return (
                 <div key={index} className="text-start">
-                  <h1 className="font-bold self-start text-primaryColor">{store[key].name}</h1>
+                  <h1 className="font-bold self-start text-primaryColor">{level.level}</h1>
                   <table>
                     <thead>
                       <tr className="flex">
@@ -129,15 +129,16 @@ function Page() {
                     </thead>
                     <tbody>
                       <tr className="flex flex-col">
-                        {store[key].topics !== null &&
-                          Object.keys(store[key].topics)
+                        {Object.keys(level.topics).length > 0
+                          &&
+                          Object.keys(level.topics)
                             .filter((topic): topic is string => topic !== null)
                             .map((topic: string, index: number) => {
                               return (
                                 <React.Fragment key={index}>
                                   <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {topic}</td>
-                                  {store[key].topics[topic] !== null &&
-                                    store[key].topics[topic]!.map((objectWord: WordsTraduction, wordIndex: number) => {
+                                  {level.topics[topic].length > 0 &&
+                                    level.topics[topic].map((objectWord: WordsTraduction, wordIndex: number) => {
                                       if (objectWord === null || objectWord.word === null) return null
                                       return (
                                         <td key={wordIndex}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{objectWord.word[0]} -&gt; {objectWord.word[1]}</td>

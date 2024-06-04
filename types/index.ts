@@ -11,12 +11,10 @@ export interface Topics {
 
 export interface Level {
   id: number;
-  name: string;
+  level: string;
   topics: Topics;
   created_at: string;
   updated_at: string;
 }
 
-export interface Levels {
-  [key: string]: Level;
-}
+export interface Levels extends Array<Level> {}

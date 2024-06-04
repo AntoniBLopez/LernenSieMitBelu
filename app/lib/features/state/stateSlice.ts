@@ -9,7 +9,7 @@ interface InitialState {
 }
 
 const initialState: InitialState = {
-  levels: {},
+  levels: [],
   selectedTopic: '',
 }
 
@@ -19,6 +19,9 @@ const stateSlice = createSlice({
   reducers: {
     /* LEVELS */
     initializeLevels(state, action: PayloadAction<Levels>) {
+      state.levels = action.payload
+    },
+    setLevels(state, action: PayloadAction<Levels>) {
       state.levels = action.payload
     },
     // addLevel(state, action: PayloadAction<Level>) {
