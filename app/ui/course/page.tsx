@@ -14,16 +14,25 @@ import { useEffect, useState } from "react";
 
 function Course() {
 
-  const store = useAppSelector((state: RootState) => state.store.levels)
+  const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
   const [userLevel, setUserLevel] = useState('A1')
+  const [levelData, setlevelData] = useState<any>({})
 
   useEffect(() => {
-    if (Object.keys(store).length === 0) {
+    if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (levelsStore.length > 0) {
+      const level = levelsStore.find(obj => obj.level === userLevel)
+      setlevelData(level)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [levelsStore])
 
 
   return (
@@ -49,10 +58,14 @@ function Course() {
           <span className="text-primaryColor font-medium text-base">Topics</span>
           <section className="flex flex-col gap-2">
             {
-              Object.keys(store).length > 0
+              Object.keys(levelsStore).length > 0
               &&
-              Object.keys(store[userLevel].topics).map((topic: string, index: number) => {
-                return <TopicCard key={index} topic={topic} terms={store[userLevel].topics[topic].length} />
+              Object.keys(levelData).length > 0
+              &&
+              Object.keys(levelData.topics).map((topic: string, index: number) => {
+                if (levelData.topics[topic].length > 0) {
+                  return <TopicCard key={index} topic={topic} terms={levelData.topics[topic].length} />
+                }
               })
             }
           </section>
