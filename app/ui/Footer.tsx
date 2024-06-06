@@ -37,24 +37,6 @@ export default function Footer() {
 
         <section className='flex flex-col gap-2'>
           <p className='self-center'>&quot;Lernen Sie schnell und einfach&quot;</p>
-          <div className="flex flex-row justify-center ">
-            <p className='self-center'>Build with&nbsp;</p>
-            <Image
-              src="/icons/heart.png"
-              width={20}
-              height={20}
-              className="h-5 self-center"
-              alt="Heart emoji"
-            />
-            <p className='self-center'>&nbsp;by <Link className="underline text-primaryColor hover:no-underline hover:text-primary2Color" href="https://twitter.com/AntoniBLopez" target="_blank">Antoni</Link>&nbsp;</p>
-            <Image
-              src="/me.png"
-              width={20}
-              height={20}
-              className="rounded-full self-center h-5"
-              alt="My profile picture"
-            />
-          </div>
           <p className='self-center'>Urheberrechte © 2024 - Alle Rechte vorbehalten.</p>
           {/* IF NECESSARY */}
           {/* <p>Logo by Freepik - Flaticon</p> */}

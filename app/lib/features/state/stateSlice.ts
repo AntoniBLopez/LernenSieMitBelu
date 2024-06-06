@@ -5,12 +5,10 @@ import { Levels } from '@/types'
 
 interface InitialState {
   levels: Levels
-  selectedTopic: string
 }
 
 const initialState: InitialState = {
   levels: [],
-  selectedTopic: '',
 }
 
 const stateSlice = createSlice({
@@ -36,13 +34,8 @@ const stateSlice = createSlice({
     //     state.levels[name] = { ...state.levels[name], ...updatedData }
     //   }
     // },
-
-    /* SELECTED TOPIC */
-    setTopic(state, action: PayloadAction<string>) {
-      state.selectedTopic = action.payload
-    },
   },
 })
 
-export const { initializeLevels, setTopic } = stateSlice.actions
+export const { initializeLevels } = stateSlice.actions
 export default stateSlice.reducer

@@ -1,17 +1,30 @@
 'use client'
-import { bricolage } from '@/app/ui/fonts'
 // import Image from 'next/image'
-import SideNav from './dashboard/SideNav'
 import { getLevelsAndDispatchToStore } from '../lib/features/state/utils'
 import { useAppDispatch, useAppSelector } from '../lib/hooks'
 import { RootState } from '../lib/store'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import Levels from '@/app/ui/levels/page'
+import Topics from './levels/topics/page'
+import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 // import { useState } from 'react'
 
 export default function Main() {
 
+  const router = useRouter()
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
+  const [levelBeenChosen, setLevelBeenChosen] = useState(false)
   const dispatch = useAppDispatch()
+
+  const handleLevelClick = () => {
+    setLevelBeenChosen(true)
+  }
+  const handleTopicClick = () => {
+    // redirect to /content
+    router.replace('/admin/dev')
+    setLevelBeenChosen(false)
+  }
 
   useEffect(() => {
     if (levelsStore.length === 0) {
@@ -22,24 +35,18 @@ export default function Main() {
 
   return (
     <main className="h-fit w-full">
-      <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-        <div className="flex flex-col h-screen py-10 text-center" >
-          <h1 className='text-6xl text-primaryColor'>Lernen Sie Mit Belu</h1>
-          <SideNav />
+      <div className="flex flex-col gap-20 px-fixed desktop:px-fixedDesktop w-full h-fit">
+        <div className="flex flex-col pt-10 text-center" >
+          <h1 className='text-6xl text-primaryColor'>Welcome</h1>
         </div>
-        <div className="px-fixed w-full h-fit">
-          <div className="h-screen py-10">
-
-            <h1>Main 2</h1>
-          </div>
-        </div>
-
-        <div className="px-fixed w-full h-fit">
-          <div className="h-screen py-10">
-
-            <h1>Main 3</h1>
-          </div>
-        </div>
+        <section className='flex justify-center'>
+          <Link
+            href="/ui/levels"
+            className='font-bold bg-primaryColor text-white rounded-md px-4 py-2 hover:bg-primaryColorDark'
+          >
+            Choose a level
+          </Link>
+        </section>
       </div>
     </main >
   )

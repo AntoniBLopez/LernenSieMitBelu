@@ -1,16 +1,15 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/navigation'
 import Option from '@/app/widgets/Option'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
-// import {
-//   ArrowLeftIcon,
-//   ArrowRightIcon,
+import {
+  ChevronRightIcon,
+  ArrowPathIcon,
 
-// } from '@heroicons/react/24/outline';
+} from '@heroicons/react/24/outline';
 
 const correctMessage = [
   'Nice Work!',
@@ -38,14 +37,13 @@ const wrongMessage = [
 
 function Page() {
 
-  const router = useRouter()
+  const isBrowser = typeof window !== 'undefined'
+  const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
+  const [selectedLevel, setSelectedLevel] = useState<string | null>(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
-  const selectedTopic = useAppSelector((state: RootState) => state.store.selectedTopic)
-  // const selectedTopic = 'Test'
-  const [selectedLevel, setSelectedLevel] = useState('A1') // ADD THE LEVEL OF THE USER
   const [cardNumber, setCardNumber] = useState(1)
   const [levelData, setlevelData] = useState<any>({})
-  const [topicWords, setTopicWords] = useState([]) /* TO DO  */
+  const [topicWords, setTopicWords] = useState([])
   const [isCorrect, setIsCorrect] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [randomNumber, setRandomNumber] = useState(0)
@@ -98,17 +96,8 @@ function Page() {
   }, [levelsStore])
 
   useEffect(() => {
-    if (levelsStore.length > 0 && Object.keys(levelData).length > 0) {
-      const topics = levelData.topics;
-      console.log(topics, "topics")
-      console.log(selectedTopic, "selectedTopic")
-      if (topics && topics[selectedTopic]) {
-        setTopicWords(topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word));
-      } else {
-        console.error('Selected topic does not exist in level data');
-        window.alert('When you refreshed the page, the information indicating which level you have chosen was lost, please select it again.')
-        router.replace('/ui/levels')
-      }
+    if (levelsStore.length > 0 && Object.keys(levelData).length > 0 && selectedLevel !== null && selectedTopic !== null) {
+      setTopicWords(levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelData]);
@@ -180,21 +169,43 @@ function Page() {
             </section>
           </div>
         </div>
-        <button
-          className='
+        {
+          showMessage
+          &&
+          <button
+            className='
+            flex
+            place-content-center
+            w-[50%]
             self-center
-            font-bold
-            text-grayColor
+            font-semibold
+            text-white
             hover:cursor-pointer
-            hover:bg-selectedColor
-            rounded-full
+            hover:bg-primaryColorDark
+            bg-primaryColor
+            rounded-md
             py-2
             px-4
             '
-          onClick={topicWords.length !== cardNumber ? nextCard : restart}
-        >
-          {showMessage ? topicWords.length !== cardNumber ? 'Next' : 'Start over' : ''}
-        </button>
+            onClick={topicWords.length !== cardNumber ? nextCard : restart}
+          >
+            {
+              topicWords.length !== cardNumber
+                ? (
+                  <div className='flex flex-row gap-2 items-center'>
+                    Next
+                    <ChevronRightIcon className='w-4 h-4' />
+                  </div>
+                )
+                : (
+                  <div className='flex flex-row gap-2 items-center'>
+                    Start over
+                    <ArrowPathIcon className='w-4 h-4' />
+                  </div>
+                )
+            }
+          </button>
+        }
       </section>
     </main>
   )

@@ -11,13 +11,14 @@ import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import SelectCard from "@/app/ui/dashboard/SelectCard"
 import { useEffect, useState } from "react";
+import { Level } from "@/types";
 
-function Course() {
+function Topics() {
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
-  const [userLevel, setUserLevel] = useState('A1')
-  const [levelData, setlevelData] = useState<any>({})
+  const [selectedLevel, setSelectedLevel] = useState(localStorage.getItem("selectedLevel"))
+  const [levelTopics, setLevelTopics] = useState<any>({})
 
   useEffect(() => {
     if (levelsStore.length === 0) {
@@ -28,8 +29,8 @@ function Course() {
 
   useEffect(() => {
     if (levelsStore.length > 0) {
-      const level = levelsStore.find(obj => obj.level === userLevel)
-      setlevelData(level)
+      const level = levelsStore.find((obj: Level) => obj.level === selectedLevel)
+      setLevelTopics(level)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])
@@ -39,18 +40,12 @@ function Course() {
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
       <div className="flex flex-col h-fit my-10 gap-10">
         <header className="flex flex-col gap-5">
-          <Link href={"/"} className="w-fit">
-            <Image
-              src="/icons/leftArrow.png"
-              width={30}
-              height={30}
-              className="text-black"
-              alt="Go back to homepage arrow icon"
-            />
-          </Link>
+          {/* Build a broadcaster here */}
+
+
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <AcademicCapIcon className="size-8 text-primaryColor" />
-            <span className="content-end">&nbsp;A1 course</span>
+            <span className="content-end">&nbsp;Choose the topic</span>
           </h1>
         </header>
 
@@ -60,11 +55,11 @@ function Course() {
             {
               levelsStore.length > 0
               &&
-              levelData.length > 0
+              Object.keys(levelTopics).length > 0
               &&
-              Object.keys(levelData.topics).map((topic: string, index: number) => {
-                if (levelData.topics[topic].length > 0) {
-                  return <SelectCard key={index} topic={topic} terms={levelData.topics[topic].length} />
+              Object.keys(levelTopics.topics).map((topic: string, index: number) => {
+                if (levelTopics.topics[topic].length > 0) {
+                  return <SelectCard key={index} name={topic} length={levelTopics.topics[topic].length} />
                 }
               })
             }
@@ -75,4 +70,4 @@ function Course() {
   )
 }
 
-export default Course
+export default Topics

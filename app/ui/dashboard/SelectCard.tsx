@@ -1,19 +1,28 @@
 import Link from 'next/link'
 
-function SelectCard({ isChooseLevels=false, topic, terms }: { isChooseLevels?: boolean, topic: string, terms: number }) {
+function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?: boolean, name: string, length: number }) {
 
   const handleClick = () => {
     console.log('handleClick')
+    if (isChooseLevels) {
+      localStorage.setItem("selectedLevel", name);
+    } else {
+      localStorage.setItem("selectedTopic", name);
+    }
   }
 
   return (
-    <Link href={isChooseLevels ? '/ui/levels/topics' : '/admin/dev'} onClick={handleClick} className='flex flex-col w-full h-20 bg-white rounded-md drop-shadow-md hover:cursor-pointer group'>
-      <div className='flex flex-col w-full h-full px-5 py-2'>
-        <section className='flex'>
-          <span className='font-medium text-xl'>{topic}</span>
-        </section>
+    <Link
+      href={isChooseLevels ? '/ui/levels/topics' : '/admin/dev'}
+      onClick={handleClick}
+      className='flex flex-col w-full h-fit bg-white rounded-md drop-shadow-md hover:cursor-pointer group'
+    >
+      <div className='flex flex-col w-full h-fit px-5 py-2'>
+        <main>
+          <span className='font-medium text-xl'>{name}</span>
+        </main>
         <footer>
-          <span>{terms} Terms</span>
+          <span className='text-sm'>{`${length} ${isChooseLevels ? 'Topics' : 'Words'}`}</span>
         </footer>
       </div>
       {/* <div className='w-full h-1 rounded-full bg-gradient-to-r from-green-400 to-blue-400 opacity-60'></div> */}
