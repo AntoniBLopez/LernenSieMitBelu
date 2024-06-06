@@ -107,7 +107,7 @@ function Page() {
       } else {
         console.error('Selected topic does not exist in level data');
         window.alert('When you refreshed the page, the information indicating which level you have chosen was lost, please select it again.')
-        router.replace('/ui/course')
+        router.replace('/ui/levels')
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

@@ -1,18 +1,13 @@
 import Link from 'next/link'
-import { useAppDispatch } from "@/app/lib/hooks"
-import { setTopic } from '@/app/lib/features/state/stateSlice'
 
-function TopicCard({ topic, terms }: { topic: string, terms: number }) {
-
-  const dispatch = useAppDispatch()
+function SelectCard({ isChooseLevels=false, topic, terms }: { isChooseLevels?: boolean, topic: string, terms: number }) {
 
   const handleClick = () => {
     console.log('handleClick')
-    dispatch(setTopic(topic))
   }
 
   return (
-    <Link href={'/admin/dev'} onClick={handleClick} className='flex flex-col w-full h-20 bg-white rounded-md drop-shadow-md hover:cursor-pointer group'>
+    <Link href={isChooseLevels ? '/ui/levels/topics' : '/admin/dev'} onClick={handleClick} className='flex flex-col w-full h-20 bg-white rounded-md drop-shadow-md hover:cursor-pointer group'>
       <div className='flex flex-col w-full h-full px-5 py-2'>
         <section className='flex'>
           <span className='font-medium text-xl'>{topic}</span>
@@ -27,4 +22,4 @@ function TopicCard({ topic, terms }: { topic: string, terms: number }) {
   )
 }
 
-export default TopicCard
+export default SelectCard

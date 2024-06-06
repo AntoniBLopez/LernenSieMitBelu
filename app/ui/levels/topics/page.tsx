@@ -9,7 +9,7 @@ import {
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import TopicCard from "../dashboard/TopicCard"
+import SelectCard from "@/app/ui/dashboard/SelectCard"
 import { useEffect, useState } from "react";
 
 function Course() {
@@ -58,13 +58,13 @@ function Course() {
           <span className="text-primaryColor font-medium text-base">Topics</span>
           <section className="flex flex-col gap-2">
             {
-              Object.keys(levelsStore).length > 0
+              levelsStore.length > 0
               &&
-              Object.keys(levelData).length > 0
+              levelData.length > 0
               &&
               Object.keys(levelData.topics).map((topic: string, index: number) => {
                 if (levelData.topics[topic].length > 0) {
-                  return <TopicCard key={index} topic={topic} terms={levelData.topics[topic].length} />
+                  return <SelectCard key={index} topic={topic} terms={levelData.topics[topic].length} />
                 }
               })
             }
