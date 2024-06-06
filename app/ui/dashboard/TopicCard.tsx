@@ -7,6 +7,7 @@ function TopicCard({ topic, terms }: { topic: string, terms: number }) {
   const dispatch = useAppDispatch()
 
   const handleClick = () => {
+    console.log('handleClick')
     dispatch(setTopic(topic))
   }
 

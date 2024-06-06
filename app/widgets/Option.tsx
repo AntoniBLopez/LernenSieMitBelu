@@ -1,7 +1,7 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
-function Option({ name, showMessage, isCorrect }: { name: string | number, showMessage: boolean, isCorrect: boolean }) {
+function Option({ name, showMessage, isCorrect, resetResponse }: { name: string | number, showMessage: boolean, isCorrect: boolean, resetResponse: boolean }) {
 
   const [clicked, setClicked] = useState(false)
 
@@ -9,6 +9,12 @@ function Option({ name, showMessage, isCorrect }: { name: string | number, showM
     if (showMessage) return
     setClicked(true)
   }
+
+  useEffect(() => {
+    if (resetResponse) {
+      setClicked(false)
+    }
+  }, [resetResponse])
 
   return (
     <div onClick={handleClick} className={`
