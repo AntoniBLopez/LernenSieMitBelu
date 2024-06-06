@@ -1,5 +1,6 @@
 'use client'
 import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import Option from '@/app/widgets/Option'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
@@ -37,13 +38,14 @@ const wrongMessage = [
 
 function Page() {
 
+  const router = useRouter()
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const selectedTopic = useAppSelector((state: RootState) => state.store.selectedTopic)
   // const selectedTopic = 'Test'
   const [selectedLevel, setSelectedLevel] = useState('A1') // ADD THE LEVEL OF THE USER
   const [cardNumber, setCardNumber] = useState(1)
   const [levelData, setlevelData] = useState<any>({})
-  const [topicWords, setTopicWords] = useState(Object.keys(levelData).length > 0 && Object.keys(levelData.topics).length > 0 ? levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word) : []) /* TO DO  */
+  const [topicWords, setTopicWords] = useState([]) /* TO DO  */
   const [isCorrect, setIsCorrect] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [randomNumber, setRandomNumber] = useState(0)
@@ -96,11 +98,20 @@ function Page() {
   }, [levelsStore])
 
   useEffect(() => {
-    if (levelsStore.length > 0 && selectedTopic) {
-      setTopicWords(levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word))
+    if (levelsStore.length > 0 && Object.keys(levelData).length > 0) {
+      const topics = levelData.topics;
+      console.log(topics, "topics")
+      console.log(selectedTopic, "selectedTopic")
+      if (topics && topics[selectedTopic]) {
+        setTopicWords(topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word));
+      } else {
+        console.error('Selected topic does not exist in level data');
+        window.alert('When you refreshed the page, the information indicating which level you have chosen was lost, please select it again.')
+        router.replace('/ui/course')
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [levelData])
+  }, [levelData]);
 
   useEffect(() => {
     setResetResponse(false) // reset the response design of the card that shows correct or wrong to none
