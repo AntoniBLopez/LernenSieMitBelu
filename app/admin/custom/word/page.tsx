@@ -75,7 +75,7 @@ function Page() {
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col max-w-xl mx-auto h-screen my-10 gap-7 text-center">
+      <div className="flex flex-col max-w-xl mx-auto mt-10 mb-32 gap-7 text-center">
         <Link href={"/admin"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"
@@ -186,9 +186,9 @@ function Page() {
               </tr>
             </thead>
             <tbody>
-              <tr className="flex flex-col">
-                <td>{topic}</td>
-                <td className="underline font-medium">Words</td>
+              <tr className="flex flex-col text-center">
+                <td className="mb-5 font-bold text-primaryColor">{topic}</td>
+                <td className="font-bold">Words</td>
                 {
                   Object.keys(actualLevelData).length > 0
                   &&
@@ -198,8 +198,8 @@ function Page() {
                   &&
                   actualLevelData.topics[topic]?.map((topicWord: WordsTraduction, index: number) => {
                     if (topicWord !== null && topicWord.word !== null) return (
-                      <td key={index}>
-                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{topicWord.word[0]} -&gt; {topicWord.word[1]}
+                      <td key={index} >
+                        {topicWord.word[0]} -&gt; {topicWord.word[1]}
                       </td>
                     )
                   })
