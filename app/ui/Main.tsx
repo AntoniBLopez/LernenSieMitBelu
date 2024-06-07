@@ -4,11 +4,27 @@ import { useAppDispatch, useAppSelector } from '../lib/hooks'
 import { RootState } from '../lib/store'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import axios from 'axios'
 
 export default function Main() {
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
+
+  const handleAddOldData = async () => {
+    try {
+      const response = await axios.post(
+        process.env.NODE_ENV === 'development'
+          ? 'http://localhost:3000/api/topics'
+          : '/api/topics'
+      )
+
+      return response.data
+    } catch (error) {
+      console.log(error, 'error')
+      throw error // manage error where getLevels is called
+    }
+  }
 
   useEffect(() => {
     if (levelsStore.length === 0) {
@@ -30,6 +46,9 @@ export default function Main() {
           >
             Start
           </Link>
+          <button onClick={handleAddOldData}>
+            Add Old Data
+          </button>
         </section>
       </div>
     </main >

@@ -1,7 +1,7 @@
 // 'use client';
 
 // import { useEffect, useState } from 'react';
-// import { extractLevelsData } from '../admin/axios/queries';
+// import { extractLevelsData } from '../admin/axios/clientQueries';
 // import { Levels } from '@/types';
 
 // function DownloadDbData() {

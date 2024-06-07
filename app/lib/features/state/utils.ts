@@ -1,4 +1,4 @@
-import { getLevels } from "@/app/admin/axios/queries"
+import { getLevels } from "@/app/admin/axios/clientQueries"
 import { initializeLevels } from "@/app/lib/features/state/stateSlice"
 
 

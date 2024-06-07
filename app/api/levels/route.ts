@@ -10,9 +10,7 @@ import { NextResponse } from 'next/server'
 export async function GET() {
   try {
     await connectDB()
-    console.log('inside api/levels/route.ts GET')
     const levels = await Levels.find()
-    console.log('levels: ', levels)
 
     return NextResponse.json(levels)
   } catch (error: any) {
