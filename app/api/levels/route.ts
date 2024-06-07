@@ -14,8 +14,6 @@ export async function GET() {
     const levels = await Levels.find()
     console.log('levels: ', levels)
 
-    // return NextResponse.json(levels)
-    // const data = await GetLevels()
     return NextResponse.json(levels)
   } catch (error: any) {
     return NextResponse.json({ error: error.message, message: 'error getting levels' })

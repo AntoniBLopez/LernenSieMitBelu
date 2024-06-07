@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const LevelSchema = new mongoose.Schema({
+const schema = new mongoose.Schema({
   level: {
     type: String,
     required: true
@@ -19,4 +19,4 @@ const LevelSchema = new mongoose.Schema({
   }
 }, { minimize: false });
 
-export default mongoose.models.levels || mongoose.model('levels', LevelSchema)
+export default mongoose.models.Levels || mongoose.model('Levels', schema)
