@@ -32,14 +32,14 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex drop-shadow-md h-[42px] grow items-center justify-center gap-2 rounded-md bg-gray-50 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3',
+              'flex h-fit gap-2 py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium bg-gray-50 hover:bg-sky-100 hover:text-blue-600',
               {
                 'bg-sky-100 text-blue-600': pathname === link.href,
               },
             )}
           >
-            <LinkIcon className="w-6" />
-            <p className="md:block">{link.name}</p>
+            <LinkIcon className="w-6 max-mobile:ml-[28%] max-md:ml-[38%]" />
+            <p className="self-end font-semibold">{link.name}</p>
           </Link>
         );
       })}
