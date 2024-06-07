@@ -19,4 +19,4 @@ const LevelSchema = new mongoose.Schema({
   }
 }, { minimize: false });
 
-export default mongoose.models.Levels || mongoose.model('Levels', LevelSchema)
+export default mongoose.models.Levels || mongoose.model('levels', LevelSchema)
