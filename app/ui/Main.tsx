@@ -13,15 +13,16 @@ export default function Main() {
 
   const handleAddOldData = async () => {
     try {
+      console.log('handleAddOldData CALLED')
       const response = await axios.post(
         process.env.NODE_ENV === 'development'
           ? 'http://localhost:3000/api/topics'
           : '/api/topics'
       )
 
-      return response.data
+      console.log(response.data, 'response.data')
     } catch (error) {
-      console.log(error, 'error')
+      console.error(error, 'error')
       throw error // manage error where getLevels is called
     }
   }
