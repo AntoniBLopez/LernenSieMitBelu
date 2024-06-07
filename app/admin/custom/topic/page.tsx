@@ -17,6 +17,7 @@ function Page() {
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
 
   useEffect(() => {
+    console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }

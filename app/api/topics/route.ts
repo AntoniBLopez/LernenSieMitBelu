@@ -17,8 +17,11 @@ export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAM
 export async function POST(request: Request) {
   try {
     await connectDB()
+    console.log('inside api/topics/route.ts POST')
     const { level, topic } = await request.json()
+    console.log('level: ', level, 'topic: ', topic)
     const levelHaveTopics = await Levels.findOne({ level })
+    console.log('levelHaveTopics working?: ', levelHaveTopics)
     const topicExists = await Levels.findOne({ level, [`topics.${topic}`]: { $exists: true } })
     let updatedDocument
 
