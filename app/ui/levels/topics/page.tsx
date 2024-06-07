@@ -15,9 +15,10 @@ import { Level } from "@/types";
 
 function Topics() {
 
+  const isBrowser = typeof window !== 'undefined'
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
-  const [selectedLevel, setSelectedLevel] = useState(localStorage.getItem("selectedLevel"))
+  const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const [levelTopics, setLevelTopics] = useState<any>({})
 
   useEffect(() => {
