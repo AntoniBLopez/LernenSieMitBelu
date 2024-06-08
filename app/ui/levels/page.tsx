@@ -1,7 +1,5 @@
 'use client'
 
-import Image from "next/image"
-import Link from "next/link"
 import {
   ChartBarIcon,
 
@@ -10,8 +8,9 @@ import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import SelectCard from "@/app/ui/dashboard/SelectCard"
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Level } from "@/types";
+import Breadcrumbs from "@/app/widgets/Breadcrumbs";
 
 function Levels() {
 
@@ -27,11 +26,10 @@ function Levels() {
 
 
   return (
-    <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
-      <div className="flex flex-col h-fit my-10 gap-10">
-        <header className="flex flex-col gap-5">
-          {/* Build a broadcaster here */}
-
+    <div className="px-12 w-full h-fit">
+      <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
+        <header className="flex flex-col gap-10">
+          <Breadcrumbs actualTab="Levels" />
 
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <ChartBarIcon className="size-7 text-primaryColor" />
@@ -39,8 +37,7 @@ function Levels() {
           </h1>
         </header>
 
-        <main className="flex flex-col gap-2">
-          <span className="text-primaryColor font-medium text-base">Levels</span>
+        <main className="flex flex-col">
           <section className="flex flex-col gap-2">
             {
               levelsStore.length > 0

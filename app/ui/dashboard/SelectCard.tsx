@@ -13,7 +13,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
 
   return (
     <Link
-      href={isChooseLevels ? '/ui/levels/topics' : '/admin/dev'}
+      href={isChooseLevels ? '/ui/levels/topics' : '/games'}
       onClick={handleClick}
       className='flex flex-col w-full h-fit bg-white rounded-md drop-shadow-md hover:cursor-pointer group'
     >

@@ -10,6 +10,7 @@ import {
   ArrowPathIcon,
 
 } from '@heroicons/react/24/outline';
+import Breadcrumbs from '@/app/widgets/Breadcrumbs'
 
 const correctMessage = [
   'Nice Work!',
@@ -135,8 +136,8 @@ function Page() {
   }, [cardNumber])
 
   return (
-    <main className='flex flex-col gap-10'>
-      <h1 className='text-3xl font-bold text-center'>Multiple Choice</h1>
+    <main className='flex flex-col mx-12 desktop:mx-desktop gap-10'>
+      <Breadcrumbs actualTab="MultipleChoice" />
 
       <section className='flex flex-col gap-2'>
         <div className='flex flex-row gap-3 items-center justify-center'>

@@ -1,10 +1,9 @@
 'use client';
 
 import {
-  UserGroupIcon,
-  ArrowUturnLeftIcon,
-  ClipboardIcon,
-  ArrowsPointingInIcon,
+  BoltIcon,
+  ClipboardDocumentListIcon,
+  PuzzlePieceIcon,
 
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -15,9 +14,9 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   // { name: 'Temporal Back', href: '/ui/levels/topics', icon: ArrowUturnLeftIcon },
-  { name: 'Flashcards', href: '/content/flashcards', icon: ClipboardIcon },
-  { name: 'Match', href: '/content/match', icon: ArrowsPointingInIcon, },
-  { name: 'Multiple Choice', href: '/content/multiplechoice', icon: UserGroupIcon },
+  { name: 'Flashcards', href: '/games/flashcards', icon: BoltIcon },
+  { name: 'Matching', href: '/games/matching', icon: PuzzlePieceIcon, },
+  { name: 'Multiple Choice', href: '/games/multiplechoice', icon: ClipboardDocumentListIcon },
 ];
 
 export default function NavLinks() {

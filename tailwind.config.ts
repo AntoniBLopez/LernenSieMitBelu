@@ -15,6 +15,7 @@ const config: Config = {
       },
       textColor: {
         'primaryColor': '#50c9a4',
+        'primaryColorDark': '#34ba91',
         'grayColor': '#696969',
         // 'grayColor': '#586380',
       },
@@ -27,9 +28,10 @@ const config: Config = {
         'selectedColor': '#ebebeb',
       },
       spacing: {
-        desktop: '8rem',
-        tablet: '4rem',
         mobile: '2rem',
+        tablet: '4rem',
+        laptop: '5rem',
+        desktop: '8rem',
         fixed: '1.5rem',
         fixedDesktop: '6rem',
         contentMargin: '6rem',
