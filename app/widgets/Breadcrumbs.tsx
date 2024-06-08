@@ -59,7 +59,7 @@ function Breadcrumbs({ actualTab }: { actualTab: string }) {
                   </div>
                 </button>
                 {showReducedBreadcrumbs && (
-                  <div ref={dropdownRef} className="absolute flex flex-row top-28 left-12 bg-white drop-shadow-md rounded-md items-center z-10">
+                  <div ref={dropdownRef} className="absolute flex flex-row top-28 left-[20%] mobile:left-[30%] tablet:left-12 desktop:left-36 bg-white drop-shadow-md rounded-md items-center z-10">
                     {itemsToShow.slice(1, itemsToShow.length - 2).map(({ name, href }, subIndex) => (
                       <React.Fragment key={`reduced-${subIndex}`}>
                         <Link href={href} className='block py-1 px-2 hover:bg-gray-100 hover:text-primaryColorDark'>

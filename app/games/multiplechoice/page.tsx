@@ -137,7 +137,7 @@ function Page() {
   }, [cardNumber])
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-10 desktop:mx-desktop gap-10'>
+    <main className='flex flex-col mx-8 mt-8 mb-28 desktop:mx-desktop gap-10'>
       <div className='flex flex-col gap-2 items-center tablet:flex-row tablet:justify-between'>
           <Breadcrumbs actualTab="MultipleChoice" />
           <SelectedLabels showLevel={true} showTopic={true} />
