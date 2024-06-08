@@ -22,10 +22,14 @@ function Page() {
     <div className="flex flex-col mx-12 h-fit mt-8 mb-10 gap-5" >
       <header className="flex flex-col gap-10">
         <Breadcrumbs actualTab="Games" />
-        <h1 className='flex text-2xl text-primaryColor font-medium'>
-          <InformationCircleIcon className="size-8 text-primaryColor" />
-          <span className="content-end">&nbsp;{selectedLevel}: {selectedTopic}</span>
-        </h1>
+        <div className="flex flex-col gap-2">
+          <div className="flex flex-row gap-1 items-center">
+            <InformationCircleIcon className="size-6 text-primaryColor" />
+            <h2 className='flex text-xl text-primaryColor font-medium'>
+              <span className="content-end">{selectedLevel}: {selectedTopic}</span>
+            </h2>
+          </div>
+        </div>
       </header>
       <SideNav />
     </div>

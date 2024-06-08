@@ -136,7 +136,7 @@ function Page() {
   }, [cardNumber])
 
   return (
-    <main className='flex flex-col mx-12 desktop:mx-desktop gap-10'>
+    <main className='flex flex-col mx-12 mt-8 mb-10 desktop:mx-desktop gap-10'>
       <Breadcrumbs actualTab="MultipleChoice" />
 
       <section className='flex flex-col gap-2'>
