@@ -11,6 +11,7 @@ import {
 
 } from '@heroicons/react/24/outline';
 import Breadcrumbs from '@/app/widgets/Breadcrumbs'
+import SelectedLabels from '@/app/widgets/SelectedLabels'
 
 const correctMessage = [
   'Nice Work!',
@@ -137,7 +138,10 @@ function Page() {
 
   return (
     <main className='flex flex-col mx-12 mt-8 mb-10 desktop:mx-desktop gap-10'>
-      <Breadcrumbs actualTab="MultipleChoice" />
+      <div className='flex flex-col gap-2 items-center tablet:flex-row tablet:justify-between'>
+          <Breadcrumbs actualTab="MultipleChoice" />
+          <SelectedLabels showLevel={true} showTopic={true} />
+        </div>
 
       <section className='flex flex-col gap-2'>
         <div className='flex flex-row gap-3 items-center justify-center'>

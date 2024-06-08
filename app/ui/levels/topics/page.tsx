@@ -11,13 +11,14 @@ import SelectCard from "@/app/ui/dashboard/SelectCard"
 import { useEffect, useState } from "react";
 import { Level } from "@/types";
 import Breadcrumbs from "@/app/widgets/Breadcrumbs";
+import SelectedLabels from '@/app/widgets/SelectedLabels';
 
 function Topics() {
 
   const isBrowser = typeof window !== 'undefined'
+  const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
-  const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const [levelTopics, setLevelTopics] = useState<any>({})
 
   useEffect(() => {
@@ -40,11 +41,14 @@ function Topics() {
     <div className="px-12 w-full h-fit">
       <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
         <header className="flex flex-col gap-10">
-          <Breadcrumbs actualTab="Topics" />
+          <div className='flex flex-col gap-2 items-start tablet:flex-row tablet:items-center tablet:justify-between'>
+            <Breadcrumbs actualTab="Topics" />
+            <SelectedLabels showLevel={true} />
+          </div>
 
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <AcademicCapIcon className="size-8 text-primaryColor" />
-            <span className="content-end">&nbsp;{selectedLevel} Choose the topic </span>
+            <span className="content-end">&nbsp;Choose the topic </span>
           </h1>
         </header>
 

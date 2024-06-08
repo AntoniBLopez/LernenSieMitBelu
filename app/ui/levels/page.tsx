@@ -33,7 +33,7 @@ function Levels() {
 
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <ChartBarIcon className="size-7 text-primaryColor" />
-            <span className="content-end">&nbsp;Choose a level</span>
+            <span className="content-end">&nbsp;Choose the level</span>
           </h1>
         </header>
 
