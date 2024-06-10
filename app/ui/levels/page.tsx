@@ -26,11 +26,10 @@ function Levels() {
 
 
   return (
-    <div className="px-12 w-full h-fit">
+    <div className="px-12 desktop:px-desktop w-full h-fit">
       <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
         <header className="flex flex-col gap-10">
           <Breadcrumbs actualTab="Levels" />
-
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <ChartBarIcon className="size-7 text-primaryColor" />
             <span className="content-end">&nbsp;Choose the level</span>

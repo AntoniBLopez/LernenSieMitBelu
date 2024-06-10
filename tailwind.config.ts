@@ -28,13 +28,11 @@ const config: Config = {
         'selectedColor': '#ebebeb',
       },
       spacing: {
+        fixed: '1.5rem',
         mobile: '2rem',
         tablet: '4rem',
         laptop: '5rem',
-        desktop: '8rem',
-        fixed: '1.5rem',
-        fixedDesktop: '6rem',
-        contentMargin: '6rem',
+        desktop: '16rem',
       },
       screens: {
         'mobile': '440px',

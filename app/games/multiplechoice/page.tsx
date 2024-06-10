@@ -45,7 +45,7 @@ function Page() {
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const [cardNumber, setCardNumber] = useState(1)
   const [levelData, setlevelData] = useState<any>({})
-  const [topicWords, setTopicWords] = useState([])
+  const [topicWords, setTopicWords] = useState<any>([])
   const [isCorrect, setIsCorrect] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [randomNumber, setRandomNumber] = useState(0)
@@ -64,23 +64,22 @@ function Page() {
       setShowMessage(true)
     } else {
       setRandomNumber(getRandomNumber(0, wrongMessage.length - 1))
-      setIsCorrect(false) // DELETE LINE and do the reset when going to the next card
       setShowMessage(true)
     }
   }
 
   const nextCard = () => {
+    setResetResponse(true)
     setShowMessage(false)
     setIsCorrect(false)
     setCardNumber(cardNumber + 1)
-    setResetResponse(true)
   }
 
   const restart = () => {
+    setResetResponse(true)
     setShowMessage(false)
     setIsCorrect(false)
     setCardNumber(1)
-    setResetResponse(true)
   }
 
   useEffect(() => {
@@ -99,7 +98,20 @@ function Page() {
 
   useEffect(() => {
     if (levelsStore.length > 0 && Object.keys(levelData).length > 0 && selectedLevel !== null && selectedTopic !== null) {
-      setTopicWords(levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word));
+      const onlyWords = levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word)
+      // /* This is the solution for ordering the words randomly divided in 3 ordered sets */
+      // /* I divide the number of words in the topic by 3 to get the number of words to show in the first third of the card to get them ordered randomly */
+      // const oneThird = onlyWords.length / 3
+      // const firstThird = onlyWords.filter((wordObj: WordsTraduction, index: number) => index < oneThird).sort(sortRandomly)
+      // /* The second third will show the next set also randomly ordered */
+      // const secondThird = onlyWords.filter((wordObj: WordsTraduction, index: number) => index >= oneThird && index < oneThird * 2).sort(sortRandomly)
+      // /* The third set it's going to be all the remaining words randomly ordered starting from the second third */
+      // const remainingWords = onlyWords.filter((wordObj: WordsTraduction, index: number) => index >= oneThird * 2).sort(sortRandomly)
+      // console.log([...firstThird, ...secondThird, ...remainingWords], '[...firstThird, ...secondThird, ...remainingWords]')
+      // setTopicWords([...firstThird, ...secondThird, ...remainingWords])
+
+      /* This is the alternative solution for the random order, to order them all randomly, without the 3 ordered sets */
+      setTopicWords(onlyWords.sort(sortRandomly))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelData]);
@@ -137,8 +149,8 @@ function Page() {
   }, [cardNumber])
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-28 desktop:mx-desktop gap-8'>
-      <div className='flex flex-col gap-2 items-start tablet:flex-row tablet:items-center tablet:justify-between'>
+    <main className='flex flex-col mx-12 mt-8 mb-24 desktop:mx-desktop gap-8'>
+      <div className='flex flex-col gap-2 items-start'>
         <Breadcrumbs actualTab="MultipleChoice" />
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>

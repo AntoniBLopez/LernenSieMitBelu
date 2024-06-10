@@ -20,9 +20,9 @@ function Page() {
   }, [selectedLevel, selectedTopic])
 
   return (
-    <div className="flex flex-col mx-12 h-fit mt-8 mb-10 gap-5" >
+    <div className="flex flex-col mx-12 desktop:mx-desktop h-fit mt-8 mb-10 gap-5" >
       <header className="flex flex-col gap-10">
-        <div className='flex flex-col gap-2 items-start tablet:flex-row tablet:items-center tablet:justify-between'>
+        <div className='flex flex-col gap-2 items-start'>
           <Breadcrumbs actualTab="Games" />
           <SelectedLabels showLevel={true} showTopic={true} />
         </div>

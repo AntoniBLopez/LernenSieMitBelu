@@ -19,7 +19,7 @@ export default function Main() {
 
   return (
     <main className="h-fit w-full">
-      <div className="flex flex-col gap-20 px-fixed desktop:px-fixedDesktop w-full h-fit">
+      <div className="flex flex-col gap-20 px-fixed desktop:px-desktop w-full h-fit">
         <div className="flex flex-col pt-10 text-center" >
           <h1 className='text-6xl text-primaryColor'>Welcome</h1>
         </div>

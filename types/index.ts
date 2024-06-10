@@ -1,3 +1,7 @@
+export interface Word {
+  value: (string | number)[];
+}
+
 export interface WordsTraduction {
   word: (string | number)[];
   known_by_0: string[];
@@ -17,4 +21,4 @@ export interface Level {
   updated_at: string;
 }
 
-export interface Levels extends Array<Level> {}
+export interface Levels extends Array<Level> { }
