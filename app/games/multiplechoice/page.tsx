@@ -137,11 +137,11 @@ function Page() {
   }, [cardNumber])
 
   return (
-    <main className='flex flex-col mx-8 mt-8 mb-28 desktop:mx-desktop gap-10'>
-      <div className='flex flex-col gap-2 items-center tablet:flex-row tablet:justify-between'>
-          <Breadcrumbs actualTab="MultipleChoice" />
-          <SelectedLabels showLevel={true} showTopic={true} />
-        </div>
+    <main className='flex flex-col mx-12 mt-8 mb-28 desktop:mx-desktop gap-8'>
+      <div className='flex flex-col gap-2 items-start tablet:flex-row tablet:items-center tablet:justify-between'>
+        <Breadcrumbs actualTab="MultipleChoice" />
+        <SelectedLabels showLevel={true} showTopic={true} />
+      </div>
 
       <section className='flex flex-col gap-2'>
         <div className='flex flex-row gap-3 items-center justify-center'>
@@ -149,7 +149,7 @@ function Page() {
             {cardNumber} / {topicWords.length}
           </div>
         </div>
-        <div className='flex flex-col h-fit gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
+        <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
           <div className='flex flex-col gap-2'>
             <p className='opacity-50 font-bold text-sm'>Term</p>
             <div className='text-lg'>{topicWords.length > 0 ? topicWords[cardNumber - 1][0] : 'loading...'}</div>
