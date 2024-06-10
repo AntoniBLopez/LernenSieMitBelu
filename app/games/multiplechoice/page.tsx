@@ -49,6 +49,7 @@ function Page() {
   const [isCorrect, setIsCorrect] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
   const [randomNumber, setRandomNumber] = useState(0)
+  const [isRestart, setIsRestart] = useState(false)
   const initialSet = [0, 1, 2, 3]
   const sortRandomly = () => Math.random() - 0.5
   const [setToShow, setSetToShow] = useState(initialSet.sort(sortRandomly))
@@ -72,10 +73,10 @@ function Page() {
     setResetResponse(true)
     setShowMessage(false)
     setIsCorrect(false)
-    setCardNumber(cardNumber + 1)
   }
 
   const restart = () => {
+    setIsRestart(true)
     setResetResponse(true)
     setShowMessage(false)
     setIsCorrect(false)
@@ -95,6 +96,15 @@ function Page() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])
+
+  useEffect(() => {
+    if(resetResponse && !isRestart) {
+      setCardNumber(cardNumber + 1)
+    } else {
+      setIsRestart(false)
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [resetResponse])
 
   useEffect(() => {
     if (levelsStore.length > 0 && Object.keys(levelData).length > 0 && selectedLevel !== null && selectedTopic !== null) {
