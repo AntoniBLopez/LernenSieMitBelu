@@ -4,7 +4,7 @@ import { useAppSelector } from '../lib/hooks'
 import { RootState } from '../lib/store'
 
 
-function Option({ name, showMessage, isCorrect, resetResponse }: { name: string | number, showMessage: boolean, isCorrect: boolean, resetResponse: boolean }) {
+function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: string | number, showMessage: boolean, isCorrect: boolean, resetOptionDesign: boolean }) {
 
   const [clicked, setClicked] = useState(false)
   const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
@@ -16,10 +16,10 @@ function Option({ name, showMessage, isCorrect, resetResponse }: { name: string 
   }
 
   useEffect(() => {
-    if (resetResponse) {
+    if (resetOptionDesign) {
       setClicked(false)
     }
-  }, [resetResponse])
+  }, [resetOptionDesign])
 
   useEffect(() => {
     if (showMessage && isCorrect && isSoundOn) {

@@ -1,5 +1,4 @@
 'use client'
-
 import React, { useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
@@ -10,11 +9,12 @@ import { RootState } from "@/app/lib/store"
 import { Level, WordsTraduction } from "@/types"
 
 function Page() {
+
   const [topic, setTopic] = useState('')
   const [level, setLevel] = useState('A1')
 
-  const dispatch = useAppDispatch()
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
+  const dispatch = useAppDispatch()
 
   useEffect(() => {
     console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)

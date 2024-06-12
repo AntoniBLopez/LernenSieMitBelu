@@ -1,6 +1,9 @@
 import Link from 'next/link'
+import { LockClosedIcon } from '@heroicons/react/24/outline'
 
 function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?: boolean, name: string, length: number }) {
+
+  const isCardBlocked = length < 2
 
   const handleClick = () => {
     console.log('handleClick')
@@ -13,20 +16,29 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
 
   return (
     <Link
-      href={isChooseLevels ? '/ui/levels/topics' : '/games'}
-      onClick={handleClick}
-      className='flex flex-col w-full h-fit bg-white rounded-md drop-shadow-md hover:cursor-pointer group'
+      href={isCardBlocked ? '' : isChooseLevels ? '/ui/levels/topics' : '/games'}
+      onClick={isCardBlocked ? undefined : handleClick}
+      className={`flex flex-col w-full h-fit bg-white rounded-md group ${isCardBlocked ? 'bg-slate-400 opacity-50 hover:cursor-default' : 'drop-shadow-md hover:cursor-pointer'}`}
     >
       <div className='flex flex-col w-full h-fit px-5 py-2'>
-        <main>
-          <span className='font-medium text-xl'>{name}</span>
+        <main className={` ${isCardBlocked && 'flex flex-row gap-2 items-center'}`}>
+          <span className='font-medium text-xl w-5'>{name}</span>
+          {
+            isCardBlocked
+            &&
+            <LockClosedIcon className='w-4 h-4' />
+          }
         </main>
         <footer>
-          <span className='text-sm'>{`${length} ${isChooseLevels ? 'Themen' : 'Wörter'}`}</span>
+          <span className='text-sm'>{isCardBlocked ? 'Demnächst' : `${length} ${isChooseLevels ? 'Themen' : 'Wörter'}`}</span>
         </footer>
       </div>
       {/* <div className='w-full h-1 rounded-full bg-gradient-to-r from-green-400 to-blue-400 opacity-60'></div> */}
-      <div className='w-full h-1 rounded-br-full rounded-bl-full bg-gradient-to-r from-green-400 to-blue-400 opacity-0 group-hover:opacity-80 transition-opacity duration-200'></div>
+      {
+        !isCardBlocked
+        &&
+        <div className='w-full h-1 rounded-br-full rounded-bl-full bg-gradient-to-r from-green-400 to-blue-400 opacity-0 group-hover:opacity-80 transition-opacity duration-200'></div>
+      }
     </Link>
   )
 }

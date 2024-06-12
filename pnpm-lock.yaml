@@ -35,6 +35,9 @@ dependencies:
   body-parser:
     specifier: ^1.20.2
     version: 1.20.2
+  canvas-confetti:
+    specifier: ^1.9.3
+    version: 1.9.3
   clsx:
     specifier: ^2.1.1
     version: 2.1.1
@@ -946,6 +949,10 @@ packages:
 
   /caniuse-lite@1.0.30001620:
     resolution: {integrity: sha512-WJvYsOjd1/BYUY6SNGUosK9DUidBPDTnOARHp3fSmFO1ekdxaY6nKRttEVrfMmYi80ctS0kz1wiWmm14fVc3ew==}
+    dev: false
+
+  /canvas-confetti@1.9.3:
+    resolution: {integrity: sha512-rFfTURMvmVEX1gyXFgn5QMn81bYk70qa0HLzcIOSVEyl57n6o9ItHeBtUSWdvKAPY0xlvBHno4/v3QPrT83q9g==}
     dev: false
 
   /chalk@4.1.2:
