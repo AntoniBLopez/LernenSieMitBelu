@@ -4,6 +4,8 @@ import {
   BoltIcon,
   ClipboardDocumentListIcon,
   PuzzlePieceIcon,
+  PencilSquareIcon,
+  PencilIcon
 
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
@@ -14,9 +16,10 @@ import clsx from 'clsx';
 // Depending on the size of the application, this would be stored in a database.
 const links = [
   // { name: 'Temporal Back', href: '/ui/levels/topics', icon: ArrowUturnLeftIcon },
-  { name: 'Flashcards', href: '/games/flashcards', icon: BoltIcon },
-  { name: 'Matching', href: '/games/matching', icon: PuzzlePieceIcon, },
-  { name: 'Multiple Choice', href: '/games/multiplechoice', icon: ClipboardDocumentListIcon },
+  { name: 'Karteikarten', href: '/games/flashcards', icon: BoltIcon }, // N.1
+  { name: 'Multiple Choice', href: '/games/multiplechoice', icon: ClipboardDocumentListIcon }, // N.2
+  { name: 'Schreiben', href: '/games/writing', icon: PencilSquareIcon }, // N.4
+  { name: 'Zuordnen', href: '/games/matching', icon: PuzzlePieceIcon, }, // N.3
 ];
 
 export default function NavLinks() {

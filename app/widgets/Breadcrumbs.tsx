@@ -13,6 +13,16 @@ const endPoints = [
   { name: 'Flashcards', href: '/games/flashcards' },
 ]
 
+// const endPoints = [
+//   { name: 'Home', href: '/' },
+//   { name: 'Levels', href: '/ui/levels' },
+//   { name: 'Themen', href: '/ui/levels/topics' },
+//   { name: 'Spiele', href: '/games' },
+//   { name: 'MultipleChoice', href: '/games/multiplechoice' },
+//   { name: 'Zuordnen', href: '/games/matching' },
+//   { name: 'Karteikarten', href: '/games/flashcards' },
+// ]
+
 function Breadcrumbs({ actualTab }: { actualTab: string }) {
 
   const [showReducedBreadcrumbs, setShowReducedBreadcrumbs] = useState(false)
@@ -59,7 +69,7 @@ function Breadcrumbs({ actualTab }: { actualTab: string }) {
                   </div>
                 </button>
                 {showReducedBreadcrumbs && (
-                  <div ref={dropdownRef} className="absolute flex flex-row top-28 left-12 desktop:left-36 bg-white drop-shadow-md rounded-md items-center z-10">
+                  <div ref={dropdownRef} className="absolute flex flex-row top-28 left-11 desktop:left-[15.7rem] bg-white drop-shadow-md rounded-md items-center z-10">
                     {itemsToShow.slice(1, itemsToShow.length - 2).map(({ name, href }, subIndex) => (
                       <React.Fragment key={`reduced-${subIndex}`}>
                         <Link href={href} className='block py-1 px-2 hover:bg-gray-100 hover:text-primaryColorDark'>

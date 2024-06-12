@@ -30,7 +30,7 @@ function Page() {
           <div className="flex flex-row gap-1 items-center justify-center">
             <PlayCircleIcon className="size-8 text-primaryColor" />
             <h2 className='flex text-2xl text-primaryColor font-medium'>
-              <span className="content-end">Choose a game</span>
+              <span className="content-end">Wähle das Spiel</span>
             </h2>
           </div>
         </div>

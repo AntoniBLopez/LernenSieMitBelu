@@ -21,14 +21,14 @@ export default function Main() {
     <main className="h-fit w-full">
       <div className="flex flex-col gap-20 px-fixed desktop:px-desktop w-full h-fit">
         <div className="flex flex-col pt-10 text-center" >
-          <h1 className='text-6xl text-primaryColor'>Welcome</h1>
+          <h1 className='text-6xl text-primaryColor'>¡Bienvenidos!</h1>
         </div>
         <section className='flex justify-center'>
           <Link
             href="/ui/levels"
             className='font-bold bg-primaryColor text-white rounded-md px-4 py-2 hover:bg-primaryColorDark'
           >
-            Start
+            Starten
           </Link>
         </section>
       </div>

@@ -48,7 +48,7 @@ function Topics() {
 
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <AcademicCapIcon className="size-8 text-primaryColor" />
-            <span className="content-end">&nbsp;Choose the topic </span>
+            <span className="content-end">&nbsp;Wähle das Thema</span>
           </h1>
         </header>
 

@@ -22,7 +22,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
           <span className='font-medium text-xl'>{name}</span>
         </main>
         <footer>
-          <span className='text-sm'>{`${length} ${isChooseLevels ? 'Topics' : 'Words'}`}</span>
+          <span className='text-sm'>{`${length} ${isChooseLevels ? 'Themen' : 'Wörter'}`}</span>
         </footer>
       </div>
       {/* <div className='w-full h-1 rounded-full bg-gradient-to-r from-green-400 to-blue-400 opacity-60'></div> */}

@@ -1,7 +1,8 @@
 'use client'
+import Link from 'next/link'
 import { useState } from 'react'
 
-function SelectedLabels({ showLevel = false, showTopic = false }: { showLevel?: boolean, showTopic?: boolean }) {
+function SelectedLabels({ showLevel = false, showTopic = false, isPlaying = false }: { showLevel?: boolean, showTopic?: boolean, isPlaying?: boolean }) {
 
   const isBrowser = typeof window !== 'undefined'
   const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
@@ -12,12 +13,12 @@ function SelectedLabels({ showLevel = false, showTopic = false }: { showLevel?: 
       {
         showLevel
         &&
-        <div className='text-sm font-semibold py-1 px-5 rounded-full text-white bg-gradient-to-r from-green-400 to-blue-400'>{selectedLevel}</div>
+        <Link href={'/ui/levels/topics'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-default ${showTopic && 'hover:cursor-pointer'} text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedLevel}</Link>
       }
       {
         showTopic
         &&
-        <div className='text-sm font-semibold py-1 px-5 rounded-full text-white bg-gradient-to-r from-green-400 to-blue-400'>{selectedTopic}</div>
+        <Link href={'/games'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-default ${isPlaying && 'hover:cursor-pointer'} text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedTopic}</Link>
       }
     </div>
 

@@ -52,3 +52,18 @@ body {
   background: #50c9a4;
   color: '#f2f2f2';
 }
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-1%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.2s forwards;
+}

@@ -5,36 +5,35 @@ import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
+import Breadcrumbs from '@/app/widgets/Breadcrumbs'
+import SelectedLabels from '@/app/widgets/SelectedLabels'
 import {
   ChevronRightIcon,
   ArrowPathIcon,
-
 } from '@heroicons/react/24/outline';
-import Breadcrumbs from '@/app/widgets/Breadcrumbs'
-import SelectedLabels from '@/app/widgets/SelectedLabels'
+// import Speaker from '@/public/icons/speaker.svg'
+// import Image from 'next/image'
 
 const correctMessage = [
-  'Nice Work!',
-  'Correct!',
-  'Awesome!',
-  'Great!',
-  'Excellent!',
-  'Fantastic!',
-  'Amazing!',
-  'Impressive!',
-  'Wonderful!',
+  'Gut gemacht!',
+  'Korrekt!',
+  'Großartig!',
+  'Super!',
+  'Ausgezeichnet!',
+  'Fantastisch!',
+  'Beeindruckend!',
+  'Wunderbar!',
 ]
 
 const wrongMessage = [
-  "Not quite, you're still learning!",
-  'No worries, learning is a process!',
-  "Keep practicing, you'll get it!",
-  "Don't give up, you can do it!",
-  'You can do it, keep trying!',
-  'You got this, keep going!',
-  'You got this, keep practicing!',
-  "Keep practicing, you'll get there!",
-  "Practice makes perfect, keep on trying!",
+  'Kein Problem, Lernen ist ein Prozess!',
+  "Übe weiter, du wirst es schaffen!",
+  "Gib nicht auf, du kannst es schaffen!",
+  'Du kannst es schaffen, versuch es weiter!',
+  'Du schaffst das, mach weiter!',
+  'Du schaffst das, übe weiter!',
+  "Übe weiter, du wirst es schaffen!",
+  "Übung macht den Meister, versuch es weiter!",
 ]
 
 function Page() {
@@ -98,12 +97,12 @@ function Page() {
   }, [levelsStore])
 
   useEffect(() => {
-    if(resetResponse && !isRestart) {
+    if (resetResponse && !isRestart) {
       setCardNumber(cardNumber + 1)
     } else {
       setIsRestart(false)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetResponse])
 
   useEffect(() => {
@@ -162,7 +161,7 @@ function Page() {
     <main className='flex flex-col mx-12 mt-8 mb-24 desktop:mx-desktop gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <Breadcrumbs actualTab="MultipleChoice" />
-        <SelectedLabels showLevel={true} showTopic={true} />
+        <SelectedLabels showLevel={true} showTopic={true} isPlaying={true} />
       </div>
 
       <section className='flex flex-col gap-2'>
@@ -173,11 +172,10 @@ function Page() {
         </div>
         <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
           <div className='flex flex-col gap-2'>
-            <p className='opacity-50 font-bold text-sm'>Term</p>
-            <div className='text-lg'>{topicWords.length > 0 ? topicWords[cardNumber - 1][0] : 'loading...'}</div>
+            <div className='text-lg'>{topicWords.length > 0 ? topicWords[cardNumber - 1][0] : 'Wird geladen...'}</div>
           </div>
           <div className='flex flex-col gap-4 tablet:mb-5'>
-            <p className={`${showMessage ? isCorrect ? 'font-medium opacity-100 text-green-500' : 'font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomNumber] : wrongMessage[randomNumber] : 'Choose matching term'}</p>
+            <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomNumber] : wrongMessage[randomNumber] : 'Wähle die richtige Antwort'}</p>
             <section className='grid grid-cols-1 tablet:grid-cols-2 gap-2 tablet:gap-5'>
               {
                 topicWords.length > 0
@@ -220,13 +218,13 @@ function Page() {
               topicWords.length !== cardNumber
                 ? (
                   <div className='flex flex-row gap-2 items-center'>
-                    Next
+                    Weiter
                     <ChevronRightIcon className='w-4 h-4' />
                   </div>
                 )
                 : (
                   <div className='flex flex-row gap-2 items-center'>
-                    Start over
+                    Weiterlernen
                     <ArrowPathIcon className='w-4 h-4' />
                   </div>
                 )
