@@ -17,7 +17,6 @@ function Page() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    console.log('process.env.NODE_ENV: ', process.env.NODE_ENV)
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
@@ -35,13 +34,11 @@ function Page() {
       }
     )
       .then((response) => {
-        console.log(response, 'response')
         getLevelsAndDispatchToStore(dispatch)
       })
       .catch((error) => {
         console.log(error, 'error')
       })
-    console.log('Topic', topic, 'Level', level)
     setTopic('')
   }
 

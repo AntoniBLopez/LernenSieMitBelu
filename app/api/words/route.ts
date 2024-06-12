@@ -24,7 +24,6 @@ export async function POST(request: Request) {
       }
     )
 
-    console.log(levelData.topics, 'levelData.topics')
     const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
     return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })
   } catch (error: any) {

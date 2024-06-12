@@ -60,7 +60,6 @@ function Page() {
       }
     )
       .then((response) => {
-        console.log(response.data, 'response')
         setSpanishWord('')
         setGermanWord('')
         setWordCreated(true)
@@ -70,7 +69,6 @@ function Page() {
         console.log(error, 'error')
         throw error
       })
-    console.log('Submitted')
   }
 
   return (

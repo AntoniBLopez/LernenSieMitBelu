@@ -23,7 +23,6 @@ export async function POST(request: Request) {
     await connectDB()
     const { level } = await request.json()
     const newLevel = await Levels.create({ level, })
-    console.log(newLevel, 'new level')
 
     return NextResponse.json({ message: 'Level created', newLevel })
   } catch (error: any) {
