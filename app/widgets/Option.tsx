@@ -1,14 +1,9 @@
 'use client'
 import { useEffect, useState } from 'react'
-import { useAppSelector } from '../lib/hooks'
-import { RootState } from '../lib/store'
-
 
 function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: string | number, showMessage: boolean, isCorrect: boolean, resetOptionDesign: boolean }) {
 
   const [clicked, setClicked] = useState(false)
-  const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
-  const correctSound = new Audio('/sounds/correct-answer.mp3')
 
   const handleClick = () => {
     if (showMessage) return
@@ -20,13 +15,6 @@ function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: str
       setClicked(false)
     }
   }, [resetOptionDesign])
-
-  useEffect(() => {
-    if (showMessage && isCorrect && isSoundOn) {
-      correctSound.play()
-    }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [clicked])
 
   return (
     <div onClick={handleClick} className={`

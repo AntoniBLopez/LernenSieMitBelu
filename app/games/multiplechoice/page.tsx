@@ -20,6 +20,7 @@ const correctMessage = [
   'Korrekt!',
   'Großartig!',
   'Super!',
+  'Exzellent!',
   'Ausgezeichnet!',
   'Fantastisch!',
   'Beeindruckend!',
@@ -39,6 +40,7 @@ const wrongMessage = [
 
 function Page() {
 
+  const correctSound = new Audio('/sounds/correct-answer.mp3')
   const allWordsCorrectSound = new Audio('/sounds/open-new-level.mp3')
 
   const isBrowser = typeof window !== 'undefined'
@@ -69,6 +71,9 @@ function Page() {
 
   const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
     if (wordSelected === actualCorrectWord) {
+      if (isSoundOn) {
+        correctSound.play()
+      }
       setRandomMessageNumber(getRandomNumber(0, correctMessage.length - 1))
       setIsCorrect(true)
       setShowMessage(true)
