@@ -1,8 +1,8 @@
 'use client'
-import Link from 'next/link'
+// import Link from 'next/link'
 import { useState } from 'react'
 
-function SelectedLabels({ showLevel = false, showTopic = false, isPlaying = false }: { showLevel?: boolean, showTopic?: boolean, isPlaying?: boolean }) {
+function SelectedLabels({ showLevel = false, showTopic = false }: { showLevel?: boolean, showTopic?: boolean }) {
 
   const isBrowser = typeof window !== 'undefined'
   const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
@@ -13,12 +13,14 @@ function SelectedLabels({ showLevel = false, showTopic = false, isPlaying = fals
       {
         showLevel
         &&
-        <Link href={'/ui/levels'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-pointer text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedLevel}</Link>
+        // <Link href={'/ui/levels'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-pointer text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedLevel}</Link>
+        <div className={`text-sm font-semibold py-1 px-5 rounded-full cursor-default text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedLevel}</div>
       }
       {
         showTopic
         &&
-        <Link href={'/ui/levels/topics'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-pointer text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedTopic}</Link>
+        // <Link href={'/ui/levels/topics'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-pointer text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedTopic}</Link>
+        <div className={`text-sm font-semibold py-1 px-5 rounded-full cursor-default text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedTopic}</div>
       }
     </div>
 

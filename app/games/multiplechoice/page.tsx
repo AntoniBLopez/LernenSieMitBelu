@@ -5,13 +5,16 @@ import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
-import confettiFireworks from '@/app/utils/confettiFireworks'
+import confettiFireworks from '@/app/widgets/confettiFireworks'
 import Breadcrumbs from '@/app/widgets/Breadcrumbs'
 import SelectedLabels from '@/app/widgets/SelectedLabels'
+import MultipleChoiceButton from '@/app/widgets/MultipleChoiceButton'
 import {
   ChevronRightIcon,
   ArrowPathIcon,
+  ArrowUturnLeftIcon
 } from '@heroicons/react/24/outline';
+import { useRouter } from 'next/navigation'
 // import Speaker from '@/public/icons/speaker.svg'
 // import Image from 'next/image'
 
@@ -66,12 +69,13 @@ function Page() {
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
   const dispatch = useAppDispatch()
+  const router = useRouter()
 
   const getRandomNumber = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
 
   const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
     if (wordSelected === actualCorrectWord) {
-      if (isSoundOn) {
+      if (isSoundOn && actualCardNumber !== topicWords.length && correctMatchesCount !== topicWords.length) {
         correctSound.play()
       }
       setRandomMessageNumber(getRandomNumber(0, correctMessage.length - 1))
@@ -97,6 +101,10 @@ function Page() {
     setIsCorrect(false)
     setCorrectMatchesCount(0)
     setActualCardNumber(1)
+  }
+
+  const goToChangeTopic = () => {
+    router.push('/ui/levels/topics')
   }
 
   useEffect(() => {
@@ -186,10 +194,10 @@ function Page() {
 
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-24 desktop:mx-desktop gap-8'>
+    <main className='flex flex-col mx-12 mt-8 desktop:mx-desktop gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <Breadcrumbs actualTab="MultipleChoice" />
-        <SelectedLabels showLevel={true} showTopic={true} isPlaying={true} />
+        <SelectedLabels showLevel={true} showTopic={true} />
       </div>
 
       <section className='flex flex-col gap-2'>
@@ -230,40 +238,17 @@ function Page() {
         </div>
         {
           showMessage
-          &&
-          <button
-            className='
-            flex
-            place-content-center
-            w-[50%]
-            self-center
-            font-semibold
-            text-white
-            hover:cursor-pointer
-            hover:bg-primaryColorDark
-            bg-primaryColor
-            rounded-md
-            py-2
-            px-4
-            '
-            onClick={topicWords.length !== actualCardNumber ? nextCard : restart}
-          >
-            {
-              topicWords.length !== actualCardNumber
-                ? (
-                  <div className='flex flex-row gap-2 items-center slide-in'>
-                    Weiter
-                    <ChevronRightIcon className='w-4 h-4' />
-                  </div>
-                )
-                : (
-                  <div className='flex flex-row gap-2 items-center slide-in'>
-                    Weiterlernen
-                    <ArrowPathIcon className='w-4 h-4' />
-                  </div>
-                )
-            }
-          </button>
+            ?
+            topicWords.length !== actualCardNumber
+              ?
+              <MultipleChoiceButton name='Weiter' Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} restart={restart} />
+              :
+              <div className='flex flex-col gap-2'>
+                <MultipleChoiceButton name='Weiterlernen' Icon={ArrowPathIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} restart={restart} />
+                <MultipleChoiceButton name='Thema wechseln' changeTopicButton={true} goToChangeTopic={goToChangeTopic} Icon={ArrowUturnLeftIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} restart={restart} />
+              </div>
+            :
+            undefined
         }
       </section>
     </main>

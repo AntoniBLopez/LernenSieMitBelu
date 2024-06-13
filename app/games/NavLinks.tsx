@@ -1,5 +1,4 @@
 'use client';
-
 import {
   BoltIcon,
   ClipboardDocumentListIcon,
@@ -13,7 +12,6 @@ import clsx from 'clsx';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  // { name: 'Temporal Back', href: '/ui/levels/topics', icon: ArrowUturnLeftIcon },
   { name: 'Karteikarten', href: '/games/flashcards', icon: BoltIcon }, // N.1
   { name: 'Multiple Choice', href: '/games/multiplechoice', icon: ClipboardDocumentListIcon }, // N.2
   { name: 'Schreiben', href: '/games/writing', icon: PencilSquareIcon }, // N.4
@@ -41,8 +39,8 @@ export default function NavLinks() {
             <LinkIcon className="w-6 max-mobile:ml-[28%] max-md:ml-[38%]" />
             <p className="self-end font-semibold">{link.name}</p>
           </Link>
-        );
+        )
       })}
     </>
-  );
+  )
 }
