@@ -260,7 +260,7 @@ function Page() {
             ?
             topicWords.length !== actualCardNumber
               ?
-              <GameButton name='Weiter' Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} restart={restart} />
+              <GameButton name='Weiter' Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} />
               :
               <FinalGameButtons topicWords={topicWords} actualCardNumber={actualCardNumber} restart={restart} goToChangeTopic={goToChangeTopic} />
             :

@@ -255,16 +255,17 @@ function Page() {
               <div
                 className={`
                   absolute
+                  self-center
                   bottom-[4.75rem]
-                  h-1
-                  rounded-br-full
-                  rounded-bl-full
+                  h-[0.15rem]
+                  rounded-br-3xl
+                  rounded-bl-3xl
                   bg-blue-400
                   ${isInputFocused && !showMessage ? 'opacity-100 ' : 'opacity-0'}
                   transition-opacity
                   duration-75
                 `}
-                style={{ width: inputWidth + 'px' }}
+                style={{ width: inputWidth - 5 + 'px' }}
               />
               <div className='flex flex-row gap-5 items-center'>
                 <button
