@@ -40,8 +40,8 @@ const wrongMessage = [
 
 function Page() {
 
-  const correctSound = new Audio('/sounds/correct-answer.mp3')
-  const allWordsCorrectSound = new Audio('/sounds/open-new-level.mp3')
+  const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
+  const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
 
   const isBrowser = typeof window !== 'undefined'
   const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
@@ -83,7 +83,7 @@ function Page() {
 
     // if (capitalizeFirstLetter(userWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
     if (userWord === topicWords[actualCardNumber - 1][1]) {
-      if (isSoundOn && correctMatchesCount !== topicWords.length - 1) {
+      if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
         correctSound.play()
       }
       setIsCorrect(true)
@@ -131,6 +131,9 @@ function Page() {
       setMarginLeft(marginLeft);
       console.log('Margin Left:', marginLeft);
     }
+
+    setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
+    setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -170,7 +173,7 @@ function Page() {
   useEffect(() => {
     if (actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length) {
       confettiFireworks()
-      if (isSoundOn) {
+      if (isSoundOn && allWordsCorrectSound !== null) {
         allWordsCorrectSound.play()
       }
     }
