@@ -1,6 +1,6 @@
 import React from 'react'
 
-function MultipleChoiceButton({ name, Icon, isLastCard, changeTopicButton = false, goToChangeTopic = () => undefined, nextCard, restart }: { name: string, Icon: any, isLastCard: boolean, changeTopicButton?: boolean, goToChangeTopic?: () => void, nextCard: () => void, restart: () => void }) {
+function GameButton({ name, Icon, isLastCard, changeTopicButton = false, goToChangeTopic = () => undefined, nextCard = () => undefined, restart = () => undefined }: { name: string, Icon: any, isLastCard: boolean, changeTopicButton?: boolean, goToChangeTopic?: () => void, nextCard?: () => void, restart?: () => void }) {
   return (
     <button
       className={`
@@ -27,4 +27,4 @@ function MultipleChoiceButton({ name, Icon, isLastCard, changeTopicButton = fals
   )
 }
 
-export default MultipleChoiceButton
+export default GameButton

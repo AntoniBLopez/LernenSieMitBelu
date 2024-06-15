@@ -22,17 +22,19 @@ const config: Config = {
       backgroundColor: {
         'primaryColor': '#50c9a4',
         'primaryColorDark': '#34ba91',
+        'primaryColorExtraDark': '#1f8767',
         // 'bgColor': '#f7fcf9',
         'bgColor': '#f2f2f2',
         'selectedPrimaryColor': '#adf7e1',
-        'selectedColor': '#ebebeb',
+        'graySelectedColor': '#ebebeb',
+        'selectedColor': '#e8f0fe',
       },
       spacing: {
         fixed: '1.5rem',
         mobile: '2rem',
         tablet: '4rem',
         laptop: '5rem',
-        desktop: '16rem',
+        desktop: '60rem',
       },
       screens: {
         'mobile': '440px',

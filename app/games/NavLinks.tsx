@@ -36,7 +36,7 @@ export default function NavLinks() {
               },
             )}
           >
-            <LinkIcon className="w-6 max-mobile:ml-[28%] max-md:ml-[38%]" />
+            <LinkIcon className="w-6 h-auto" />
             <p className="self-end font-semibold">{link.name}</p>
           </Link>
         )

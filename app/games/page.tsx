@@ -20,7 +20,7 @@ function Page() {
   }, [selectedLevel, selectedTopic])
 
   return (
-    <div className="flex flex-col mx-12 desktop:mx-desktop h-fit mt-8 mb-10 gap-5" >
+    <div className="flex flex-col mx-12 laptop:mx-auto laptop:max-w-desktop mt-8 mb-10 gap-5" >
       <header className="flex flex-col gap-10">
         <div className='flex flex-col gap-2 items-start'>
           <Breadcrumbs actualTab="Games" />

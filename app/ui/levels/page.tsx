@@ -26,7 +26,7 @@ function Levels() {
 
 
   return (
-    <div className="px-12 desktop:px-desktop w-full h-fit">
+    <div className="mx-12 laptop:mx-auto laptop:max-w-desktop">
       <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
         <header className="flex flex-col gap-10">
           <Breadcrumbs actualTab="Levels" />

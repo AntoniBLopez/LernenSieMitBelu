@@ -17,7 +17,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex flex-row justify-between items-end py-3 px-12 desktop:px-desktop bg-bluishBlackColor">
+    <header className="flex flex-row justify-between items-end my-3 mx-12 laptop:mx-auto laptop:max-w-desktop bg-bluishBlackColor">
       <Link
         href={"/"}
       >
