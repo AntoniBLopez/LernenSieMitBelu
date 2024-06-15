@@ -16,6 +16,7 @@ const config: Config = {
       textColor: {
         'primaryColor': '#50c9a4',
         'primaryColorDark': '#34ba91',
+        'primaryColorExtraDark': '#1f8767',
         'grayColor': '#696969',
         // 'grayColor': '#586380',
       },
@@ -23,6 +24,8 @@ const config: Config = {
         'primaryColor': '#50c9a4',
         'primaryColorDark': '#34ba91',
         'primaryColorExtraDark': '#1f8767',
+        'disabledPrimaryColor': '#b2ebd9',
+        // 'disabledPrimaryColor': '#a1cfc0',
         // 'bgColor': '#f7fcf9',
         'bgColor': '#f2f2f2',
         'selectedPrimaryColor': '#adf7e1',

@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import Option from '@/app/widgets/Option'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
@@ -60,6 +60,9 @@ function Page() {
   const [showMessage, setShowMessage] = useState(false)
   const [randomMessageNumber, setRandomMessageNumber] = useState(0)
   const [resetOptionDesign, setResetOptionDesign] = useState(false)
+
+  const mainRef = useRef<HTMLInputElement>(null)
+  const [marginLeft, setMarginLeft] = useState('');
 
   const sortRandomly = () => Math.random() - 0.5
   const initialSet = [0, 1, 2, 3]
@@ -191,11 +194,28 @@ function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showMessage])
 
+  useEffect(() => {
+    const handleMarginResize = () => {
+      if (mainRef.current) {
+        const mainElement = mainRef.current;
+        const computedStyles = window.getComputedStyle(mainElement);
+        const marginLeft = computedStyles.marginLeft;
+        setMarginLeft(marginLeft);
+      }
+    }
+    window.addEventListener('resize', handleMarginResize)
+
+    return () => {
+      window.removeEventListener('resize', handleMarginResize);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [mainRef.current])
+
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main ref={mainRef} className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
-        <Breadcrumbs actualTab="MultipleChoice" />
+        <Breadcrumbs actualTab="MultipleChoice" marginLeft={marginLeft} />
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
 

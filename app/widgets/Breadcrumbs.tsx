@@ -24,7 +24,7 @@ const endPoints = [
 //   { name: 'Karteikarten', href: '/games/flashcards' },
 // ]
 
-function Breadcrumbs({ actualTab }: { actualTab: string }) {
+function Breadcrumbs({ actualTab, marginLeft = '20px' }: { actualTab: string, marginLeft?: string }) {
 
   const [showReducedBreadcrumbs, setShowReducedBreadcrumbs] = useState(false)
   const dropdownRef = useRef<HTMLDivElement | null>(null)
@@ -50,7 +50,7 @@ function Breadcrumbs({ actualTab }: { actualTab: string }) {
   }, [])
 
   return (
-    <div className='flex flex-row items-center space-x-1'>
+    <div className='flex flex-row items-center gap-1'>
       {itemsToShow.map(({ name, href }, index) => {
         if (itemsToShow.length > 4) {
           if (index > 0 && index < itemsToShow.length - 2 && !isSizeReduced) {
@@ -70,7 +70,7 @@ function Breadcrumbs({ actualTab }: { actualTab: string }) {
                   </div>
                 </button>
                 {showReducedBreadcrumbs && (
-                  <div ref={dropdownRef} className="absolute flex flex-row top-28 left-11 desktop:left-[15.7rem] tablet:divide-x bg-white drop-shadow-md rounded-md items-center z-10">
+                  <div ref={dropdownRef} className={`absolute flex flex-row top-[6.1rem] left-[${marginLeft}] tablet:divide-x bg-white drop-shadow-md rounded-md items-center z-10`}>
                     {itemsToShow.slice(1, itemsToShow.length - 2).map(({ name, href }, subIndex) => (
                       <React.Fragment key={`reduced-${subIndex}`}>
                         <Link href={href} className='block py-1 px-2 hover:rounded-md hover:bg-gray-100 hover:text-primaryColor'>

@@ -22,9 +22,9 @@ function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: str
         ?
         isCorrect
           ?
-          'border-green-500 font-medium'
+          'bg-green-50 border-green-500 font-medium'
           :
-          'border-red-500 font-medium'
+          'bg-red-50 border-red-500 font-medium'
         :
         'border-gray-200'
       }

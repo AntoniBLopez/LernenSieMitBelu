@@ -62,8 +62,10 @@ function Page() {
 
   const [userWord, setUserWord] = useState('')
   const [isInputFocused, setIsInputFocused] = useState(false)
-  const inputRef = useRef<HTMLInputElement>(null);
   const [inputWidth, setInputWidth] = useState(0);
+  const [marginLeft, setMarginLeft] = useState('');
+  const inputRef = useRef<HTMLInputElement>(null);
+  const mainRef = useRef<HTMLInputElement>(null)
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
@@ -122,6 +124,13 @@ function Page() {
     if (inputRef.current) {
       setInputWidth(inputRef.current.offsetWidth);
     }
+    if (mainRef.current) {
+      const mainElement = mainRef.current;
+      const computedStyles = window.getComputedStyle(mainElement);
+      const marginLeft = computedStyles.marginLeft;
+      setMarginLeft(marginLeft);
+      console.log('Margin Left:', marginLeft);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -174,19 +183,29 @@ function Page() {
         setInputWidth(inputRef.current.offsetWidth);
       }
     }
+    const handleMarginResize = () => {
+      if (mainRef.current) {
+        const mainElement = mainRef.current;
+        const computedStyles = window.getComputedStyle(mainElement);
+        const marginLeft = computedStyles.marginLeft;
+        setMarginLeft(marginLeft);
+      }
+    }
     window.addEventListener('resize', handleResize)
+    window.addEventListener('resize', handleMarginResize)
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', handleMarginResize);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputRef.current])
+  }, [inputRef.current, mainRef.current])
 
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main ref={mainRef} className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
-        <Breadcrumbs actualTab="Writing" />
+        <Breadcrumbs actualTab="Writing" marginLeft={marginLeft} />
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
 
@@ -223,8 +242,8 @@ function Page() {
                   py-3
                   outline-none
                   bg-bgColor
-                  focus:bg-graySelectedColor
-                  disabled:bg-selectedColor disabled:border-2 ${isCorrect ? 'disabled:border-green-500' : 'disabled:border-red-500'}
+                  focus:bg-selectedColor
+                  disabled:border-2 disabled:py-[0.65rem] ${isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
                 `}
                 ref={inputRef}
                 onFocus={() => setIsInputFocused(true)}
@@ -240,10 +259,10 @@ function Page() {
                   h-1
                   rounded-br-full
                   rounded-bl-full
-                  bg-primaryColor
-                  ${isInputFocused && !showMessage ? 'opacity-70 ' : 'opacity-0'}
+                  bg-blue-400
+                  ${isInputFocused && !showMessage ? 'opacity-100 ' : 'opacity-0'}
                   transition-opacity
-                  duration-200
+                  duration-75
                 `}
                 style={{ width: inputWidth + 'px' }}
               />
@@ -262,18 +281,17 @@ function Page() {
                     py-2
                     px-4
                     slide-in
-                    opacity-100
                     hover:cursor-pointer
-                    disabled:opacity-20 disabled:cursor-default disabled:text-slate-200 disabled:bg-primaryColorExtraDark
+                    disabled:cursor-default disabled:bg-disabledPrimaryColor
                   `}>
                   Antwort
                 </button>
                 {
                   showMessage && !isCorrect
                   &&
-                  <span className='flex flex-row gap-2 text-xl font-semibold text-primaryColor'>
+                  <span className='flex flex-row gap-2 text-xl text-primaryColorExtraDark'>
                     {topicWords[actualCardNumber - 1][1]}
-                    <CheckBadgeIcon className='w-6 text-primaryColor' />
+                    <CheckBadgeIcon className='w-6 text-primaryColorExtraDark' />
                   </span>
                 }
               </div>
