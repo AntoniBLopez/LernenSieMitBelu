@@ -1,10 +1,10 @@
 'use client'
-import { getLevelsAndDispatchToStore } from '../lib/features/state/utils'
-import { useAppDispatch, useAppSelector } from '../lib/hooks'
-import { RootState } from '../lib/store'
+import { getLevelsAndDispatchToStore } from '@/app/lib/features/state/utils'
+import { useAppDispatch, useAppSelector } from '@/app/lib/hooks'
+import { RootState } from '@/app/lib/store'
 import { useEffect } from 'react'
 import Link from 'next/link'
-import { setActiveTab } from '../lib/features/state/stateSlice'
+import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 
 export default function Main() {
 
