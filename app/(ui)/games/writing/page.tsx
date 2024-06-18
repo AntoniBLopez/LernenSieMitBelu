@@ -261,7 +261,7 @@ function Page() {
                     font-semibold
                     text-white
                     bg-primaryColor
-                    hover:bg-primaryColorDark
+                    hover:bg-primaryDarkColor
                     rounded-md
                     py-2
                     px-4
@@ -274,9 +274,9 @@ function Page() {
                 {
                   showMessage && !isCorrect
                   &&
-                  <span className='flex flex-row gap-2 text-xl text-primaryColorExtraDark'>
+                  <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor'>
                     {topicWords[actualCardNumber - 1][1]}
-                    <CheckBadgeIcon className='w-6 text-primaryColorExtraDark' />
+                    <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
                   </span>
                 }
               </div>

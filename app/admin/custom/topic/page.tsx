@@ -100,7 +100,7 @@ function Page() {
               font-medium
               rounded-lg
               bg-primaryColor
-              hover:bg-primaryColorDark
+              hover:bg-primaryDarkColor
               text-black
             '
             >

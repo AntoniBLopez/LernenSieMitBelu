@@ -12,8 +12,8 @@ function GameButton({ name, Icon, isLastCard, changeTopicButton = false, goToCha
             font-semibold
             text-white
             hover:cursor-pointer
-            ${restart !== undefined ? 'bg-primaryColor hover:bg-primaryColorDark' : 'bg-primaryColor hover:bg-primaryColorDark'}
-            ${changeTopicButton ? 'bg-blue-500 hover:bg-blue-600' : 'bg-primaryColor hover:bg-primaryColorDark'}
+            ${restart !== undefined ? 'bg-primaryColor hover:bg-primaryDarkColor' : 'bg-primaryColor hover:bg-primaryDarkColor'}
+            ${changeTopicButton ? 'bg-blue-500 hover:bg-blue-600' : 'bg-primaryColor hover:bg-primaryDarkColor'}
             rounded-md
             py-2
             px-4

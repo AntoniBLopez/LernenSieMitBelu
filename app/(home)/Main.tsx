@@ -27,7 +27,7 @@ export default function Main() {
       <section className='flex justify-center'>
         <Link
           href="/levels"
-          className='font-bold bg-primaryColor text-white rounded-md px-4 py-2 hover:bg-primaryColorDark'
+          className='font-bold bg-primaryColor text-white rounded-md px-4 py-2 hover:bg-primaryDarkColor'
         >
           Starten
         </Link>
