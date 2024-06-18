@@ -1,8 +1,6 @@
 'use client';
 
 import {
-  PlusIcon,
-  ArrowUturnLeftIcon,
   ChartPieIcon,
   ChatBubbleOvalLeftEllipsisIcon,
 
@@ -14,7 +12,6 @@ import clsx from 'clsx';
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: 'Back to Home', href: '/', icon: ArrowUturnLeftIcon },
   { name: 'Add Topic', href: '/admin/custom/topic', icon: ChartPieIcon, },
   { name: 'Add Word', href: '/admin/custom/word', icon: ChatBubbleOvalLeftEllipsisIcon },
 ];

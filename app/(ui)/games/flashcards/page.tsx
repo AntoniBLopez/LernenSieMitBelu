@@ -175,6 +175,7 @@ function Page() {
             {actualCardNumber} / {topicWords.length}
           </div>
         </div>
+
         <div onClick={handleCardClick} className='flex flex-col h-[60vh] items-center justify-center p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white'>
           {
             actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
@@ -185,9 +186,15 @@ function Page() {
               :
               isFlipped
                 ?
-                <div className='text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                <>
+                  <span className='absolute top-5 left-5'>Alemán</span>
+                  <div className='text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                </>
                 :
-                <div className='text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                <>
+                  <span className='absolute top-5 left-5'>Español</span>
+                  <div className='text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                </>
           }
         </div>
         <div onClick={handlePrevCard} className='flex flex-row gap-5 justify-center items-center'>
