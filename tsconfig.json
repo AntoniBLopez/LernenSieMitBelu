@@ -22,6 +22,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server/server.js", "app/api/route.js", "app/api/middleware.js", "app/widgets/DownloadDbData.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "server/server.js", "app/api/route.js", "app/api/middleware.js", "app/(ui)/widgets/DownloadDbData.tsx"],
   "exclude": ["node_modules"]
 }

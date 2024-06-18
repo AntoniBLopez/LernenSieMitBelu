@@ -10,7 +10,7 @@ import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import SelectCard from "@/app/(ui)/dashboard/SelectCard"
 import { useEffect, useState } from "react";
 import { Level } from "@/types";
-import SelectedLabels from '@/app/widgets/SelectedLabels';
+import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels';
 import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 
 function Topics() {

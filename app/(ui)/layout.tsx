@@ -5,7 +5,7 @@ import "@/app/globals.css";
 import Header from "@/app/(ui)/Header";
 import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
-import Breadcrumbs from "@/app/widgets/Breadcrumbs";
+import Breadcrumbs from "@/app/(ui)/widgets/Breadcrumbs";
 
 
 export const metadata: Metadata = {

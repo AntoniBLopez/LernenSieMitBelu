@@ -2,8 +2,8 @@
 import { HomeIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
-import { useAppSelector } from '../lib/hooks'
-import { RootState } from '../lib/store'
+import { useAppSelector } from '../../lib/hooks'
+import { RootState } from '../../lib/store'
 
 const endPoints = [
   { name: 'Home', href: '/' },

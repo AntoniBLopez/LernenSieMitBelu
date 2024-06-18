@@ -2,7 +2,7 @@
 import SideNav from "./SideNav"
 import { useEffect, useState } from "react"
 import { PlayCircleIcon } from "@heroicons/react/24/outline"
-import SelectedLabels from "@/app/widgets/SelectedLabels"
+import SelectedLabels from "@/app/(ui)/widgets/SelectedLabels"
 import { useAppDispatch } from "@/app/lib/hooks"
 import { setActiveTab } from "@/app/lib/features/state/stateSlice"
 

@@ -4,16 +4,16 @@ import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
-import confettiFireworks from '@/app/widgets/confettiFireworks'
-import SelectedLabels from '@/app/widgets/SelectedLabels'
-import GameButton from '@/app/widgets/GameButton'
+import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
+import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
+import GameButton from '@/app/(ui)/widgets/GameButton'
 import {
   ChevronRightIcon,
   ArrowRightCircleIcon,
   ArrowLeftCircleIcon
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
-import FinalGameButtons from '@/app/widgets/FinalGameButtons'
+import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 // import Speaker from '@/public/icons/speaker.svg'
 // import Image from 'next/image'
