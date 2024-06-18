@@ -1,4 +1,4 @@
-import { GetUsers } from '../../lib/db/queries'
+import { GetUsers } from '@/app/lib/db/queries'
 // const createError = require('http-errors')
 
 

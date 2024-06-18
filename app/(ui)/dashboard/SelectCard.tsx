@@ -15,7 +15,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
 
   return (
     <Link
-      href={isCardBlocked ? '' : isChooseLevels ? '/ui/levels/topics' : '/games'}
+      href={isCardBlocked ? '' : isChooseLevels ? '/levels/topics' : '/games'}
       onClick={isCardBlocked ? undefined : handleClick}
       className={`flex flex-col w-full h-fit bg-white rounded-md group ${isCardBlocked ? 'bg-slate-200 opacity-50 hover:cursor-default' : 'drop-shadow-md hover:cursor-pointer'}`}
     >

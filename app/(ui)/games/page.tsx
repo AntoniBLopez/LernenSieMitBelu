@@ -1,17 +1,21 @@
 'use client'
-import Breadcrumbs from "@/app/widgets/Breadcrumbs"
 import SideNav from "./SideNav"
 import { useEffect, useState } from "react"
 import { PlayCircleIcon } from "@heroicons/react/24/outline"
 import SelectedLabels from "@/app/widgets/SelectedLabels"
+import { useAppDispatch } from "@/app/lib/hooks"
+import { setActiveTab } from "@/app/lib/features/state/stateSlice"
 
 function Page() {
+
+  const dispatch = useAppDispatch()
 
   const isBrowser = typeof window !== 'undefined'
   const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const [selectedTopic, setSelectedTopic] = useState(isBrowser ? localStorage.getItem("selectedTopic") : null)
 
   useEffect(() => {
+    dispatch(setActiveTab({ name: 'Games', position: 3 }))
     if (selectedLevel === null && selectedTopic === null) {
       setSelectedLevel(localStorage.getItem("selectedLevel"))
       setSelectedTopic(localStorage.getItem("selectedTopic"))
@@ -23,7 +27,6 @@ function Page() {
     <div className="flex flex-col mx-12 laptop:mx-auto laptop:max-w-desktop mt-8 mb-10 gap-5" >
       <header className="flex flex-col gap-10">
         <div className='flex flex-col gap-2 items-start'>
-          <Breadcrumbs actualTab="Games" />
           <SelectedLabels showLevel={true} showTopic={true} />
         </div>
         <div className="flex flex-col gap-2">

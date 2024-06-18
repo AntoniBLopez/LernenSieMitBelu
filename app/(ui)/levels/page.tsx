@@ -7,10 +7,10 @@ import {
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import SelectCard from "@/app/ui/dashboard/SelectCard"
+import SelectCard from "@/app/(ui)/dashboard/SelectCard"
 import { useEffect } from "react";
 import { Level } from "@/types";
-import Breadcrumbs from "@/app/widgets/Breadcrumbs";
+import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 
 function Levels() {
 
@@ -18,6 +18,7 @@ function Levels() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    dispatch(setActiveTab({ name: 'Levels', position: 1 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
@@ -29,7 +30,6 @@ function Levels() {
     <div className="mx-12 laptop:mx-auto laptop:max-w-desktop">
       <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
         <header className="flex flex-col gap-10">
-          <Breadcrumbs actualTab="Levels" />
           <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
             <ChartBarIcon className="size-7 text-primaryColor" />
             <span className="content-end">&nbsp;Wähle dein Niveau</span>

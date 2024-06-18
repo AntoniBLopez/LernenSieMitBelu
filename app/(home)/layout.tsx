@@ -1,10 +1,10 @@
 import type { GetServerSideProps, Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import "./globals.css";
-import Header from "@/app/ui/Header";
-import StoreProvider from "./StoreProvider";
-import { bricolage } from "./ui/fonts";
+import "@/app/globals.css";
+import Header from "@/app/(home)/Header";
+import StoreProvider from "@/app/StoreProvider";
+import { bricolage } from "@/app/(ui)/fonts";
 
 
 export const metadata: Metadata = {
@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html lang="en">
+    <html lang="de">
       <body className={`${bricolage.className} antialiased`}>
         <StoreProvider>
           <Header />

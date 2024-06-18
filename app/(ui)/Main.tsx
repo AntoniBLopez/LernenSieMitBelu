@@ -4,6 +4,7 @@ import { useAppDispatch, useAppSelector } from '../lib/hooks'
 import { RootState } from '../lib/store'
 import { useEffect } from 'react'
 import Link from 'next/link'
+import { setActiveTab } from '../lib/features/state/stateSlice'
 
 export default function Main() {
 
@@ -11,6 +12,7 @@ export default function Main() {
   const dispatch = useAppDispatch()
 
   useEffect(() => {
+    dispatch(setActiveTab({ name: 'Home', position: 0 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
@@ -24,7 +26,7 @@ export default function Main() {
       </div>
       <section className='flex justify-center'>
         <Link
-          href="/ui/levels"
+          href="/levels"
           className='font-bold bg-primaryColor text-white rounded-md px-4 py-2 hover:bg-primaryColorDark'
         >
           Starten

@@ -5,7 +5,6 @@ import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
 import confettiFireworks from '@/app/widgets/confettiFireworks'
-import Breadcrumbs from '@/app/widgets/Breadcrumbs'
 import SelectedLabels from '@/app/widgets/SelectedLabels'
 import GameButton from '@/app/widgets/GameButton'
 import {
@@ -14,6 +13,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
 import FinalGameButtons from '@/app/widgets/FinalGameButtons'
+import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -63,9 +63,7 @@ function Page() {
   const [userWord, setUserWord] = useState('')
   const [isInputFocused, setIsInputFocused] = useState(false)
   const [inputWidth, setInputWidth] = useState(0);
-  const [marginLeft, setMarginLeft] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
-  const mainRef = useRef<HTMLInputElement>(null)
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
@@ -113,23 +111,17 @@ function Page() {
   }
 
   const goToChangeTopic = () => {
-    router.push('/ui/levels/topics')
+    router.push('/levels/topics')
   }
 
   useEffect(() => {
+    dispatch(setActiveTab({ name: 'Writing', position: 6 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
 
     if (inputRef.current) {
       setInputWidth(inputRef.current.offsetWidth);
-    }
-    if (mainRef.current) {
-      const mainElement = mainRef.current;
-      const computedStyles = window.getComputedStyle(mainElement);
-      const marginLeft = computedStyles.marginLeft;
-      setMarginLeft(marginLeft);
-      console.log('Margin Left:', marginLeft);
     }
 
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
@@ -186,29 +178,18 @@ function Page() {
         setInputWidth(inputRef.current.offsetWidth);
       }
     }
-    const handleMarginResize = () => {
-      if (mainRef.current) {
-        const mainElement = mainRef.current;
-        const computedStyles = window.getComputedStyle(mainElement);
-        const marginLeft = computedStyles.marginLeft;
-        setMarginLeft(marginLeft);
-      }
-    }
     window.addEventListener('resize', handleResize)
-    window.addEventListener('resize', handleMarginResize)
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      window.removeEventListener('resize', handleMarginResize);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputRef.current, mainRef.current])
+  }, [inputRef.current])
 
 
   return (
-    <main ref={mainRef} className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
-        <Breadcrumbs actualTab="Writing" marginLeft={marginLeft} />
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
 

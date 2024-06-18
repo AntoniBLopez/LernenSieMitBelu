@@ -7,11 +7,11 @@ import {
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import SelectCard from "@/app/ui/dashboard/SelectCard"
+import SelectCard from "@/app/(ui)/dashboard/SelectCard"
 import { useEffect, useState } from "react";
 import { Level } from "@/types";
-import Breadcrumbs from "@/app/widgets/Breadcrumbs";
 import SelectedLabels from '@/app/widgets/SelectedLabels';
+import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 
 function Topics() {
 
@@ -22,6 +22,7 @@ function Topics() {
   const [levelTopics, setLevelTopics] = useState<any>({})
 
   useEffect(() => {
+    dispatch(setActiveTab({ name: 'Levels', position: 2 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
@@ -42,7 +43,6 @@ function Topics() {
       <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
         <header className="flex flex-col gap-10">
           <div className='flex flex-col gap-2 items-start'>
-            <Breadcrumbs actualTab="Topics" />
             <SelectedLabels showLevel={true} />
           </div>
 
