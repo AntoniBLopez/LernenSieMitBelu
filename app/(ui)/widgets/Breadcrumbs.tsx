@@ -83,18 +83,21 @@ function Breadcrumbs() {
                 </button>
                 {showReducedBreadcrumbs && (
                   <div ref={dropdownRef} className={`absolute flex flex-row top-[6rem] left-[${marginLeft}] laptop:divide-x bg-white drop-shadow-md rounded-md items-center z-10`}>
-                    {endPoints.slice(1, position).map(({ name, href }, subIndex) => (
-                      <React.Fragment key={`reduced-${subIndex}`}>
-                        <Link href={href} className='block py-1 px-2 hover:rounded-md hover:bg-gray-100 hover:text-primaryColor'>
-                          {name}
-                        </Link>
-                        {
-                          subIndex < endPoints.slice(1, position).length
-                          &&
-                          <ChevronRightIcon key={`chevron-${subIndex}`} className='h-3 w-3 ml-0 block laptop:hidden' />
-                        }
-                      </React.Fragment>
-                    ))}
+                    {endPoints.slice(1, position).map(({ name, href }, subIndex) => {
+                      if (subIndex > 2) return null
+                      return (
+                        <React.Fragment key={`reduced-${subIndex}`}>
+                          <Link href={href} className='block py-1 px-2 hover:rounded-md hover:bg-gray-100 hover:text-primaryColor'>
+                            {name}
+                          </Link>
+                          {
+                            subIndex < endPoints.slice(1, position).length
+                            &&
+                            <ChevronRightIcon key={`chevron-${subIndex}`} className='h-3 w-3 ml-0 block laptop:hidden' />
+                          }
+                        </React.Fragment>
+                      )
+                    })}
                   </div>
                 )}
                 {index < position
