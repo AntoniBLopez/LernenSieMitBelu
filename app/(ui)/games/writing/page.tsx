@@ -1,5 +1,5 @@
 'use client'
-import { use, useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
@@ -72,15 +72,15 @@ function Page() {
 
   const getRandomNumber = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1)) + min
 
-  // const capitalizeFirstLetter = (word: string): string => {
-  //   return word.charAt(0).toUpperCase() + word.slice(1);
-  // }
+  const capitalizeFirstLetter = (word: string): string => {
+    return word.charAt(0).toUpperCase() + word.slice(1);
+  }
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
 
-    // if (capitalizeFirstLetter(userWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
-    if (userWord === topicWords[actualCardNumber - 1][1]) {
+    if (capitalizeFirstLetter(userWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
+    // if (userWord === topicWords[actualCardNumber - 1][1]) {
       if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
         correctSound.play()
       }
