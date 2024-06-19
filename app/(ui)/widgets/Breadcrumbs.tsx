@@ -91,7 +91,7 @@ function Breadcrumbs() {
                             {name}
                           </Link>
                           {
-                            subIndex < endPoints.slice(1, position).length
+                            subIndex < endPoints.slice(1, position).length - 3
                             &&
                             <ChevronRightIcon key={`chevron-${subIndex}`} className='h-3 w-3 ml-0 block laptop:hidden' />
                           }
