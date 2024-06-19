@@ -224,7 +224,7 @@ function Page() {
 
       <section className='flex flex-col gap-2'>
         <div className='flex flex-row gap-3 items-center justify-center'>
-          <div className='flex font-medium opacity-60'>
+          <div className='flex font-medium'>
             {actualCardNumber} / {topicWords.length}
           </div>
         </div>

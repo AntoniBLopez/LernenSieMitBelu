@@ -10,8 +10,9 @@ import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
 import GameButton from '@/app/(ui)/widgets/GameButton'
 import {
   ChevronRightIcon,
-  ArrowRightCircleIcon,
-  ArrowLeftCircleIcon
+  CheckIcon,
+  XMarkIcon,
+  ArrowUturnLeftIcon
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
 import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
@@ -30,6 +31,10 @@ function Page() {
   const [isFlipped, setIsFlipped] = useState(false)
   const [nextCard, setNextCard] = useState(false)
   const [prevCard, setPrevCard] = useState(false)
+
+  const [learningCount, setLearningCount] = useState(0)
+  const [knownCount, setKnownCount] = useState(0)
+  const [countRegister, setCountRegister] = useState<any>([]) // 0 = learning, 1 = known
 
   const isBrowser = typeof window !== 'undefined'
   const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
@@ -77,7 +82,18 @@ function Page() {
     }
   }
 
-  const handleNextCard = () => {
+  const handleLearningButton = () => {
+    goToNextCard()
+    setLearningCount(learningCount + 1)
+    setCountRegister([...countRegister, 0])
+  }
+  const handleKnownButton = () => {
+    goToNextCard()
+    setKnownCount(knownCount + 1)
+    setCountRegister([...countRegister, 1])
+  }
+
+  const goToNextCard = () => {
     setResetCard(true)
     setNextCard(true)
     setShowMessage(false)
@@ -88,6 +104,16 @@ function Page() {
     setPrevCard(true)
     setShowMessage(false)
     setIsCorrect(false)
+
+    if (countRegister[countRegister.length - 1] === 0) {
+      setLearningCount(learningCount - 1)
+      countRegister.pop()
+    } else if (countRegister[countRegister.length - 1] === 1) {
+      setKnownCount(knownCount - 1)
+      const newArray = [...countRegister]
+      newArray.pop()
+      setCountRegister([...newArray])
+    }
   }
 
   const restart = () => {
@@ -99,6 +125,8 @@ function Page() {
     setIsCorrect(false)
     setCorrectMatchesCount(0)
     setActualCardNumber(1)
+    setLearningCount(0)
+    setKnownCount(0)
   }
 
   const goToChangeTopic = () => {
@@ -171,9 +199,15 @@ function Page() {
       </div>
 
       <section className='flex flex-col gap-2'>
-        <div className='flex flex-row gap-3 items-center justify-center'>
-          <div className='flex font-medium opacity-60'>
+        <div className='flex flex-row gap-3 items-center justify-between'>
+          <div className='ml-2'>
+            {learningCount}
+          </div>
+          <div className='flex font-medium'>
             {actualCardNumber} / {topicWords.length}
+          </div>
+          <div className='mr-2'>
+            {knownCount}
           </div>
         </div>
 
@@ -209,24 +243,26 @@ function Page() {
           </div>
         </div>
         <div className='h-[50vh]'></div>
-        <div onClick={handlePrevCard} className='flex flex-row gap-5 justify-center items-center'>
-          <button>
-            <ArrowLeftCircleIcon className='w-12 h-auto text-grayColor' />
-          </button>
-          <button onClick={handleNextCard}>
-            <ArrowRightCircleIcon className='w-12 h-auto text-grayColor' />
-          </button>
+        <div className='flex flex-row items-center justify-between'>
+          <div className='flex flex-1'>
+            <button className='rounded-full p-2 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
+              <ArrowUturnLeftIcon className='w-6 h-auto' />
+            </button>
+          </div>
+          <div className='flex-1 flex justify-center gap-2 tablet:gap-10'>
+            <button title='Lernen' className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === topicWords.length} onClick={actualCardNumber < topicWords.length ? handleLearningButton : undefined}>
+              <XMarkIcon className='w-8 h-auto text-red-500' />
+            </button>
+            <button title='Bekannt' className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === topicWords.length} onClick={actualCardNumber < topicWords.length ? handleKnownButton : undefined}>
+              <CheckIcon className='w-8 h-auto text-green-500' />
+            </button>
+          </div>
+          <div className='flex-1'></div>
         </div>
         {
-          showMessage
-            ?
-            topicWords.length !== actualCardNumber
-              ?
-              <GameButton name='Weiter' Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={handleNextCard} />
-              :
-              <FinalGameButtons topicWords={topicWords} actualCardNumber={actualCardNumber} restart={restart} goToChangeTopic={goToChangeTopic} />
-            :
-            undefined
+          showMessage && topicWords.length !== actualCardNumber
+          &&
+          <FinalGameButtons topicWords={topicWords} actualCardNumber={actualCardNumber} restart={restart} goToChangeTopic={goToChangeTopic} />
         }
       </section>
     </main>

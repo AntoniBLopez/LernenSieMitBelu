@@ -1,5 +1,5 @@
 .card {
-  transition: transform 1s ease; /* Transición suave del giro */
+  transition: transform 0.5s ease; /* Transición suave del giro */
   transform-style: preserve-3d; /* Mantiene la transformación 3D */
   perspective: 1000px; /* Añade perspectiva para el efecto 3D */
 }
