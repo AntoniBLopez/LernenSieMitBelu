@@ -280,7 +280,7 @@ function Page() {
           }
           <div className='flex flex-col gap-4'>
             <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}</p>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-4'>
+            <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
               <input
                 type="text"
                 name="userWord"
@@ -309,7 +309,7 @@ function Page() {
                 className={`
                   relative
                   self-center
-                  bottom-[1.18rem]
+                  bottom-[0.68rem]
                   h-[0.15rem]
                   rounded-br-3xl
                   rounded-bl-3xl
