@@ -175,7 +175,13 @@ function Page() {
   useEffect(() => {
     setResetOptionDesign(false) // reset the response design of the card that shows correct or wrong to none
     if (inputRef.current) {
-      inputRef.current.focus()
+      if (window.innerWidth <= 640) {
+        setTimeout(() => {
+          inputRef.current?.focus()
+        }, 100)
+      } else {
+        inputRef.current.focus()
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualCardNumber])
