@@ -176,7 +176,7 @@ function Page() {
           </div>
         </div>
 
-        <div onClick={handleCardClick} className='flex flex-col h-[60vh] items-center justify-center p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white'>
+        <div onClick={handleCardClick} className='flex flex-col h-[50vh] items-center justify-center p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white'>
           {
             actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
               ?

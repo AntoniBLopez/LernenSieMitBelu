@@ -80,7 +80,7 @@ function Page() {
     e.preventDefault()
 
     if (capitalizeFirstLetter(userWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
-    // if (userWord === topicWords[actualCardNumber - 1][1]) {
+      // if (userWord === topicWords[actualCardNumber - 1][1]) {
       if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
         correctSound.play()
       }
@@ -126,6 +126,18 @@ function Page() {
 
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
     setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
+
+    const preventScroll = (e: TouchEvent) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault()
+      }
+    }
+
+    window.addEventListener('touchmove', preventScroll, { passive: false })
+
+    return () => {
+      window.removeEventListener('touchmove', preventScroll)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -169,6 +181,17 @@ function Page() {
         allWordsCorrectSound.play()
       }
     }
+
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Enter' && showMessage && topicWords.length !== actualCardNumber) {
+        e.preventDefault()
+        nextCard()
+      }
+    }
+    window.addEventListener('keydown', handleGlobalKeyDown)
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showMessage])
 
@@ -199,7 +222,7 @@ function Page() {
             {actualCardNumber} / {topicWords.length}
           </div>
         </div>
-        <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
+        <div className='flex flex-col h-[45vh] tablet:h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
           {
             actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
               ?
@@ -239,6 +262,8 @@ function Page() {
               <div
                 className={`
                   absolute
+                  hidden
+                  tablet:block
                   self-center
                   bottom-[4.75rem]
                   h-[0.15rem]
