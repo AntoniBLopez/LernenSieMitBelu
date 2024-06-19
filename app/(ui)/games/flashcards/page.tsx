@@ -1,4 +1,5 @@
 'use client'
+import '@/app/(ui)/games/flashcards/styles.css'
 import { useEffect, useRef, useState } from 'react'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
@@ -59,7 +60,7 @@ function Page() {
 
   const handleCardClick = () => {
     setIsFlipped(!isFlipped)
-  };
+  }
 
   const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
     if (wordSelected === actualCorrectWord) {
@@ -176,27 +177,38 @@ function Page() {
           </div>
         </div>
 
-        <div onClick={handleCardClick} className='flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white'>
-          {
-            actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-              ?
-              <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                Du hast alle Wörter richtig verstanden!
-              </div>
-              :
-              isFlipped
+        <div className='relative'>
+          <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
+            {
+              actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
                 ?
-                <>
-                  <span>Alemán</span>
-                  <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
-                </>
+                <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
+                  Du hast alle Wörter richtig verstanden!
+                </div>
                 :
                 <>
-                  <span>Español</span>
+                  <span className='text-sm'>Español</span>
                   <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
                 </>
-          }
+            }
+          </div>
+          <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '' : '[transform:rotateY(-180deg)] '}`}>
+            {
+              actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
+                ?
+                <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
+                  Du hast alle Wörter richtig verstanden!
+                </div>
+                :
+                <>
+                  <span className='text-sm'>Alemán</span>
+                  <div className=' flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                </>
+
+            }
+          </div>
         </div>
+        <div className='h-[50vh]'></div>
         <div onClick={handlePrevCard} className='flex flex-row gap-5 justify-center items-center'>
           <button>
             <ArrowLeftCircleIcon className='w-12 h-auto text-grayColor' />
