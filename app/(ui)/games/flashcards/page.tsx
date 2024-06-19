@@ -164,7 +164,7 @@ function Page() {
 
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>

@@ -40,7 +40,7 @@ function Topics() {
 
   return (
     <div className="mx-12 laptop:mx-auto laptop:max-w-desktop">
-      <div className="flex flex-col h-fit mt-8 mb-10 gap-5">
+      <div className="flex flex-col h-fit mt-1 mb-10 gap-5">
         <header className="flex flex-col gap-10">
           <div className='flex flex-col gap-2 items-start'>
             <SelectedLabels showLevel={true} />

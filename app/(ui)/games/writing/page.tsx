@@ -40,6 +40,7 @@ const wrongMessage = [
 
 function Page() {
 
+  const [isIphone, setIsIphone] = useState(false)
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
 
@@ -122,6 +123,7 @@ function Page() {
 
   useEffect(() => {
     dispatch(setActiveTab({ name: 'Writing', position: 6 }))
+
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
@@ -129,6 +131,10 @@ function Page() {
     if (inputRef.current) {
       setInputWidth(inputRef.current.offsetWidth);
     }
+
+    /* Detect if the user's device is iphone */
+    const userAgent = window.navigator.userAgent
+    setIsIphone(/iPhone/i.test(userAgent))
 
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
     setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
@@ -223,7 +229,7 @@ function Page() {
 
 
   return (
-    <main className='flex flex-col mx-12 mt-8 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
@@ -274,8 +280,7 @@ function Page() {
               <div
                 className={`
                   absolute
-                  hidden
-                  tablet:block
+                  ${isIphone ? 'hidden' : 'block'}
                   self-center
                   bottom-[4.75rem]
                   h-[0.15rem]
