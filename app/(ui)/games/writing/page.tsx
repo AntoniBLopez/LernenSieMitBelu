@@ -228,7 +228,7 @@ function Page() {
             {actualCardNumber} / {topicWords.length}
           </div>
         </div>
-        <div className='flex flex-col h-[45vh] tablet:h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
+        <div className='flex flex-col h-[40vh] tablet:h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
           {
             actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
               ?
