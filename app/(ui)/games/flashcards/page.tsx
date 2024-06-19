@@ -176,24 +176,24 @@ function Page() {
           </div>
         </div>
 
-        <div onClick={handleCardClick} className='flex flex-col h-[50vh] items-center justify-center p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white'>
+        <div onClick={handleCardClick} className='flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white'>
           {
             actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
               ?
-              <div className='flex justify-center text-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
+              <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
                 Du hast alle Wörter richtig verstanden!
               </div>
               :
               isFlipped
                 ?
                 <>
-                  <span className='absolute top-5 left-5'>Alemán</span>
-                  <div className='text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                  <span>Alemán</span>
+                  <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
                 </>
                 :
                 <>
-                  <span className='absolute top-5 left-5'>Español</span>
-                  <div className='text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                  <span>Español</span>
+                  <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
                 </>
           }
         </div>
