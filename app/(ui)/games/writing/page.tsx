@@ -103,25 +103,25 @@ function Page() {
   }
 
   /* DOES NOT WORK */
-  const focusAndOpenKeyboardOnIphone = (el: HTMLInputElement | null) => {
-    if (el && tempInputRef.current) {
-      // Set temporary input position
-      tempInputRef.current.style.position = 'absolute'
-      tempInputRef.current.style.top = (el.offsetTop + 7) + 'px'
-      tempInputRef.current.style.left = el.offsetLeft + 'px'
-      tempInputRef.current.style.height = '0'
-      tempInputRef.current.style.opacity = '0'
+  // const focusAndOpenKeyboardOnIphone = (el: HTMLInputElement | null) => {
+  //   if (el && tempInputRef.current) {
+  //     // Set temporary input position
+  //     tempInputRef.current.style.position = 'absolute'
+  //     tempInputRef.current.style.top = (el.offsetTop + 7) + 'px'
+  //     tempInputRef.current.style.left = el.offsetLeft + 'px'
+  //     tempInputRef.current.style.height = '0'
+  //     tempInputRef.current.style.opacity = '0'
 
-      // Focus on the temporary element to open keyboard
-      tempInputRef.current.focus()
+  //     // Focus on the temporary element to open keyboard
+  //     tempInputRef.current.focus()
 
-      // After a short delay, focus on the actual input element
-      setTimeout(() => {
-        el.focus()
-        el.click()
-      }, 300)
-    }
-  }
+  //     // After a short delay, focus on the actual input element
+  //     setTimeout(() => {
+  //       el.focus()
+  //       el.click()
+  //     }, 300)
+  //   }
+  // }
 
   const nextCard = () => {
     setResetOptionDesign(true)
@@ -161,6 +161,11 @@ function Page() {
 
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
     setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
+
+    // Disable scrolling on mobile devices to prevent pushing the content out of the screen on iOS when the keyboard is open
+    document.ontouchmove = function (e) {
+      e.preventDefault()
+    }
 
     const preventScroll = (e: TouchEvent) => {
       if (window.innerWidth <= 640) {
@@ -204,13 +209,13 @@ function Page() {
   useEffect(() => {
     setResetOptionDesign(false) // reset the response design of the card that shows correct or wrong to none
     if (inputRef.current) {
-      if (window.innerWidth <= 640 && isIphone) {
-        setTimeout(() => {
-          focusAndOpenKeyboardOnIphone(inputRef.current) // DOES NOT WORK
-        }, 100)
-      } else {
-        inputRef.current.focus()
-      }
+      // if (window.innerWidth <= 640 && isIphone) {
+      //   setTimeout(() => {
+      //     focusAndOpenKeyboardOnIphone(inputRef.current) // DOES NOT WORK
+      //   }, 100)
+      // } else {
+      // }
+      inputRef.current.focus()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [actualCardNumber])
