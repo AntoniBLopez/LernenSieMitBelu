@@ -78,7 +78,6 @@ function Page() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-
     if (capitalizeFirstLetter(userWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
       // if (userWord === topicWords[actualCardNumber - 1][1]) {
       if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
@@ -91,6 +90,13 @@ function Page() {
       setRandomMessageNumber(getRandomNumber(0, wrongMessage.length - 1))
       setShowMessage(true)
     }
+  }
+
+  const handleBlur = () => {
+    if (window.innerWidth <= 640) {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    setIsInputFocused(false)
   }
 
   const nextCard = () => {
@@ -254,7 +260,7 @@ function Page() {
                 `}
                 ref={inputRef}
                 onFocus={() => setIsInputFocused(true)}
-                onBlur={() => setIsInputFocused(false)}
+                onBlur={handleBlur}
                 disabled={showMessage}
                 autoComplete='off'
                 autoFocus
