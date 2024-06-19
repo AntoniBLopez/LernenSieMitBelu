@@ -162,22 +162,17 @@ function Page() {
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
     setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
 
-    // Disable scrolling on mobile devices to prevent pushing the content out of the screen on iOS when the keyboard is open
-    document.ontouchmove = function (e) {
-      e.preventDefault()
+    const preventScroll = (e: TouchEvent) => {
+      if (window.innerWidth <= 640) {
+        e.preventDefault()
+      }
     }
 
-    // const preventScroll = (e: TouchEvent) => {
-    //   if (window.innerWidth <= 640) {
-    //     e.preventDefault()
-    //   }
-    // }
+    window.addEventListener('touchmove', preventScroll, { passive: false })
 
-    // window.addEventListener('touchmove', preventScroll, { passive: false })
-
-    // return () => {
-    //   window.removeEventListener('touchmove', preventScroll)
-    // }
+    return () => {
+      window.removeEventListener('touchmove', preventScroll)
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
