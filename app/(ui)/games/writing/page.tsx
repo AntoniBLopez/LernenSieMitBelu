@@ -80,8 +80,9 @@ function Page() {
 
   const handleSubmit = (e: any) => {
     e.preventDefault()
-    if (capitalizeFirstLetter(userWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
-      // if (userWord === topicWords[actualCardNumber - 1][1]) {
+    const trimmedUserWord = userWord.trim() // removes whitespaces
+    if (capitalizeFirstLetter(trimmedUserWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
+      // if (trimmedUserWord === topicWords[actualCardNumber - 1][1]) {
       if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
         correctSound.play()
       }
@@ -101,6 +102,7 @@ function Page() {
     setIsInputFocused(false)
   }
 
+  /* DOES NOT WORK */
   const focusAndOpenKeyboardOnIphone = (el: HTMLInputElement | null) => {
     if (el && tempInputRef.current) {
       // Set temporary input position
@@ -204,7 +206,7 @@ function Page() {
     if (inputRef.current) {
       if (window.innerWidth <= 640 && isIphone) {
         setTimeout(() => {
-          focusAndOpenKeyboardOnIphone(inputRef.current)
+          focusAndOpenKeyboardOnIphone(inputRef.current) // DOES NOT WORK
         }, 100)
       } else {
         inputRef.current.focus()
@@ -300,10 +302,9 @@ function Page() {
               />
               <div
                 className={`
-                  absolute
-                  ${isIphone ? 'hidden' : 'block'}
+                  relative
                   self-center
-                  bottom-[4.75rem]
+                  bottom-[1.18rem]
                   h-[0.15rem]
                   rounded-br-3xl
                   rounded-bl-3xl
