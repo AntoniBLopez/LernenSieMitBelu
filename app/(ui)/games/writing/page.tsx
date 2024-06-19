@@ -167,17 +167,17 @@ function Page() {
       e.preventDefault()
     }
 
-    const preventScroll = (e: TouchEvent) => {
-      if (window.innerWidth <= 640) {
-        e.preventDefault()
-      }
-    }
+    // const preventScroll = (e: TouchEvent) => {
+    //   if (window.innerWidth <= 640) {
+    //     e.preventDefault()
+    //   }
+    // }
 
-    window.addEventListener('touchmove', preventScroll, { passive: false })
+    // window.addEventListener('touchmove', preventScroll, { passive: false })
 
-    return () => {
-      window.removeEventListener('touchmove', preventScroll)
-    }
+    // return () => {
+    //   window.removeEventListener('touchmove', preventScroll)
+    // }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
