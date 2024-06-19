@@ -63,8 +63,9 @@ function Page() {
 
   const [userWord, setUserWord] = useState('')
   const [isInputFocused, setIsInputFocused] = useState(false)
-  const [inputWidth, setInputWidth] = useState(0);
-  const inputRef = useRef<HTMLInputElement>(null);
+  const [inputWidth, setInputWidth] = useState(0)
+  const inputRef = useRef<HTMLInputElement>(null)
+  const tempInputRef = useRef<HTMLInputElement>(null)
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
@@ -74,7 +75,7 @@ function Page() {
   const getRandomNumber = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1)) + min
 
   const capitalizeFirstLetter = (word: string): string => {
-    return word.charAt(0).toUpperCase() + word.slice(1);
+    return word.charAt(0).toUpperCase() + word.slice(1)
   }
 
   const handleSubmit = (e: any) => {
@@ -98,6 +99,26 @@ function Page() {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
     setIsInputFocused(false)
+  }
+
+  const focusAndOpenKeyboardOnIphone = (el: HTMLInputElement | null) => {
+    if (el && tempInputRef.current) {
+      // Set temporary input position
+      tempInputRef.current.style.position = 'absolute'
+      tempInputRef.current.style.top = (el.offsetTop + 7) + 'px'
+      tempInputRef.current.style.left = el.offsetLeft + 'px'
+      tempInputRef.current.style.height = '0'
+      tempInputRef.current.style.opacity = '0'
+
+      // Focus on the temporary element to open keyboard
+      tempInputRef.current.focus()
+
+      // After a short delay, focus on the actual input element
+      setTimeout(() => {
+        el.focus()
+        el.click()
+      }, 300)
+    }
   }
 
   const nextCard = () => {
@@ -181,10 +202,10 @@ function Page() {
   useEffect(() => {
     setResetOptionDesign(false) // reset the response design of the card that shows correct or wrong to none
     if (inputRef.current) {
-      if (window.innerWidth <= 640) {
+      if (window.innerWidth <= 640 && isIphone) {
         setTimeout(() => {
-          inputRef.current?.focus()
-        }, 300)
+          focusAndOpenKeyboardOnIphone(inputRef.current)
+        }, 100)
       } else {
         inputRef.current.focus()
       }
