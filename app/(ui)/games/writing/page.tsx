@@ -338,7 +338,7 @@ function Page() {
                 {
                   showMessage && !isCorrect
                   &&
-                  <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor'>
+                  <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor slide-in'>
                     {topicWords[actualCardNumber - 1][1]}
                     <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
                   </span>
