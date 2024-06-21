@@ -5,6 +5,7 @@ import Image from 'next/image'
 function EndGameScreen({ knownCount, learningCount, topicWords, restart, goToChangeTopic }: { knownCount: number, learningCount: number, topicWords: any[], restart: () => void, goToChangeTopic: () => void }) {
   return (
     <section className='flex flex-col gap-10'>
+      <h2 className='text-4xl font-bold'>Way to go! You&apos;ve reviewed all the cards.</h2>
       <div className='flex flex-row gap-10 mt-10'>
         <div className='flex flex-1 flex-col justify-start gap-10'>
           <div className='flex flex-1 flex-row h-fit gap-2 justify-center items-center'>

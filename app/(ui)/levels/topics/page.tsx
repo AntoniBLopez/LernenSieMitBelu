@@ -46,9 +46,9 @@ function Topics() {
             <SelectedLabels showLevel={true} />
           </div>
 
-          <h1 className='flex flex-row text-2xl text-primaryColor font-medium'>
-            <AcademicCapIcon className="size-8 text-primaryColor" />
-            <span className="content-end">&nbsp;Wähle das Thema</span>
+          <h1 className='flex flex-row text-2xl mobile:text-3xl items-center text-primaryColor font-medium'>
+            <AcademicCapIcon className="size-6 mobile:size-8 text-primaryColor" />
+            <span className="content-end whitespace-nowrap">&nbsp;Wähle das Thema</span>
           </h1>
         </header>
 

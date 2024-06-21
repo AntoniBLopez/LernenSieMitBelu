@@ -201,7 +201,7 @@ function Page() {
   }, [resetCard])
 
   return (
-    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-10'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
@@ -227,30 +227,22 @@ function Page() {
             <div className='relative'>
               <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '[transform:rotateY(180deg)] tablet:[transform:rotateX(180deg)]' : ''}`}>
                 {
-                  actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-                    ?
-                    <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                      Du hast alle Wörter richtig verstanden!
-                    </div>
-                    :
-                    <>
-                      <span className='text-sm'>Español</span>
-                      <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
-                    </>
+                  actualCardNumber !== topicWords.length && correctMatchesCount !== topicWords.length
+                  &&
+                  <>
+                    <span className='text-sm'>Español</span>
+                    <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                  </>
                 }
               </div>
               <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '' : '[transform:rotateY(-180deg)] tablet:[transform:rotateX(-180deg)]'}`}>
                 {
-                  actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-                    ?
-                    <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                      Du hast alle Wörter richtig verstanden!
-                    </div>
-                    :
-                    <>
-                      <span className='text-sm'>Alemán</span>
-                      <div className=' flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
-                    </>
+                  actualCardNumber !== topicWords.length && correctMatchesCount !== topicWords.length
+                  &&
+                  <>
+                    <span className='text-sm'>Alemán</span>
+                    <div className=' flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                  </>
 
                 }
               </div>

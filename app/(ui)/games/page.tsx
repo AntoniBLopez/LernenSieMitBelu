@@ -31,9 +31,9 @@ function Page() {
         </div>
         <div className="flex flex-col gap-2">
           <div className="flex flex-row gap-1 items-center justify-center">
-            <PlayCircleIcon className="size-8 text-primaryColor" />
-            <h2 className='flex text-2xl text-primaryColor font-medium'>
-              <span className="content-end">Wähle das Spiel</span>
+            <PlayCircleIcon className="size-8 mobile:size-10 text-primaryColor" />
+            <h2 className='flex text-2xl mobile:text-4xl text-primaryColor font-medium'>
+              <span className="content-end whitespace-nowrap">Wähle das Spiel</span>
             </h2>
           </div>
         </div>
