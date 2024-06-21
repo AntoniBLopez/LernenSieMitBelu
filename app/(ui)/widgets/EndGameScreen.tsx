@@ -28,7 +28,7 @@ function EndGameScreen({ knownCount, learningCount, topicWords, restart, goToCha
         </div>
         <div className='flex flex-1 h-full'>
           <Image
-            src='/icons/confetti2.png'
+            src='/icons/confetti.png'
             alt='Confetti icon'
             width={100}
             height={100}
