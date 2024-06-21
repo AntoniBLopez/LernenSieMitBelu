@@ -30,7 +30,7 @@ function DonutChart({ value1, value2 }: { value1: number, value2: number }) {
           {
             percentage === 100
               ?
-              <Image src='/icons/correct2.png' width={40} height={40} alt='Checkmark' />
+              <Image src='/icons/correct.png' width={40} height={40} alt='Checkmark' />
               :
               `${Math.round(percentage)}%`
           }
