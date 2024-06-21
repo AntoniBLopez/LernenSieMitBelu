@@ -22,3 +22,9 @@ export interface Level {
 }
 
 export interface Levels extends Array<Level> { }
+
+export type CSSPropertiesWithVariables = React.CSSProperties & {
+  '--percentage'?: number;
+  '--color1'?: string;
+  '--color2'?: string;
+}

@@ -1,27 +1,22 @@
 'use client'
 import '@/app/(ui)/games/flashcards/styles.css'
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
 import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
 import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
-import GameButton from '@/app/(ui)/widgets/GameButton'
+import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
+import { setActiveTab } from '@/app/lib/features/state/stateSlice'
+import DonutChart from '@/app/(ui)/widgets/DonutChart'
 import {
-  ChevronRightIcon,
   CheckIcon,
   XMarkIcon,
   ArrowUturnLeftIcon
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
-import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
-import { setActiveTab } from '@/app/lib/features/state/stateSlice'
-// import Speaker from '@/public/icons/speaker.svg'
-// import Image from 'next/image'
-
-const knowMessage = 'Known' // Delete and put directly
-const stillLearningMessage = 'Still learning' // Delete and put directly
+import EndGameScreen from '../../widgets/EndGameScreen'
 
 function Page() {
 
@@ -31,6 +26,7 @@ function Page() {
   const [isFlipped, setIsFlipped] = useState(false)
   const [nextCard, setNextCard] = useState(false)
   const [prevCard, setPrevCard] = useState(false)
+  const [showStats, setShowStats] = useState(false)
 
   const [learningCount, setLearningCount] = useState(0)
   const [knownCount, setKnownCount] = useState(0)
@@ -67,30 +63,42 @@ function Page() {
     setIsFlipped(!isFlipped)
   }
 
-  const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
-    if (wordSelected === actualCorrectWord) {
-      if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
-        correctSound.play()
-      }
-      setRandomMessageNumber(getRandomNumber(0, knowMessage.length - 1))
-      setIsCorrect(true)
-      setShowMessage(true)
-      setCorrectMatchesCount(correctMatchesCount + 1)
-    } else {
-      setRandomMessageNumber(getRandomNumber(0, stillLearningMessage.length - 1))
-      setShowMessage(true)
-    }
-  }
+  // const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
+  //   if (wordSelected === actualCorrectWord) {
+  //     if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
+
+  //     }
+  //     setRandomMessageNumber(getRandomNumber(0, knowMessage.length - 1))
+  //     setIsCorrect(true)
+  //     setShowMessage(true)
+  //     setCorrectMatchesCount(correctMatchesCount + 1)
+  //   } else {
+  //     setRandomMessageNumber(getRandomNumber(0, stillLearningMessage.length - 1))
+  //     setShowMessage(true)
+  //   }
+  // }
 
   const handleLearningButton = () => {
     goToNextCard()
     setLearningCount(learningCount + 1)
     setCountRegister([...countRegister, 0])
+
+    if (actualCardNumber === topicWords.length) {
+      setShowStats(true)
+    }
   }
   const handleKnownButton = () => {
+    if (correctSound && knownCount + 1 !== topicWords.length) {
+      correctSound.play()
+    }
     goToNextCard()
     setKnownCount(knownCount + 1)
     setCountRegister([...countRegister, 1])
+
+    console.log(actualCardNumber === topicWords.length)
+    if (actualCardNumber === topicWords.length) {
+      setShowStats(true)
+    }
   }
 
   const goToNextCard = () => {
@@ -127,6 +135,7 @@ function Page() {
     setActualCardNumber(1)
     setLearningCount(0)
     setKnownCount(0)
+    setShowStats(false)
   }
 
   const goToChangeTopic = () => {
@@ -167,14 +176,14 @@ function Page() {
   }, [actualCardNumber])
 
   useEffect(() => {
-    if (actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length) {
+    if (actualCardNumber === topicWords.length && knownCount === topicWords.length) {
       confettiFireworks()
       if (isSoundOn && allWordsCorrectSound !== null) {
         allWordsCorrectSound.play()
       }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showMessage])
+  }, [showStats])
 
   useEffect(() => {
     if (resetCard && nextCard && !restartGame) {
@@ -191,80 +200,80 @@ function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [resetCard])
 
-
   return (
     <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
 
-      <section className='flex flex-col gap-2'>
-        <div className='flex flex-row gap-3 items-center justify-between'>
-          <div className='ml-2'>
-            {learningCount}
-          </div>
-          <div className='flex font-medium'>
-            {actualCardNumber} / {topicWords.length}
-          </div>
-          <div className='mr-2'>
-            {knownCount}
-          </div>
-        </div>
+      {
+        showStats
+          ?
+          <EndGameScreen knownCount={knownCount} learningCount={learningCount} topicWords={topicWords} restart={restart} goToChangeTopic={goToChangeTopic} />
+          :
+          <section className='flex flex-col gap-2'>
+            <div className='flex flex-row gap-3 items-center justify-between'>
+              <div className='text-xs ml-2 w-10 py-1 font-semibold text-center bg-red-200 border-2 border-red-500 rounded-full'>
+                {learningCount}
+              </div>
+              <div className='flex font-medium'>
+                {actualCardNumber} / {topicWords.length}
+              </div>
+              <div className='text-xs mr-2 w-10 py-1 font-semibold text-center bg-green-200 border-2 border-green-500 rounded-full'>
+                {knownCount}
+              </div>
+            </div>
 
-        <div className='relative'>
-          <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '[transform:rotateY(180deg)]' : ''}`}>
-            {
-              actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-                ?
-                <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                  Du hast alle Wörter richtig verstanden!
-                </div>
-                :
-                <>
-                  <span className='text-sm'>Español</span>
-                  <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
-                </>
-            }
-          </div>
-          <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '' : '[transform:rotateY(-180deg)] '}`}>
-            {
-              actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-                ?
-                <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                  Du hast alle Wörter richtig verstanden!
-                </div>
-                :
-                <>
-                  <span className='text-sm'>Alemán</span>
-                  <div className=' flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
-                </>
+            <div className='relative'>
+              <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '[transform:rotateY(180deg)] tablet:[transform:rotateX(180deg)]' : ''}`}>
+                {
+                  actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
+                    ?
+                    <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
+                      Du hast alle Wörter richtig verstanden!
+                    </div>
+                    :
+                    <>
+                      <span className='text-sm'>Español</span>
+                      <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                    </>
+                }
+              </div>
+              <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '' : '[transform:rotateY(-180deg)] tablet:[transform:rotateX(-180deg)]'}`}>
+                {
+                  actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
+                    ?
+                    <div className='flex self-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
+                      Du hast alle Wörter richtig verstanden!
+                    </div>
+                    :
+                    <>
+                      <span className='text-sm'>Alemán</span>
+                      <div className=' flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                    </>
 
-            }
-          </div>
-        </div>
-        <div className='h-[50vh]'></div>
-        <div className='flex flex-row items-center justify-between'>
-          <div className='flex flex-1'>
-            <button className='rounded-full p-2 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
-              <ArrowUturnLeftIcon className='w-6 h-auto' />
-            </button>
-          </div>
-          <div className='flex-1 flex justify-center gap-2 tablet:gap-10'>
-            <button title='Lernen' className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === topicWords.length} onClick={actualCardNumber < topicWords.length ? handleLearningButton : undefined}>
-              <XMarkIcon className='w-8 h-auto text-red-500' />
-            </button>
-            <button title='Bekannt' className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === topicWords.length} onClick={actualCardNumber < topicWords.length ? handleKnownButton : undefined}>
-              <CheckIcon className='w-8 h-auto text-green-500' />
-            </button>
-          </div>
-          <div className='flex-1'></div>
-        </div>
-        {
-          showMessage && topicWords.length !== actualCardNumber
-          &&
-          <FinalGameButtons topicWords={topicWords} actualCardNumber={actualCardNumber} restart={restart} goToChangeTopic={goToChangeTopic} />
-        }
-      </section>
+                }
+              </div>
+            </div>
+            <div className='h-[50vh]'></div>
+            <div className='flex flex-row items-center justify-between'>
+              <div className='flex flex-1'>
+                <button className='rounded-full p-2 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
+                  <ArrowUturnLeftIcon className='w-6 h-auto' />
+                </button>
+              </div>
+              <div className='flex-1 flex justify-center gap-5 tablet:gap-10'>
+                <button className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' onClick={handleLearningButton}>
+                  <XMarkIcon className='w-8 h-auto text-red-500' />
+                </button>
+                <button className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' onClick={handleKnownButton}>
+                  <CheckIcon className='w-8 h-auto text-green-500' />
+                </button>
+              </div>
+              <div className='flex-1'></div>
+            </div>
+          </section>
+      }
     </main>
   )
 }

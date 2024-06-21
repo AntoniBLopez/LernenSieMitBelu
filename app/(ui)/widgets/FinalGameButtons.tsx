@@ -6,11 +6,11 @@ import {
   ArrowUturnLeftIcon
 } from '@heroicons/react/24/outline'
 
-function FinalGameButtons({ topicWords, actualCardNumber, restart = () => undefined, goToChangeTopic = () => undefined }: { topicWords: Word[], actualCardNumber: number, restart?: () => void, goToChangeTopic?: () => void }) {
+function FinalGameButtons({ topicWords, actualCardNumber, bgBlue = false, restart = () => undefined, goToChangeTopic = () => undefined }: { topicWords: Word[], actualCardNumber: number, bgBlue?: boolean, restart?: () => void, goToChangeTopic?: () => void }) {
   return (
-    <div className='flex flex-col gap-2 slide-in'>
-      <GameButton name='Weiterlernen' restart={restart} Icon={ArrowPathIcon} isLastCard={topicWords.length === actualCardNumber} />
-      <GameButton name='Thema wechseln' goToChangeTopic={goToChangeTopic} changeTopicButton={true} Icon={ArrowUturnLeftIcon} isLastCard={topicWords.length === actualCardNumber} />
+    <div className='flex flex-col w-full justify-center mobile:flex-row gap-4 self-start slide-in'>
+      <GameButton name='Thema wechseln' bgBlue={bgBlue} goToChangeTopic={goToChangeTopic} changeTopicButton={true} Icon={ArrowUturnLeftIcon} isLastCard={topicWords.length === actualCardNumber} />
+      <GameButton name='Weiterlernen' bgBlue={bgBlue} restart={restart} Icon={ArrowPathIcon} isLastCard={topicWords.length === actualCardNumber} />
     </div>
   )
 }
