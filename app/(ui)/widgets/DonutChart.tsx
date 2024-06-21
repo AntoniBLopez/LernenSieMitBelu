@@ -17,7 +17,7 @@ function DonutChart({ value1, value2 }: { value1: number, value2: number }) {
     )`,
   }
   return (
-    <div className='relative w-24 h-24'>
+    <div className='relative w-20 h-20 mobile:w-24 mobile:h-24'>
       <div
         className='w-full h-full rounded-full bg-[conic-gradient(var(--color1) calc(var(--percentage) * 1%), var(--color2) calc(var(--percentage) * 1%))]'
         style={style}

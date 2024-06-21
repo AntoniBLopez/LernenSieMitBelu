@@ -8,7 +8,8 @@ function GameButton({ name, Icon, isLastCard, bgBlue = false, changeTopicButton 
             flex-row
             gap-2
             items-center
-            ${isLastCard || changeTopicButton ? 'self-start place-content-start w-48' : 'self-center place-content-center w-[50%] m-0'}
+            self-center
+            ${isLastCard || changeTopicButton ? 'place-content-start w-48' : 'place-content-center w-[50%] m-0'}
             font-semibold
             text-white
             hover:cursor-pointer
