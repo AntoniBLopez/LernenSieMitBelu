@@ -10,7 +10,7 @@ function EndGameScreen({ knownCount, learningCount, topicWords, restart, goToCha
         <div className='flex flex-1 flex-col justify-start gap-10'>
           <div className='flex flex-1 flex-col mobile:flex-row h-fit gap-4 justify-center items-center'>
             <DonutChart value1={knownCount} value2={learningCount} />
-            <div className='flex flex-col w-[66%] justify-center h-full gap-2'>
+            <div className='flex flex-col w-48 mobile:w-[66%] justify-center h-full gap-2'>
               <div className='flex flex-row justify-between bg-green-200 border-2 rounded-full py-1 px-4'>
                 <span className='flex font-semibold text-green-800'>Gelernt</span>
                 <span className='flex font-semibold text-green-800'>{knownCount}</span>
