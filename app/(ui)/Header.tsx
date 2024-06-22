@@ -2,18 +2,17 @@
 import { SpeakerWaveIcon, SpeakerXMarkIcon } from '@heroicons/react/24/outline'
 import Image from "next/image";
 import Link from "next/link";
-import { useAppDispatch } from "@/app/lib/hooks"
-import { changeSoundStatus } from "@/app/lib/features/state/stateSlice"
 import { useState } from "react";
 
 export default function Header() {
 
-  const [isSpeakerOn, setIsSpeakerOn] = useState(true)
-  const dispatch = useAppDispatch()
+  const isBrowser = typeof window !== 'undefined'
+  const [isSpeakerOn, setIsSpeakerOn] = useState(isBrowser ? localStorage.getItem("soundOn") === "true" : null)
 
   const handleSpeaker = () => {
+    const modeChanged = !isSpeakerOn
+    localStorage.setItem("soundOn", modeChanged.toString())
     setIsSpeakerOn(!isSpeakerOn)
-    dispatch(changeSoundStatus())
   }
 
   return (

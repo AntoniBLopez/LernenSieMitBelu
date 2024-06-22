@@ -5,7 +5,6 @@ import { Levels } from '@/types'
 
 interface InitialState {
   levels: Levels
-  soundOn: boolean
   activeTab: {
     name: string,
     position: number,
@@ -14,7 +13,6 @@ interface InitialState {
 
 const initialState: InitialState = {
   levels: [],
-  soundOn: true,
   activeTab: {
     name: '',
     position: 0,
@@ -36,9 +34,6 @@ const stateSlice = createSlice({
       state.activeTab.name = action.payload.name
       state.activeTab.position = action.payload.position
     },
-    changeSoundStatus(state) {
-      state.soundOn = !state.soundOn
-    },
     // addLevel(state, action: PayloadAction<Level>) {
     //   state.levels[action.payload.name] = action.payload
     // },
@@ -54,5 +49,5 @@ const stateSlice = createSlice({
   },
 })
 
-export const { initializeLevels, setActiveTab, changeSoundStatus } = stateSlice.actions
+export const { initializeLevels, setActiveTab } = stateSlice.actions
 export default stateSlice.reducer

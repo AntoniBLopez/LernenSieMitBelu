@@ -48,7 +48,6 @@ function Page() {
   const sortRandomly = () => Math.random() - 0.5
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
-  const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
   const dispatch = useAppDispatch()
   const router = useRouter()
 
@@ -74,7 +73,7 @@ function Page() {
     }
   }
   const handleKnownButton = () => {
-    if (correctSound && knownCount + 1 !== topicWords.length) {
+    if (localStorage.getItem("soundOn") === 'true' && correctSound && knownCount + 1 !== topicWords.length) {
       correctSound.play()
     }
     goToNextCard()
@@ -163,7 +162,7 @@ function Page() {
   useEffect(() => {
     if (actualCardNumber === topicWords.length && knownCount === topicWords.length) {
       confettiFireworks()
-      if (isSoundOn && allWordsCorrectSound !== null) {
+      if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
         allWordsCorrectSound.play()
       }
     }
@@ -218,7 +217,7 @@ function Page() {
                     <div className='flex justify-between items-center'>
                       <span className='text-sm ml-3'>Español</span>
                       <button className='p-3 rounded-full hover:bg-slate-200' onClick={event => handleVoice(event)}>
-                        <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={20} height={20} />
+                        <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
                       </button>
                     </div>
                     <div className='flex relative h-full items-center justify-center mb-12 text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>

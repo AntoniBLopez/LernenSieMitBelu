@@ -69,7 +69,6 @@ function Page() {
   const [setToShow, setSetToShow] = useState(initialSet.sort(sortRandomly))
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
-  const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
   const dispatch = useAppDispatch()
   const router = useRouter()
 
@@ -77,7 +76,7 @@ function Page() {
 
   const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
     if (wordSelected === actualCorrectWord) {
-      if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
+      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
         correctSound.play()
       }
       setRandomMessageNumber(getRandomNumber(0, correctMessage.length - 1))
@@ -191,7 +190,7 @@ function Page() {
   useEffect(() => {
     if (actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length) {
       confettiFireworks()
-      if (isSoundOn && allWordsCorrectSound !== null) {
+      if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
         allWordsCorrectSound.play()
       }
     }

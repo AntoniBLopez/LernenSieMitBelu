@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
+import { useEffect } from 'react';
 
 function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?: boolean, name: string, length: number }) {
 
@@ -12,6 +13,12 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
       localStorage.setItem("selectedTopic", name);
     }
   }
+
+  useEffect(() => {
+    if (!localStorage.getItem("soundOn")) {
+      localStorage.setItem("soundOn", true.toString())
+    }
+  }, [])
 
   return (
     <Link
