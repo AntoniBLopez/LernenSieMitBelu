@@ -9,11 +9,12 @@ import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
 import GameButton from '@/app/(ui)/widgets/GameButton'
 import {
   ChevronRightIcon,
-  CheckBadgeIcon
+  CheckBadgeIcon,
+  ChartPieIcon
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
-import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
+import EndGameScreen from '../../widgets/EndGameScreen'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -40,6 +41,7 @@ const wrongMessage = [
 
 function Page() {
 
+  const [showStats, setShowStats] = useState(false)
   const [isIphone, setIsIphone] = useState(false)
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
@@ -56,8 +58,8 @@ function Page() {
   const [topicWords, setTopicWords] = useState<any>([])
   const sortRandomly = () => Math.random() - 0.5
 
-  const [isCorrect, setIsCorrect] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
+  const [isCorrect, setIsCorrect] = useState(false)
   const [randomMessageNumber, setRandomMessageNumber] = useState(0)
   const [resetOptionDesign, setResetOptionDesign] = useState(false)
 
@@ -68,7 +70,6 @@ function Page() {
   const tempInputRef = useRef<HTMLInputElement>(null)
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
-  const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
   const dispatch = useAppDispatch()
   const router = useRouter()
 
@@ -83,7 +84,7 @@ function Page() {
     const trimmedUserWord = userWord.trim() // removes whitespaces
     if (capitalizeFirstLetter(trimmedUserWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
       // if (trimmedUserWord === topicWords[actualCardNumber - 1][1]) {
-      if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
+      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
         correctSound.play()
       }
       setIsCorrect(true)
@@ -138,6 +139,7 @@ function Page() {
     setCorrectMatchesCount(0)
     setActualCardNumber(1)
     setUserWord('')
+    setShowStats(false)
   }
 
   const goToChangeTopic = () => {
@@ -216,17 +218,13 @@ function Page() {
   }, [actualCardNumber])
 
   useEffect(() => {
-    if (actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length) {
-      confettiFireworks()
-      if (isSoundOn && allWordsCorrectSound !== null) {
-        allWordsCorrectSound.play()
-      }
-    }
 
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && showMessage && topicWords.length !== actualCardNumber) {
         e.preventDefault()
         nextCard()
+      } else if (topicWords.length === actualCardNumber) {
+        setShowStats(true)
       }
     }
     window.addEventListener('keydown', handleGlobalKeyDown)
@@ -250,40 +248,45 @@ function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [inputRef.current])
 
+  useEffect(() => {
+    if (correctMatchesCount === topicWords.length && localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
+      confettiFireworks()
+      allWordsCorrectSound.play()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showStats])
+
 
   return (
     <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
+      {
+        showStats
+          ?
+          <EndGameScreen knownCount={correctMatchesCount} learningCount={topicWords.length - correctMatchesCount} topicWords={topicWords} restart={restart} goToChangeTopic={goToChangeTopic} />
+          :
 
-      <section className='flex flex-col gap-2'>
-        <div className='flex flex-row gap-3 items-center justify-center'>
-          <div className='flex font-medium slide-in opacity-60'>
-            {actualCardNumber} / {topicWords.length}
-          </div>
-        </div>
-        <div className='flex flex-col h-fit gap-6 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
-          {
-            actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-              ?
-              <div className='flex justify-center text-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                Du hast alle Wörter richtig verstanden!
+          <section className='flex flex-col gap-2'>
+            <div className='flex flex-row gap-3 items-center justify-center'>
+              <div className='flex font-medium slide-in opacity-60'>
+                {actualCardNumber} / {topicWords.length}
               </div>
-              :
+            </div>
+            <div className='flex flex-col h-fit gap-6 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
               <div className='text-lg slide-in'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
-          }
-          <div className='flex flex-col gap-4'>
-            <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}</p>
-            <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-              <input
-                type="text"
-                name="userWord"
-                id="userWord"
-                value={userWord}
-                onChange={(e) => setUserWord(e.target.value)}
-                placeholder='Schreiben Sie Spanisch'
-                className={`
+              <div className='flex flex-col gap-4'>
+                <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}</p>
+                <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+                  <input
+                    type="text"
+                    name="userWord"
+                    id="userWord"
+                    value={userWord}
+                    onChange={(e) => setUserWord(e.target.value)}
+                    placeholder='Schreiben Sie Spanisch'
+                    className={`
                   w-full
                   rounded-md
                   px-4
@@ -293,15 +296,15 @@ function Page() {
                   focus:bg-selectedColor
                   disabled:border-2 disabled:py-[0.65rem] ${isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
                 `}
-                ref={inputRef}
-                onFocus={() => setIsInputFocused(true)}
-                onBlur={handleBlur}
-                disabled={showMessage}
-                autoComplete='off'
-                autoFocus
-              />
-              <div
-                className={`
+                    ref={inputRef}
+                    onFocus={() => setIsInputFocused(true)}
+                    onBlur={handleBlur}
+                    disabled={showMessage}
+                    autoComplete='off'
+                    autoFocus
+                  />
+                  <div
+                    className={`
                   relative
                   self-center
                   bottom-[0.68rem]
@@ -313,12 +316,12 @@ function Page() {
                   transition-opacity
                   duration-75
                 `}
-                style={{ width: inputWidth - 5 + 'px' }}
-              />
-              <div className='flex flex-row gap-5 items-center'>
-                <button
-                  disabled={showMessage || userWord === ''}
-                  className={`
+                    style={{ width: inputWidth - 5 + 'px' }}
+                  />
+                  <div className='flex flex-row gap-5 items-center'>
+                    <button
+                      disabled={showMessage || userWord === ''}
+                      className={`
                     self-start
                     gap-2
                     items-center
@@ -333,32 +336,54 @@ function Page() {
                     hover:cursor-pointer
                     disabled:cursor-default disabled:bg-disabledPrimaryColor
                   `}>
-                  Antwort
-                </button>
-                {
-                  showMessage && !isCorrect
-                  &&
-                  <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor slide-in'>
-                    {topicWords[actualCardNumber - 1][1]}
-                    <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
-                  </span>
-                }
+                      Antwort
+                    </button>
+                    {
+                      showMessage && !isCorrect
+                      &&
+                      <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor slide-in'>
+                        {topicWords[actualCardNumber - 1][1]}
+                        <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
+                      </span>
+                    }
+                  </div>
+                </form>
               </div>
-            </form>
-          </div>
-        </div>
-        {
-          showMessage
-            ?
-            topicWords.length !== actualCardNumber
-              ?
-              <GameButton name='Weiter' nextCard={nextCard} Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} />
-              :
-              <FinalGameButtons topicWords={topicWords} actualCardNumber={actualCardNumber} restart={restart} goToChangeTopic={goToChangeTopic} />
-            :
-            undefined
-        }
-      </section>
+            </div>
+            {
+              showMessage
+                ?
+                topicWords.length !== actualCardNumber
+                  ?
+                  <GameButton name='Weiter' nextCard={nextCard} Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} />
+                  :
+                  <button
+                    onClick={() => setShowStats(true)}
+                    className={`
+                flex
+                flex-row
+                gap-2
+                items-center
+                self-center
+                font-semibold
+                text-white
+                hover:cursor-pointer
+                bg-blue-500
+                hover:bg-blue-600
+                rounded-md
+                py-2
+                px-4
+                slide-in
+                `}
+                  >
+                    Zeige Statistiken
+                    <ChartPieIcon className='w-5 h-5' />
+                  </button>
+                :
+                undefined
+            }
+          </section>
+      }
     </main>
   )
 }
