@@ -1,22 +1,21 @@
 'use client'
 import '@/app/(ui)/games/flashcards/styles.css'
-import { useEffect, useState } from 'react'
-import { RootState } from "@/app/lib/store"
-import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
-import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import { WordsTraduction } from '@/types'
-import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
-import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
-import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
-import { setActiveTab } from '@/app/lib/features/state/stateSlice'
-import DonutChart from '@/app/(ui)/widgets/DonutChart'
+import { useRouter } from 'next/navigation'
+import Image from 'next/image'
 import {
   CheckIcon,
   XMarkIcon,
   ArrowUturnLeftIcon
 } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/navigation'
-import EndGameScreen from '../../widgets/EndGameScreen'
+import { useEffect, useState } from 'react'
+import { WordsTraduction } from '@/types'
+import { RootState } from "@/app/lib/store"
+import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
+import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
+import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
+import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
+import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
+import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 
 function Page() {
 
@@ -38,45 +37,32 @@ function Page() {
 
   const [restartGame, setRestartGame] = useState(false)
   const [actualCardNumber, setActualCardNumber] = useState(1)
-  const [correctMatchesCount, setCorrectMatchesCount] = useState(0)
 
   const [levelData, setlevelData] = useState<any>({})
   const [topicWords, setTopicWords] = useState<any>([])
 
   const [isCorrect, setIsCorrect] = useState(false)
   const [showMessage, setShowMessage] = useState(false)
-  const [randomMessageNumber, setRandomMessageNumber] = useState(0)
   const [resetCard, setResetCard] = useState(false)
 
   const sortRandomly = () => Math.random() - 0.5
-  const initialSet = [0, 1, 2, 3]
-  const [setToShow, setSetToShow] = useState(initialSet.sort(sortRandomly))
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const isSoundOn = useAppSelector((state: RootState) => state.store.soundOn)
   const dispatch = useAppDispatch()
   const router = useRouter()
 
-  const getRandomNumber = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
 
   const handleCardClick = () => {
     setIsFlipped(!isFlipped)
   }
 
-  // const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
-  //   if (wordSelected === actualCorrectWord) {
-  //     if (isSoundOn && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
-
-  //     }
-  //     setRandomMessageNumber(getRandomNumber(0, knowMessage.length - 1))
-  //     setIsCorrect(true)
-  //     setShowMessage(true)
-  //     setCorrectMatchesCount(correctMatchesCount + 1)
-  //   } else {
-  //     setRandomMessageNumber(getRandomNumber(0, stillLearningMessage.length - 1))
-  //     setShowMessage(true)
-  //   }
-  // }
+  const handleVoice = (event: any) => {
+    event.stopPropagation()
+    let utterance = new SpeechSynthesisUtterance(topicWords[actualCardNumber - 1][1])
+    utterance.lang = 'es-ES'
+    speechSynthesis.speak(utterance)
+  }
 
   const handleLearningButton = () => {
     goToNextCard()
@@ -131,7 +117,6 @@ function Page() {
     setPrevCard(false)
     setShowMessage(false)
     setIsCorrect(false)
-    setCorrectMatchesCount(0)
     setActualCardNumber(1)
     setLearningCount(0)
     setKnownCount(0)
@@ -227,21 +212,26 @@ function Page() {
             <div className='relative'>
               <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '[transform:rotateY(180deg)] tablet:[transform:rotateX(180deg)]' : ''}`}>
                 {
-                  actualCardNumber !== topicWords.length && correctMatchesCount !== topicWords.length
+                  !showStats
                   &&
                   <>
-                    <span className='text-sm'>Español</span>
-                    <div className='flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                    <div className='flex justify-between items-center'>
+                      <span className='text-sm ml-3'>Español</span>
+                      <button className='p-3 rounded-full hover:bg-slate-200' onClick={event => handleVoice(event)}>
+                        <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={20} height={20} />
+                      </button>
+                    </div>
+                    <div className='flex relative h-full items-center justify-center mb-12 text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
                   </>
                 }
               </div>
               <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '' : '[transform:rotateY(-180deg)] tablet:[transform:rotateX(-180deg)]'}`}>
                 {
-                  actualCardNumber !== topicWords.length && correctMatchesCount !== topicWords.length
+                  !showStats
                   &&
                   <>
-                    <span className='text-sm'>Alemán</span>
-                    <div className=' flex relative items-center justify-center bottom-3 h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
+                    <span className='text-sm ml-3 mt-3'>Alemán</span>
+                    <div className=' flex relative items-center justify-center bottom-[1.1rem] h-full text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
                   </>
 
                 }
