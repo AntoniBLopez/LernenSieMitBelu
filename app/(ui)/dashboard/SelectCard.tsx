@@ -16,7 +16,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
 
   useEffect(() => {
     if (!localStorage.getItem("soundOn")) {
-      localStorage.setItem("soundOn", true.toString())
+      localStorage.setItem("soundOn", 'true')
     }
   }, [])
 
