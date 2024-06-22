@@ -28,16 +28,26 @@ export default function NavLinks() {
         return (
           <Link
             key={link.name}
-            href={link.href}
+            href={link.name === 'Zuordnen' ? '' : link.href}
             className={clsx(
-              'flex h-fit gap-2 py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50 hover:bg-sky-100 hover:text-blue-600',
+              'flex flex-col h-fit py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50 hover:bg-sky-100 hover:text-blue-600',
               {
                 'bg-sky-100 text-blue-600': pathname === link.href,
+                'opacity-40 pt-3 pb-0 hover:cursor-default hover:text-black hover:bg-gray-50': link.name === 'Zuordnen',
               },
             )}
           >
-            <LinkIcon className="w-6 h-auto" />
-            <p className="self-end font-semibold">{link.name}</p>
+            <div className='flex flex-row self-start gap-2 items-center'>
+              <LinkIcon className="w-6 h-auto" />
+              <p className="self-end font-semibold">{link.name}</p>
+            </div>
+            {
+              link.name === 'Zuordnen'
+              &&
+              <div className='text-xs self-start ml-8 laptop:self-end laptop:ml-0'>
+                Demnächst
+              </div>
+            }
           </Link>
         )
       })}

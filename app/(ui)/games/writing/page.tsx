@@ -271,7 +271,7 @@ function Page() {
   }, [inputRef.current])
 
   useEffect(() => {
-    if (correctMatchesCount === topicWords.length) {
+    if (showStats && correctMatchesCount === topicWords.length) {
       confettiFireworks()
       if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
         allWordsCorrectSound.play()

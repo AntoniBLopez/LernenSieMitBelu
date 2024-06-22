@@ -7,7 +7,7 @@ import { useState } from "react";
 export default function Header() {
 
   const isBrowser = typeof window !== 'undefined'
-  const [isSpeakerOn, setIsSpeakerOn] = useState(isBrowser ? localStorage.getItem("soundOn") === "true" : null)
+  const [isSpeakerOn, setIsSpeakerOn] = useState(isBrowser ? localStorage.getItem("soundOn") === "true" : true)
 
   const handleSpeaker = () => {
     const modeChanged = !isSpeakerOn

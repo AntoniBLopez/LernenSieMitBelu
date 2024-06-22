@@ -63,9 +63,6 @@ function Page() {
   const [randomMessageNumber, setRandomMessageNumber] = useState(0)
   const [resetOptionDesign, setResetOptionDesign] = useState(false)
 
-  const mainRef = useRef<HTMLInputElement>(null)
-  const [marginLeft, setMarginLeft] = useState('');
-
   const sortRandomly = () => Math.random() - 0.5
   const initialSet = [0, 1, 2, 3]
   const [setToShow, setSetToShow] = useState(initialSet.sort(sortRandomly))
@@ -78,7 +75,7 @@ function Page() {
 
   const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
     if (wordSelected === actualCorrectWord) {
-      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
+      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null) {
         correctSound.play()
       }
       setRandomMessageNumber(getRandomNumber(0, correctMessage.length - 1))
@@ -191,23 +188,6 @@ function Page() {
   }, [actualCardNumber])
 
   useEffect(() => {
-    const handleMarginResize = () => {
-      if (mainRef.current) {
-        const mainElement = mainRef.current;
-        const computedStyles = window.getComputedStyle(mainElement);
-        const marginLeft = computedStyles.marginLeft;
-        setMarginLeft(marginLeft);
-      }
-    }
-    window.addEventListener('resize', handleMarginResize)
-
-    return () => {
-      window.removeEventListener('resize', handleMarginResize);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [mainRef.current])
-
-  useEffect(() => {
     if (showStats && correctMatchesCount === topicWords.length) {
       confettiFireworks()
       if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
@@ -219,7 +199,7 @@ function Page() {
 
 
   return (
-    <main ref={mainRef} className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
