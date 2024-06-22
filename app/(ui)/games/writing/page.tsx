@@ -7,6 +7,7 @@ import { WordsTraduction } from '@/types'
 import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
 import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
 import GameButton from '@/app/(ui)/widgets/GameButton'
+import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
 import {
   ChevronRightIcon,
   CheckBadgeIcon,
@@ -14,7 +15,7 @@ import {
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
-import EndGameScreen from '../../widgets/EndGameScreen'
+import Image from 'next/image'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -42,6 +43,9 @@ const wrongMessage = [
 function Page() {
 
   const [showStats, setShowStats] = useState(false)
+  const [currentlySpeaking, setCurrentlySpeaking] = useState(false)
+  const [clickOnVoice, setClickOnVoice] = useState(false)
+
   const [isIphone, setIsIphone] = useState(false)
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
@@ -79,12 +83,28 @@ function Page() {
     return word.charAt(0).toUpperCase() + word.slice(1)
   }
 
+  const handleVoice = (word: string) => {
+    setClickOnVoice(true)
+    if (!currentlySpeaking) {
+      let utterance = new SpeechSynthesisUtterance(word)
+      utterance.lang = 'es-ES'
+      utterance.onstart = () => {
+        setCurrentlySpeaking(true)
+      }
+      utterance.onend = () => {
+        setCurrentlySpeaking(false)
+      }
+      speechSynthesis.speak(utterance)
+    }
+  }
+
   const handleSubmit = (e: any) => {
     e.preventDefault()
+    if (clickOnVoice) return
     const trimmedUserWord = userWord.trim() // removes whitespaces
     if (capitalizeFirstLetter(trimmedUserWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
       // if (trimmedUserWord === topicWords[actualCardNumber - 1][1]) {
-      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null && correctMatchesCount !== topicWords.length - 1) {
+      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null) {
         correctSound.play()
       }
       setIsCorrect(true)
@@ -129,6 +149,7 @@ function Page() {
     setShowMessage(false)
     setIsCorrect(false)
     setUserWord('')
+    setClickOnVoice(false)
   }
 
   const restart = () => {
@@ -140,6 +161,7 @@ function Page() {
     setActualCardNumber(1)
     setUserWord('')
     setShowStats(false)
+    setClickOnVoice(false)
   }
 
   const goToChangeTopic = () => {
@@ -223,7 +245,7 @@ function Page() {
       if (e.key === 'Enter' && showMessage && topicWords.length !== actualCardNumber) {
         e.preventDefault()
         nextCard()
-      } else if (topicWords.length === actualCardNumber) {
+      } else if (e.key === 'Enter' && topicWords.length === actualCardNumber) {
         setShowStats(true)
       }
     }
@@ -249,9 +271,11 @@ function Page() {
   }, [inputRef.current])
 
   useEffect(() => {
-    if (correctMatchesCount === topicWords.length && localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
+    if (correctMatchesCount === topicWords.length) {
       confettiFireworks()
-      allWordsCorrectSound.play()
+      if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
+        allWordsCorrectSound.play()
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showStats])
@@ -287,15 +311,15 @@ function Page() {
                     onChange={(e) => setUserWord(e.target.value)}
                     placeholder='Schreiben Sie Spanisch'
                     className={`
-                  w-full
-                  rounded-md
-                  px-4
-                  py-3
-                  outline-none
-                  bg-bgColor
-                  focus:bg-selectedColor
-                  disabled:border-2 disabled:py-[0.65rem] ${isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
-                `}
+                      w-full
+                      rounded-md
+                      px-4
+                      py-3
+                      outline-none
+                      bg-bgColor
+                      focus:bg-selectedColor
+                      disabled:border-2 disabled:py-[0.65rem] ${isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
+                    `}
                     ref={inputRef}
                     onFocus={() => setIsInputFocused(true)}
                     onBlur={handleBlur}
@@ -305,46 +329,59 @@ function Page() {
                   />
                   <div
                     className={`
-                  relative
-                  self-center
-                  bottom-[0.68rem]
-                  h-[0.15rem]
-                  rounded-br-3xl
-                  rounded-bl-3xl
-                  bg-blue-400
-                  ${isInputFocused && !showMessage ? 'opacity-100 ' : 'opacity-0'}
-                  transition-opacity
-                  duration-75
-                `}
+                      relative
+                      self-center
+                      bottom-[0.68rem]
+                      h-[0.15rem]
+                      rounded-br-3xl
+                      rounded-bl-3xl
+                      bg-blue-400
+                      ${isInputFocused && !showMessage ? 'opacity-100 ' : 'opacity-0'}
+                      transition-opacity
+                      duration-75
+                    `}
                     style={{ width: inputWidth - 5 + 'px' }}
                   />
                   <div className='flex flex-row gap-5 items-center'>
                     <button
                       disabled={showMessage || userWord === ''}
                       className={`
-                    self-start
-                    gap-2
-                    items-center
-                    font-semibold
-                    text-white
-                    bg-primaryColor
-                    hover:bg-primaryDarkColor
-                    rounded-md
-                    py-2
-                    px-4
-                    slide-in
-                    hover:cursor-pointer
-                    disabled:cursor-default disabled:bg-disabledPrimaryColor
-                  `}>
+                        self-start
+                        gap-2
+                        items-center
+                        font-semibold
+                        text-white
+                        bg-primaryColor
+                        hover:bg-primaryDarkColor
+                        rounded-md
+                        py-2
+                        px-4
+                        slide-in
+                        hover:cursor-pointer
+                        disabled:cursor-default disabled:bg-disabledPrimaryColor
+                      `}>
                       Antwort
                     </button>
                     {
-                      showMessage && !isCorrect
-                      &&
-                      <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor slide-in'>
-                        {topicWords[actualCardNumber - 1][1]}
-                        <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
-                      </span>
+                      showMessage
+                        ?
+                        isCorrect
+                          ?
+                          <button className='p-2 rounded-full hover:bg-slate-200' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
+                            <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
+                          </button>
+                          :
+                          <div className='flex flex-row items-center gap-2'>
+                            <span className='flex flex-row gap-2 text-xl text-primaryExtraDarkColor slide-in'>
+                              {topicWords[actualCardNumber - 1][1]}
+                              <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
+                            </span>
+                            <button className='p-2 rounded-full hover:bg-slate-200' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
+                              <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
+                            </button>
+                          </div>
+                        :
+                        undefined
                     }
                   </div>
                 </form>
@@ -360,21 +397,21 @@ function Page() {
                   <button
                     onClick={() => setShowStats(true)}
                     className={`
-                flex
-                flex-row
-                gap-2
-                items-center
-                self-center
-                font-semibold
-                text-white
-                hover:cursor-pointer
-                bg-blue-500
-                hover:bg-blue-600
-                rounded-md
-                py-2
-                px-4
-                slide-in
-                `}
+                      flex
+                      flex-row
+                      gap-2
+                      items-center
+                      self-center
+                      font-semibold
+                      text-white
+                      hover:cursor-pointer
+                      bg-blue-500
+                      hover:bg-blue-600
+                      rounded-md
+                      py-2
+                      px-4
+                      slide-in
+                    `}
                   >
                     Zeige Statistiken
                     <ChartPieIcon className='w-5 h-5' />

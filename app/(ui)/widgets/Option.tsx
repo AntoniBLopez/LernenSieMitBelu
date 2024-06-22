@@ -5,6 +5,7 @@ import { useEffect, useState } from 'react'
 function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: string | number, showMessage: boolean, isCorrect: boolean, resetOptionDesign: boolean }) {
 
   const [clicked, setClicked] = useState(false)
+  const [currentlySpeaking, setCurrentlySpeaking] = useState(false)
 
   const handleClick = () => {
     if (showMessage) return
@@ -13,9 +14,17 @@ function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: str
 
   const handleVoice = (event: any) => {
     event.stopPropagation()
-    let utterance = new SpeechSynthesisUtterance(name.toString())
-    utterance.lang = 'es-ES'
-    speechSynthesis.speak(utterance)
+    if (!currentlySpeaking) {
+      let utterance = new SpeechSynthesisUtterance(name.toString())
+      utterance.lang = 'es-ES'
+      utterance.onstart = () => {
+        setCurrentlySpeaking(true)
+      }
+      utterance.onend = () => {
+        setCurrentlySpeaking(false)
+      }
+      speechSynthesis.speak(utterance)
+    }
   }
 
   useEffect(() => {

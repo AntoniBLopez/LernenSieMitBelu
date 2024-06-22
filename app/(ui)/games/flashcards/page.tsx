@@ -1,13 +1,6 @@
 'use client'
 import '@/app/(ui)/games/flashcards/styles.css'
 import { useRouter } from 'next/navigation'
-import Image from 'next/image'
-import {
-  CheckIcon,
-  XMarkIcon,
-  ArrowUturnLeftIcon
-} from '@heroicons/react/24/outline';
-import { useEffect, useState } from 'react'
 import { WordsTraduction } from '@/types'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
@@ -16,11 +9,19 @@ import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
 import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
 import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
+import Image from 'next/image'
+import {
+  CheckIcon,
+  XMarkIcon,
+  ArrowUturnLeftIcon
+} from '@heroicons/react/24/outline';
+import { useEffect, useState } from 'react'
 
 function Page() {
 
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
+  const [currentlySpeaking, setCurrentlySpeaking] = useState(false)
 
   const [isFlipped, setIsFlipped] = useState(false)
   const [nextCard, setNextCard] = useState(false)
@@ -56,11 +57,19 @@ function Page() {
     setIsFlipped(!isFlipped)
   }
 
-  const handleVoice = (event: any) => {
+  const handleVoice = (event: any, word: string) => {
     event.stopPropagation()
-    let utterance = new SpeechSynthesisUtterance(topicWords[actualCardNumber - 1][1])
-    utterance.lang = 'es-ES'
-    speechSynthesis.speak(utterance)
+    if (!currentlySpeaking) {
+      let utterance = new SpeechSynthesisUtterance(word)
+      utterance.lang = 'es-ES'
+      utterance.onstart = () => {
+        setCurrentlySpeaking(true)
+      }
+      utterance.onend = () => {
+        setCurrentlySpeaking(false)
+      }
+      speechSynthesis.speak(utterance)
+    }
   }
 
   const handleLearningButton = () => {
@@ -216,7 +225,7 @@ function Page() {
                   <>
                     <div className='flex justify-between items-center'>
                       <span className='text-sm ml-3'>Español</span>
-                      <button className='p-3 rounded-full hover:bg-slate-200' onClick={event => handleVoice(event)}>
+                      <button className='p-3 rounded-full hover:bg-slate-200' onClick={event => handleVoice(event, topicWords[actualCardNumber - 1][1])}>
                         <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
                       </button>
                     </div>

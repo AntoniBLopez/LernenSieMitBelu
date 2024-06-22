@@ -8,11 +8,12 @@ import { WordsTraduction } from '@/types'
 import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
 import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
 import GameButton from '@/app/(ui)/widgets/GameButton'
+import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
 import {
+  ChartPieIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
-import FinalGameButtons from '@/app/(ui)/widgets/FinalGameButtons'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 // import Speaker from '@/public/icons/speaker.svg'
 // import Image from 'next/image'
@@ -42,6 +43,7 @@ const wrongMessage = [
 
 function Page() {
 
+  const [showStats, setShowStats] = useState(false)
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
 
@@ -102,6 +104,7 @@ function Page() {
     setIsCorrect(false)
     setCorrectMatchesCount(0)
     setActualCardNumber(1)
+    setShowStats(false)
   }
 
   const goToChangeTopic = () => {
@@ -188,16 +191,6 @@ function Page() {
   }, [actualCardNumber])
 
   useEffect(() => {
-    if (actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length) {
-      confettiFireworks()
-      if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
-        allWordsCorrectSound.play()
-      }
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showMessage])
-
-  useEffect(() => {
     const handleMarginResize = () => {
       if (mainRef.current) {
         const mainElement = mainRef.current;
@@ -214,6 +207,16 @@ function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainRef.current])
 
+  useEffect(() => {
+    if (showStats && correctMatchesCount === topicWords.length) {
+      confettiFireworks()
+      if (localStorage.getItem("soundOn") === 'true' && allWordsCorrectSound !== null) {
+        allWordsCorrectSound.play()
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showStats])
+
 
   return (
     <main ref={mainRef} className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
@@ -221,54 +224,73 @@ function Page() {
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
 
-      <section className='flex flex-col gap-2'>
-        <div className='flex flex-row gap-3 items-center justify-center'>
-          <div className='flex font-medium'>
-            {actualCardNumber} / {topicWords.length}
-          </div>
-        </div>
-        <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
-          {
-            actualCardNumber === topicWords.length && correctMatchesCount === topicWords.length
-              ?
-              <div className='flex justify-center text-center relative top-6 text-xl tablet:top-8 tablet:text-2xl font-bold text-gradient-to-r from-green-400 to-blue-400 '>
-                Du hast alle Wörter richtig verstanden!
+      {
+        showStats
+          ?
+          <EndGameScreen knownCount={correctMatchesCount} learningCount={topicWords.length - correctMatchesCount} topicWords={topicWords} restart={restart} goToChangeTopic={goToChangeTopic} />
+          :
+          <section className='flex flex-col gap-2'>
+            <div className='flex flex-row gap-3 items-center justify-center'>
+              <div className='flex font-medium'>
+                {actualCardNumber} / {topicWords.length}
               </div>
-              :
+            </div>
+            <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
               <div className='text-lg'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
-          }
-          <div className='flex flex-col gap-4 tablet:mb-5'>
-            <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Wähle die richtige Antwort'}</p>
-            <section className='grid grid-cols-1 tablet:grid-cols-2 gap-2 tablet:gap-5'>
-              {
-                topicWords.length > 0
-                &&
-                setToShow.map((word, index) => {
-                  return <div key={index} onClick={() => !showMessage && handleSelectedOption(topicWords[word][0], topicWords[actualCardNumber - 1][0])}>
-                    <Option
-                      showMessage={showMessage}
-                      isCorrect={topicWords[word][0] === topicWords[actualCardNumber - 1][0]}
-                      name={topicWords[word][1]}
-                      resetOptionDesign={resetOptionDesign}
-                    />
-                  </div>
-                })
-              }
-            </section>
-          </div>
-        </div>
-        {
-          showMessage
-            ?
-            topicWords.length !== actualCardNumber
-              ?
-              <GameButton name='Weiter' Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} />
-              :
-              <FinalGameButtons topicWords={topicWords} actualCardNumber={actualCardNumber} restart={restart} goToChangeTopic={goToChangeTopic} />
-            :
-            undefined
-        }
-      </section>
+              <div className='flex flex-col gap-4 tablet:mb-5'>
+                <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Wähle die richtige Antwort'}</p>
+                <section className='grid grid-cols-1 tablet:grid-cols-2 gap-2 tablet:gap-5'>
+                  {
+                    topicWords.length > 0
+                    &&
+                    setToShow.map((word, index) => {
+                      return <div key={index} onClick={() => !showMessage && handleSelectedOption(topicWords[word][0], topicWords[actualCardNumber - 1][0])}>
+                        <Option
+                          showMessage={showMessage}
+                          isCorrect={topicWords[word][0] === topicWords[actualCardNumber - 1][0]}
+                          name={topicWords[word][1]}
+                          resetOptionDesign={resetOptionDesign}
+                        />
+                      </div>
+                    })
+                  }
+                </section>
+              </div>
+            </div>
+            {
+              showMessage
+                ?
+                topicWords.length !== actualCardNumber
+                  ?
+                  <GameButton name='Weiter' Icon={ChevronRightIcon} isLastCard={topicWords.length === actualCardNumber} nextCard={nextCard} />
+                  :
+                  <button
+                    onClick={() => setShowStats(true)}
+                    className={`
+                      flex
+                      flex-row
+                      gap-2
+                      items-center
+                      self-center
+                      font-semibold
+                      text-white
+                      hover:cursor-pointer
+                      bg-blue-500
+                      hover:bg-blue-600
+                      rounded-md
+                      py-2
+                      px-4
+                      slide-in
+                    `}
+                  >
+                    Zeige Statistiken
+                    <ChartPieIcon className='w-5 h-5' />
+                  </button>
+                :
+                undefined
+            }
+          </section>
+      }
     </main>
   )
 }
