@@ -413,7 +413,7 @@ function Page() {
                       slide-in
                     `}
                   >
-                    Zeige Statistiken
+                    Statistiken zeigen
                     <ChartPieIcon className='w-5 h-5' />
                   </button>
                 :

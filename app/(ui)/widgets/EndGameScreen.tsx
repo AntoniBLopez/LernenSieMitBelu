@@ -16,13 +16,9 @@ function EndGameScreen({ knownCount, learningCount, topicWords, restart, goToCha
                 <span className='flex font-semibold text-green-800'>{knownCount}</span>
               </div>
               <div className='flex flex-row justify-between bg-slate-200 rounded-full py-1 px-4'>
-                {/* <span className='flex font-medium text-red-600'>Noch nicht ganz gelernt</span> */}
                 <span className='flex font-semibold text-slate-600 whitespace-nowrap'>Zum Lernen</span>
                 <span className='flex font-semibold text-slate-600'>{learningCount}</span>
               </div>
-              {/* <span className='font-semibold'>
-              Zum Lernen: {learningCount}
-            </span> */}
             </div>
           </div>
           <FinalGameButtons topicWords={topicWords} actualCardNumber={topicWords.length} restart={restart} goToChangeTopic={goToChangeTopic} bgBlue={true} />

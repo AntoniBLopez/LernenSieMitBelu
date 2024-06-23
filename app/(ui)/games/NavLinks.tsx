@@ -30,10 +30,11 @@ export default function NavLinks() {
             key={link.name}
             href={link.name === 'Zuordnen' ? '' : link.href}
             className={clsx(
-              'flex flex-col h-fit py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50 hover:bg-sky-100 hover:text-blue-600',
+              'flex flex-col h-fit py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50',
               {
                 'bg-sky-100 text-blue-600': pathname === link.href,
                 'opacity-40 pt-3 pb-0 hover:cursor-default hover:text-black hover:bg-gray-50': link.name === 'Zuordnen',
+                'hover:bg-sky-100 hover:text-blue-600': link.name !== 'Zuordnen',
               },
             )}
           >

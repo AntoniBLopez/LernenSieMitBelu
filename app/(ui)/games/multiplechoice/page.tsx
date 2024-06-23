@@ -15,8 +15,6 @@ import {
 } from '@heroicons/react/24/outline';
 import { useRouter } from 'next/navigation'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
-// import Speaker from '@/public/icons/speaker.svg'
-// import Image from 'next/image'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -263,7 +261,7 @@ function Page() {
                       slide-in
                     `}
                   >
-                    Zeige Statistiken
+                    Statistiken zeigen
                     <ChartPieIcon className='w-5 h-5' />
                   </button>
                 :

@@ -2,18 +2,18 @@
 import { HomeIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
-import { useAppSelector } from '../../lib/hooks'
-import { RootState } from '../../lib/store'
+import { useAppSelector } from '@/app/lib/hooks'
+import { RootState } from '@/app/lib/store'
 
 const endPoints = [
   { name: 'Home', href: '/' },
   { name: 'Levels', href: '/levels' },
-  { name: 'Topics', href: '/levels/topics' },
-  { name: 'Games', href: '/games' },
-  { name: 'Flashcards', href: '/games/flashcards' },
+  { name: 'Themen', href: '/levels/topics' }, // Topics
+  { name: 'Spiele', href: '/games' }, // Games
+  { name: 'Karteikarten', href: '/games/flashcards' }, // Flashcards
   { name: 'MultipleChoice', href: '/games/multiplechoice' },
-  { name: 'Writing', href: '/games/writing' },
-  { name: 'Matching', href: '/games/matching' },
+  { name: 'Schreiben', href: '/games/writing' }, // Writing
+  { name: 'Zuordnen', href: '/games/matching' }, // Matching
 ]
 
 function Breadcrumbs() {
@@ -71,7 +71,7 @@ function Breadcrumbs() {
   return (
     <div ref={mainRef} className='flex flex-row items-center gap-1 mx-12 mt-7 laptop:mx-auto laptop:max-w-desktop'>
       {endPoints.slice(0, position + 1).map(({ name, href }, index) => {
-        if (position > 3) {
+        if (position > 3 && window.innerWidth <= 640) {
           if (index > 0 && index < endPoints.length - 2 && !isSizeReduced) {
             isSizeReduced = true
             return (
@@ -84,14 +84,14 @@ function Breadcrumbs() {
                 {showReducedBreadcrumbs && (
                   <div ref={dropdownRef} className={`absolute flex flex-row top-[6rem] left-[${marginLeft}] laptop:divide-x bg-white drop-shadow-md rounded-md items-center z-10`}>
                     {endPoints.slice(1, position).map(({ name, href }, subIndex) => {
-                      if (subIndex > 2) return null
+                      if (subIndex > 1) return null
                       return (
                         <React.Fragment key={`reduced-${subIndex}`}>
                           <Link onClick={() => setShowReducedBreadcrumbs(false)} href={href} className='block py-1 px-2 hover:rounded-md hover:bg-gray-100 hover:text-primaryColor'>
                             {name}
                           </Link>
                           {
-                            subIndex < endPoints.slice(1, position).length - 3
+                            subIndex < endPoints.slice(1, 2).length
                             &&
                             <ChevronRightIcon key={`chevron-${subIndex}`} className='h-3 w-3 ml-0 block laptop:hidden' />
                           }
@@ -106,7 +106,23 @@ function Breadcrumbs() {
                 }
               </React.Fragment>
             )
-          } else if (index === 0 || index > position - 1 && isSizeReduced) {
+          } else if (index === 0 || isSizeReduced) {
+            console.log(position)
+            console.log(index)
+            if (position === 4 && index === 2) return
+
+            if (position === 5 && index === 2) return
+            if (position === 5 && index === 4) return
+
+            if (position === 6 && index === 2) return
+            if (position === 6 && index === 4) return
+            if (position === 6 && index === 5) return
+
+            if (position === 7 && index === 2) return
+            if (position === 7 && index === 4) return
+            if (position === 7 && index === 5) return
+            if (position === 7 && index === 6) return
+
             return (
               <React.Fragment key={index}>
                 <Link href={href} className='flex items-center gap-2'>
@@ -123,6 +139,8 @@ function Breadcrumbs() {
             )
           }
         } else {
+          if (position > 4 && index === 4) return
+          if (position > 5 && index === 5) return
           return (
             <React.Fragment key={index}>
               <Link href={href} className='flex items-center gap-2'>
