@@ -194,7 +194,7 @@ function Page() {
   }, [resetCard])
 
   return (
-    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-10'>
+    <main className='flex flex-col mx-6 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-10'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
@@ -248,15 +248,15 @@ function Page() {
             <div className='h-[50vh]'></div>
             <div className='flex flex-row items-center justify-between'>
               <div className='flex flex-1'>
-                <button className='rounded-full p-2 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
+                <button className='rounded-full p-2 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 laptop:disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
                   <ArrowUturnLeftIcon className='w-6 h-auto' />
                 </button>
               </div>
               <div className='flex-1 flex justify-center gap-5 tablet:gap-10'>
-                <button className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' onClick={handleLearningButton}>
+                <button className='rounded-full p-1 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 laptop:disabled:hover:bg-transparent' onClick={handleLearningButton}>
                   <XMarkIcon className='w-8 h-auto text-red-500' />
                 </button>
-                <button className='rounded-full p-1 hover:bg-slate-200 disabled:opacity-30 disabled:hover:bg-transparent' onClick={handleKnownButton}>
+                <button className='rounded-full p-1 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 laptop:disabled:hover:bg-transparent' onClick={handleKnownButton}>
                   <CheckIcon className='w-8 h-auto text-green-500' />
                 </button>
               </div>

@@ -1,0 +1,50 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground: '#ffffff';
+  --background: 255, 255, 255;
+}
+
+body {
+  color: var(--foreground);
+  background: rgb(var(--background));
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+::-moz-selection {
+  background: #50c9a4;
+  color: '#f2f2f2';
+}
+
+::-webkit-selection {
+  background: #50c9a4;
+  color: '#f2f2f2';
+}
+
+::selection {
+  background: #50c9a4;
+  color: '#f2f2f2';
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-1%);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+.slide-in {
+  animation: slideIn 0.2s forwards;
+}

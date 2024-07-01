@@ -2,7 +2,7 @@ import type { GetServerSideProps, Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
 import "@/app/globals.css";
-import Header from "@/app/(home)/Header";
+import Header from "@/app/(test)/home/Header";
 import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
 

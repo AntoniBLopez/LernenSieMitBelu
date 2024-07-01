@@ -1,8 +1,8 @@
 import type { GetServerSideProps, Metadata } from "next";
 import { Analytics } from "@vercel/analytics/react"
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import "@/app/globals.css";
-import Header from "@/app/(home)/Header";
+import "@/app/(landingpage)/style.css"
+// import Header from "@/app/(test)/home/Header";
 import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
 
@@ -22,7 +22,7 @@ export default function RootLayout({
     <html lang="de">
       <body className={`${bricolage.className} antialiased`}>
         <StoreProvider>
-          <Header />
+          {/* <Header /> */}
           {children}
           <SpeedInsights />
           <Analytics />

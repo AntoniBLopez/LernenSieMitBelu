@@ -51,6 +51,7 @@ function Page() {
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
 
   const isBrowser = typeof window !== 'undefined'
+  const [isSoundOn, setIsSoundOn] = useState(isBrowser ? localStorage.getItem("soundOn") === "true" : true)
   const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
   const [selectedLevel, setSelectedLevel] = useState<string | null>(isBrowser ? localStorage.getItem("selectedLevel") : null)
 
@@ -104,7 +105,7 @@ function Page() {
     const trimmedUserWord = userWord.trim() // removes whitespaces
     if (capitalizeFirstLetter(trimmedUserWord) === capitalizeFirstLetter(topicWords[actualCardNumber - 1][1].toLowerCase())) {
       // if (trimmedUserWord === topicWords[actualCardNumber - 1][1]) {
-      if (localStorage.getItem("soundOn") === 'true' && correctSound !== null) {
+      if (correctSound !== null && isSoundOn) {
         correctSound.play()
       }
       setIsCorrect(true)
@@ -282,7 +283,7 @@ function Page() {
 
 
   return (
-    <main className='flex flex-col mx-12 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col mx-6 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>
@@ -342,32 +343,13 @@ function Page() {
                     `}
                     style={{ width: inputWidth - 5 + 'px' }}
                   />
-                  <div className='flex flex-row gap-5 items-center'>
-                    <button
-                      disabled={showMessage || userWord === ''}
-                      className={`
-                        self-start
-                        gap-2
-                        items-center
-                        font-semibold
-                        text-white
-                        bg-primaryColor
-                        hover:bg-primaryDarkColor
-                        rounded-md
-                        py-2
-                        px-4
-                        slide-in
-                        hover:cursor-pointer
-                        disabled:cursor-default disabled:bg-disabledPrimaryColor
-                      `}>
-                      Antwort
-                    </button>
+                  <div className={`flex ${showMessage && isCorrect ? 'flex-row' : 'flex-col tablet:flex-row'} gap-2`}>
                     {
                       showMessage
                         ?
                         isCorrect
                           ?
-                          <button className='p-2 rounded-full hover:bg-slate-200' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
+                          <button className='p-2 rounded-full bg-slate-100 mobile:bg-transparent mobile:hover:bg-slate-200 slide-in' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
                             <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
                           </button>
                           :
@@ -376,12 +358,30 @@ function Page() {
                               {topicWords[actualCardNumber - 1][1]}
                               <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
                             </span>
-                            <button className='p-2 rounded-full hover:bg-slate-200' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
+                            <button className='flex-shrink-0 p-2 rounded-full bg-slate-100 mobile:bg-transparent mobile:hover:bg-slate-200 slide-in' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
                               <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
                             </button>
                           </div>
                         :
-                        undefined
+                        <button
+                          disabled={showMessage || userWord === ''}
+                          className={`
+                            self-start
+                            gap-2
+                            items-center
+                            font-semibold
+                            text-white
+                            bg-primaryColor
+                            hover:bg-primaryDarkColor
+                            rounded-md
+                            py-2
+                            px-4
+                            slide-in
+                            hover:cursor-pointer
+                            disabled:cursor-default disabled:bg-disabledPrimaryColor
+                          `}>
+                          Antwort
+                        </button>
                     }
                   </div>
                 </form>

@@ -1,16 +1,19 @@
 import Link from 'next/link'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
-import { useEffect } from 'react';
+import { useEffect } from 'react'
+import { useAppDispatch } from "@/app/lib/hooks"
+import { setChosenLevel, setChosenTopic } from '@/app/lib/features/state/stateSlice'
 
 function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?: boolean, name: string, length: number }) {
 
+  const dispatch = useAppDispatch()
   const isCardBlocked = length < 2
 
   const handleClick = () => {
     if (isChooseLevels) {
-      localStorage.setItem("selectedLevel", name);
+      dispatch(setChosenLevel(name))
     } else {
-      localStorage.setItem("selectedTopic", name);
+      dispatch(setChosenTopic(name))
     }
   }
 

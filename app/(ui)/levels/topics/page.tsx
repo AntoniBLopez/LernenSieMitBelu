@@ -15,9 +15,11 @@ import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 
 function Topics() {
 
-  const isBrowser = typeof window !== 'undefined'
-  const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
+  // const isBrowser = typeof window !== 'undefined'
+  // const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
+  const chosenLevel = useAppSelector((state: RootState) => state.store.chosenLevel)
+  const [selectedLevel, setSelectedLevel] = useState<string | null>(chosenLevel)
   const dispatch = useAppDispatch()
   const [levelTopics, setLevelTopics] = useState<any>({})
 
@@ -25,6 +27,10 @@ function Topics() {
     dispatch(setActiveTab({ name: 'Levels', position: 2 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
+    }
+
+    if(!selectedLevel) {
+      setSelectedLevel(localStorage.getItem("selectedLevel"))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
@@ -39,7 +45,7 @@ function Topics() {
 
 
   return (
-    <div className="mx-12 laptop:mx-auto laptop:max-w-desktop">
+    <div className="mx-6 laptop:mx-auto laptop:max-w-desktop">
       <div className="flex flex-col h-fit mt-1 mb-10 gap-5">
         <header className="flex flex-col gap-10">
           <div className='flex flex-col gap-2 items-start'>

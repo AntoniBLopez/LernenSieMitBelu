@@ -9,16 +9,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "gradient-conic":
-          "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-      },
       textColor: {
         'primaryColor': '#50c9a4',
         'primaryDarkColor': '#34ba91',
         'primaryExtraDarkColor': '#1f8767',
         'grayColor': '#696969',
+        /* Landing page */
+        'LPGrayColor': '#c9c9c9',
         // 'grayColor': '#586380',
       },
       backgroundColor: {
@@ -32,6 +29,13 @@ const config: Config = {
         'selectedPrimaryColor': '#adf7e1',
         'graySelectedColor': '#ebebeb',
         'selectedColor': '#e8f0fe',
+        /* Landing page */
+        'LPPrimaryColor': '#68f2c8',
+        'LPPrimaryColorHover': '#7ef7d2',
+      },
+      backgroundImage: {
+        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+        "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
       },
       spacing: {
         fixed: '1.5rem',
@@ -45,6 +49,16 @@ const config: Config = {
         'tablet': '640px',
         'laptop': '1024px',
         'desktop': '1280px',
+      },
+      dropShadow: {
+        'PaymentButton': '4px 4px 0px rgba(41, 207, 156, 1)',
+        'PaymentButtonHover': '4px 4px 0px rgba(55, 219, 169, 1)',
+      },
+      borderColor: {
+        'primaryColor': '#50c9a4',
+      },
+      width: {
+        desktop: '1200px',
       },
     },
   },

@@ -16,7 +16,7 @@ export default function Header() {
   }
 
   return (
-    <header className="flex flex-row justify-between items-end my-3 mx-12 laptop:mx-auto laptop:max-w-desktop">
+    <header className="flex flex-row justify-between items-end my-3 mx-6 laptop:mx-auto laptop:max-w-desktop">
       <Link
         href={"/"}
       >

@@ -9,14 +9,18 @@ interface InitialState {
     name: string,
     position: number,
   }
+  chosenLevel: string,
+  chosenTopic: string,
 }
 
 const initialState: InitialState = {
   levels: [],
-  activeTab: {
+  activeTab: { // breadcrumb
     name: '',
     position: 0,
-  }
+  },
+  chosenLevel: '',
+  chosenTopic: '',
 }
 
 const stateSlice = createSlice({
@@ -29,6 +33,14 @@ const stateSlice = createSlice({
     },
     setLevels(state, action: PayloadAction<Levels>) {
       state.levels = action.payload
+    },
+    setChosenLevel(state, action: PayloadAction<string>) {
+      state.chosenLevel = action.payload
+      localStorage.setItem("selectedLevel", action.payload)
+    },
+    setChosenTopic(state, action: PayloadAction<string>) {
+      state.chosenTopic = action.payload
+      localStorage.setItem("selectedTopic", action.payload)
     },
     setActiveTab(state, action) {
       state.activeTab.name = action.payload.name
@@ -49,5 +61,5 @@ const stateSlice = createSlice({
   },
 })
 
-export const { initializeLevels, setActiveTab } = stateSlice.actions
+export const { initializeLevels, setChosenLevel, setChosenTopic, setActiveTab } = stateSlice.actions
 export default stateSlice.reducer

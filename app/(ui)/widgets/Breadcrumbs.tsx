@@ -69,7 +69,7 @@ function Breadcrumbs() {
   }, [mainRef.current])
 
   return (
-    <div ref={mainRef} className='flex flex-row items-center gap-1 mx-12 mt-7 laptop:mx-auto laptop:max-w-desktop'>
+    <div ref={mainRef} className='flex flex-row items-center gap-1 mx-6 mt-7 laptop:mx-auto laptop:max-w-desktop'>
       {endPoints.slice(0, position + 1).map(({ name, href }, index) => {
         if (position > 3 && window.innerWidth <= 640) {
           if (index > 0 && index < endPoints.length - 2 && !isSizeReduced) {
