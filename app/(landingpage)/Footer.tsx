@@ -11,7 +11,7 @@ export default function Footer() {
             <p className="">Copyright © 2024 - All rights reserved</p>
           </div>
           <div className="self-center laptop:self-start">
-            <Link className="w-fit h-fit" href={"https://twitter.com/taskease_click"} target="_blank">
+            <Link className="w-fit h-fit" href={"https://twitter.com/"} target="_blank">
               <Image
                 src="/logos/socialmedia/x.png"
                 width={35}
