@@ -7,7 +7,7 @@ import {
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import SelectCard from "@/app/(ui)/dashboard/SelectCard"
+import SelectCard from "@/app/(ui)/widgets/SelectCard"
 import { useEffect, useState } from "react";
 import { Level } from "@/types";
 import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels';

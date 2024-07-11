@@ -8,10 +8,8 @@ import {
   ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/outline'
 import Image from "next/image";
-// import Link from "next/link";
 import { useState } from "react";
 import { Dropdown } from "flowbite-react"
-// import Breadcrumbs from '@/app/(ui)/widgets/Breadcrumbs'
 
 export default function Header() {
 
@@ -76,7 +74,7 @@ export default function Header() {
             <ChevronRightIcon width={16} height={16} strokeWidth={1.5} className='' />
           </Dropdown.Item>
           <Dropdown.Divider className='bg-gray-300' />
-          <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom'>
+          <Dropdown.Item onClick={() => location.href = '/'} className='flex flex-row justify-between font-semibold align-bottom'>
             <div className='flex flex-row gap-2'>
               <ArrowLeftStartOnRectangleIcon width={18} height={18} strokeWidth={2} className='text-red-500' />
               Sign out
@@ -87,7 +85,7 @@ export default function Header() {
         {/* <Breadcrumbs /> */}
       </div>
 
-      <div className="flex flex-row gap-10 items-end">
+      {/* <div className="flex flex-row gap-10 items-end">
         {
           isSpeakerOn
             ?
@@ -97,7 +95,7 @@ export default function Header() {
             <SpeakerXMarkIcon onClick={handleSpeaker} className='mr-2 hover:cursor-pointer' width={18} height={18} />
           // <Image src="/icons/speakerOff.svg" onClick={handleSpeaker} className='mr-2 hover:cursor-pointer' width={25} height={25} alt="Speaker Icon" />
         }
-      </div>
+      </div> */}
     </header>
   )
 }

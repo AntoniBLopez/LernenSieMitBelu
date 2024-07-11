@@ -1,12 +1,12 @@
 'use client'
-import { HomeIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
+import { UserIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
 import { useAppSelector } from '@/app/lib/hooks'
 import { RootState } from '@/app/lib/store'
 
 const endPoints = [
-  { name: 'Home', href: '/' },
+  { name: 'Profile', href: '/profile' },
   { name: 'Levels', href: '/levels' },
   { name: 'Themen', href: '/levels/topics' }, // Topics
   { name: 'Spiele', href: '/games' }, // Games
@@ -128,7 +128,7 @@ function Breadcrumbs() {
               <React.Fragment key={index}>
                 <Link href={href} className='flex items-center gap-2'>
                   <div className={`${index < position ? 'hover:text-primaryColor text-current' : 'font-semibold hover:cursor-default'}`}>
-                    {name === 'Home' ? <HomeIcon className='h-5 w-5' /> : name}
+                    {name === 'Profile' ? <UserIcon className='h-5 w-5' /> : name}
                   </div>
                 </Link>
                 {
@@ -146,7 +146,7 @@ function Breadcrumbs() {
             <React.Fragment key={index}>
               <Link href={href} className='flex items-center gap-2'>
                 <div className={`${index < position ? 'hover:text-primaryColor text-current' : 'font-semibold hover:cursor-default'}`}>
-                  {name === 'Home' ? <HomeIcon className='h-5 w-5' /> : name}
+                  {name === 'Profile' ? <UserIcon className={`h-5 w-5 ${position === 0 ? 'h-6' : ''}`} strokeWidth={position === 0 ? 2 : 1.5} /> : name}
                 </div>
               </Link>
               {index < position

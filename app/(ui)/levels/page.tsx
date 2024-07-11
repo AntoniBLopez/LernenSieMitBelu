@@ -6,7 +6,7 @@ import {
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import SelectCard from "@/app/(ui)/dashboard/SelectCard"
+import SelectCard from "@/app/(ui)/widgets/SelectCard"
 import { useEffect } from "react";
 import { Level } from "@/types";
 import { setActiveTab } from '@/app/lib/features/state/stateSlice';

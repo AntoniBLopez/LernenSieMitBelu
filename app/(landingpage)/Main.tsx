@@ -11,8 +11,8 @@ export default function Main() {
 
   return (
     <main className="h-fit w-full">
-        <Link className="w-fit h-fit ml-40 p-2 bg-primaryColor hover:text-white" href={"/levels"}>
-          Go inside (temporary dev mode)
+        <Link className="w-fit h-fit ml-40 p-2 bg-primaryColor hover:text-white" href={"/profile"}>
+          GO INSIDE (temporary dev mode)
         </Link>
       <div className="
         grid
