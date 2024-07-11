@@ -7,6 +7,7 @@ import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
 import Breadcrumbs from "@/app/(ui)/widgets/Breadcrumbs";
 
+
 export const metadata: Metadata = {
   title: "Vokabeltrainer mit Belu",
   description: "Spanisch Vokabeltrainer für Deutschsprachige: Die wichtigsten Wörter nach Themen und Level A1-B2 sortiert!",
@@ -23,7 +24,6 @@ export default function RootLayout({
       <body className={`${bricolage.className} antialiased bg-bgColor`}>
         <StoreProvider>
           <Header />
-          <Breadcrumbs />
           {children}
           <SpeedInsights />
           <Analytics />

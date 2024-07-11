@@ -19,7 +19,7 @@ export default function Header() {
       </Link>
       <div className="flex flex-row gap-10 items-end">
         <Link href="/" className="font-bold hover:underline">Abo</Link>
-        <Link href="/" className="font-bold hover:underline">Log In</Link>
+        <Link href="/profile" className="font-bold hover:underline">Log In</Link>
       </div>
     </header>
   )

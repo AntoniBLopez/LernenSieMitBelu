@@ -12,7 +12,7 @@ import { useEffect, useState } from "react";
 import { Level } from "@/types";
 import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels';
 import { setActiveTab } from '@/app/lib/features/state/stateSlice';
-import Loading from '@/app/(ui)/widgets/Loading';
+import CardsLoading from '@/app/(ui)/levels/widgets/CardsLoading';
 
 function Topics() {
 
@@ -66,7 +66,7 @@ function Topics() {
           {
             loading
               ?
-              <Loading />
+              <CardsLoading />
               :
               <section className="flex flex-col gap-2">
                 {

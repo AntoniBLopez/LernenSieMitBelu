@@ -1,6 +1,6 @@
 'use client'
 
-export default function Loading() {
+export default function CardsLoading() {
   return (
     <div>Ladet...</div>
   )
