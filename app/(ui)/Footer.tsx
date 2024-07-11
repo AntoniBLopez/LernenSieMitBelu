@@ -29,7 +29,7 @@ export default function Footer() {
           <div className='flex flex-col gap-2'>
             <h3 className='mb-2 font-bold'>LEGAL</h3>
             <div className="flex flex-col gap-2 text-black">
-              <Link className="hover:underline w-fit" href="/legal/tos">Terms of services</Link>
+              <Link className="hover:underline hover:text-primaryColor w-fit" href="/legal/tos">Terms of services</Link>
               <Link className="hover:underline w-fit" href="/legal/privacy">Privacy policy</Link>
             </div>
           </div>

@@ -363,25 +363,45 @@ function Page() {
                             </button>
                           </div>
                         :
-                        <button
-                          disabled={showMessage || userWord === ''}
-                          className={`
-                            self-start
-                            gap-2
-                            items-center
-                            font-semibold
-                            text-white
-                            bg-primaryColor
-                            hover:bg-primaryDarkColor
-                            rounded-md
-                            py-2
-                            px-4
-                            slide-in
-                            hover:cursor-pointer
-                            disabled:cursor-default disabled:bg-disabledPrimaryColor
-                          `}>
-                          Antwort
-                        </button>
+                        <div className='flex flex-row w-full justify-between'>
+                          <button
+                            disabled={showMessage || userWord === ''}
+                            className={`
+                              self-start
+                              gap-2
+                              items-center
+                              font-semibold
+                              text-white
+                              bg-primaryColor
+                              hover:bg-primaryDarkColor
+                              rounded-md
+                              py-2
+                              px-4
+                              slide-in
+                              hover:cursor-pointer
+                              disabled:cursor-default disabled:bg-disabledPrimaryColor
+                            `}>
+                            Antwort
+                          </button>
+                          <button
+                            className={`
+                              self-start
+                              gap-2
+                              items-center
+                              font-semibold
+                              text-white
+                              bg-blue-500
+                              hover:bg-blue-700
+                              rounded-md
+                              py-2
+                              px-4
+                              slide-in
+                              hover:cursor-pointer
+                              disabled:cursor-default disabled:bg-blue-200
+                            `}>
+                            Omitir
+                          </button>
+                        </div>
                     }
                   </div>
                 </form>

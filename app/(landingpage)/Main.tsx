@@ -5,12 +5,15 @@ import PaymentButton from '@/app/(landingpage)/widgets/PaymentButton'
 import PlanDetails from './widgets/PlanDetails'
 import NextVideo from 'next-video'
 import DemoVideo from '@/videos/lernenapp.mp4'
-// import { useState } from 'react'
+import Link from 'next/link'
 
 export default function Main() {
 
   return (
     <main className="h-fit w-full">
+        <Link className="w-fit h-fit ml-40 p-2 bg-primaryColor hover:text-white" href={"/levels"}>
+          Go inside (temporary dev mode)
+        </Link>
       <div className="
         grid
         grid-cols-1

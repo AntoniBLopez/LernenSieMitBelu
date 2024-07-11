@@ -8,7 +8,7 @@ import { bricolage } from "@/app/(ui)/fonts";
 
 
 export const metadata: Metadata = {
-  title: "Lernen Sie Mit Belu",
+  title: "Vokabeltrainer Spanisch mit Belu",
   description: "Lernen Sie Spanisch, indem Sie Aufgaben auf die einfachste, schnellste und einfachste Art und Weise erledigen, die es je gab.",
 };
 

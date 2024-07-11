@@ -15,30 +15,34 @@ import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 
 function Topics() {
 
-  // const isBrowser = typeof window !== 'undefined'
+  const isBrowser = typeof window !== 'undefined'
   // const [selectedLevel, setSelectedLevel] = useState(isBrowser ? localStorage.getItem("selectedLevel") : null)
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const chosenLevel = useAppSelector((state: RootState) => state.store.chosenLevel)
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(chosenLevel)
+  const [selectedLevel, setSelectedLevel] = useState<string | null>(chosenLevel ? chosenLevel : isBrowser ? localStorage.getItem("selectedLevel") : null)
   const dispatch = useAppDispatch()
   const [levelTopics, setLevelTopics] = useState<any>({})
 
   useEffect(() => {
+    console.log('chosenLevel', chosenLevel)
+    console.log('selectedLevel', selectedLevel)
     dispatch(setActiveTab({ name: 'Levels', position: 2 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
 
-    if(!selectedLevel) {
+    if (!selectedLevel) {
       setSelectedLevel(localStorage.getItem("selectedLevel"))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
-    if (levelsStore.length > 0) {
+    if (levelsStore.length > 0 && selectedLevel) {
       const level = levelsStore.find((obj: Level) => obj.level === selectedLevel)
-      setLevelTopics(level)
+      console.log(level, 'level')
+      if (!level) return
+      setLevelTopics(level.topics)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])
@@ -61,13 +65,13 @@ function Topics() {
         <main className="flex flex-col">
           <section className="flex flex-col gap-2">
             {
-              levelsStore.length > 0
+              levelsStore.length
               &&
-              Object.keys(levelTopics).length > 0
+              Object.keys(levelTopics).length
               &&
-              Object.keys(levelTopics.topics).map((topic: string, index: number) => {
-                if (levelTopics.topics[topic].length > 0) {
-                  return <SelectCard key={index} name={topic} length={levelTopics.topics[topic].length} />
+              Object.keys(levelTopics).map((topic: string, index: number) => {
+                if (levelTopics[topic].length) {
+                  return <SelectCard key={index} name={topic} length={levelTopics[topic].length} />
                 }
               })
             }
