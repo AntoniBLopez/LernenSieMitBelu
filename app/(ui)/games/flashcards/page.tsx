@@ -131,10 +131,6 @@ function Page() {
     setShowStats(false)
   }
 
-  const goToChangeTopic = () => {
-    router.push('/levels/topics')
-  }
-
   useEffect(() => {
     dispatch(setActiveTab({ name: 'Flashcards', position: 4 }))
     if (levelsStore.length === 0) {
@@ -202,7 +198,7 @@ function Page() {
       {
         showStats
           ?
-          <EndGameScreen knownCount={knownCount} learningCount={learningCount} topicWords={topicWords} restart={restart} goToChangeTopic={goToChangeTopic} />
+          <EndGameScreen knownCount={knownCount} learningCount={learningCount} topicWords={topicWords} restart={restart} />
           :
           <section className='flex flex-col gap-2'>
             <div className='flex flex-row gap-3 items-center justify-between'>

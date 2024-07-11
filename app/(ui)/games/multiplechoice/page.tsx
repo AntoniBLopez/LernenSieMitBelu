@@ -102,10 +102,6 @@ function Page() {
     setShowStats(false)
   }
 
-  const goToChangeTopic = () => {
-    router.push('/levels/topics')
-  }
-
   useEffect(() => {
     dispatch(setActiveTab({ name: 'MultipleChoice', position: 5 }))
     if (levelsStore.length === 0) {
@@ -205,7 +201,7 @@ function Page() {
       {
         showStats
           ?
-          <EndGameScreen knownCount={correctMatchesCount} learningCount={topicWords.length - correctMatchesCount} topicWords={topicWords} restart={restart} goToChangeTopic={goToChangeTopic} />
+          <EndGameScreen knownCount={correctMatchesCount} learningCount={topicWords.length - correctMatchesCount} topicWords={topicWords} restart={restart} />
           :
           <section className='flex flex-col gap-2'>
             <div className='flex flex-row gap-3 items-center justify-center'>

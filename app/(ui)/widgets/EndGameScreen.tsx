@@ -2,7 +2,7 @@ import DonutChart from '@/app/(ui)/widgets/DonutChart'
 import FinalGameButtons from './FinalGameButtons'
 import Image from 'next/image'
 
-function EndGameScreen({ knownCount, learningCount, topicWords, restart, goToChangeTopic }: { knownCount: number, learningCount: number, topicWords: any[], restart: () => void, goToChangeTopic: () => void }) {
+function EndGameScreen({ knownCount, learningCount, topicWords, restart }: { knownCount: number, learningCount: number, topicWords: any[], restart: () => void }) {
   return (
     <section className='flex flex-col gap-4 mobile:gap-10 tablet:gap-4'>
       <h2 className='text-center mobile:text-start text-2xl mobile:text-4xl font-bold'>Gut gemacht! Du hast alle Karten geübt.</h2>
@@ -21,7 +21,7 @@ function EndGameScreen({ knownCount, learningCount, topicWords, restart, goToCha
               </div>
             </div>
           </div>
-          <FinalGameButtons topicWords={topicWords} actualCardNumber={topicWords.length} restart={restart} goToChangeTopic={goToChangeTopic} bgBlue={true} />
+          <FinalGameButtons topicWords={topicWords} actualCardNumber={topicWords.length} restart={restart} bgBlue={true} />
         </div>
         <div className='flex flex-1 h-full max-tablet:hidden'>
           <Image

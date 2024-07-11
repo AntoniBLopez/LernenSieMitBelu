@@ -39,8 +39,8 @@ function Topics() {
 
   useEffect(() => {
     if (levelsStore.length > 0 && selectedLevel) {
+      setLoading(false)
       const level = levelsStore.find((obj: Level) => obj.level === selectedLevel)
-      console.log(level, 'level')
       if (!level) return
       setLevelTopics(level.topics)
     }

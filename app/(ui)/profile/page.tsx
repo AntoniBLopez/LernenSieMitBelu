@@ -22,12 +22,14 @@ export default function Page() {
 
   return (
     <main className="mx-6 laptop:mx-auto laptop:max-w-desktop mt-10">
-      <Link href={"/levels"} className="w-fit h-fit ml-40 p-2 rounded-md bg-primaryColor hover:text-white hover:bg-primaryDarkColor">
-        START
-      </Link>
+      <div className='w-fit h-fit mb-10'>
+        <Link href={"/levels"} className="w-fit h-fit py-2 px-3 font-semibold rounded-md bg-primaryColor hover:font-semibold hover:text-white hover:bg-primaryDarkColor">
+          START
+        </Link>
+      </div>
       <div>
         <Image src="/photos/defaultProfilePicture.png" alt="Logo" width={80} height={80} />
-        <span>Username</span>
+        <span className='font-semibold ml-2'>Username</span>
       </div>
     </main>
   )

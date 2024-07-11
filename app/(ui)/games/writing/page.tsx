@@ -64,6 +64,7 @@ function Page() {
   const sortRandomly = () => Math.random() - 0.5
 
   const [showMessage, setShowMessage] = useState(false)
+  const [hasOmitted, setHasOmitted] = useState(false)
   const [isCorrect, setIsCorrect] = useState(false)
   const [randomMessageNumber, setRandomMessageNumber] = useState(0)
   const [resetOptionDesign, setResetOptionDesign] = useState(false)
@@ -148,6 +149,7 @@ function Page() {
   const nextCard = () => {
     setResetOptionDesign(true)
     setShowMessage(false)
+    setHasOmitted(false)
     setIsCorrect(false)
     setUserWord('')
     setClickOnVoice(false)
@@ -157,16 +159,13 @@ function Page() {
     setRestartGame(true)
     setResetOptionDesign(true)
     setShowMessage(false)
+    setHasOmitted(false)
     setIsCorrect(false)
     setCorrectMatchesCount(0)
     setActualCardNumber(1)
     setUserWord('')
     setShowStats(false)
     setClickOnVoice(false)
-  }
-
-  const goToChangeTopic = () => {
-    router.push('/levels/topics')
   }
 
   useEffect(() => {
@@ -290,7 +289,7 @@ function Page() {
       {
         showStats
           ?
-          <EndGameScreen knownCount={correctMatchesCount} learningCount={topicWords.length - correctMatchesCount} topicWords={topicWords} restart={restart} goToChangeTopic={goToChangeTopic} />
+          <EndGameScreen knownCount={correctMatchesCount} learningCount={topicWords.length - correctMatchesCount} topicWords={topicWords} restart={restart} />
           :
 
           <section className='flex flex-col gap-2'>
@@ -302,7 +301,7 @@ function Page() {
             <div className='flex flex-col h-fit gap-6 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
               <div className='text-lg slide-in'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
               <div className='flex flex-col gap-4'>
-                <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}</p>
+                <p className={`${showMessage ? hasOmitted ? 'slide-in font-medium opacity-100 text-blue-500' : isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}</p>
                 <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
                   <input
                     type="text"
@@ -310,7 +309,7 @@ function Page() {
                     id="userWord"
                     value={userWord}
                     onChange={(e) => setUserWord(e.target.value)}
-                    placeholder='Schreiben Sie Spanisch'
+                    placeholder={hasOmitted ? '' : 'Schreiben Sie Spanisch'}
                     className={`
                       w-full
                       rounded-md
@@ -319,7 +318,7 @@ function Page() {
                       outline-none
                       bg-bgColor
                       focus:bg-selectedColor
-                      disabled:border-2 disabled:py-[0.65rem] ${isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
+                      disabled:border-2 disabled:py-[0.65rem] ${hasOmitted ? 'disabled:bg-slate-100 disabled:border-slate-300' : isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
                     `}
                     ref={inputRef}
                     onFocus={() => setIsInputFocused(true)}
@@ -363,7 +362,7 @@ function Page() {
                             </button>
                           </div>
                         :
-                        <div className='flex flex-row w-full justify-between'>
+                        <div className='flex flex-row w-full gap-2'>
                           <button
                             disabled={showMessage || userWord === ''}
                             className={`
@@ -389,16 +388,19 @@ function Page() {
                               gap-2
                               items-center
                               font-semibold
-                              text-white
-                              bg-blue-500
-                              hover:bg-blue-700
+                              text-blue-500
+                              hover:text-white
+                              hover:bg-blue-500
                               rounded-md
                               py-2
                               px-4
                               slide-in
                               hover:cursor-pointer
-                              disabled:cursor-default disabled:bg-blue-200
-                            `}>
+                            ${userWord.length > 0 ? 'hidden' : ''}
+                              disabled:cursor-default disabled:bg-transparent
+                            `}
+                            onClick={() => setHasOmitted(true)}
+                          >
                             Omitir
                           </button>
                         </div>
