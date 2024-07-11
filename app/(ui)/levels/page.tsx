@@ -19,6 +19,7 @@ function Levels() {
   useEffect(() => {
     dispatch(setActiveTab({ name: 'Levels', position: 1 }))
     if (levelsStore.length === 0) {
+      console.log('levelsStore.length === 0')
       getLevelsAndDispatchToStore(dispatch)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
