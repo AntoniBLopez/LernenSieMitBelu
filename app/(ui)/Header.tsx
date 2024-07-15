@@ -91,8 +91,6 @@ export default function Header() {
               </Dropdown.Item>
             </Link>
           </Dropdown>
-
-          {/* <Breadcrumbs /> */}
         </div>
 
         {/* <div className="flex flex-row gap-10 items-end">

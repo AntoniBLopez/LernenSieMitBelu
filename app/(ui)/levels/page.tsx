@@ -7,23 +7,32 @@ import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import SelectCard from "@/app/(ui)/widgets/SelectCard"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Level } from "@/types";
 import { setActiveTab } from '@/app/lib/features/state/stateSlice';
+import CardsLoading from '@/app/(ui)/levels/widgets/CardsLoading';
 
 function Levels() {
 
+  const [loading, setLoading] = useState(false)
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     dispatch(setActiveTab({ name: 'Levels', position: 1 }))
     if (levelsStore.length === 0) {
-      console.log('levelsStore.length === 0')
+      setLoading(true)
       getLevelsAndDispatchToStore(dispatch)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  useEffect(() => {
+    if (levelsStore.length > 0) {
+      setLoading(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [levelsStore])
 
 
   return (
@@ -39,13 +48,17 @@ function Levels() {
         <main className="flex flex-col">
           <section className="flex flex-col gap-2">
             {
-              levelsStore.length > 0
-              &&
-              levelsStore.length > 0
-              &&
-              levelsStore.map((obj: Level | any, index: number) => {
-                return <SelectCard key={index} isChooseLevels={true} name={obj.level} length={Object.keys(obj.topics).length} />
-              })
+              loading
+                ?
+                <CardsLoading />
+                :
+                levelsStore.length > 0
+                &&
+                levelsStore.length > 0
+                &&
+                levelsStore.map((obj: Level | any, index: number) => {
+                  return <SelectCard key={index} isChooseLevels={true} name={obj.level} length={Object.keys(obj.topics).length} />
+                })
             }
           </section>
         </main>

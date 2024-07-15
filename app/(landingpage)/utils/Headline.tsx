@@ -36,7 +36,7 @@ function Headline() {
             className='inline-block self-start'
           />
           <span className='text-[#00C82A] self-start whitespace-nowrap'>
-            &nbsp;&nbsp;25% off
+            &nbsp;&nbsp;15% off
           </span>
           &nbsp;for the first 50 customers (11 left)
         </p>

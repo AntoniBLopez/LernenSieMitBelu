@@ -221,8 +221,8 @@ function Page() {
                       return <div key={index} onClick={() => !showMessage && handleSelectedOption(topicWords[word][0], topicWords[actualCardNumber - 1][0])}>
                         <Option
                           showMessage={showMessage}
-                          isCorrect={topicWords[word][0] === topicWords[actualCardNumber - 1][0]}
-                          name={topicWords[word][1]}
+                          isCorrect={topicWords[word]?.[0] === topicWords[actualCardNumber - 1][0]}
+                          name={topicWords[word]?.[1]}
                           resetOptionDesign={resetOptionDesign}
                         />
                       </div>

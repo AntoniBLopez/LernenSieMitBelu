@@ -176,11 +176,15 @@ function Page() {
 
   useEffect(() => {
     if (resetCard && nextCard && !restartGame) {
-      setActualCardNumber(actualCardNumber + 1)
+      setTimeout(() => {
+        setActualCardNumber(actualCardNumber + 1)
+      }, 100)
       setIsFlipped(false)
       setNextCard(false)
     } else if (resetCard && prevCard && !restartGame) {
-      setActualCardNumber(actualCardNumber - 1)
+      setTimeout(() => {
+        setActualCardNumber(actualCardNumber - 1)
+      }, 100)
       setIsFlipped(false)
       setPrevCard(false)
     } else {

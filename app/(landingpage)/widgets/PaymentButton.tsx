@@ -38,8 +38,10 @@ function PaymentButton({ size }: { size: string }) {
         hover:bg-LPPrimaryColorHover
         filter
         rounded-lg
-        drop-shadow-PaymentButton
-        hover:drop-shadow-PaymentButtonHover
+        hover:drop-shadow-md
+        border-2
+        border-primaryDarkColor
+        hover:scale-105
         `}
         // hover:drop-shadow-md
       href={
@@ -53,11 +55,11 @@ function PaymentButton({ size }: { size: string }) {
       target='_blank'
     >
       <CalendarIcon
-        width={20}
-        height={20}
+        width={22}
+        height={22}
         className=""
       />
-      Subscribe
+      Beginnen
     </Link>
   )
 }

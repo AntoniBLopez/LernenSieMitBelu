@@ -16,7 +16,6 @@ const config: Config = {
         'grayColor': '#696969',
         /* Landing page */
         'LPGrayColor': '#c9c9c9',
-        // 'grayColor': '#586380',
       },
       backgroundColor: {
         'primaryColor': '#50c9a4',
@@ -24,7 +23,6 @@ const config: Config = {
         'primaryExtraDarkColor': '#1f8767',
         'disabledPrimaryColor': '#b2ebd9',
         // 'disabledPrimaryColor': '#a1cfc0',
-        // 'bgColor': '#f7fcf9',
         'bgColor': '#f2f2f2',
         'selectedPrimaryColor': '#adf7e1',
         'graySelectedColor': '#ebebeb',
@@ -50,12 +48,13 @@ const config: Config = {
         'laptop': '1024px',
         'desktop': '1280px',
       },
-      dropShadow: {
-        'PaymentButton': '4px 4px 0px rgba(41, 207, 156, 1)',
-        'PaymentButtonHover': '4px 4px 0px rgba(55, 219, 169, 1)',
-      },
+      // dropShadow: {
+      //   'PaymentButton': '4px 4px 0px rgba(41, 207, 156, 1)',
+      //   'PaymentButtonHover': '4px 4px 0px rgba(55, 219, 169, 1)',
+      // },
       borderColor: {
-        'primaryColor': '#50c9a4',
+        'primaryColor': '#7ef7d2',
+        'primaryDarkColor': '#7ef7d2',
       },
       width: {
         desktop: '1200px',

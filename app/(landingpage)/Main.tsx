@@ -14,6 +14,7 @@ export default function Main() {
         grid
         grid-cols-1
         laptop:grid-cols-2
+        gap-10
         h-screen
         mx-10
         desktop:mx-auto
@@ -53,7 +54,7 @@ export default function Main() {
               className='inline-block self-start'
             />
             <span className='text-[#00C82A] whitespace-nowrap self-start'>
-              &nbsp;&nbsp;25% off
+              &nbsp;&nbsp;15% off
             </span>
             &nbsp;for the first 50 customers (12 left)
           </p>
@@ -72,7 +73,7 @@ export default function Main() {
               laptop:rounded-3xl
               bg-white
               drop-shadow-md
-              laptop:hover:scale-105 transition-all duration-200
+              transition-all duration-200
             '>
 
               {/* <p className='font-bold text-lg'>Starter</p> */}
@@ -116,7 +117,7 @@ export default function Main() {
               border-2
               bg-white
               drop-shadow-md
-              laptop:hover:scale-105 transition-all duration-200
+              laptop:scale-110 transition-all duration-200
             '>
               <div className='absolute text-xs font-semibold px-2 py-1 bg-primaryColor text-white rounded-full z-10 -top-3 translate-x-[172px]'>
                 Popular
