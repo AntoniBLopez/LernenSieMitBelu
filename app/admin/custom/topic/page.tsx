@@ -114,7 +114,6 @@ function Page() {
               justify-center
               self-start
               font-medium
-              rounded-lg
               text-black
               bg-primaryColor
               hover:text-white
