@@ -6,23 +6,29 @@ export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAM
 export async function POST(request: Request) {
   try {
     await connectDB()
-    const { level, topic, germanWord, spanishWord } = await request.json()
+    const { level, topic, wordsList } = await request.json()
     const levelData = await Levels.findOne({ level })
 
-    if (levelData.topics[topic].find((word: any) => word.word[0] === germanWord)) {
-      return NextResponse.json({ message: 'Word already exists', error: 'Word already exists' })
-    }
+    const lines = wordsList.split("\n")
 
-    levelData.topics[topic].push(
-      {
-        word: [germanWord, spanishWord],
-        known_by_0: [],
-        known_by_1: [],
-        known_by_2: [],
-        known_by_3: [],
-        known_by_4: [],
+    lines.forEach((line: any) => {
+      const oneLineWords = line.trim().split(" ")
+
+      if (levelData.topics[topic].find((word: any) => word.word[0] === oneLineWords[0])) { // oneLineWords[0] = German Word
+        return NextResponse.json({ message: 'Word already exists', error: 'Word already exists' })
       }
-    )
+
+      levelData.topics[topic].push(
+        {
+          word: [oneLineWords[0], oneLineWords[1]],
+          known_by_0: [],
+          known_by_1: [],
+          known_by_2: [],
+          known_by_3: [],
+          known_by_4: [],
+        }
+      )
+    })
 
     const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
     return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })

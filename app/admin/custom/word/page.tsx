@@ -16,8 +16,9 @@ function Page() {
   const [levelName, setLevelName] = useState('A1')
   const [actualLevelData, setActualLevelData] = useState<any>(levelsStore.length > 0 ? levelsStore.find((obj: Level) => obj.level === levelName) : {})
   const [topic, setTopic] = useState('')
-  const [germanWord, setGermanWord] = useState('')
-  const [spanishWord, setSpanishWord] = useState('')
+  // const [germanWord, setGermanWord] = useState('')
+  // const [spanishWord, setSpanishWord] = useState('')
+  const [wordsList, setWordsList] = useState('')
   const [wordCreated, setWordCreated] = useState(false)
 
 
@@ -42,6 +43,7 @@ function Page() {
       setWordCreated(false)
     } else if (levelsStore.length > 0) {
       const firstTopic = Object.keys(actualLevelData.topics)[0]
+      console.log(firstTopic, 'firstTopic')
       setTopic(firstTopic)
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -55,13 +57,11 @@ function Page() {
       {
         level: levelName,
         topic,
-        germanWord,
-        spanishWord,
+        wordsList
       }
     )
       .then((response) => {
-        setSpanishWord('')
-        setGermanWord('')
+        setWordsList('')
         setWordCreated(true)
         getLevelsAndDispatchToStore(dispatch)
       })
@@ -119,37 +119,18 @@ function Page() {
             </div>
             <div className="flex flex-row gap-2">
               <label
-                className="block font-bold text-gray-900 self-center whitespace-nowrap"
-                htmlFor="germanWord"
+                className="block self-start font-semibold text-gray-900 whitespace-nowrap"
+                htmlFor="wordsList"
               >
-                Add German Word:
+                Add Words:
               </label>
-              <input
-                id="germanWord"
-                type="text"
-                name="germanWord"
-                placeholder="Spanien"
-                value={germanWord}
-                onChange={(e) => setGermanWord(e.target.value)}
-                className="py-2 px-3"
-                required
-              />
-            </div>
-            <div className="flex flex-row gap-2">
-              <label
-                className="block font-bold text-gray-900 self-center whitespace-nowrap"
-                htmlFor="spanishWord"
-              >
-                Add Spanish Word:
-              </label>
-              <input
-                id="spanishWord"
-                type="text"
-                name="spanishWord"
-                placeholder="Español"
-                value={spanishWord}
-                onChange={(e) => setSpanishWord(e.target.value)}
-                className="py-2 px-3"
+              <textarea
+                id="wordsList"
+                name="wordsList"
+                placeholder={`Spanien Español\nFrankreich Francia\netc...`}
+                value={wordsList}
+                onChange={(e) => setWordsList(e.target.value)}
+                className="w-full min-h-24 py-2 px-3"
                 required
               />
             </div>
@@ -165,28 +146,42 @@ function Page() {
               justify-center
               self-center
               font-medium
-              rounded-lg
-              bg-primaryColor
-              hover:bg-primaryDarkColor
+              rounded-lgs
               text-black
+              bg-primaryColor
+              hover:text-white
+              hover:bg-primaryDarkColor
             '
             >
               Add
             </button>
           </div>
         </form>
-        <div className="flex flex-col gap-5">
-          <div className='w-auto h-px lg:h-px bg-slate-700' />
+        <div className="flex flex-col items-start gap-7">
+          <div className="w-full items-center">
+            <div className='w-auto h-px lg:h-px bg-slate-700' />
+          </div>
           <table>
             <thead>
               <tr>
-                <th>Topic</th>
+                <th className="font-semibold">
+                  Topic:
+                  <span className="font-semibold text-primaryDarkColor">
+                    &nbsp;{topic}
+                  </span>
+                </th>
               </tr>
             </thead>
             <tbody>
-              <tr className="flex flex-col text-center">
-                <td className="mb-5 font-bold text-primaryColor">{topic}</td>
-                <td className="font-bold">Words</td>
+              <tr className="flex flex-col text-start">
+                <td className="font-semibold">
+                  Words:
+                  <span className="font-normal">
+                    &nbsp;{Object.keys(actualLevelData).length > 0 && Object.keys(actualLevelData.topics).length > 0 && actualLevelData.topics[topic] && actualLevelData.topics[topic].length}
+                    <br />
+                    -
+                  </span>
+                </td>
                 {
                   Object.keys(actualLevelData).length > 0
                   &&
@@ -197,7 +192,7 @@ function Page() {
                   actualLevelData.topics[topic]?.map((topicWord: WordsTraduction, index: number) => {
                     if (topicWord !== null && topicWord.word !== null) return (
                       <td key={index} >
-                        {topicWord.word[0]} -&gt; {topicWord.word[1]}
+                        {topicWord.word[0]} - {topicWord.word[1]}
                       </td>
                     )
                   })

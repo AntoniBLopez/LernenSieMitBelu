@@ -1,5 +1,5 @@
 'use client'
-import React, { useEffect, useState } from "react"
+import React, { use, useEffect, useState } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import axios from "axios"
@@ -7,11 +7,13 @@ import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { useAppSelector, useAppDispatch } from "@/app/lib/hooks"
 import { RootState } from "@/app/lib/store"
 import { Level, WordsTraduction } from "@/types"
+import { ChevronRightIcon, ChevronDownIcon } from "@heroicons/react/24/outline"
 
 function Page() {
-
-  const [topic, setTopic] = useState('')
+  const [topics, setTopics] = useState('')
   const [level, setLevel] = useState('A1')
+  const [openLevels, setOpenLevels] = useState<{ [key: string]: boolean }>({})
+  const [openTopics, setOpenTopics] = useState<{ [key: string]: boolean }>({})
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
@@ -30,17 +32,30 @@ function Page() {
       : '/api/topics',
       {
         level,
-        topic,
+        topics,
       }
     )
       .then((response) => {
+        console.log(response, 'response')
         getLevelsAndDispatchToStore(dispatch)
       })
       .catch((error) => {
         console.log(error, 'error')
       })
-    setTopic('')
+    setTopics('')
   }
+
+  const toggleLevel = (level: string) => {
+    setOpenLevels(prev => ({ ...prev, [level]: !prev[level] }))
+  }
+
+  const toggleTopic = (topics: string) => {
+    setOpenTopics(prev => ({ ...prev, [topics]: !prev[topics] }))
+  }
+
+  useEffect(() => {
+    console.log('openLevels', openLevels)
+  }, [openLevels])
 
   return (
     <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
@@ -69,23 +84,24 @@ function Page() {
               <option value="C2">C2</option>
             </select>
           </div>
-          <div className="flex flex-col tablet:flex-row gap-5">
-            <label
-              className="block font-bold text-gray-900 self-center whitespace-nowrap"
-              htmlFor="topic"
-            >
-              Topic Name:
-            </label>
-            <input
-              id="topic"
-              type="text"
-              name="topic"
-              value={topic}
-              onChange={(e) => setTopic(e.target.value)}
-              placeholder="Naturaleza"
-              className="py-2 px-3"
-              required
-            />
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col tablet:flex-row tablet:gap-5 gap-2">
+              <label
+                className="block font-semibold self-start text-gray-900 whitespace-nowrap"
+                htmlFor="topics"
+              >
+                Topic Name:
+              </label>
+              <textarea
+                id="topics"
+                name="topics"
+                value={topics}
+                onChange={(e) => setTopics(e.target.value)}
+                placeholder={`Natur\nLänder\netc...`}
+                className="w-full min-h-24 py-2 px-3"
+                required
+              />
+            </div>
             <button
               type='submit'
               className='
@@ -96,12 +112,13 @@ function Page() {
               px-4
               py-2
               justify-center
-              self-center
+              self-start
               font-medium
               rounded-lg
-              bg-primaryColor
-              hover:bg-primaryDarkColor
               text-black
+              bg-primaryColor
+              hover:text-white
+              hover:bg-primaryDarkColor
             '
             >
               Add
@@ -116,38 +133,63 @@ function Page() {
             levelsStore.length > 0
             &&
             levelsStore.map((level: Level, index: number) => {
+              const isLevelOpen = openLevels[level.level] || false
               return (
                 <div key={index} className="text-start">
-                  <h1 className="font-bold self-start text-primaryColor">{level.level}</h1>
                   <table>
                     <thead>
-                      <tr className="flex">
-                        <th className="self-start">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Topics</th>
+                      <tr className="flex" onClick={() => toggleLevel(level.level)}>
+                        <th className="self-start">
+                          <div className="flex flex-row w-fit items-center font-semibold hover:cursor-pointer">
+                            <span className="font-bold text-primaryColor">{level.level}&nbsp;&nbsp;</span>
+                            {isLevelOpen
+                              ? <ChevronDownIcon className="w-4 h-4 stroke-black" strokeWidth={2.2} />
+                              : <ChevronRightIcon className="w-4 h-4 stroke-black" strokeWidth={2.2} />}
+                            Topics<span className="font-normal">&nbsp;({Object.keys(level.topics).length})</span>
+                          </div>
+                        </th>
                       </tr>
                     </thead>
                     <tbody>
-                      <tr className="flex flex-col">
-                        {Object.keys(level.topics).length > 0
-                          &&
-                          Object.keys(level.topics)
-                            .filter((topic): topic is string => topic !== null)
-                            .map((topic: string, index: number) => {
-                              return (
-                                <React.Fragment key={index}>
-                                  <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- {topic}</td>
-                                  {level.topics[topic].length > 0 &&
-                                    level.topics[topic].map((objectWord: WordsTraduction, wordIndex: number) => {
+                      {isLevelOpen && Object.keys(level.topics).length > 0 &&
+                        Object.keys(level.topics)
+                          .filter((topics): topics is string => topics !== null)
+                          .map((topics: string, index: number) => {
+                            const isTopicOpen = openTopics[topics] || false
+                            return (
+                              <React.Fragment key={index}>
+                                <tr className="flex" onClick={() => toggleTopic(topics)}>
+                                  <td>
+                                    <div className="flex flex-row w-fit items-center hover:cursor-pointer">
+                                      &nbsp;&nbsp;&nbsp;
+                                      {isTopicOpen
+                                        ? <ChevronDownIcon className="w-4 h-4" strokeWidth={2.2} />
+                                        : <ChevronRightIcon className="w-4 h-4" strokeWidth={2.2} />}
+                                      <span className="font-semibold text-primaryDarkColor">
+                                        {topics}
+                                        <span className="font-normal"> ({level.topics[topics].length})</span>
+                                      </span>
+                                    </div>
+                                  </td>
+                                </tr>
+                                {isTopicOpen && level.topics[topics].length > 0 &&
+                                  level.topics[topics]
+                                    .map((objectWord: WordsTraduction, wordIndex: number) => {
                                       if (objectWord === null || objectWord.word === null) return null
                                       return (
-                                        <td key={wordIndex}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{objectWord.word[0]} -&gt; {objectWord.word[1]}</td>
+                                        <tr key={wordIndex}>
+                                          <td>
+                                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            {objectWord.word[0]} - {objectWord.word[1]}
+                                          </td>
+                                        </tr>
                                       )
                                     })
-                                  }
-                                </React.Fragment>
-                              )
-                            })
-                        }
-                      </tr>
+                                }
+                              </React.Fragment>
+                            )
+                          })
+                      }
                     </tbody>
                   </table>
                 </div>
