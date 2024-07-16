@@ -127,7 +127,7 @@ function Page() {
               <textarea
                 id="wordsList"
                 name="wordsList"
-                placeholder={`Spanien Español\nFrankreich Francia\netc...`}
+                placeholder={`Español Spanien\nFrancia Frankreich\netc...`}
                 value={wordsList}
                 onChange={(e) => setWordsList(e.target.value)}
                 className="w-full min-h-24 py-2 px-3"

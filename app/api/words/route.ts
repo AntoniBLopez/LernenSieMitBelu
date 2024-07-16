@@ -12,15 +12,17 @@ export async function POST(request: Request) {
     const lines = wordsList.split("\n")
 
     lines.forEach((line: any) => {
-      const oneLineWords = line.trim().split(" ")
+      const oneLineWords = line.trim().split("\t")
 
-      if (levelData.topics[topic].find((word: any) => word.word[0] === oneLineWords[0])) { // oneLineWords[0] = German Word
+      console.log(oneLineWords, 'oneLineWords')
+
+      if (levelData.topics[topic].find((word: any) => word.word[0] === oneLineWords[1])) { // oneLineWords[1] = German Word
         return NextResponse.json({ message: 'Word already exists', error: 'Word already exists' })
       }
 
       levelData.topics[topic].push(
         {
-          word: [oneLineWords[0], oneLineWords[1]],
+          word: [oneLineWords[1], oneLineWords[0]],
           known_by_0: [],
           known_by_1: [],
           known_by_2: [],
