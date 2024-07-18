@@ -1,4 +1,4 @@
-import DonutChart from '@/app/(ui)/widgets/DonutChart'
+import DonutChart from '@/app/(ui)/components/DonutChart'
 import FinalGameButtons from './FinalGameButtons'
 import Image from 'next/image'
 

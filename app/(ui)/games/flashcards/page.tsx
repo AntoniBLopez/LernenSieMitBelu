@@ -5,9 +5,9 @@ import { WordsTraduction } from '@/types'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
-import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
-import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
+import EndGameScreen from '@/app/(ui)/components/EndGameScreen'
+import confettiFireworks from '@/app/(ui)/components/confettiFireworks'
+import SelectedLabels from '@/app/(ui)/components/SelectedLabels'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 import Image from 'next/image'
 import {

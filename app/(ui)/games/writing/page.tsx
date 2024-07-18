@@ -4,10 +4,10 @@ import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
-import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
-import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
-import GameButton from '@/app/(ui)/widgets/GameButton'
-import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
+import confettiFireworks from '@/app/(ui)/components/confettiFireworks'
+import SelectedLabels from '@/app/(ui)/components/SelectedLabels'
+import GameButton from '@/app/(ui)/components/GameButton'
+import EndGameScreen from '@/app/(ui)/components/EndGameScreen'
 import {
   ChevronRightIcon,
   CheckBadgeIcon,
@@ -16,6 +16,7 @@ import {
 import { useRouter } from 'next/navigation'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 import Image from 'next/image'
+import SpanishKeyboardLetter from '@/app/(ui)/games/writing/components/spanishKeyboardLetter'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -70,7 +71,8 @@ function Page() {
   const [resetOptionDesign, setResetOptionDesign] = useState(false)
 
   const [userWord, setUserWord] = useState('')
-  const [isInputFocused, setIsInputFocused] = useState(false)
+  const [spanishLetterAdded, setSpanishLetterAdded] = useState(false)
+  const [isInputFocused, setIsInputFocused] = useState(true)
   const [inputWidth, setInputWidth] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
   const tempInputRef = useRef<HTMLInputElement>(null)
@@ -122,6 +124,8 @@ function Page() {
     if (window.innerWidth <= 640) {
       window.scrollTo({ top: 0, behavior: 'smooth' })
     }
+    console.log('word does not changed')
+    setSpanishLetterAdded(false)
     setIsInputFocused(false)
   }
 
@@ -280,6 +284,15 @@ function Page() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [showStats])
 
+  useEffect(() => {
+    if (spanishLetterAdded && inputRef.current) {
+      inputRef.current.focus()
+      setIsInputFocused(true)
+      setSpanishLetterAdded(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [spanishLetterAdded])
+
 
   return (
     <main className='flex flex-col mx-6 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
@@ -301,7 +314,21 @@ function Page() {
             <div className='flex flex-col h-fit gap-6 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
               <div className='text-lg slide-in'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
               <div className='flex flex-col gap-4'>
-                <p className={`${showMessage ? hasOmitted ? 'slide-in font-medium opacity-100 text-blue-500' : isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}</p>
+                <p className={`${showMessage ? hasOmitted ? 'slide-in font-medium opacity-100 text-blue-500' : isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>
+                  {showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Deine Antwort'}
+                </p>
+                {
+                  !showMessage
+                  &&
+                  <div className='flex flex-row gap-2 items-center'>
+                    <SpanishKeyboardLetter spanishLetter='á' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
+                    <SpanishKeyboardLetter spanishLetter='é' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
+                    <SpanishKeyboardLetter spanishLetter='í' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
+                    <SpanishKeyboardLetter spanishLetter='ó' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
+                    <SpanishKeyboardLetter spanishLetter='ú' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
+                    <SpanishKeyboardLetter spanishLetter='ñ' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
+                  </div>
+                }
                 <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
                   <input
                     type="text"

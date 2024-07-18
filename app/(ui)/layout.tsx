@@ -5,7 +5,9 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import Header from "@/app/(ui)/Header";
 import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
-import Breadcrumbs from "@/app/(ui)/widgets/Breadcrumbs";
+// import Breadcrumbs from "@/app/(ui)/widgets/Breadcrumbs";
+import Aside from "@/app/(ui)/profile/components/Aside";
+import StartButton from "./components/StartButton";
 
 
 export const metadata: Metadata = {
@@ -24,7 +26,11 @@ export default function RootLayout({
       <body className={`${bricolage.className} antialiased bg-bgColor`}>
         <StoreProvider>
           <Header />
-          {children}
+          <StartButton />
+          <div className="flex flex-row gap-5 ml-6 laptop:mx-auto laptop:max-w-desktop">
+            <Aside />
+            {children}
+          </div>
           <SpeedInsights />
           <Analytics />
         </StoreProvider>

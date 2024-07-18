@@ -7,10 +7,10 @@ import {
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
-import SelectCard from "@/app/(ui)/widgets/SelectCard"
+import SelectCard from "@/app/(ui)/components/SelectCard"
 import { useEffect, useState } from "react";
 import { Level } from "@/types";
-import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels';
+import SelectedLabels from '@/app/(ui)/components/SelectedLabels';
 import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 import CardsLoading from '@/app/(ui)/levels/widgets/CardsLoading';
 
@@ -49,41 +49,39 @@ function Topics() {
 
 
   return (
-    <div className="mx-6 laptop:mx-auto laptop:max-w-desktop">
-      <div className="flex flex-col h-fit mt-1 mb-10 gap-5">
-        <header className="flex flex-col gap-10">
-          <div className='flex flex-col gap-2 items-start'>
-            <SelectedLabels showLevel={true} />
-          </div>
+    <div className="flex flex-col w-full h-fit mt-1 mb-10 gap-5">
+      <header className="flex flex-col gap-5">
+        <div className='flex flex-col gap-2 items-start'>
+          <SelectedLabels showLevel={true} />
+        </div>
 
-          <h1 className='flex flex-row text-2xl mobile:text-3xl items-center text-primaryColor font-medium'>
-            <AcademicCapIcon className="size-6 mobile:size-8 text-primaryColor" />
-            <span className="content-end whitespace-nowrap">&nbsp;Wähle das Thema</span>
-          </h1>
-        </header>
+        <h1 className='flex flex-row text-2xl mobile:text-3xl items-center text-primaryColor font-medium'>
+          <AcademicCapIcon className="size-6 mobile:size-8 text-primaryColor" />
+          <span className="content-end whitespace-nowrap">&nbsp;Wähle das Thema</span>
+        </h1>
+      </header>
 
-        <main className="flex flex-col">
-          {
-            loading
-              ?
-              <CardsLoading />
-              :
-              <section className="flex flex-col gap-2">
-                {
-                  levelsStore.length > 0
-                  &&
-                  Object.keys(levelTopics).length > 0
-                  &&
-                  Object.keys(levelTopics).map((topic: string, index: number) => {
-                    if (levelTopics[topic].length) {
-                      return <SelectCard key={index} name={topic} length={levelTopics[topic].length} />
-                    }
-                  })
-                }
-              </section>
-          }
-        </main>
-      </div>
+      <main className="flex flex-col">
+        {
+          loading
+            ?
+            <CardsLoading />
+            :
+            <section className="flex flex-col gap-2">
+              {
+                levelsStore.length > 0
+                &&
+                Object.keys(levelTopics).length > 0
+                &&
+                Object.keys(levelTopics).map((topic: string, index: number) => {
+                  if (levelTopics[topic].length) {
+                    return <SelectCard key={index} name={topic} length={levelTopics[topic].length} />
+                  }
+                })
+              }
+            </section>
+        }
+      </main>
     </div>
   )
 }

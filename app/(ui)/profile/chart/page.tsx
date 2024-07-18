@@ -6,7 +6,6 @@ import { RootState } from '@/app/lib/store'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect } from 'react'
-import Aside from '@/app/(ui)/profile/components/Aside'
 
 export default function Page() {
 
@@ -23,17 +22,7 @@ export default function Page() {
 
   return (
     <section className='w-full rounded-xl p-5 bg-white'>
-      <h1 className='text-5xl w-fit font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#55aeb8] to-[#2cd5a2] text-primaryDarkColor'>Profile</h1>
-      <div className='flex flex-row justify-between w-full'>
-        <div className='flex flex-col w-full'>
-          <span className='font-semibold ml-2'>Username</span>
-          <span className='font-semibold ml-2'>Email</span>
-          <span className='font-semibold ml-2'>Password</span>
-        </div>
-        <div className='flex flex-col w-full items-center mt-14'>
-          <Image src="/photos/defaultProfilePicture.png" alt="Logo" width={160} height={160} />
-        </div>
-      </div>
+      <h1 className='text-5xl w-fit font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#55aeb8] to-[#2cd5a2] text-primaryDarkColor'>Chart</h1>
     </section>
   )
 }

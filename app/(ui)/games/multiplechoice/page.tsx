@@ -1,14 +1,14 @@
 'use client'
 import { useEffect, useState } from 'react'
-import Option from '@/app/(ui)/widgets/Option'
+import Option from '@/app/(ui)/components/Option'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import { WordsTraduction } from '@/types'
-import confettiFireworks from '@/app/(ui)/widgets/confettiFireworks'
-import SelectedLabels from '@/app/(ui)/widgets/SelectedLabels'
-import GameButton from '@/app/(ui)/widgets/GameButton'
-import EndGameScreen from '@/app/(ui)/widgets/EndGameScreen'
+import confettiFireworks from '@/app/(ui)/components/confettiFireworks'
+import SelectedLabels from '@/app/(ui)/components/SelectedLabels'
+import GameButton from '@/app/(ui)/components/GameButton'
+import EndGameScreen from '@/app/(ui)/components/EndGameScreen'
 import {
   ChartPieIcon,
   ChevronRightIcon,

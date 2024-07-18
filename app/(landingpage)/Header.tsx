@@ -11,8 +11,8 @@ export default function Header() {
       >
         <Image
           src={'/icons/icon.png'}
-          width={30}
-          height={30}
+          width={40}
+          height={40}
           className="rounded-full hover:cursor-pointer hover:scale-110"
           alt="Site icon"
         />
