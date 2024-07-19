@@ -13,8 +13,7 @@ export async function POST(request: Request) {
 
     lines.forEach((line: any) => {
       const oneLineWords = line.trim().split(/\t+/)
-
-      console.log(oneLineWords, 'oneLineWords')
+      // console.log(oneLineWords, 'oneLineWords')
 
       if (levelData.topics[topic].find((word: any) => word.word[0] === oneLineWords[1])) { // oneLineWords[1] = German Word
         return NextResponse.json({ message: 'Word already exists', error: 'Word already exists' })
@@ -32,9 +31,8 @@ export async function POST(request: Request) {
       )
     })
 
-    // const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
-    // return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })
-    return NextResponse.json({ message: 'Words updated successfully' })
+    const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
+    return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })
   } catch (error: any) {
     return NextResponse.json({ error: error.message, message: 'Error to post level' })
   }
