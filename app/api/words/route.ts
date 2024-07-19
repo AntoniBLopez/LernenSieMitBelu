@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const lines = wordsList.split("\n")
 
     lines.forEach((line: any) => {
-      const oneLineWords = line.trim().split("\t")
+      const oneLineWords = line.trim().split(/\t+/)
 
       console.log(oneLineWords, 'oneLineWords')
 
@@ -32,8 +32,9 @@ export async function POST(request: Request) {
       )
     })
 
-    const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
-    return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })
+    // const wordsUpdated = await Levels.updateOne({ level }, { $set: { [`topics.${topic}`]: levelData.topics[topic] } })
+    // return NextResponse.json({ message: 'Words updated successfully', newWords: wordsUpdated })
+    return NextResponse.json({ message: 'Words updated successfully' })
   } catch (error: any) {
     return NextResponse.json({ error: error.message, message: 'Error to post level' })
   }
