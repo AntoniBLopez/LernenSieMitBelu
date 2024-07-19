@@ -98,7 +98,7 @@ function Page() {
                 value={topics}
                 onChange={(e) => setTopics(e.target.value)}
                 placeholder={`Natur\nLänder\netc...`}
-                className="w-full min-h-24 py-2 px-3"
+                className="w-full min-h-24 max-h-52 py-2 px-3 bg-white"
                 required
               />
             </div>

@@ -130,7 +130,7 @@ function Page() {
                 placeholder={`Español Spanien\nFrancia Frankreich\netc...`}
                 value={wordsList}
                 onChange={(e) => setWordsList(e.target.value)}
-                className="w-full min-h-24 py-2 px-3"
+                className="w-full min-h-24 max-h-52 py-2 px-3 bg-white"
                 required
               />
             </div>
@@ -173,12 +173,11 @@ function Page() {
             </thead>
             <tbody>
               <tr className="flex flex-col text-start">
-                <td className="font-semibold">
+                <td className="font-semibold mb-5">
                   Words:
                   <span className="font-normal">
                     &nbsp;{Object.keys(actualLevelData).length > 0 && Object.keys(actualLevelData.topics).length > 0 && actualLevelData.topics[topic] && actualLevelData.topics[topic].length}
                     <br />
-                    -
                   </span>
                 </td>
                 {
