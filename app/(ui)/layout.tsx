@@ -27,7 +27,7 @@ export default function RootLayout({
         <StoreProvider>
           <Header />
           <StartButton />
-          <div className="flex flex-row gap-5 ml-6 laptop:mx-auto laptop:max-w-desktop">
+          <div className="flex flex-row gap-5 mx-6 laptop:mx-auto laptop:max-w-desktop">
             <Aside />
             {children}
           </div>

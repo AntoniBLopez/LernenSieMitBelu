@@ -295,7 +295,7 @@ function Page() {
 
 
   return (
-    <main className='flex flex-col mx-6 mt-1 mb-16 laptop:max-w-desktop laptop:mx-auto gap-8'>
+    <main className='flex flex-col w-full mt-1 gap-10'>
       <div className='flex flex-col gap-2 items-start'>
         <SelectedLabels showLevel={true} showTopic={true} />
       </div>

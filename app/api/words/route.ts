@@ -1,7 +1,7 @@
 import { connectDB } from '@/app/lib/db/connection'
 import Levels from '@/app/lib/db/models/levels'
 import { NextResponse } from 'next/server'
-export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAMICOS, SI SON ESTATICOS Y NO VAN A CAMBIAR, QUITARLO
+export const dynamic = 'force-dynamic' // defaults to auto SOLO PARA DATOS DINAMICOS CON GET, SI SON ESTATICOS Y NO VAN A CAMBIAR Y NO SON GET, QUITARLO
 
 export async function POST(request: Request) {
   try {
@@ -34,86 +34,89 @@ export async function POST(request: Request) {
   }
 }
 
+
+
 /* Delete the known_by_0... of all the words */
-export async function DELETE(request: Request) {
-  try {
-    await connectDB();
-    const levelDataOne = await Levels.findOne({ level: 'A1' });
-    const levelDataTwo = await Levels.findOne({ level: 'A2' });
-    const levelDataThree = await Levels.findOne({ level: 'B1' });
-    const levelDataFour = await Levels.findOne({ level: 'B2' });
 
-    // Iterate over each topic and word object to remove known_by properties
-    const updatedTopicsOne = { ...levelDataOne.topics };
+// export async function DELETE(request: Request) {
+//   try {
+//     await connectDB();
+//     const levelDataOne = await Levels.findOne({ level: 'A1' });
+//     const levelDataTwo = await Levels.findOne({ level: 'A2' });
+//     const levelDataThree = await Levels.findOne({ level: 'B1' });
+//     const levelDataFour = await Levels.findOne({ level: 'B2' });
 
-    for (const topicKey in updatedTopicsOne) {
-      if (updatedTopicsOne.hasOwnProperty(topicKey)) {
-        updatedTopicsOne[topicKey] = updatedTopicsOne[topicKey].map((wordObject: any) => {
-          const newWordObject = { ...wordObject };
-          delete newWordObject.known_by_0;
-          delete newWordObject.known_by_1;
-          delete newWordObject.known_by_2;
-          delete newWordObject.known_by_3;
-          delete newWordObject.known_by_4;
-          return newWordObject;
-        })
-      }
-    }
-    const updatedTopicsTwo = { ...levelDataTwo.topics };
+//     // Iterate over each topic and word object to remove known_by properties
+//     const updatedTopicsOne = { ...levelDataOne.topics };
 
-    for (const topicKey in updatedTopicsTwo) {
-      if (updatedTopicsTwo.hasOwnProperty(topicKey)) {
-        updatedTopicsTwo[topicKey] = updatedTopicsTwo[topicKey].map((wordObject: any) => {
-          const newWordObject = { ...wordObject };
-          delete newWordObject.known_by_0;
-          delete newWordObject.known_by_1;
-          delete newWordObject.known_by_2;
-          delete newWordObject.known_by_3;
-          delete newWordObject.known_by_4;
-          return newWordObject;
-        })
-      }
-    }
-    const updatedTopicsThree = { ...levelDataThree.topics };
+//     for (const topicKey in updatedTopicsOne) {
+//       if (updatedTopicsOne.hasOwnProperty(topicKey)) {
+//         updatedTopicsOne[topicKey] = updatedTopicsOne[topicKey].map((wordObject: any) => {
+//           const newWordObject = { ...wordObject };
+//           delete newWordObject.known_by_0;
+//           delete newWordObject.known_by_1;
+//           delete newWordObject.known_by_2;
+//           delete newWordObject.known_by_3;
+//           delete newWordObject.known_by_4;
+//           return newWordObject;
+//         })
+//       }
+//     }
+//     const updatedTopicsTwo = { ...levelDataTwo.topics };
 
-    for (const topicKey in updatedTopicsThree) {
-      if (updatedTopicsThree.hasOwnProperty(topicKey)) {
-        updatedTopicsThree[topicKey] = updatedTopicsThree[topicKey].map((wordObject: any) => {
-          const newWordObject = { ...wordObject };
-          delete newWordObject.known_by_0;
-          delete newWordObject.known_by_1;
-          delete newWordObject.known_by_2;
-          delete newWordObject.known_by_3;
-          delete newWordObject.known_by_4;
-          return newWordObject;
-        })
-      }
-    }
+//     for (const topicKey in updatedTopicsTwo) {
+//       if (updatedTopicsTwo.hasOwnProperty(topicKey)) {
+//         updatedTopicsTwo[topicKey] = updatedTopicsTwo[topicKey].map((wordObject: any) => {
+//           const newWordObject = { ...wordObject };
+//           delete newWordObject.known_by_0;
+//           delete newWordObject.known_by_1;
+//           delete newWordObject.known_by_2;
+//           delete newWordObject.known_by_3;
+//           delete newWordObject.known_by_4;
+//           return newWordObject;
+//         })
+//       }
+//     }
+//     const updatedTopicsThree = { ...levelDataThree.topics };
 
-    const updatedTopicsFour = { ...levelDataFour.topics };
+//     for (const topicKey in updatedTopicsThree) {
+//       if (updatedTopicsThree.hasOwnProperty(topicKey)) {
+//         updatedTopicsThree[topicKey] = updatedTopicsThree[topicKey].map((wordObject: any) => {
+//           const newWordObject = { ...wordObject };
+//           delete newWordObject.known_by_0;
+//           delete newWordObject.known_by_1;
+//           delete newWordObject.known_by_2;
+//           delete newWordObject.known_by_3;
+//           delete newWordObject.known_by_4;
+//           return newWordObject;
+//         })
+//       }
+//     }
 
-    for (const topicKey in updatedTopicsFour) {
-      if (updatedTopicsFour.hasOwnProperty(topicKey)) {
-        updatedTopicsFour[topicKey] = updatedTopicsFour[topicKey].map((wordObject: any) => {
-          const newWordObject = { ...wordObject };
-          delete newWordObject.known_by_0;
-          delete newWordObject.known_by_1;
-          delete newWordObject.known_by_2;
-          delete newWordObject.known_by_3;
-          delete newWordObject.known_by_4;
-          return newWordObject;
-        })
-      }
-    }
+//     const updatedTopicsFour = { ...levelDataFour.topics };
 
-    // Update the document in the database
-    await Levels.updateOne({ level: 'A1' }, { $set: { topics: updatedTopicsOne } });
-    await Levels.updateOne({ level: 'A2' }, { $set: { topics: updatedTopicsTwo } });
-    await Levels.updateOne({ level: 'B1' }, { $set: { topics: updatedTopicsThree } });
-    await Levels.updateOne({ level: 'B2' }, { $set: { topics: updatedTopicsFour } });
+//     for (const topicKey in updatedTopicsFour) {
+//       if (updatedTopicsFour.hasOwnProperty(topicKey)) {
+//         updatedTopicsFour[topicKey] = updatedTopicsFour[topicKey].map((wordObject: any) => {
+//           const newWordObject = { ...wordObject };
+//           delete newWordObject.known_by_0;
+//           delete newWordObject.known_by_1;
+//           delete newWordObject.known_by_2;
+//           delete newWordObject.known_by_3;
+//           delete newWordObject.known_by_4;
+//           return newWordObject;
+//         })
+//       }
+//     }
 
-    return NextResponse.json({ message: 'Known words properties deleted successfully', updatedTopicsOne, updatedTopicsTwo, updatedTopicsThree, updatedTopicsFour });
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message, message: 'Error delete known words properties' })
-  }
-}
+//     // Update the document in the database
+//     await Levels.updateOne({ level: 'A1' }, { $set: { topics: updatedTopicsOne } });
+//     await Levels.updateOne({ level: 'A2' }, { $set: { topics: updatedTopicsTwo } });
+//     await Levels.updateOne({ level: 'B1' }, { $set: { topics: updatedTopicsThree } });
+//     await Levels.updateOne({ level: 'B2' }, { $set: { topics: updatedTopicsFour } });
+
+//     return NextResponse.json({ message: 'Known words properties deleted successfully', updatedTopicsOne, updatedTopicsTwo, updatedTopicsThree, updatedTopicsFour });
+//   } catch (error: any) {
+//     return NextResponse.json({ error: error.message, message: 'Error delete known words properties' })
+//   }
+// }
