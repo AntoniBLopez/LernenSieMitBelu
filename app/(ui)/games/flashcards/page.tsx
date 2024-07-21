@@ -15,6 +15,7 @@ import {
   XMarkIcon,
   ArrowUturnLeftIcon
 } from '@heroicons/react/24/outline';
+import { BiUserVoice } from "react-icons/bi";
 import { useEffect, useState } from 'react'
 
 function Page() {
@@ -206,34 +207,36 @@ function Page() {
           :
           <section className='flex flex-col gap-2'>
             <div className='flex flex-row gap-3 items-center justify-between'>
-              <div className='text-xs ml-2 w-10 py-1 font-semibold text-center bg-red-200 border-2 border-red-500 rounded-full'>
+              <div className='text-sm ml-2 w-10 py-1 font-semibold dark:font-black text-center text-black bg-red-200 border-2 border-red-500 rounded-full'>
                 {learningCount}
               </div>
               <div className='flex font-medium'>
                 {actualCardNumber} / {topicWords.length}
               </div>
-              <div className='text-xs mr-2 w-10 py-1 font-semibold text-center bg-green-200 border-2 border-green-500 rounded-full'>
+              <div className='text-sm mr-2 w-10 py-1 font-semibold dark:font-black text-center text-black bg-green-200 border-2 border-green-500 rounded-full'>
                 {knownCount}
               </div>
             </div>
 
             <div className='relative'>
-              <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '[transform:rotateY(180deg)] tablet:[transform:rotateX(180deg)]' : ''}`}>
+              <div onClick={handleCardClick} className={`card card-front absolute w-full flex flex-col h-[50vh] p-5 rounded-xl drop-shadow-lg hover:cursor-pointer bg-white dark:bg-bgColorCardDark ${isFlipped ? '[transform:rotateY(180deg)] tablet:[transform:rotateX(180deg)]' : ''}`}>
                 {
                   !showStats
                   &&
                   <>
                     <div className='flex justify-between items-center'>
                       <span className='text-sm ml-3'>Español</span>
-                      <button className='p-3 rounded-full hover:bg-slate-200' onClick={event => handleVoice(event, topicWords[actualCardNumber - 1][1])}>
-                        <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
+                      <button className='p-3 rounded-full hover:bg-slate-200 dark:hover:bg-bgColorCardHoverDark' onClick={event => handleVoice(event, topicWords[actualCardNumber - 1][1])}>
+                        <BiUserVoice className='w-6 h-auto text-black dark:text-white' />
                       </button>
                     </div>
-                    <div className='flex relative h-full items-center justify-center mb-12 text-2xl'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}</div>
+                    <div className='flex relative h-full items-center justify-center mb-12 text-2xl'>
+                      {topicWords.length > 0 ? topicWords[actualCardNumber - 1][1] : 'Wird geladen...'}
+                    </div>
                   </>
                 }
               </div>
-              <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl border drop-shadow-md hover:cursor-pointer bg-white ${isFlipped ? '' : '[transform:rotateY(-180deg)] tablet:[transform:rotateX(-180deg)]'}`}>
+              <div onClick={handleCardClick} className={`card card-back absolute w-full flex flex-col h-[50vh] p-5 rounded-xl drop-shadow-md hover:cursor-pointer bg-white dark:bg-bgColorCardDark ${isFlipped ? '' : '[transform:rotateY(-180deg)] tablet:[transform:rotateX(-180deg)]'}`}>
                 {
                   !showStats
                   &&
@@ -248,15 +251,15 @@ function Page() {
             <div className='h-[50vh]'></div>
             <div className='flex flex-row items-center justify-between'>
               <div className='flex flex-1'>
-                <button className='rounded-full p-2 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 laptop:disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
+                <button className='rounded-full p-2 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 dark:laptop:hover:bg-bgColorCardDark laptop:disabled:hover:bg-transparent dark:laptop:disabled:hover:bg-transparent' disabled={actualCardNumber === 1} onClick={actualCardNumber > 1 ? handlePrevCard : undefined}>
                   <ArrowUturnLeftIcon className='w-6 h-auto' />
                 </button>
               </div>
               <div className='flex-1 flex justify-center gap-5 tablet:gap-10'>
-                <button className='rounded-full p-1 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 laptop:disabled:hover:bg-transparent' onClick={handleLearningButton}>
+                <button className='rounded-full p-1 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 dark:laptop:hover:bg-bgColorCardDark laptop:disabled:hover:bg-transparent dark:laptop:disabled:hover:bg-transparent' onClick={handleLearningButton}>
                   <XMarkIcon className='w-8 h-auto text-red-500' />
                 </button>
-                <button className='rounded-full p-1 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 laptop:disabled:hover:bg-transparent' onClick={handleKnownButton}>
+                <button className='rounded-full p-1 bg-slate-200 disabled:bg-transparent disabled:opacity-30 laptop:bg-transparent laptop:hover:bg-slate-200 dark:laptop:hover:bg-bgColorCardDark laptop:disabled:hover:bg-transparent dark:laptop:disabled:hover:bg-transparent' onClick={handleKnownButton}>
                   <CheckIcon className='w-8 h-auto text-green-500' />
                 </button>
               </div>

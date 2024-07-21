@@ -23,7 +23,7 @@ function DonutChart({ value1, value2 }: { value1: number, value2: number }) {
         style={style}
       />
       <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center'>
-        <div className='w-16 h-16 bg-bgColor rounded-full' />
+        <div className='w-16 h-16 bg-bgColorLight rounded-full' />
       </div>
       <div className='absolute top-0 left-0 w-full h-full flex items-center justify-center'>
         <span className='text-xl font-medium text-grayColor'>

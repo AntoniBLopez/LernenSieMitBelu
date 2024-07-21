@@ -27,7 +27,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
     <Link
       href={isCardBlocked ? '' : isChooseLevels ? '/levels/topics' : '/games'}
       onClick={isCardBlocked ? undefined : handleClick}
-      className={`flex flex-col w-full h-fit bg-white rounded-md group ${isCardBlocked ? 'bg-slate-200 opacity-50 hover:cursor-default' : 'drop-shadow-md hover:cursor-pointer'}`}
+      className={`flex flex-col w-full h-fit bg-white dark:bg-bgColorCardDark rounded-md group ${isCardBlocked ? 'bg-slate-200 opacity-50 hover:cursor-default' : 'drop-shadow-md hover:cursor-pointer'}`}
     >
       <div className='flex flex-col w-full h-fit px-5 py-2'>
         <main className={` ${isCardBlocked && 'flex flex-row gap-2 items-center'}`}>

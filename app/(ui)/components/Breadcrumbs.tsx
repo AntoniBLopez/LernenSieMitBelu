@@ -78,7 +78,7 @@ function Breadcrumbs() {
             return (
               <React.Fragment key={index}>
                 <button onClick={handleReducedBreadcrumbs} className='flex items-center gap-2'>
-                  <div className={`${index < position ? 'hover:text-primaryColor text-current' : 'font-semibold hover:cursor-default'}`}>
+                  <div className={`${index < position ? 'hover:text-primaryDarkColor text-current' : 'text-primaryDarkColor dark:text-primaryColor font-semibold hover:cursor-default'}`}>
                     ...
                   </div>
                 </button>
@@ -127,7 +127,7 @@ function Breadcrumbs() {
             return (
               <React.Fragment key={index}>
                 <Link href={href} className='flex items-center gap-2'>
-                  <div className={`${index < position ? 'hover:text-primaryColor text-current' : 'font-semibold hover:cursor-default'}`}>
+                  <div className={`${index < position ? 'hover:text-primaryDarkColor text-current' : 'text-primaryColor dark:text-primaryColor font-semibold hover:cursor-default'}`}>
                     {name === 'Profile' ? <UserIcon className='h-5 w-5' /> : name}
                   </div>
                 </Link>
@@ -145,7 +145,7 @@ function Breadcrumbs() {
           return (
             <React.Fragment key={index}>
               <Link href={href} className='flex items-center gap-2'>
-                <div className={`${index < position ? 'hover:text-primaryColor text-current' : 'font-semibold hover:cursor-default'}`}>
+                <div className={`${index < position ? 'hover:text-primaryDarkColor text-current' : 'text-primaryDarkColor dark:text-primaryColor font-semibold hover:cursor-default'}`}>
                   {name === 'Profile' ? <UserIcon className={`h-5 w-5 ${position === 0 ? 'h-6' : ''}`} strokeWidth={position === 0 ? 2 : 1.5} /> : name}
                 </div>
               </Link>

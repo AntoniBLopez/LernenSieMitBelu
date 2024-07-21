@@ -6,7 +6,7 @@ import {
   PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+// import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 
 // Map of links to display in the side navigation.
@@ -19,7 +19,7 @@ const links = [
 ];
 
 export default function NavLinks() {
-  const pathname = usePathname()
+  // const pathname = usePathname()
 
   return (
     <>
@@ -30,10 +30,10 @@ export default function NavLinks() {
             key={link.name}
             href={link.name === 'Zuordnen' ? '' : link.href}
             className={clsx(
-              'flex flex-col h-fit py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50 hover:bg-sky-100 hover:text-blue-600',
-              {
-                'bg-sky-100 text-blue-600': pathname === link.href,
-              },
+              'flex flex-col h-fit py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50 dark:bg-bgColorCardDark hover:bg-sky-100 hover:text-primaryDarkColor',
+              // {
+              //   'bg-sky-100 text-blue-600': pathname === link.href,
+              // },
             )}
           >
             <div className='flex flex-row self-start gap-2 items-center'>

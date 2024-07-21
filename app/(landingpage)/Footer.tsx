@@ -16,7 +16,7 @@ export default function Footer() {
                 src="/logos/socialmedia/x.png"
                 width={35}
                 height={35}
-                className="p-2 rounded-full bg-bgColor hover:cursor-pointer hover:scale-125 transition-all duration-200"
+                className="p-2 rounded-full bg-bgColorLight hover:cursor-pointer hover:scale-125 transition-all duration-200"
                 alt="X social media logo"
               />
             </Link>

@@ -8,6 +8,7 @@ import { bricolage } from "@/app/(ui)/fonts";
 // import Breadcrumbs from "@/app/(ui)/widgets/Breadcrumbs";
 import Aside from "@/app/(ui)/profile/components/Aside";
 import StartButton from "./components/StartButton";
+import { ThemeProvider } from "next-themes";
 
 
 export const metadata: Metadata = {
@@ -23,17 +24,19 @@ export default function RootLayout({
 
   return (
     <html lang="de">
-      <body className={`${bricolage.className} antialiased bg-bgColor`}>
-        <StoreProvider>
-          <Header />
-          <StartButton />
-          <div className="flex flex-row gap-5 mx-6 laptop:mx-auto laptop:max-w-desktop">
-            <Aside />
-            {children}
-          </div>
-          <SpeedInsights />
-          <Analytics />
-        </StoreProvider>
+      <body className={`${bricolage.className} antialiased bg-bgColorLight dark:bg-bgColorDark`}>
+        <ThemeProvider enableSystem={true} attribute="class">
+          <StoreProvider>
+            <Header />
+            <StartButton />
+            <div className="flex flex-row gap-5 mx-6 laptop:mx-auto laptop:max-w-desktop">
+              <Aside />
+              {children}
+            </div>
+            <SpeedInsights />
+            <Analytics />
+          </StoreProvider>
+        </ThemeProvider>
       </body>
     </html >
   );

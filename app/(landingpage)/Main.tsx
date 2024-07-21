@@ -11,18 +11,19 @@ export default function Main() {
   return (
     <main className="h-fit w-full">
       <div className="
-        grid
-        grid-cols-1
-        laptop:grid-cols-2
-        gap-10
-        h-screen
-        mx-10
-        desktop:mx-auto
-        desktop:w-desktop
-        mt-20
-        mb-36
-        bg-white"
-      >
+          grid
+          grid-cols-1
+          laptop:grid-cols-2
+          gap-10
+          h-screen
+          mx-10
+          desktop:mx-auto
+          desktop:w-desktop
+          mt-20
+          mb-36
+          bg-white
+          dark:bg-bgColorCardDark
+        ">
         <Headline />
         <div className="w-full h-full">
           <NextVideo src={DemoVideo} style={{}} accentColor='#50c9a4' className='w-full h-fit' />
@@ -35,7 +36,7 @@ export default function Main() {
         </div>
       </div> */}
 
-      <div id='pricing' className="px-fixed desktop:px-fixedDesktop w-full h-fit bg-bgColor">
+      <div id='pricing' className="px-fixed desktop:px-fixedDesktop w-full h-fit bg-bgColorLight dark:bg-bgColorDark">
         <div className="flex flex-col items-center gap-10 h-fit py-20">
           <h3 className='font-bold text-primaryColor'>Pricing</h3>
           <h2 className='flex flex-col gap-2 text-5xl text-center font-extrabold'>
@@ -72,6 +73,7 @@ export default function Main() {
               rounded-xl
               laptop:rounded-3xl
               bg-white
+              dark:bg-bgColorCardDark
               drop-shadow-md
               transition-all duration-200
             '>
@@ -116,10 +118,11 @@ export default function Main() {
               border-primaryColor
               border-2
               bg-white
+              dark:bg-bgColorCardDark
               drop-shadow-md
               laptop:scale-110 transition-all duration-200
             '>
-              <div className='absolute text-xs font-semibold px-2 py-1 bg-primaryColor text-white rounded-full z-10 -top-3 translate-x-[172px]'>
+              <div className='absolute text-xs font-semibold px-2 py-1 bg-primaryColor text-white dark:text-black rounded-full z-10 -top-3 translate-x-[172px]'>
                 Popular
               </div>
 

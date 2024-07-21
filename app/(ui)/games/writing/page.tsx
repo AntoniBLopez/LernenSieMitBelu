@@ -343,7 +343,7 @@ function Page() {
                       px-4
                       py-3
                       outline-none
-                      bg-bgColor
+                      bg-bgColorLight
                       focus:bg-selectedColor
                       disabled:border-2 disabled:py-[0.65rem] ${hasOmitted ? 'disabled:bg-slate-100 disabled:border-slate-300' : isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
                     `}

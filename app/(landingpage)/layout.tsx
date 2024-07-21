@@ -4,6 +4,7 @@ import { SpeedInsights } from "@vercel/speed-insights/next"
 import "@/app/(landingpage)/style.css"
 import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
+import { ThemeProvider } from "next-themes";
 
 
 export const metadata: Metadata = {
@@ -19,13 +20,15 @@ export default function RootLayout({
 
   return (
     <html lang="de">
-      <body className={`${bricolage.className} antialiased`}>
-        <StoreProvider>
-          {/* <Header /> */}
-          {children}
-          <SpeedInsights />
-          <Analytics />
-        </StoreProvider>
+      <body className={`${bricolage.className} antialiased bg-white text-black dark:bg-bgColorCardDark dark:text-white`}>
+        <ThemeProvider enableSystem={true} attribute="class" defaultTheme="system">
+          <StoreProvider>
+            {/* <Header /> */}
+            {children}
+            <SpeedInsights />
+            <Analytics />
+          </StoreProvider>
+        </ThemeProvider>
       </body>
     </html >
   );

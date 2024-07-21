@@ -1,6 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
+import ThemeMode from '@/app/utils/ThemeMode'
 
 export default function Header() {
 
@@ -17,9 +18,10 @@ export default function Header() {
           alt="Site icon"
         />
       </Link>
-      <div className="flex flex-row gap-10 items-end">
-        <Link href="/" className="font-bold hover:underline">Abo</Link>
-        <Link href="/profile" className="font-bold hover:underline">Log In</Link>
+      <div className="flex flex-row gap-10 items-center">
+        <Link href="/" className="text-lg font-bold hover:underline">Abo</Link>
+        <Link href="/profile" className="text-lg font-bold hover:underline">Log In</Link>
+        <ThemeMode />
       </div>
     </header>
   )
