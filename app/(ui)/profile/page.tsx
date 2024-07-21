@@ -4,9 +4,8 @@ import { getLevelsAndDispatchToStore } from '@/app/lib/features/state/utils'
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { RootState } from '@/app/lib/store'
 import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect } from 'react'
-import Aside from '@/app/(ui)/profile/components/Aside'
+import { CldImage, CldUploadButton } from 'next-cloudinary'
 
 export default function Page() {
 
@@ -31,7 +30,18 @@ export default function Page() {
           <span className='font-semibold ml-2'>Password</span>
         </div>
         <div className='flex flex-col w-full items-center mt-14'>
-          <Image src="/photos/defaultProfilePicture.png" alt="Logo" width={160} height={160} />
+          <Image src="/photos/defaultProfilePicture.png" alt="Logo" width={160} height={160} loading='lazy' />
+          <CldImage
+            src="cld-sample-5" // Use this sample image or upload your own via the Media Explorer
+            alt='alt'
+            width="500" // Transform the image: auto-crop to square aspect_ratio
+            height="500"
+            crop={{
+              type: 'auto',
+              source: true
+            }}
+          />
+          {/* <CldUploadButton uploadPreset='<upload_preset>' /> */}
         </div>
       </div>
     </section>

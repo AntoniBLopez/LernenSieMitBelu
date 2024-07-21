@@ -61,6 +61,7 @@ function Page() {
       }
     )
       .then((response) => {
+        console.log(response, 'response')
         setWordsList('')
         setWordCreated(true)
         getLevelsAndDispatchToStore(dispatch)
