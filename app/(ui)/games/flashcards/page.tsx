@@ -226,7 +226,7 @@ function Page() {
                   <>
                     <div className='flex justify-between items-center'>
                       <span className='text-sm ml-3'>Español</span>
-                      <button className='p-3 rounded-full hover:bg-slate-200 dark:hover:bg-bgColorCardHoverDark' onClick={event => handleVoice(event, topicWords[actualCardNumber - 1][1])}>
+                      <button className='p-3 rounded-full hover:bg-[#ebeef2] dark:hover:bg-bgColorCardHoverDark' onClick={event => handleVoice(event, topicWords[actualCardNumber - 1][1])}>
                         <BiUserVoice className='w-6 h-auto text-black dark:text-white' />
                       </button>
                     </div>
