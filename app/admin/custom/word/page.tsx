@@ -120,7 +120,7 @@ function Page() {
             </div>
             <div className="flex flex-row gap-2">
               <label
-                className="block self-start font-semibold text-gray-900 whitespace-nowrap"
+                className="block self-start font-semibold text-black dark:text-white whitespace-nowrap"
                 htmlFor="wordsList"
               >
                 Add Words:
@@ -131,7 +131,7 @@ function Page() {
                 placeholder={`Español Spanien\nFrancia Frankreich\netc...`}
                 value={wordsList}
                 onChange={(e) => setWordsList(e.target.value)}
-                className="w-full min-h-24 max-h-52 py-2 px-3 bg-white"
+                className="w-full min-h-24 max-h-52 py-2 px-3 bg-white dark:bg-bgColorCardDark"
                 required
               />
             </div>

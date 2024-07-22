@@ -58,14 +58,13 @@ function Page() {
   }, [openLevels])
 
   return (
-    <div className="px-fixed desktop:px-fixedDesktop w-full h-fit">
+    <div className="w-full h-fit px-fixed desktop:px-fixedDesktop">
       <div className="flex flex-col max-w-3xl mx-auto h-fit mt-10 mb-20 gap-7 text-center">
         <Link href={"/admin"} className="w-fit">
           <Image
             src="/icons/leftArrow.png"
             width={30}
             height={30}
-            className="text-black"
             alt="Go back to homepage arrow icon"
           />
         </Link>
@@ -87,7 +86,7 @@ function Page() {
           <div className="flex flex-col gap-5">
             <div className="flex flex-col tablet:flex-row tablet:gap-5 gap-2">
               <label
-                className="block font-semibold self-start text-gray-900 whitespace-nowrap"
+                className="block font-semibold self-start text-black dark:text-white whitespace-nowrap"
                 htmlFor="topics"
               >
                 Topic Name:
@@ -98,7 +97,7 @@ function Page() {
                 value={topics}
                 onChange={(e) => setTopics(e.target.value)}
                 placeholder={`Natur\nLänder\netc...`}
-                className="w-full min-h-24 max-h-52 py-2 px-3 bg-white"
+                className="w-full min-h-24 max-h-52 py-2 px-3 bg-white dark:bg-bgColorCardDark"
                 required
               />
             </div>
@@ -115,6 +114,7 @@ function Page() {
               self-start
               font-medium
               text-black
+              dark:text-white
               bg-primaryColor
               hover:text-white
               hover:bg-primaryDarkColor
@@ -142,8 +142,8 @@ function Page() {
                           <div className="flex flex-row w-fit items-center font-semibold hover:cursor-pointer">
                             <span className="font-bold text-primaryColor">{level.level}&nbsp;&nbsp;</span>
                             {isLevelOpen
-                              ? <ChevronDownIcon className="w-4 h-4 stroke-black" strokeWidth={2.2} />
-                              : <ChevronRightIcon className="w-4 h-4 stroke-black" strokeWidth={2.2} />}
+                              ? <ChevronDownIcon className="w-4 h-4 stroke-black dark:stroke-white" strokeWidth={2.2} />
+                              : <ChevronRightIcon className="w-4 h-4 stroke-black dark:stroke-white" strokeWidth={2.2} />}
                             Topics<span className="font-normal">&nbsp;({Object.keys(level.topics).length})</span>
                           </div>
                         </th>

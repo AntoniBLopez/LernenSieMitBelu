@@ -28,7 +28,7 @@ export default function NavLinks() {
             key={link.name}
             href={link.href}
             className={clsx(
-              'flex h-fit gap-2 py-3 px-6 items-center rounded-md drop-shadow-xl text-sm font-medium bg-gray-50 hover:bg-sky-100 hover:text-blue-600',
+              'flex h-fit gap-2 py-3 px-6 items-center rounded-md drop-shadow-xl text-sm font-medium bg-gray-50 dark:bg-bgColorCardDark hover:bg-sky-100 hover:text-blue-600',
               {
                 'bg-sky-100 text-blue-600': pathname === link.href,
               },
