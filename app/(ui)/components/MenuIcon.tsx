@@ -32,7 +32,7 @@ export default function MenuIcon() {
         className="rounded-full hover:cursor-pointer hover:scale-110"
         alt="Site icon"
       />}
-      className='border-none rounded-lg drop-shadow-md bg-white dark:bg-bgColorCardDark'
+      className='light:border-none rounded-lg drop-shadow-md bg-white dark:bg-bgColorCardDark dark:border-2 dark:border-gray-800'
       arrowIcon={false}
       inline
       dismissOnClick={false}
