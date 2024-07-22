@@ -335,6 +335,7 @@ function Page() {
                     disabled:bg-transparent
                     disabled:opacity-30
                     laptop:bg-transparent
+                    dark:laptop:bg-transparent
                     laptop:hover:bg-slate-200
                     dark:laptop:hover:bg-bgColorCardDark
                     laptop:disabled:hover:bg-transparent
@@ -357,6 +358,7 @@ function Page() {
                     disabled:bg-transparent
                     disabled:opacity-30
                     laptop:bg-transparent
+                    dark:laptop:bg-transparent
                     laptop:hover:bg-slate-200
                     dark:laptop:hover:bg-bgColorCardDark
                     laptop:disabled:hover:bg-transparent
@@ -375,6 +377,7 @@ function Page() {
                     disabled:bg-transparent
                     disabled:opacity-30
                     laptop:bg-transparent
+                    dark:laptop:bg-transparent
                     laptop:hover:bg-slate-200
                     dark:laptop:hover:bg-bgColorCardDark
                     laptop:disabled:hover:bg-transparent

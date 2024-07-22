@@ -83,12 +83,12 @@ function Breadcrumbs() {
                   </div>
                 </button>
                 {showReducedBreadcrumbs && (
-                  <div ref={dropdownRef} className={`absolute flex flex-row top-[6rem] left-[${marginLeft}] laptop:divide-x bg-white drop-shadow-md rounded-md items-center z-10`}>
+                  <div ref={dropdownRef} className={`absolute flex flex-row top-[6rem] left-[${marginLeft}] laptop:divide-x bg-white dark:bg-bgColorCardDark drop-shadow-md rounded-md items-center z-10`}>
                     {endPoints.slice(1, position).map(({ name, href }, subIndex) => {
                       if (subIndex > 1) return null
                       return (
                         <React.Fragment key={`reduced-${subIndex}`}>
-                          <Link onClick={() => setShowReducedBreadcrumbs(false)} href={href} className='block py-1 px-2 hover:rounded-md hover:bg-gray-100 hover:text-primaryColor'>
+                          <Link onClick={() => setShowReducedBreadcrumbs(false)} href={href} className='block py-1 px-2 hover:rounded-md hover:bg-gray-100 dark:hover:bg-bgColorCardHoverDark hover:text-primaryColor dark:hover:text-primaryDarkColor'>
                             {name}
                           </Link>
                           {

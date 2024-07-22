@@ -32,7 +32,7 @@ function SelectedLabels({ showLevel = false, showTopic = false }: { showLevel?: 
         &&
         // <Link href={'/ui/levels'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-pointer text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedLevel}</Link>
         <div
-          className={`text-sm font-semibold py-1 px-5 rounded-full cursor-default text-white bg-gradient-to-r from-green-400 to-blue-400`}>
+          className={`text-sm font-semibold py-1 px-5 rounded-full cursor-default text-white dark:text-black bg-gradient-to-r from-green-400 to-blue-400`}>
           {
             selectedLevel
               ?
@@ -46,7 +46,7 @@ function SelectedLabels({ showLevel = false, showTopic = false }: { showLevel?: 
         showTopic
         &&
         // <Link href={'/ui/levels/topics'} className={`text-sm font-semibold py-1 px-5 rounded-full hover:cursor-pointer text-white bg-gradient-to-r from-green-400 to-blue-400`}>{selectedTopic}</Link>
-        <div className={`text-sm font-semibold py-1 px-5 rounded-full cursor-default text-white bg-gradient-to-r from-green-400 to-blue-400`}>
+        <div className={`text-sm font-semibold py-1 px-5 rounded-full cursor-default text-white dark:text-black bg-gradient-to-r from-green-400 to-blue-400`}>
           {
             selectedTopic
               ?

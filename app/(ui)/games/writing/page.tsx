@@ -17,6 +17,7 @@ import { useRouter } from 'next/navigation'
 import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 import Image from 'next/image'
 import SpanishKeyboardLetter from '@/app/(ui)/games/writing/components/spanishKeyboardLetter'
+import { BiUserVoice } from 'react-icons/bi'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -311,7 +312,7 @@ function Page() {
                 {actualCardNumber} / {topicWords.length}
               </div>
             </div>
-            <div className='flex flex-col h-fit gap-6 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
+            <div className='flex flex-col h-fit gap-6 tablet:gap-16 justify-between bg-white dark:bg-bgColorCardDark p-5 rounded-xl drop-shadow-md'>
               <div className='text-lg slide-in'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
               <div className='flex flex-col gap-4'>
                 <p className={`${showMessage ? hasOmitted ? 'slide-in font-medium opacity-100 text-blue-500' : isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>
@@ -320,7 +321,7 @@ function Page() {
                 {
                   !showMessage
                   &&
-                  <div className='flex flex-row gap-2 items-center'>
+                  <div className='flex flex-wrap gap-2 items-center'>
                     <SpanishKeyboardLetter spanishLetter='á' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
                     <SpanishKeyboardLetter spanishLetter='é' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
                     <SpanishKeyboardLetter spanishLetter='í' setSpanishLetterAdded={setSpanishLetterAdded} setUserWord={setUserWord} />
@@ -340,12 +341,18 @@ function Page() {
                     className={`
                       w-full
                       rounded-md
+                      font-normal
                       px-4
                       py-3
                       outline-none
+                      dark:text-black
                       bg-bgColorLight
                       focus:bg-selectedColor
-                      disabled:border-2 disabled:py-[0.65rem] ${hasOmitted ? 'disabled:bg-slate-100 disabled:border-slate-300' : isCorrect ? 'disabled:bg-green-50 disabled:border-green-500' : 'disabled:bg-red-50 disabled:border-red-500'}
+                      disabled:border-2 disabled:py-[0.65rem]
+                      ${hasOmitted
+                        ? 'font-normal disabled:bg-slate-100 disabled:border-slate-300 dark:disabled:bg-bgColorCardHoverDark dark:disabled:border-slate-700'
+                        : isCorrect ? 'disabled:bg-green-50 disabled:border-green-500 dark:disabled:bg-green-200 disabled:font-semibold'
+                          : 'disabled:bg-red-50 disabled:border-red-500 dark:disabled:bg-red-100 disabled:font-semibold'}
                     `}
                     ref={inputRef}
                     onFocus={() => setIsInputFocused(true)}
@@ -358,7 +365,7 @@ function Page() {
                     className={`
                       relative
                       self-center
-                      bottom-[0.68rem]
+                      bottom-[0.65rem]
                       h-[0.15rem]
                       rounded-br-3xl
                       rounded-bl-3xl
@@ -375,8 +382,8 @@ function Page() {
                         ?
                         isCorrect
                           ?
-                          <button className='p-2 rounded-full bg-slate-100 mobile:bg-transparent mobile:hover:bg-slate-200 slide-in' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
-                            <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
+                          <button className='p-2 rounded-full bg-slate-100 mobile:bg-transparent mobile:hover:bg-slate-200 dark:mobile:hover:bg-bgColorCardHoverDark slide-in' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
+                            <BiUserVoice className={`w-[1.6rem] h-auto text-black dark:text-white`} />
                           </button>
                           :
                           <div className='flex flex-row items-center gap-2'>
@@ -384,12 +391,12 @@ function Page() {
                               {topicWords[actualCardNumber - 1][1]}
                               <CheckBadgeIcon className='w-6 text-primaryExtraDarkColor' />
                             </span>
-                            <button className='flex-shrink-0 p-2 rounded-full bg-slate-100 mobile:bg-transparent mobile:hover:bg-slate-200 slide-in' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
-                              <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
+                            <button className='p-2 rounded-full bg-slate-100 mobile:bg-transparent mobile:hover:bg-slate-200 dark:mobile:hover:bg-bgColorCardHoverDark slide-in' onClick={event => handleVoice(topicWords[actualCardNumber - 1][1])}>
+                              <BiUserVoice className={`w-[1.6rem] h-auto text-black dark:text-white`} />
                             </button>
                           </div>
                         :
-                        <div className='flex flex-row w-full gap-2'>
+                        <div className='flex flex-wrap w-full gap-2'>
                           <button
                             disabled={showMessage || userWord === ''}
                             className={`
@@ -398,6 +405,8 @@ function Page() {
                               items-center
                               font-semibold
                               text-white
+                              dark:text-black
+                              dark:disabled:text-slate-400
                               bg-primaryColor
                               hover:bg-primaryDarkColor
                               rounded-md

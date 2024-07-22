@@ -32,12 +32,12 @@ export default function MenuIcon() {
         className="rounded-full hover:cursor-pointer hover:scale-110"
         alt="Site icon"
       />}
-      className='drop-shadow-md'
+      className='border-none rounded-lg drop-shadow-md bg-white dark:bg-bgColorCardDark'
       arrowIcon={false}
       inline
       dismissOnClick={false}
     >
-      <Dropdown.Item className='gap-2 pb-3 hover:bg-white hover:cursor-default select-text'>
+      <Dropdown.Item className='gap-2 pb-3 hover:cursor-default hover:bg-transparent select-text'>
         <Image
           src={'/icons/icon.png'}
           width={35}
@@ -50,33 +50,35 @@ export default function MenuIcon() {
           <span className="block truncate text-sm text-grayColor">name@flowbite.com</span>
         </div>
       </Dropdown.Item>
-      <div className='w-full h-[0.5px] bg-slate-300 mb-1' />
+      <div className='w-full h-[0.5px] bg-slate-300 dark:bg-gray-700 mb-1' />
       <Link href="/profile">
-        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom'>
+        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
           <div className='flex flex-row gap-2'>
             <UserIcon width={18} height={18} strokeWidth={1.8} />
             Profile
           </div>
-          <ChevronRightIcon width={16} height={16} strokeWidth={1.5} className='' />
+          {/* <ChevronRightIcon width={16} height={16} strokeWidth={1.5} className='' /> */}
         </Dropdown.Item>
       </Link>
-      <Dropdown.Item onClick={handleSpeaker} className='flex flex-row justify-between font-semibold align-bottom'>
+      <Dropdown.Item onClick={handleSpeaker} className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
         <div className='flex flex-row gap-2'>
           <SpeakerWaveIcon width={18} height={18} strokeWidth={1.5} />
           Sound
         </div>
         <span className='font-medium text-grayColor'>{isSpeakerOn ? 'On' : 'Off'}</span>
       </Dropdown.Item>
-      <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom'>
-        <div className='flex flex-row gap-2'>
-          <Cog6ToothIcon width={18} height={18} strokeWidth={1.8} />
-          Settings
-        </div>
-        <ChevronRightIcon width={16} height={16} strokeWidth={1.5} className='' />
-      </Dropdown.Item>
-      <Dropdown.Divider className='bg-gray-300' />
+      <Link href="/profile/settings">
+        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
+          <div className='flex flex-row gap-2'>
+            <Cog6ToothIcon width={18} height={18} strokeWidth={1.8} />
+            Settings
+          </div>
+          {/* <ChevronRightIcon width={16} height={16} strokeWidth={1.5} className='' /> */}
+        </Dropdown.Item>
+      </Link>
+      <Dropdown.Divider className='bg-gray-300 dark:bg-gray-700' />
       <Link href="/">
-        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom'>
+        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
           <div className='flex flex-row gap-2'>
             <ArrowLeftStartOnRectangleIcon width={18} height={18} strokeWidth={2} className='text-red-500' />
             Sign out

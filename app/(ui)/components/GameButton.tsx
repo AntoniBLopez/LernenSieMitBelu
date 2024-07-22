@@ -16,6 +16,7 @@ function GameButton({ name, Icon, isLastCard, bgBlue = false, changeGameButton =
             ${isLastCard || changeGameButton ? 'place-content-start w-48' : 'place-content-center w-[50%] m-0'}
             font-semibold
             text-white
+            dark:text-black
             hover:cursor-pointer
             ${restart !== undefined && `${bgBlue ? 'bg-blue-500 hover:bg-blue-600' : 'bg-primaryColor hover:bg-primaryDarkColor'}`}
             ${changeGameButton ? 'bg-blue-500 hover:bg-blue-600' : `${bgBlue ? 'bg-blue-500 hover:bg-blue-600' : 'bg-primaryColor hover:bg-primaryDarkColor'}`}

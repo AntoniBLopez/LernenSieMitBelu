@@ -1,8 +1,9 @@
 'use client'
 import Image from 'next/image'
+import { BiUserVoice } from "react-icons/bi";
 import { useEffect, useState } from 'react'
 
-function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: string | number, showMessage: boolean, isCorrect: boolean, resetOptionDesign: boolean }) {
+function Option({ name, showMessage, isThisOptionCorrect, isChosenCorrect, resetOptionDesign }: { name: string | number, showMessage: boolean, isThisOptionCorrect: boolean, isChosenCorrect: boolean, resetOptionDesign: boolean }) {
 
   const [clicked, setClicked] = useState(false)
   const [currentlySpeaking, setCurrentlySpeaking] = useState(false)
@@ -39,14 +40,16 @@ function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: str
       justify-between
       items-center
       border-2
+      border-gray-200
+      dark:border-gray-600
       rounded-lg
       ${clicked
         ?
-        isCorrect
+        isThisOptionCorrect
           ?
-          'bg-green-50 border-green-500 font-medium py-1 pl-[0.55rem] pr-1'
+          'bg-green-50 dark:bg-green-200 border-green-500 dark:border-green-500 text-black font-medium py-1 pl-[0.55rem] pr-1'
           :
-          'bg-red-50 border-red-500 font-medium p-[0.55rem]'
+          'bg-red-50 dark:bg-red-300 border-red-500 dark:border-red-500 text-black font-medium p-[0.55rem]'
         :
         'border-gray-200 p-[0.55rem]'
       }
@@ -56,19 +59,19 @@ function Option({ name, showMessage, isCorrect, resetOptionDesign }: { name: str
           ?
           'opacity-100 hover:bg-none'
           :
-          `opacity-50 hover:bg-none ${isCorrect ? 'border-green-400 py-1 pl-[0.55rem] pr-1' : 'border-gray-200'}`
+          `opacity-50 hover:bg-none ${isThisOptionCorrect ? 'border-green-400 dark:border-green-300 py-1 pl-[0.55rem] pr-1' : 'border-gray-200 dark:border-gray-600'}`
         :
-        'hover:bg-selectedPrimaryColor hover:cursor-pointer hover:font-medium hover:border-slate-300'
+        'hover:bg-selectedPrimaryColor dark:hover:bg-[#273b35] hover:cursor-pointer hover:font-medium hover:border-slate-300'
       }
     `}>
       <span className='ml-2'>
         {name}
       </span>
       {
-        showMessage && isCorrect
+        showMessage && isThisOptionCorrect
         &&
-        <button className='p-2 rounded-full hover:bg-green-200' onClick={event => handleVoice(event)}>
-          <Image src='/icons/voice.png' alt='Symbol zum Anhören des Textes' width={18} height={18} />
+        <button className={`p-1 rounded-full ${isChosenCorrect ? 'hover:bg-green-200 dark:hover:bg-green-300' : 'hover:bg-gray-300 dark:hover:bg-black'} hover:text-black`} onClick={event => handleVoice(event)}>
+          <BiUserVoice className={`w-[1.6rem] h-auto text-black ${isChosenCorrect ? 'dark:text-black' : ' dark:text-white'}`} />
         </button>
       }
     </div >

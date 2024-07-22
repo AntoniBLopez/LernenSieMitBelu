@@ -209,7 +209,7 @@ function Page() {
                 {actualCardNumber} / {topicWords.length}
               </div>
             </div>
-            <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white border p-5 rounded-xl drop-shadow-md'>
+            <div className='flex flex-col h-fit gap-12 tablet:gap-16 justify-between bg-white dark:bg-bgColorCardDark p-5 rounded-xl drop-shadow-lg'>
               <div className='text-lg'>{topicWords.length > 0 ? topicWords[actualCardNumber - 1][0] : 'Wird geladen...'}</div>
               <div className='flex flex-col gap-4 tablet:mb-5'>
                 <p className={`${showMessage ? isCorrect ? 'slide-in font-medium opacity-100 text-green-500' : 'slide-in font-medium opacity-100 text-red-500' : 'font-bold opacity-50'}`}>{showMessage ? isCorrect ? correctMessage[randomMessageNumber] : wrongMessage[randomMessageNumber] : 'Wähle die richtige Antwort'}</p>
@@ -221,7 +221,8 @@ function Page() {
                       return <div key={index} onClick={() => !showMessage && handleSelectedOption(topicWords[word][0], topicWords[actualCardNumber - 1][0])}>
                         <Option
                           showMessage={showMessage}
-                          isCorrect={topicWords[word]?.[0] === topicWords[actualCardNumber - 1][0]}
+                          isThisOptionCorrect={topicWords[word]?.[0] === topicWords[actualCardNumber - 1][0]}
+                          isChosenCorrect={isCorrect}
                           name={topicWords[word]?.[1]}
                           resetOptionDesign={resetOptionDesign}
                         />

@@ -24,7 +24,7 @@ export default function RootLayout({
 
   return (
     <html lang="de">
-      <body className={`${bricolage.className} antialiased bg-bgColorLight dark:bg-bgColorDark`}>
+      <body className={`${bricolage.className} antialiased bg-bgColorLight dark:bg-bgColorDark transition-all duration-500`}>
         <ThemeProvider enableSystem={true} attribute="class">
           <StoreProvider>
             <Header />

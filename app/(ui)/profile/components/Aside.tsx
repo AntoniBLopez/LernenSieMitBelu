@@ -21,7 +21,7 @@ export default function Aside() {
   }, [])
 
   return (
-    <aside className={`self-start w-fit h-fit ${pathname.includes('/levels') || pathname.includes('/games') ? 'hidden' : ''}`}>
+    <aside className={`self-start w-fit h-fit ${pathname.includes('/levels') || pathname.includes('/games') ? 'hidden' : ''} transition-all duration-500`}>
       <div className='flex flex-col w-fit drop-shadow-md rounded-xl bg-gradient-to-b from-[#55aeb8] to-[#2cd5a2]'>
         {
           links.map((link, index) => {
@@ -31,7 +31,7 @@ export default function Aside() {
                 key={link.name}
                 href={link.href}
                 className={clsx(
-                  `flex flex-col h-fit py-10 px-6 items-center text-sm font-medium hover:text-black hover:bg-white dark:hover:bg-bgColorCardDark dark:hover:text-white hover:scale-110 transition-all duration-200`,
+                  `flex flex-col h-fit py-10 px-6 items-center text-sm font-medium hover:text-black hover:bg-white dark:hover:bg-bgColorCardDark dark:hover:text-white hover:scale-110 transition-all duration-100`,
                   {
                     'scale-110 bg-white text-black dark:bg-bgColorCardDark dark:text-white': pathname === link.href,
                     'bg-transparent text-white': pathname !== link.href,

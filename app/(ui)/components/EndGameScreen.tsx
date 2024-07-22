@@ -29,7 +29,7 @@ function EndGameScreen({ knownCount, learningCount, topicWords, restart }: { kno
             alt='Confetti icon'
             width={100}
             height={100}
-            className='ml-10 laptop:ml-20 [transform:rotateY(180deg)]'
+            className=' object-contain ml-10 laptop:ml-20 [transform:rotateY(180deg)]'
           />
         </div>
       </div>
