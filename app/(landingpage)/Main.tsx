@@ -5,8 +5,30 @@ import PaymentButton from '@/app/(landingpage)/widgets/PaymentButton'
 import PlanDetails from './widgets/PlanDetails'
 import NextVideo from 'next-video'
 import DemoVideo from '@/videos/lernenapp.mp4'
+import { useEffect, useState, useRef } from 'react'
 
 export default function Main() {
+
+  // const [script, setScript] = useState<any>(null)
+  // const scriptRef = useRef<any>(null)
+
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.trustindex.io/loader.js?3b845a03223a5388e946ead85cf';
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    }
+  }, [])
+
+  // useEffect(() => {
+  //   if (script) {
+  //     console.log('script loaded', script)
+  //   }
+  // }, [script])
 
   return (
     <main className="h-fit w-full">
@@ -151,8 +173,11 @@ export default function Main() {
                 <p className='text-sm font-medium opacity-90'>Pay once. Build unlimited blocks!</p>
               </div>
             </div>
-
           </div>
+          <div>
+            Hola
+          </div>
+          <script defer async src='https://cdn.trustindex.io/loader.js?3b845a03223a5388e946ead85cf'></script>
         </div>
       </div>
     </main >

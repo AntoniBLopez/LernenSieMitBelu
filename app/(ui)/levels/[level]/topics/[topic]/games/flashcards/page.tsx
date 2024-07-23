@@ -1,6 +1,5 @@
 'use client'
-import '@/app/(ui)/games/flashcards/styles.css'
-import { useRouter } from 'next/navigation'
+import '@/app/(ui)/levels/[level]/topics/[topic]/games/flashcards/styles.css'
 import { WordsTraduction } from '@/types'
 import { RootState } from "@/app/lib/store"
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
@@ -8,8 +7,6 @@ import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import EndGameScreen from '@/app/(ui)/components/EndGameScreen'
 import confettiFireworks from '@/app/(ui)/components/confettiFireworks'
 import SelectedLabels from '@/app/(ui)/components/SelectedLabels'
-import { setActiveTab } from '@/app/lib/features/state/stateSlice'
-// import Image from 'next/image'
 import {
   CheckIcon,
   XMarkIcon,
@@ -18,8 +15,7 @@ import {
 import { BiUserVoice } from "react-icons/bi";
 import { useEffect, useState } from 'react'
 
-function Page() {
-
+function Page({ params }: { params: { level: string, topic: string } }) {
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [currentlySpeaking, setCurrentlySpeaking] = useState(false)
@@ -32,10 +28,6 @@ function Page() {
   const [learningCount, setLearningCount] = useState(0)
   const [knownCount, setKnownCount] = useState(0)
   const [countRegister, setCountRegister] = useState<any>([]) // 0 = learning, 1 = known
-
-  const isBrowser = typeof window !== 'undefined'
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(isBrowser ? localStorage.getItem("selectedLevel") : null)
 
   const [restartGame, setRestartGame] = useState(false)
   const [actualCardNumber, setActualCardNumber] = useState(1)
@@ -51,7 +43,6 @@ function Page() {
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
 
   const handleCardClick = () => {
@@ -133,7 +124,6 @@ function Page() {
   }
 
   useEffect(() => {
-    dispatch(setActiveTab({ name: 'Flashcards', position: 4 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
@@ -145,14 +135,16 @@ function Page() {
 
   useEffect(() => {
     if (levelsStore.length > 0) {
-      setlevelData(levelsStore.find(obj => obj.level === selectedLevel))
+      setlevelData(levelsStore.find(obj => obj.level === params.level))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])
 
   useEffect(() => {
-    if (levelsStore.length > 0 && Object.keys(levelData).length > 0 && selectedLevel !== null && selectedTopic !== null) {
-      const onlyWords = levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word)
+    console.log(params.level)
+    console.log(params.topic)
+    if (levelsStore.length > 0 && Object.keys(levelData).length > 0) {
+      const onlyWords = levelData.topics[decodeURI(params.topic)].map((wordObject: WordsTraduction) => wordObject.word)
 
       /* To order them all randomly */
       setTopicWords(onlyWords.sort(sortRandomly))
@@ -197,7 +189,7 @@ function Page() {
   return (
     <main className='flex flex-col w-full mt-1 gap-10'>
       <div className='flex flex-col gap-2 items-start'>
-        <SelectedLabels showLevel={true} showTopic={true} />
+        <SelectedLabels levelName={params.level} topicName={params.topic} />
       </div>
 
       {

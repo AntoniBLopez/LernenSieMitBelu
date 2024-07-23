@@ -6,7 +6,7 @@ import Header from "@/app/(ui)/Header";
 import StoreProvider from "@/app/StoreProvider";
 import { bricolage } from "@/app/(ui)/fonts";
 // import Breadcrumbs from "@/app/(ui)/widgets/Breadcrumbs";
-import Aside from "@/app/(ui)/profile/components/Aside";
+import Aside from "@/app/(ui)/dashboard/components/Aside";
 import StartButton from "./components/StartButton";
 import { ThemeProvider } from "next-themes";
 

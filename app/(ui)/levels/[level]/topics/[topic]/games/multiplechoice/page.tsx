@@ -13,8 +13,6 @@ import {
   ChartPieIcon,
   ChevronRightIcon,
 } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/navigation'
-import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 
 const correctMessage = [
   'Gut gemacht!',
@@ -39,15 +37,11 @@ const wrongMessage = [
   "Übung macht den Meister, versuch es weiter!",
 ]
 
-function Page() {
+function Page({ params }: { params: { level: string, topic: string } }) {
 
   const [showStats, setShowStats] = useState(false)
   const [correctSound, setCorrectSound] = useState<HTMLAudioElement | null>(null)
   const [allWordsCorrectSound, setAllWordsCorrectSound] = useState<HTMLAudioElement | null>(null)
-
-  const isBrowser = typeof window !== 'undefined'
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(isBrowser ? localStorage.getItem("selectedLevel") : null)
 
   const [restartGame, setRestartGame] = useState(false)
   const [actualCardNumber, setActualCardNumber] = useState(1)
@@ -61,14 +55,12 @@ function Page() {
   const [randomMessageNumber, setRandomMessageNumber] = useState(0)
   const [resetOptionDesign, setResetOptionDesign] = useState(false)
 
-  const sortRandomly = () => Math.random() - 0.5
-  const initialSet = [0, 1, 2, 3]
-  const [setToShow, setSetToShow] = useState(initialSet.sort(sortRandomly))
-
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
+  const initialSet = [0, 1, 2, 3]
+  const sortRandomly = () => Math.random() - 0.5
+  const [setToShow, setSetToShow] = useState(initialSet.sort(sortRandomly))
   const getRandomNumber = (min: number, max: number) => Math.floor(Math.random() * (max - min + 1)) + min
 
   const handleSelectedOption = (wordSelected: string, actualCorrectWord: string) => {
@@ -103,11 +95,9 @@ function Page() {
   }
 
   useEffect(() => {
-    dispatch(setActiveTab({ name: 'MultipleChoice', position: 5 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
-
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
     setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -115,7 +105,7 @@ function Page() {
 
   useEffect(() => {
     if (levelsStore.length > 0) {
-      setlevelData(levelsStore.find(obj => obj.level === selectedLevel))
+      setlevelData(levelsStore.find((obj: any) => obj.level === params.level))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])
@@ -130,8 +120,8 @@ function Page() {
   }, [resetOptionDesign])
 
   useEffect(() => {
-    if (levelsStore.length > 0 && Object.keys(levelData).length > 0 && selectedLevel !== null && selectedTopic !== null) {
-      const onlyWords = levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word)
+    if (levelsStore.length > 0 && Object.keys(levelData).length > 0) {
+      const onlyWords = levelData.topics[decodeURI(params.topic)].map((wordObject: WordsTraduction) => wordObject.word)
       // /* This is the solution for ordering the words randomly divided in 3 ordered sets */
       // /* I divide the number of words in the topic by 3 to get the number of words to show in the first third of the card to get them ordered randomly */
       // const oneThird = onlyWords.length / 3
@@ -195,7 +185,7 @@ function Page() {
   return (
     <main className='flex flex-col w-full mt-1 gap-10'>
       <div className='flex flex-col gap-2 items-start'>
-        <SelectedLabels showLevel={true} showTopic={true} />
+        <SelectedLabels levelName={params.level} topicName={params.topic} />
       </div>
 
       {

@@ -2,23 +2,23 @@
 import { UserIcon, ChevronRightIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link'
 import React, { useEffect, useRef, useState } from 'react'
-import { useAppSelector } from '@/app/lib/hooks'
-import { RootState } from '@/app/lib/store'
+import { usePathname } from 'next/navigation'
 
-const endPoints = [
-  { name: 'Profile', href: '/profile' },
-  { name: 'Levels', href: '/levels' },
-  { name: 'Themen', href: '/levels/topics' }, // Topics
-  { name: 'Spiele', href: '/games' }, // Games
-  { name: 'Karteikarten', href: '/games/flashcards' }, // Flashcards
-  { name: 'MultipleChoice', href: '/games/multiplechoice' },
-  { name: 'Schreiben', href: '/games/writing' }, // Writing
-  { name: 'Zuordnen', href: '/games/matching' }, // Matching
-]
+export default function Breadcrumbs() {
+  const pathName = usePathname()
+  const level = pathName.split('/')[2]
+  const topic = pathName.split('/')[4]
 
-function Breadcrumbs() {
-
-  const { position } = useAppSelector((state: RootState) => state.store.activeTab)
+  const endPoints = [
+    { name: 'Profile', href: '/dashboard/profile' },
+    { name: 'Levels', href: '/levels' },
+    { name: 'Themen', href: `/levels/${level}/topics` }, // Topics
+    { name: 'Spiele', href: `/levels/${level}/topics/${topic}/games` }, // Games
+    { name: 'Karteikarten', href: `/levels/${level}/topics/${topic}/games/flashcards` }, // Flashcards
+    { name: 'MultipleChoice', href: `/levels/${level}/topics/${topic}/games/multiplechoice` }, // MultipleChoice
+    { name: 'Schreiben', href: `/levels/${level}/topics/${topic}/games/writing` }, // Writing
+    { name: 'Zuordnen', href: `/levels/${level}/topics/${topic}/games/matching` }, // Matching
+  ]
 
   const [showReducedBreadcrumbs, setShowReducedBreadcrumbs] = useState(false)
   const [isClickOutside, setIsClickOutside] = useState(false)
@@ -49,6 +49,7 @@ function Breadcrumbs() {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   useEffect(() => {
@@ -61,15 +62,15 @@ function Breadcrumbs() {
       }
     }
     window.addEventListener('resize', handleMarginResize)
-
     return () => {
       window.removeEventListener('resize', handleMarginResize);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [mainRef.current])
 
+  const position = endPoints.findIndex(endpoint => endpoint.href === pathName)
+
   return (
-    // <div ref={mainRef} className='flex flex-row items-center gap-1'> // Styles in Header
     <div ref={mainRef} className='flex flex-row items-center gap-1 mx-6 mt-7 laptop:mx-auto laptop:max-w-desktop'>
       {endPoints.slice(0, position + 1).map(({ name, href }, index) => {
         if (position > 3 && window.innerWidth <= 640) {
@@ -160,5 +161,3 @@ function Breadcrumbs() {
     </div >
   )
 }
-
-export default Breadcrumbs

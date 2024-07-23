@@ -6,20 +6,20 @@ import {
   PencilSquareIcon,
 } from '@heroicons/react/24/outline';
 import Link from 'next/link';
-// import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
-const links = [
-  { name: 'Karteikarten', href: '/games/flashcards', icon: BoltIcon }, // N.1
-  { name: 'Multiple Choice', href: '/games/multiplechoice', icon: ClipboardDocumentListIcon }, // N.2
-  { name: 'Schreiben', href: '/games/writing', icon: PencilSquareIcon }, // N.4
-  { name: 'Zuordnen', href: '/games/matching', icon: PuzzlePieceIcon, }, // N.3
-];
+import { usePathname } from 'next/navigation';
 
 export default function NavLinks() {
-  // const pathname = usePathname()
+  const pathName = usePathname()
+  const level = pathName.split('/')[2]
+  const topic = pathName.split('/')[4]
+
+  const links = [
+    { name: 'Karteikarten', href: `/levels/${level}/topics/${topic}/games/flashcards`, icon: BoltIcon }, // N.1
+    { name: 'MultipleChoice', href: `/levels/${level}/topics/${topic}/games/multiplechoice`, icon: ClipboardDocumentListIcon }, // N.2
+    { name: 'Schreiben', href: `/levels/${level}/topics/${topic}/games/writing`, icon: PencilSquareIcon }, // N.4
+    { name: 'Zuordnen', href: `/levels/${level}/topics/${topic}/games/matching`, icon: PuzzlePieceIcon, }, // N.3
+  ]
 
   return (
     <>

@@ -6,10 +6,10 @@ import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 
 const links = [
-  { name: 'Profile', href: '/profile', icon: UserIcon },
-  { name: 'Chart', href: '/profile/chart', icon: ChartPieIcon },
-  { name: 'Privacy', href: '/profile/legal', icon: LockClosedIcon, },
-  { name: 'Settings', href: '/profile/settings', icon: Cog6ToothIcon },
+  { name: 'Profile', href: '/dashboard/profile', icon: UserIcon },
+  { name: 'Chart', href: '/dashboard/chart', icon: ChartPieIcon },
+  { name: 'Privacy', href: '/dashboard/legal', icon: LockClosedIcon, },
+  { name: 'Settings', href: '/dashboard/settings', icon: Cog6ToothIcon },
 ];
 
 export default function Aside() {
@@ -21,7 +21,7 @@ export default function Aside() {
   }, [])
 
   return (
-    <aside className={`self-start w-fit h-fit ${pathname.includes('/levels') || pathname.includes('/games') ? 'hidden' : ''} transition-all duration-500`}>
+    <aside className={`self-start w-fit h-fit ${pathname.includes('/levels') ? 'hidden' : ''} transition-all duration-500`}>
       <div className='flex flex-col w-fit drop-shadow-md rounded-xl bg-gradient-to-b from-[#55aeb8] to-[#2cd5a2]'>
         {
           links.map((link, index) => {

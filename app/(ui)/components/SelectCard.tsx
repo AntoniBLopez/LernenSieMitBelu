@@ -1,21 +1,9 @@
 import Link from 'next/link'
 import { LockClosedIcon } from '@heroicons/react/24/outline'
 import { useEffect } from 'react'
-import { useAppDispatch } from "@/app/lib/hooks"
-import { setChosenLevel, setChosenTopic } from '@/app/lib/features/state/stateSlice'
 
-function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?: boolean, name: string, length: number }) {
-
-  const dispatch = useAppDispatch()
+function SelectCard({ isChooseLevels = false, levelName, topicName, length }: { isChooseLevels?: boolean, levelName: string, topicName?: string, length: number }) {
   const isCardBlocked = length < 2
-
-  const handleClick = () => {
-    if (isChooseLevels) {
-      dispatch(setChosenLevel(name))
-    } else {
-      dispatch(setChosenTopic(name))
-    }
-  }
 
   useEffect(() => {
     if (!localStorage.getItem("soundOn")) {
@@ -25,8 +13,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
 
   return (
     <Link
-      href={isCardBlocked ? '' : isChooseLevels ? '/levels/topics' : '/games'}
-      onClick={isCardBlocked ? undefined : handleClick}
+      href={isCardBlocked ? '' : isChooseLevels ? `/levels/${levelName}/topics` : `/levels/${levelName}/topics/${topicName}/games`}
       className={`
         flex
         flex-col
@@ -41,7 +28,7 @@ function SelectCard({ isChooseLevels = false, name, length }: { isChooseLevels?:
     >
       <div className='flex flex-col w-full h-fit px-5 py-2'>
         <main className={` ${isCardBlocked && 'flex flex-row gap-2 items-center'}`}>
-          <span className='font-medium text-xl w-5'>{name}</span>
+          <span className='font-medium text-xl w-5'>{topicName ? topicName : levelName}</span>
           {
             isCardBlocked
             &&

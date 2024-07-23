@@ -1,5 +1,4 @@
 'use client'
-
 import {
   ChartBarIcon,
 } from '@heroicons/react/24/outline';
@@ -9,17 +8,15 @@ import { getLevelsAndDispatchToStore } from "@/app/lib/features/state/utils"
 import SelectCard from "@/app/(ui)/components/SelectCard"
 import { useEffect, useState } from "react";
 import { Level } from "@/types";
-import { setActiveTab } from '@/app/lib/features/state/stateSlice';
 import CardsLoading from '@/app/(ui)/levels/widgets/CardsLoading';
 
-export default function Levels() {
 
+export default function Levels() {
   const [loading, setLoading] = useState(false)
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setActiveTab({ name: 'Levels', position: 1 }))
     if (levelsStore.length === 0) {
       setLoading(true)
       getLevelsAndDispatchToStore(dispatch)
@@ -56,7 +53,8 @@ export default function Levels() {
               levelsStore.length > 0
               &&
               levelsStore.map((obj: Level | any, index: number) => {
-                return <SelectCard key={index} isChooseLevels={true} name={obj.level} length={Object.keys(obj.topics).length} />
+                console.log(obj)
+                return <SelectCard key={index} isChooseLevels={true} levelName={obj.level} length={Object.keys(obj.topics).length} />
               })
           }
         </section>

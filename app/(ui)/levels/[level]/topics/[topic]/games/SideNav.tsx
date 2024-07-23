@@ -1,4 +1,4 @@
-import NavLinks from '@/app/(ui)/games/NavLinks';
+import NavLinks from '@/app/(ui)/levels/[level]/topics/[topic]/games/NavLinks'
 
 export default function SideNav() {
   return (

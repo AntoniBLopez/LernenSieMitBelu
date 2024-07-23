@@ -20,7 +20,7 @@ export default function Header() {
       </Link>
       <div className="flex flex-row gap-10 items-center">
         <Link href="/" className="text-lg font-bold hover:underline">Abo</Link>
-        <Link href="/profile" className="text-lg font-bold hover:underline">Log In</Link>
+        <Link href="/dashboard/profile" className="text-lg font-bold hover:underline">Log In</Link>
         <ThemeMode />
       </div>
     </header>

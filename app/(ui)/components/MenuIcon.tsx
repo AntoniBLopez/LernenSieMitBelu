@@ -4,10 +4,10 @@ import { Dropdown } from "flowbite-react"
 import Link from 'next/link';
 import Image from "next/image";
 import {
-  SpeakerWaveIcon,
   // SpeakerXMarkIcon,
+  // ChevronRightIcon,
+  SpeakerWaveIcon,
   Cog6ToothIcon,
-  ChevronRightIcon,
   UserIcon,
   ArrowLeftStartOnRectangleIcon,
 } from '@heroicons/react/24/outline'
@@ -51,7 +51,7 @@ export default function MenuIcon() {
         </div>
       </Dropdown.Item>
       <div className='w-full h-[0.5px] bg-slate-300 dark:bg-gray-700 mb-1' />
-      <Link href="/profile">
+      <Link href="/dashboard/profile">
         <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
           <div className='flex flex-row gap-2'>
             <UserIcon width={18} height={18} strokeWidth={1.8} />
@@ -67,7 +67,7 @@ export default function MenuIcon() {
         </div>
         <span className='font-medium text-grayColor'>{isSpeakerOn ? 'On' : 'Off'}</span>
       </Dropdown.Item>
-      <Link href="/profile/settings">
+      <Link href="/dashboard/settings">
         <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
           <div className='flex flex-row gap-2'>
             <Cog6ToothIcon width={18} height={18} strokeWidth={1.8} />

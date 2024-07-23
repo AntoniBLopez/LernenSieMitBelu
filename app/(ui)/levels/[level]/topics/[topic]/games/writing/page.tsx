@@ -13,10 +13,7 @@ import {
   CheckBadgeIcon,
   ChartPieIcon
 } from '@heroicons/react/24/outline';
-import { useRouter } from 'next/navigation'
-import { setActiveTab } from '@/app/lib/features/state/stateSlice'
-import Image from 'next/image'
-import SpanishKeyboardLetter from '@/app/(ui)/games/writing/components/spanishKeyboardLetter'
+import SpanishKeyboardLetter from '@/app/(ui)/levels/[level]/topics/[topic]/games/writing/components/spanishKeyboardLetter'
 import { BiUserVoice } from 'react-icons/bi'
 
 const correctMessage = [
@@ -42,8 +39,7 @@ const wrongMessage = [
   "Übung macht den Meister, versuch es weiter!",
 ]
 
-function Page() {
-
+function Page({ params }: { params: { level: string, topic: string } }) {
   const [showStats, setShowStats] = useState(false)
   const [currentlySpeaking, setCurrentlySpeaking] = useState(false)
   const [clickOnVoice, setClickOnVoice] = useState(false)
@@ -54,8 +50,6 @@ function Page() {
 
   const isBrowser = typeof window !== 'undefined'
   const [isSoundOn, setIsSoundOn] = useState(isBrowser ? localStorage.getItem("soundOn") === "true" : true)
-  const [selectedTopic, setSelectedTopic] = useState<string | null>(isBrowser ? localStorage.getItem("selectedTopic") : null)
-  const [selectedLevel, setSelectedLevel] = useState<string | null>(isBrowser ? localStorage.getItem("selectedLevel") : null)
 
   const [restartGame, setRestartGame] = useState(false)
   const [actualCardNumber, setActualCardNumber] = useState(1)
@@ -76,11 +70,9 @@ function Page() {
   const [isInputFocused, setIsInputFocused] = useState(true)
   const [inputWidth, setInputWidth] = useState(0)
   const inputRef = useRef<HTMLInputElement>(null)
-  const tempInputRef = useRef<HTMLInputElement>(null)
 
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
-  const router = useRouter()
 
   const getRandomNumber = (min: number, max: number): number => Math.floor(Math.random() * (max - min + 1)) + min
 
@@ -174,31 +166,23 @@ function Page() {
   }
 
   useEffect(() => {
-    dispatch(setActiveTab({ name: 'Writing', position: 6 }))
-
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
-
     if (inputRef.current) {
       setInputWidth(inputRef.current.offsetWidth);
     }
-
     /* Detect if the user's device is iphone */
     const userAgent = window.navigator.userAgent
     setIsIphone(/iPhone/i.test(userAgent))
-
     setCorrectSound(new Audio('/sounds/correct-answer.mp3'))
     setAllWordsCorrectSound(new Audio('/sounds/open-new-level.mp3'))
-
     const preventScroll = (e: TouchEvent) => {
       if (window.innerWidth <= 640) {
         e.preventDefault()
       }
     }
-
     window.addEventListener('touchmove', preventScroll, { passive: false })
-
     return () => {
       window.removeEventListener('touchmove', preventScroll)
     }
@@ -207,7 +191,7 @@ function Page() {
 
   useEffect(() => {
     if (levelsStore.length > 0) {
-      setlevelData(levelsStore.find(obj => obj.level === selectedLevel))
+      setlevelData(levelsStore.find(obj => obj.level === params.level))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])
@@ -222,8 +206,8 @@ function Page() {
   }, [resetOptionDesign])
 
   useEffect(() => {
-    if (levelsStore.length > 0 && Object.keys(levelData).length > 0 && selectedLevel !== null && selectedTopic !== null) {
-      const onlyWords = levelData.topics[selectedTopic].map((wordObject: WordsTraduction) => wordObject.word)
+    if (levelsStore.length > 0 && Object.keys(levelData).length > 0) {
+      const onlyWords = levelData.topics[decodeURI(params.topic)].map((wordObject: WordsTraduction) => wordObject.word)
       /* To order them all randomly */
       setTopicWords(onlyWords.sort(sortRandomly))
     }
@@ -245,7 +229,6 @@ function Page() {
   }, [actualCardNumber])
 
   useEffect(() => {
-
     const handleGlobalKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Enter' && showMessage && topicWords.length !== actualCardNumber) {
         e.preventDefault()
@@ -268,7 +251,6 @@ function Page() {
       }
     }
     window.addEventListener('resize', handleResize)
-
     return () => {
       window.removeEventListener('resize', handleResize);
     }
@@ -298,7 +280,7 @@ function Page() {
   return (
     <main className='flex flex-col w-full mt-1 gap-10'>
       <div className='flex flex-col gap-2 items-start'>
-        <SelectedLabels showLevel={true} showTopic={true} />
+        <SelectedLabels levelName={params.level} topicName={params.topic} />
       </div>
       {
         showStats

@@ -1,19 +1,14 @@
 'use client'
-import { setActiveTab } from '@/app/lib/features/state/stateSlice'
 import { getLevelsAndDispatchToStore } from '@/app/lib/features/state/utils'
 import { useAppDispatch, useAppSelector } from "@/app/lib/hooks"
 import { RootState } from '@/app/lib/store'
-import Image from 'next/image'
-import Link from 'next/link'
 import { useEffect } from 'react'
 
 export default function Page() {
-
   const levelsStore = useAppSelector((state: RootState) => state.store.levels)
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    dispatch(setActiveTab({ name: 'Profile', position: 0 }))
     if (levelsStore.length === 0) {
       getLevelsAndDispatchToStore(dispatch)
     }
