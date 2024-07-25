@@ -3,8 +3,8 @@ import Headline from '@/app/(landingpage)/utils/Headline'
 import Image from 'next/image'
 import PaymentButton from '@/app/(landingpage)/widgets/PaymentButton'
 import PlanDetails from './widgets/PlanDetails'
-import NextVideo from 'next-video'
-import DemoVideo from '@/videos/lernenapp.mp4.json'
+// import NextVideo from 'next-video'
+// import DemoVideo from '@/videos/lernenapp.mp4.json'
 import { useEffect, useState, useRef } from 'react'
 
 export default function Main() {
@@ -47,9 +47,9 @@ export default function Main() {
           dark:bg-bgColorCardDark
         ">
         <Headline />
-        <div className="w-full h-full">
+        {/* <div className="w-full h-full">
           <NextVideo src={DemoVideo} style={{}} accentColor='#50c9a4' className='w-full h-fit' />
-        </div>
+        </div> */}
       </div>
 
       <div className="px-fixed desktop:px-fixedDesktop w-full h-fit bg-bgColorLight dark:bg-bgColorDark">
