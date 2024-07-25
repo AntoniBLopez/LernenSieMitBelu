@@ -28,8 +28,7 @@ export default function RootLayout({
         <ThemeProvider enableSystem={true} attribute="class">
           <StoreProvider>
             <Header />
-            <StartButton />
-            <div className="flex flex-row gap-5 mx-6 laptop:mx-auto laptop:max-w-desktop">
+            <div className="flex flex-col tablet:flex-row gap-5 mx-6 mb-16 laptop:mx-auto laptop:max-w-desktop">
               <Aside />
               {children}
             </div>

@@ -14,6 +14,9 @@ const config: Config = {
         'primaryDarkColor': '#34ba91',
         'primaryExtraDarkColor': '#1f8767',
         'grayColor': '#696969',
+        'darkColor': '#141723',
+        'darkCardColor': '#1e2530',
+        'profileGrayColor': '#b4b4b4',
         /* Landing page */
         'LPGrayColor': '#c9c9c9',
       },
@@ -24,8 +27,8 @@ const config: Config = {
         'disabledPrimaryColor': '#b2ebd9',
         // 'disabledPrimaryColor': '#a1cfc0',
         'bgColorLight': '#f2f2f2',
-        'bgColorDark': '#000000',
-        'bgColorCardDark': '#202327',
+        'bgColorDark': '#141723',
+        'bgColorCardDark': '#1f2937',
         'bgColorCardHoverDark': '#181a1c',
         'selectedPrimaryColor': '#adf7e1',
         'graySelectedColor': '#ebebeb',
@@ -57,7 +60,8 @@ const config: Config = {
       // },
       borderColor: {
         'primaryColor': '#7ef7d2',
-        'primaryDarkColor': '#7ef7d2',
+        'primaryDarkColor': '#34ba91',
+        'primaryExtraDarkColor': '#1f8767',
       },
       width: {
         desktop: '1200px',

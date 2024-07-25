@@ -7,7 +7,7 @@ export default function SelectedLabels({ levelName = '', topicName = '' }: { lev
         levelName
         &&
         <div
-          className={`text-sm font-semibold dark:font-bold py-1 px-5 rounded-full cursor-default text-white dark:text-black bg-gradient-to-r from-green-400 to-blue-400`}>
+          className={`text-sm font-semibold dark:font-bold py-1 px-5 rounded-full cursor-default text-white dark:text-darkColor bg-gradient-to-r from-green-400 to-blue-400`}>
           {
             levelName.length > 0
               ?
@@ -20,7 +20,7 @@ export default function SelectedLabels({ levelName = '', topicName = '' }: { lev
       {
         topicName
         &&
-        <div className={`text-sm font-semibold dark:font-bold py-1 px-5 rounded-full cursor-default text-white dark:text-black bg-gradient-to-r from-green-400 to-blue-400`}>
+        <div className={`text-sm font-semibold dark:font-bold py-1 px-5 rounded-full cursor-default text-white dark:text-darkColor bg-gradient-to-r from-green-400 to-blue-400`}>
           {
             topicName.length > 0
               ?

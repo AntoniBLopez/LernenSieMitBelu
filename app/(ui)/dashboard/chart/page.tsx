@@ -17,7 +17,7 @@ export default function Page() {
 
   return (
     <section className='w-full rounded-xl p-5 bg-white dark:bg-bgColorCardDark transition-all duration-500'>
-      <h1 className='text-5xl w-fit font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#55aeb8] to-[#2cd5a2] text-primaryDarkColor'>Chart</h1>
+      <h1 className='text-5xl w-fit font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#55aeb8] to-[#2cd5a2]'>Chart</h1>
     </section>
   )
 }

@@ -3,6 +3,7 @@ import MenuIcon from '@/app/(ui)/components/MenuIcon'
 import Breadcrumbs from '@/app/(ui)/components/Breadcrumbs'
 import { usePathname } from 'next/navigation';
 import ThemeMode from '@/app/utils/ThemeMode'
+import StartButton from '@/app/(ui)/components/StartButton'
 
 export default function Header() {
   const pathname = usePathname()
@@ -22,6 +23,7 @@ export default function Header() {
           :
           ''
       }
+      <StartButton />
     </>
   )
 }

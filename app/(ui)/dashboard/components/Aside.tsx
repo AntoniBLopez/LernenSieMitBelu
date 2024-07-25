@@ -1,5 +1,4 @@
 'use client'
-import React, { useEffect } from 'react'
 import { UserIcon, ChartPieIcon, LockClosedIcon, Cog6ToothIcon } from '@heroicons/react/24/outline'
 import Link from 'next/link';
 import clsx from 'clsx';
@@ -15,14 +14,9 @@ const links = [
 export default function Aside() {
   const pathname = usePathname()
 
-  useEffect(() => {
-    console.log('pathname', pathname)
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-
   return (
-    <aside className={`self-start w-fit h-fit ${pathname.includes('/levels') ? 'hidden' : ''} transition-all duration-500`}>
-      <div className='flex flex-col w-fit drop-shadow-md rounded-xl bg-gradient-to-b from-[#55aeb8] to-[#2cd5a2]'>
+    <aside className={`self-start w-full h-full tablet:w-fit tablet:h-fit ${pathname.includes('/levels') ? 'hidden' : ''} transition-all duration-500`}>
+      <div className='flex flex-row tablet:flex-col w-full h-full tablet:w-fit tablet:h-fit max-tablet:justify-between drop-shadow-md rounded-xl bg-gradient-to-b from-[#55aeb8] to-[#2cd5a2]'>
         {
           links.map((link, index) => {
             const Icon = link.icon;
@@ -31,12 +25,12 @@ export default function Aside() {
                 key={link.name}
                 href={link.href}
                 className={clsx(
-                  `flex flex-col h-fit py-10 px-6 items-center text-sm font-medium hover:text-black hover:bg-white dark:hover:bg-bgColorCardDark dark:hover:text-white hover:scale-110 transition-all duration-100`,
+                  `flex flex-col h-fit w-full tablet:w-fit py-5 px-4 tablet:py-10 tablet:px-6 items-center text-sm font-medium hover:text-black hover:bg-white dark:hover:bg-bgColorCardDark dark:hover:text-white hover:scale-110 transition-all duration-100`,
                   {
                     'scale-110 bg-white text-black dark:bg-bgColorCardDark dark:text-white': pathname === link.href,
                     'bg-transparent text-white': pathname !== link.href,
-                    'rounded-t-xl': index === 0,
-                    'rounded-b-xl': index === links.length - 1,
+                    'max-tablet:rounded-tl-xl max-tablet:rounded-bl-xl tablet:rounded-t-xl': index === 0,
+                    'max-tablet:rounded-tr-xl max-tablet:rounded-br-xl tablet:rounded-b-xl': index === links.length - 1,
                   },
                 )}
               >

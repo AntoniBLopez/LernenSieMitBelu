@@ -191,7 +191,7 @@ function Page({ params }: { params: { level: string, topic: string } }) {
 
   useEffect(() => {
     if (levelsStore.length > 0) {
-      setlevelData(levelsStore.find(obj => obj.level === params.level))
+      setlevelData(levelsStore.find((obj: any) => obj.level === params.level))
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [levelsStore])

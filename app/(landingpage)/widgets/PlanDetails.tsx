@@ -1,14 +1,15 @@
 import Image from 'next/image'
+import { CheckIcon } from "@heroicons/react/24/outline"
 
-function PlanDetails({text}: {text: string}) {
+
+function PlanDetails({ text }: { text: string }) {
   return (
     <ul className='whitespace-nowrap'>
-      <Image
-        src="/icons/landingpage/check.png"
+      <CheckIcon
         width={15}
         height={15}
-        alt="Check icon"
-        className='inline-block'
+        className='inline-block text-primaryDarkColor'
+        strokeWidth={2}
       />
       &nbsp;&nbsp;{text}
     </ul>

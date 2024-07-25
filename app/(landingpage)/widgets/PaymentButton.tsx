@@ -35,6 +35,7 @@ function PaymentButton({ size }: { size: string }) {
         items-center
         font-bold
         bg-LPPrimaryColor
+        dark:bg-primaryColor
         hover:bg-LPPrimaryColorHover
         filter
         rounded-lg
@@ -59,7 +60,7 @@ function PaymentButton({ size }: { size: string }) {
         height={22}
         className=""
       />
-      Beginnen
+      Anfangen
     </Link>
   )
 }

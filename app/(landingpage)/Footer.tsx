@@ -1,5 +1,7 @@
 import Image from "next/image"
 import Link from 'next/link'
+import { FaYoutube, FaXTwitter, FaInstagram, FaFacebook, FaSquareFacebook } from "react-icons/fa6";
+import { PiInstagramLogoFill } from "react-icons/pi";
 
 export default function Footer() {
   return (
@@ -10,14 +12,20 @@ export default function Footer() {
             <p>&quot;Maximize your productivity, one block at a time&quot;</p>
             <p className="">Copyright © 2024 - All rights reserved</p>
           </div>
-          <div className="self-center laptop:self-start">
-            <Link className="w-fit h-fit" href={"https://twitter.com/"} target="_blank">
-              <Image
-                src="/logos/socialmedia/x.png"
-                width={35}
-                height={35}
-                className="p-2 rounded-full bg-bgColorLight hover:cursor-pointer hover:scale-125 transition-all duration-200"
-                alt="X social media logo"
+          <div className="flex flex-row self-center items-center gap-2 laptop:self-start">
+            <Link className="w-fit h-fit" href={"https://www.youtube.com/@einfachspanischmitbelu"} target="_blank">
+              <FaYoutube
+                className="w-9 h-9 hover:cursor-pointer hover:scale-110 transition-all duration-200 text-red-500"
+              />
+            </Link>
+            <Link className="w-fit h-fit" href={"https://www.facebook.com/einfachspanischmitbelu"} target="_blank">
+              <FaSquareFacebook
+                className="w-7 h-7 hover:cursor-pointer hover:scale-110 transition-all duration-200 text-blue-500"
+              />
+            </Link>
+            <Link className="w-fit h-fit" href={"https://www.instagram.com/spanischmitbelu"} target="_blank">
+              <FaInstagram
+                className="w-7 h-7 hover:cursor-pointer hover:scale-110 transition-all duration-200"
               />
             </Link>
           </div>

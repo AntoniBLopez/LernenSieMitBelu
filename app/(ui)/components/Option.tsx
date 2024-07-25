@@ -47,9 +47,9 @@ function Option({ name, showMessage, isThisOptionCorrect, isChosenCorrect, reset
         ?
         isThisOptionCorrect
           ?
-          'bg-green-50 dark:bg-green-200 border-green-500 dark:border-green-500 text-black font-medium py-1 pl-[0.55rem] pr-1'
+          'bg-green-50 dark:bg-green-300 border-green-500 dark:border-green-500 text-black font-semibold py-1 pl-[0.55rem] pr-1'
           :
-          'bg-red-50 dark:bg-red-300 border-red-500 dark:border-red-500 text-black font-medium p-[0.55rem]'
+          'bg-red-50 dark:bg-red-300 border-red-500 dark:border-red-500 text-black font-semibold p-[0.55rem]'
         :
         'border-gray-200 p-[0.55rem]'
       }
