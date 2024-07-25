@@ -73,10 +73,10 @@ export default function ImageCropper({ updateAvatar = '', closeModal }: { update
             file:rounded-full
             file:border-0
             file:font-semibold
-            file:text-primaryDarkColor
+            file:text-sky-500
             file:bg-slate-200
             hover:file:text-white
-            hover:file:bg-primaryDarkColor
+            hover:file:bg-sky-500
             dark:file:text-sky-300
             dark:file:bg-gray-700
             dark:hover:file:bg-gray-600
