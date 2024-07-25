@@ -1,5 +1,4 @@
 import { IoMdClose } from "react-icons/io";
-import ReactCrop from 'react-image-crop';
 import ImageCropper from '@/app/(ui)/dashboard/profile/widgets/ImageCropper'
 
 export default function Modal({ updateAvatar = '', closeModal }: { updateAvatar?: any, closeModal: any }) {
@@ -17,11 +16,11 @@ export default function Modal({ updateAvatar = '', closeModal }: { updateAvatar?
             <div className="px-5 py-4">
               <button
                 type="button"
-                className="rounded-md p-1 inline-flex items-center justify-center text-black hover:bg-gray-200 dark:text-gray-400  dark:hover:bg-gray-700 focus:outline-none absolute top-2 right-2"
+                className="rounded-md p-1 inline-flex items-center justify-center text-black hover:bg-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 focus:outline-none absolute top-2 right-2"
                 onClick={closeModal}
               >
                 <span className="sr-only">Close menu</span>
-                <IoMdClose />
+                <IoMdClose className="text-2xl" />
               </button>
               <ImageCropper
                 updateAvatar={updateAvatar}

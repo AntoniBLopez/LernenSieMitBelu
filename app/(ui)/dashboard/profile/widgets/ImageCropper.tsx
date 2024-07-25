@@ -56,15 +56,34 @@ export default function ImageCropper({ updateAvatar = '', closeModal }: { update
   return (
     <>
       <label className="block mb-3 w-fit">
-        <span className="sr-only">Choose profile photo</span>
+        <span className="sr-only text-lg">Choose profile photo</span>
         <input
           type="file"
           accept="image/*"
           onChange={onSelectFile}
-          className="block w-full text-sm text-slate-500 file:mr-4 file:py-1 file:px-2 file:rounded-full file:border-0 file:text-xs file:bg-gray-700 file:text-sky-300 hover:file:bg-gray-600"
+          className="
+            block
+            w-full
+            file:text-base
+            text-slate-500
+            file:cursor-pointer
+            file:mr-4
+            file:py-1
+            file:px-4
+            file:rounded-full
+            file:border-0
+            file:font-semibold
+            file:text-primaryDarkColor
+            file:bg-slate-200
+            hover:file:text-white
+            hover:file:bg-primaryDarkColor
+            dark:file:text-sky-300
+            dark:file:bg-gray-700
+            dark:hover:file:bg-gray-600
+          "
         />
       </label>
-      {error && <p className="text-red-400 text-xs">{error}</p>}
+      {error && <p className="text-red-400 text-lg">{error}</p>}
       {imgSrc && (
         <div className="flex flex-col items-center">
           <ReactCrop
@@ -84,7 +103,7 @@ export default function ImageCropper({ updateAvatar = '', closeModal }: { update
             />
           </ReactCrop>
           <button
-            className="text-white font-mono text-xs py-2 px-4 rounded-2xl mt-4 bg-sky-500 hover:bg-sky-600"
+            className="text-white font-mono text-sm py-2 px-4 rounded-2xl mt-4 bg-sky-500 hover:bg-sky-600"
             onClick={() => {
               if (imgRef.current) {
                 const pixelCrop = convertToPixelCrop(crop, imgRef.current.width, imgRef.current.height);

@@ -155,6 +155,7 @@ export default function Page() {
         </div>
       </section>
       <button
+        disabled={true}
         className='
           w-fit
           self-end
@@ -168,8 +169,12 @@ export default function Page() {
           from-[#55aeb8]
           to-[#2cd5a2]
           text-white
+          disabled:text-gray-400
           hover:from-[#62c2cd]
           hover:to-[#2bcb9b]
+          disabled:from-[#418188]
+          disabled:to-[#218869]
+          disabled:hover:shadow-none
           hover:shadow-md
         '>
         Save
