@@ -2,11 +2,18 @@
 import Image from "next/image";
 import Link from "next/link";
 import ThemeMode from '@/app/utils/ThemeMode'
+import { animate } from "motion"
+import { useEffect } from "react";
+
 
 export default function Header() {
 
+  useEffect(() => {
+    animate("#header", { y: [-100, 0], opacity: [0, 1] }, { duration: 1.2 })
+  }, [])
+
   return (
-    <header className="flex flex-row justify-between items-end my-3 mx-10 desktop:mx-auto desktop:w-desktop">
+    <header id="header" className="flex flex-row justify-between items-end my-3 mx-10 desktop:mx-auto desktop:w-desktop">
       <Link
         href={"/"}
       >

@@ -68,6 +68,9 @@ dependencies:
   morgan:
     specifier: ^1.10.0
     version: 1.10.0
+  motion:
+    specifier: ^10.18.0
+    version: 10.18.0
   next:
     specifier: 14.2.3
     version: 14.2.3(react-dom@18.3.1)(react@18.3.1)
@@ -1146,6 +1149,53 @@ packages:
     resolution: {integrity: sha512-qKwC/M/nNNaKUBMQ0nuzm47b7ZYWQHN3pcXq4IIcoSBc2hOIrflAxJduIvvqmhoz3gR2TacTAs8vlsCVPkiEdQ==}
     dependencies:
       sparse-bitfield: 3.0.3
+    dev: false
+
+  /@motionone/animation@10.18.0:
+    resolution: {integrity: sha512-9z2p5GFGCm0gBsZbi8rVMOAJCtw1WqBTIPw3ozk06gDvZInBPIsQcHgYogEJ4yuHJ+akuW8g1SEIOpTOvYs8hw==}
+    dependencies:
+      '@motionone/easing': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      tslib: 2.6.3
+    dev: false
+
+  /@motionone/dom@10.18.0:
+    resolution: {integrity: sha512-bKLP7E0eyO4B2UaHBBN55tnppwRnaE3KFfh3Ps9HhnAkar3Cb69kUCJY9as8LrccVYKgHA+JY5dOQqJLOPhF5A==}
+    dependencies:
+      '@motionone/animation': 10.18.0
+      '@motionone/generators': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      hey-listen: 1.0.8
+      tslib: 2.6.3
+    dev: false
+
+  /@motionone/easing@10.18.0:
+    resolution: {integrity: sha512-VcjByo7XpdLS4o9T8t99JtgxkdMcNWD3yHU/n6CLEz3bkmKDRZyYQ/wmSf6daum8ZXqfUAgFeCZSpJZIMxaCzg==}
+    dependencies:
+      '@motionone/utils': 10.18.0
+      tslib: 2.6.3
+    dev: false
+
+  /@motionone/generators@10.18.0:
+    resolution: {integrity: sha512-+qfkC2DtkDj4tHPu+AFKVfR/C30O1vYdvsGYaR13W/1cczPrrcjdvYCj0VLFuRMN+lP1xvpNZHCRNM4fBzn1jg==}
+    dependencies:
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
+      tslib: 2.6.3
+    dev: false
+
+  /@motionone/types@10.17.1:
+    resolution: {integrity: sha512-KaC4kgiODDz8hswCrS0btrVrzyU2CSQKO7Ps90ibBVSQmjkrt2teqta6/sOG59v7+dPnKMAg13jyqtMKV2yJ7A==}
+    dev: false
+
+  /@motionone/utils@10.18.0:
+    resolution: {integrity: sha512-3XVF7sgyTSI2KWvTf6uLlBJ5iAgRgmvp3bpuOiQJvInd4nZ19ET8lX5unn30SlmRH7hXbBbH+Gxd0m0klJ3Xtw==}
+    dependencies:
+      '@motionone/types': 10.17.1
+      hey-listen: 1.0.8
+      tslib: 2.6.3
     dev: false
 
   /@mux/mux-node@8.8.0:
@@ -3798,6 +3848,10 @@ packages:
     engines: {node: '>=16.0.0'}
     dev: false
 
+  /hey-listen@1.0.8:
+    resolution: {integrity: sha512-COpmrF2NOg4TBWUJ5UVyaCU2A88wEMkUPK4hNqyCkqHbxT92BbvfjoSozkAIIm6XhicGlJHhFdullInrdhwU8Q==}
+    dev: false
+
   /hls.js@1.5.13:
     resolution: {integrity: sha512-xRgKo84nsC7clEvSfIdgn/Tc0NOT+d7vdiL/wvkLO+0k0juc26NRBPPG1SfB8pd5bHXIjMW/F5VM8VYYkOYYdw==}
     dev: false
@@ -4476,6 +4530,15 @@ packages:
       on-headers: 1.0.2
     transitivePeerDependencies:
       - supports-color
+    dev: false
+
+  /motion@10.18.0:
+    resolution: {integrity: sha512-MVAZZmwM/cp77BrNe1TxTMldxRPjwBNHheU5aPToqT4rJdZxLiADk58H+a0al5jKLxkB0OdgNq6DiVn11cjvIQ==}
+    dependencies:
+      '@motionone/animation': 10.18.0
+      '@motionone/dom': 10.18.0
+      '@motionone/types': 10.17.1
+      '@motionone/utils': 10.18.0
     dev: false
 
   /mpath@0.9.0:

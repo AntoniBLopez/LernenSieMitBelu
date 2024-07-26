@@ -48,3 +48,7 @@ body {
 .slide-in {
   animation: slideIn 0.2s forwards;
 }
+
+.shadow-customized {
+  box-shadow: 0px 0px 10px #50c9a4;
+}

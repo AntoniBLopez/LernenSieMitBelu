@@ -63,6 +63,9 @@ const config: Config = {
         'primaryDarkColor': '#34ba91',
         'primaryExtraDarkColor': '#1f8767',
       },
+      boxShadowColor: {
+        primaryColor: '#50c9a4',
+      },
       width: {
         desktop: '1200px',
       },

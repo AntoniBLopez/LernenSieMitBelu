@@ -15,8 +15,8 @@ export default function Aside() {
   const pathname = usePathname()
 
   return (
-    <aside className={`self-start w-full h-full tablet:w-fit tablet:h-fit ${pathname.includes('/levels') ? 'hidden' : ''} transition-all duration-500`}>
-      <div className='flex flex-row tablet:flex-col w-full h-full tablet:w-fit tablet:h-fit max-tablet:justify-between drop-shadow-md rounded-xl bg-gradient-to-b from-[#55aeb8] to-[#2cd5a2]'>
+    <aside className={`self-start w-full h-fit tablet:w-fit tablet:h-fit ${pathname.includes('/levels') ? 'hidden' : ''} transition-all duration-500`}>
+      <div className='flex flex-row tablet:flex-col w-full h-fit tablet:w-fit tablet:h-full max-tablet:justify-between drop-shadow-md rounded-xl bg-gradient-to-b from-[#55aeb8] to-[#2cd5a2]'>
         {
           links.map((link, index) => {
             const Icon = link.icon;
