@@ -1,0 +1,23 @@
+{
+  "status": "ready",
+  "originalFilePath": "videos\\app-vokabeltrainer.mp4",
+  "provider": "mux",
+  "providerMetadata": {
+    "mux": {
+      "uploadId": "TW1E202WLYqxeGDES6mxq00f02bwGNtc6025wEX8cVbY2kA",
+      "assetId": "w01s01mICDU667YuURFuLIj12kKAHTmxIuMuHEtZ02Rv5g",
+      "playbackId": "Y3rK9RIBnXMZM5TYdx65UTdhnPywvOulZ2Zcyef00v2s"
+    }
+  },
+  "createdAt": 1722439448823,
+  "updatedAt": 1722439487794,
+  "size": 588915734,
+  "sources": [
+    {
+      "src": "https://stream.mux.com/Y3rK9RIBnXMZM5TYdx65UTdhnPywvOulZ2Zcyef00v2s.m3u8",
+      "type": "application/x-mpegURL"
+    }
+  ],
+  "poster": "https://image.mux.com/Y3rK9RIBnXMZM5TYdx65UTdhnPywvOulZ2Zcyef00v2s/thumbnail.webp",
+  "blurDataURL": "data:image/webp;base64,UklGRqwAAABXRUJQVlA4IKAAAABwAgCdASoQAAkAAQAcJQBOgngIoAMsc0aQAEEAAP79lqO2vKksHeX8WxCJ/6D/NP/Tky3sI6fKqfPf9wvDiBb59EAV8+L/WWRrkG20yBqg6Xgjmk0+HvZqFTL7WKKHd653ITPRezqmTX8EyKjL96aN3gP1RgMfMcaYl67or60ID/wFST9+/GBc3Xj94CIRUx5zNj4LpiwRD9S7ZKQxmH4A"
+}

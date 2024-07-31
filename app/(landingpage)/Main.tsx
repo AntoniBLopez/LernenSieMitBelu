@@ -5,9 +5,9 @@ import Image from 'next/image'
 import Headline from '@/app/(landingpage)/utils/Headline'
 import PaymentButton from '@/app/(landingpage)/widgets/PaymentButton'
 import PlanDetails from '@/app/(landingpage)/widgets/PlanDetails'
-import MuxPlayer from '@mux/mux-player-react'
-// import NextVideo from 'next-video'
-// import DemoVideo from '@/videos/app-vokabeltrainer.mp4'
+// import MuxPlayer from '@mux/mux-player-react'
+import NextVideo from 'next-video'
+import DemoVideo from '@/videos/app-vokabeltrainer.mp4'
 import { animate, stagger, inView, timeline, scroll } from "motion"
 
 export default function Main() {
@@ -90,8 +90,8 @@ export default function Main() {
       >
         <Headline />
         <div id='video' className="w-full h-full">
-          {/* <NextVideo src={DemoVideo} style={{}} accentColor='#50c9a4' className='w-full h-fit' /> */}
-          <MuxPlayer
+          <NextVideo src={DemoVideo} style={{}} accentColor='#50c9a4' className='w-full h-fit' />
+          {/* <MuxPlayer
             streamType="on-demand"
             playbackId="mEeasIlVAz0102nlL9c4DBayMmgj006vKAyRn4h7GbALRY"
             metadataVideoTitle="Placeholder (optional)"
@@ -99,7 +99,7 @@ export default function Main() {
             accentColor="#50c9a4"
             // primaryColor="#50c9a4"
             // secondaryColor="#000000"
-          />
+          /> */}
         </div>
       </div>
 
