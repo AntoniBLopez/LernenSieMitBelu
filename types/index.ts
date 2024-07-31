@@ -4,7 +4,7 @@ export interface Word {
 
 export interface WordsTraduction {
   word: (string | number)[];
-  known_by_0: string[];
+  known_by_0: Array<string>;
   known_by_1: string[];
   known_by_2: string[];
 }
