@@ -17,7 +17,7 @@ export default function ThemeMode() {
   return (
     <Dropdown
       label={currentTheme === 'dark' ? <MdOutlineDarkMode className="rounded-lg hover:cursor-pointer w-6 h-6" /> : <MdOutlineLightMode className="rounded-lg hover:cursor-pointer w-5 h-5" />}
-      className={`w-24 h-fit p-0 drop-shadow-md rounded-lg bg-white dark:bg-bgColorCardDark dark:border-2 dark:border-gray-800 ${pathName === '/' ? 'dark:bg-black border-hidden' : ''}`}
+      className={`w-24 h-fit p-0 drop-shadow-md rounded-lg bg-white dark:bg-bgColorCardDark dark:border-2 dark:border-gray-800 ${pathName === '/' ? 'dark:bg-bgColorCardDark dark:border-slate-500' : ''}`}
       arrowIcon={false}
       dismissOnClick={false}
       inline

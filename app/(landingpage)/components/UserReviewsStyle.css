@@ -1,0 +1,9 @@
+.reviews-container {
+  overflow: hidden; /* Oculta la barra de desplazamiento */
+  white-space: nowrap; /* Mantiene los elementos en una sola línea */
+}
+
+.reviews-container > * {
+  display: inline-block; /* Mantiene los elementos en línea */
+  white-space: normal; /* Permite que el texto dentro de las tarjetas se ajuste adecuadamente */
+}
