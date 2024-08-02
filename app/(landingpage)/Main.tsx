@@ -67,25 +67,25 @@ export default function Main() {
         <UserReviews />
       </div>
 
-      <div className='w-full h-fit bg-bgColorLight dark:bg-bgColorDark'>
-        <section className="flex flex-col h-fit mx-10 gap-5 desktop:w-desktop desktop:mx-auto ">
+      <div className='w-full h-fit py-44 bg-bgColorLight dark:bg-bgColorDark'>
+        <section className="flex flex-col h-fit mx-10 gap-52 desktop:w-desktop desktop:mx-auto ">
           {/* <script defer async src='https://cdn.trustindex.io/loader.js?3b845a03223a5388e946ead85cf'></script> */}
 
-          <div id='step-1' className='flex flex-col desktop:flex-row h-screen justify-center items-center gap-10'>
+          <div id='step-1' className='flex flex-col desktop:flex-row h-fit justify-center items-center gap-10'>
             <div className='flex flex-col gap-10'>
               <h3 className='flex flex-col mt-5 text-6xl text-center text-primaryColor'>
                 <span>Spanisch To-Go,</span>
                 <span>egal wann, egal wo.</span>
                 <span></span>
               </h3>
-              <p className='text-center text-xl px-24'><span className='text-primaryColor'>Lerne effektiv</span> und mit Spaß Vokabeln, die dich weiterbringen und <span className='text-primaryColor'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
+              <p className='text-center text-xl px-24'><span className='text-primaryColor font-semibold'>Lerne effektiv</span> und <span className='text-primaryColor font-semibold'>mit Spaß</span> Vokabeln, die dich weiterbringen und <span className='text-primaryColor font-semibold'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
             </div>
             <picture className='flex w-full h-fit justify-center'>
               <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
             </picture>
           </div>
 
-          <div id='step-2' className='flex flex-col-reverse desktop:flex-row h-screen gap-10'>
+          <div id='step-2' className='flex flex-col-reverse desktop:flex-row h-fit gap-10'>
             <picture className='flex justify-center w-full h-fit'>
               <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
             </picture>
@@ -96,37 +96,37 @@ export default function Main() {
                 <span></span>
               </h3>
               <p className='text-center text-xl px-24'>
-                Belu <span className='text-primaryColor'>hat</span>schon vielen Menschen geholfen, ihr <span className='text-primaryColor'>Spanisch</span> zu verbessern. Begib dich jetzt auf deine Reise und teste die App 3 Tage gratis.
+                Belu <span className='text-primaryColor font-semibold'>hat</span>schon <span className='text-primaryColor font-semibold'>vielen Menschen geholfen</span>, ihr <span className='text-primaryColor font-semibold'>Spanisch</span> zu <span className='text-primaryColor font-semibold'>verbessern</span>. Begib dich jetzt auf deine Reise und teste die App 3 Tage gratis.
               </p>
             </div>
           </div>
 
-          <div id='step-3' className='flex flex-col desktop:flex-row h-screen gap-10'>
+          <div id='step-3' className='flex flex-col desktop:flex-row h-fit gap-10'>
             <div className='flex flex-col gap-10'>
               <h3 className='flex flex-col mt-5 text-6xl  text-center text-primaryColor'>
-                <span>Spanisch To-Go,</span>
-                <span>egal wann, egal wo.</span>
+                <span>Zertifizierte</span>
+                <span>Lernmethode</span>
                 <span></span>
               </h3>
-              <p className='text-center text-xl px-24 '><span className='text-primaryColor'>Lerne effektiv</span> und mit Spaß Vokabeln, die dich weiterbringen und <span className='text-primaryColor'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
+              <p className='text-center text-xl px-24 '>Durch ihre <span className='text-primaryColor font-semibold'>langjährige Erfahrung</span> als <span className='text-primaryColor font-semibold'>zertifizierte Spanischlehrerin</span> für deutschsprachige Schüler kennt Belu die Herausforderungen beim Vokabellernen genau und hat die App <span className='text-primaryColor font-semibold'>speziell</span> auf deine Bedürfnisse <span className='text-primaryColor font-semibold'>zugeschnitten</span>.</p>
             </div>
             <picture className='flex w-full h-fit justify-center '>
               <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
             </picture>
           </div>
 
-          <div id='step-4' className='flex flex-col-reverse desktop:flex-row h-fit mb-20 gap-10'>
+          <div id='step-4' className='flex flex-col-reverse desktop:flex-row h-fit gap-10'>
             <picture className='flex justify-center w-full h-fit '>
               <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
             </picture>
             <div className='flex flex-col gap-10'>
               <h3 className='flex flex-col mt-5 text-6xl  text-center text-primaryColor'>
-                <span>Du lernst nicht</span>
-                <span>alleine.</span>
+                <span>Karteikarten</span>
+                <span>waren gestern.</span>
                 <span></span>
               </h3>
               <p className='text-center text-xl px-24 '>
-                Belu <span className='text-primaryColor'>hat</span>schon vielen Menschen geholfen, ihr <span className='text-primaryColor'>Spanisch</span> zu verbessern. Begib dich jetzt auf deine Reise und teste die App 3 Tage gratis.
+                Wiederhole Fehler, wechsle das Level mit einem Klick und lerne in einer strukturierten und sinnvollen Reihenfolge für bessere Erfolge.
               </p>
             </div>
           </div>

@@ -4,7 +4,7 @@ import PaymentButton from '@/app/(landingpage)/widgets/PaymentButton'
 
 function Headline() {
   return (
-    <div id="headline" className="flex flex-col gap-16 w-full h-fit">
+    <div id="headline" className="flex flex-col gap-10 w-full h-fit">
       <div className="flex flex-col gap-8">
         <h1 className='flex flex-col gap-2 text-5xl font-extrabold'>
           <span className='max-laptop:text-center'>

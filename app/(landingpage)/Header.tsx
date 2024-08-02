@@ -67,7 +67,7 @@ export default function Header() {
               </div>
           }
         </div>
-        <div className={`w-full h-px bg-slate-400 ${isScrolled ? 'opacity-100' : 'opacity-0'} transition-all duration-1000`} />
+        <div className={`w-full h-px bg-gray-400 dark:bg-black ${isScrolled ? 'opacity-100' : 'opacity-0'} transition-all duration-1000`} />
       </header>
     </>
   )
