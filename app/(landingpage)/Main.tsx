@@ -200,7 +200,7 @@ export default function Main() {
       </div>
 
 
-      <div
+      {/* <div
         className='
           bg-white
           dark:bg-bgColorCardDark
@@ -210,7 +210,7 @@ export default function Main() {
         ref={stickyEnd}
       >
         Reviews
-      </div>
+      </div> */}
 
       <div id='pricing' className="px-fixed desktop:px-fixedDesktop w-full h-fit bg-bgColorLight dark:bg-bgColorDark">
         <div className="flex flex-col items-center gap-10 h-fit py-20">

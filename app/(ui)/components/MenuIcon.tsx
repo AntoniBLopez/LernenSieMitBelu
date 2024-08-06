@@ -1,5 +1,5 @@
 'use client'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dropdown } from "flowbite-react"
 import Link from 'next/link';
 import Image from "next/image";
@@ -35,7 +35,7 @@ export default function MenuIcon() {
       className='light:border-none rounded-lg drop-shadow-md bg-white dark:bg-bgColorCardDark dark:border-2 dark:border-gray-800'
       arrowIcon={false}
       inline
-      dismissOnClick={false}
+      dismissOnClick={true} // Keep dropdown open or not when click inside
     >
       <Dropdown.Item className='gap-2 pb-3 hover:cursor-default hover:bg-transparent select-text'>
         <Image

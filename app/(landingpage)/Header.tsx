@@ -58,7 +58,10 @@ export default function Header() {
           {
             showActionButton
               ?
-              <PaymentButton size="w-50"  />
+              <div className="flex flex-row gap-10 items-center">
+                <PaymentButton size="w-50" />
+                <ThemeMode />
+              </div>
               :
               <div className="flex flex-row gap-10 items-center">
                 <Link href="/" className="text-lg font-bold hover:underline">Abo</Link>
