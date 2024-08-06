@@ -118,13 +118,13 @@
 //                 <p className='text-center text-xl px-24 translate-y-[28rem]'><span className='text-primaryColor'>Lerne effektiv</span> und mit Spaß Vokabeln, die dich weiterbringen und <span className='text-primaryColor'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
 //               </div>
 //               <picture className='w-full h-fit translate-y-[35rem]'>
-//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-landingpage-card' />
 //               </picture>
 //             </div>
 
 //             <div id='step-2' className='step absolute flex flex-row gap-10'>
 //               <picture className='flex justify-end w-full h-fit translate-y-[13rem]'>
-//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-landingpage-card' />
 //               </picture>
 //               <div className='flex flex-col gap-10'>
 //                 <h3 className='flex flex-col mt-5 text-6xl translate-y-[12rem] text-center text-primaryColor'>
@@ -148,13 +148,13 @@
 //                 <p className='text-center text-xl px-24 -translate-y-[10rem]'><span className='text-primaryColor'>Lerne effektiv</span> und mit Spaß Vokabeln, die dich weiterbringen und <span className='text-primaryColor'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
 //               </div>
 //               <picture className='w-full h-fit -translate-y-[9rem]'>
-//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-landingpage-card' />
 //               </picture>
 //             </div>
 
 //             <div id='step-4' className='step absolute flex flex-row gap-10'>
 //               <picture className='flex justify-end w-full h-fit -translate-y-[31rem]'>
-//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+//                 <Image src='/photos/levels.png' width={400} height={400} alt='levels photo sample' className='rounded-tr-[100px] shadow-landingpage-card' />
 //               </picture>
 //               <div className='flex flex-col gap-10'>
 //                 <h3 className='flex flex-col mt-5 text-6xl -translate-y-[32rem] text-center text-primaryColor'>

@@ -9,13 +9,22 @@ import MuxPlayer from '@mux/mux-player-react'
 // import NextVideo from 'next-video'
 // import DemoVideo from '@/videos/app-vokabeltrainer.mp4'
 import { animate, stagger, inView, timeline, scroll } from "motion"
+import { useTheme } from 'next-themes'
 
 export default function Main() {
 
+  const { theme, systemTheme } = useTheme()
+  const currentTheme = theme === 'system' ? systemTheme : theme
+  const isBrowser = typeof window !== 'undefined'
+  const [isDarkMode, setIsDarkMode] = useState(isBrowser ? localStorage.theme === 'dark' : currentTheme === 'dark')
   const stickyEnd = useRef<HTMLDivElement>(null)
   // const [script, setScript] = useState<any>(null)
   // const scriptRef = useRef<any>(null)
 
+  useEffect(() => {
+    setIsDarkMode(currentTheme === 'dark')
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentTheme])
 
   const getVideo = async () => {
     await fetch('https://api.mux.com/video/v1/assets/1SZbpjrszuzrmQ69UpetkJ6w65Jkm9yJqZ7IsIcgrtM')
@@ -67,67 +76,124 @@ export default function Main() {
         <UserReviews />
       </div>
 
-      <div className='w-full h-fit py-44 bg-bgColorLight dark:bg-bgColorDark'>
+      <div className='w-full h-fit py-36 bg-bgColorLight dark:bg-bgColorDark'>
         <section className="flex flex-col h-fit mx-10 gap-52 desktop:w-desktop desktop:mx-auto ">
           {/* <script defer async src='https://cdn.trustindex.io/loader.js?3b845a03223a5388e946ead85cf'></script> */}
 
-          <div id='step-1' className='flex flex-col desktop:flex-row h-fit justify-center items-center gap-10'>
+          <div id='step-1' className='flex flex-col desktop:flex-row h-fit justify-center items-center gap-14'>
             <div className='flex flex-col gap-10'>
-              <h3 className='flex flex-col mt-5 text-6xl text-center text-primaryColor'>
+              <h3 className='flex flex-col text-5xl mobile:text-6xl font-bold text-center text-primaryColor'>
                 <span>Spanisch To-Go,</span>
                 <span>egal wann, egal wo.</span>
                 <span></span>
               </h3>
-              <p className='text-center text-xl px-24'><span className='text-primaryColor font-semibold'>Lerne effektiv</span> und <span className='text-primaryColor font-semibold'>mit Spaß</span> Vokabeln, die dich weiterbringen und <span className='text-primaryColor font-semibold'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
+              <p className='text-center text-xl tablet:px-24'><span className='text-primaryColor font-semibold'>Lerne effektiv</span> und <span className='text-primaryColor font-semibold'>mit Spaß</span> Vokabeln, die dich weiterbringen und <span className='text-primaryColor font-semibold'>auf dein Level abgestimmt</span> sind. Denn eine Sprache zu lernen macht nur Spaß, wenn das Lernen maßgeschneidert  ist.</p>
             </div>
             <picture className='flex w-full h-fit justify-center'>
-              <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+              <Image
+                src={isDarkMode ? '/photos/levels-dark.png' : '/photos/levels-light.png'}
+                width={350} height={350}
+                alt='levels photo sample'
+                className='rounded-tr-[100px] shadow-landingpage-card'
+              />
             </picture>
           </div>
 
-          <div id='step-2' className='flex flex-col-reverse desktop:flex-row h-fit gap-10'>
+          <div id='step-2' className='flex flex-col-reverse desktop:flex-row h-fit justify-center gap-14'>
             <picture className='flex justify-center w-full h-fit'>
-              <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+              <Image
+                src={isDarkMode ? '/photos/topic-dark.png' : '/photos/topic-light.png'}
+                width={350} height={350}
+                alt='topics photo sample'
+                className='rounded-tr-[100px] shadow-landingpage-card'
+              />
             </picture>
             <div className='flex flex-col gap-10'>
-              <h3 className='flex flex-col mt-5 text-6xl text-center text-primaryColor'>
+              <h3 className='flex flex-col mt-5 text-5xl mobile:text-6xl font-bold text-center text-primaryColor'>
                 <span>Du lernst nicht</span>
                 <span>alleine.</span>
                 <span></span>
               </h3>
-              <p className='text-center text-xl px-24'>
+              <p className='text-center text-xl tablet:px-24'>
                 Belu <span className='text-primaryColor font-semibold'>hat</span>schon <span className='text-primaryColor font-semibold'>vielen Menschen geholfen</span>, ihr <span className='text-primaryColor font-semibold'>Spanisch</span> zu <span className='text-primaryColor font-semibold'>verbessern</span>. Begib dich jetzt auf deine Reise und teste die App 3 Tage gratis.
               </p>
             </div>
           </div>
 
-          <div id='step-3' className='flex flex-col desktop:flex-row h-fit gap-10'>
+          <div id='step-3' className='flex flex-col desktop:flex-row h-fit gap-14'>
             <div className='flex flex-col gap-10'>
-              <h3 className='flex flex-col mt-5 text-6xl  text-center text-primaryColor'>
+              <h3 className='flex flex-col mt-5 text-5xl mobile:text-6xl font-bold text-center break-words text-primaryColor'>
                 <span>Zertifizierte</span>
                 <span>Lernmethode</span>
                 <span></span>
               </h3>
-              <p className='text-center text-xl px-24 '>Durch ihre <span className='text-primaryColor font-semibold'>langjährige Erfahrung</span> als <span className='text-primaryColor font-semibold'>zertifizierte Spanischlehrerin</span> für deutschsprachige Schüler kennt Belu die Herausforderungen beim Vokabellernen genau und hat die App <span className='text-primaryColor font-semibold'>speziell</span> auf deine Bedürfnisse <span className='text-primaryColor font-semibold'>zugeschnitten</span>.</p>
+              <p className='text-center text-xl tablet:px-24 '>Durch ihre <span className='text-primaryColor font-semibold'>langjährige Erfahrung</span> als <span className='text-primaryColor font-semibold'>zertifizierte Spanischlehrerin</span> für deutschsprachige Schüler kennt Belu die Herausforderungen beim Vokabellernen genau und hat die App <span className='text-primaryColor font-semibold'>speziell</span> auf deine Bedürfnisse <span className='text-primaryColor font-semibold'>zugeschnitten</span>.</p>
             </div>
             <picture className='flex w-full h-fit justify-center '>
-              <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
+              <Image
+                src={isDarkMode ? '/photos/games-dark.png' : '/photos/games-light.png'}
+                width={350} height={350}
+                alt='Games photo sample'
+                className='rounded-tr-[100px] shadow-landingpage-card'
+              />
             </picture>
           </div>
 
-          <div id='step-4' className='flex flex-col-reverse desktop:flex-row h-fit gap-10'>
-            <picture className='flex justify-center w-full h-fit '>
-              <Image src='/photos/levels.png' width={380} height={380} alt='levels photo sample' className='rounded-tr-[100px] shadow-customized' />
-            </picture>
-            <div className='flex flex-col gap-10'>
-              <h3 className='flex flex-col mt-5 text-6xl  text-center text-primaryColor'>
-                <span>Karteikarten</span>
-                <span>waren gestern.</span>
-                <span></span>
-              </h3>
-              <p className='text-center text-xl px-24 '>
-                Wiederhole Fehler, wechsle das Level mit einem Klick und lerne in einer strukturierten und sinnvollen Reihenfolge für bessere Erfolge.
-              </p>
+          <div id='step-4' className='flex flex-col h-fit gap-16'>
+            <div className='flex flex-col w-full desktop:flex-row gap-10'>
+              <div className='flex flex-col w-full desktop:mx-20 desktop:flex-row gap-10'>
+                <h3 className='flex-2 flex-col w-full desktop:w-fit mt-5 text-5xl mobile:text-6xl font-bold text-center desktop:text-start text-primaryColor'>
+                  <span className='break-words'>Karteikarten </span>
+                  <br />
+                  <span> waren gestern.</span>
+                  <span></span>
+                </h3>
+                <p className='flex-1 text-center tablet:px-24 desktop:px-0 desktop:text-start text-xl self-end'>
+                  Wiederhole Fehler, wechsle das Level mit einem Klick und lerne in einer strukturierten und sinnvollen Reihenfolge für bessere Erfolge.
+                </p>
+              </div>
+            </div>
+            <div className='flex flex-wrap justify-center gap-10'>
+              <picture className='flex flex-col justify-center w-fit h-fit gap-2'>
+                <span className='self-center font-bold text-primaryColor'>Karteikarten</span>
+                <Image
+                  src={isDarkMode ? '/photos/games/flashcard-dark.png' : '/photos/games/flashcard-light.png'}
+                  width={220}
+                  height={220}
+                  alt='Flashcard game photo sample'
+                  className='rounded-[20px] shadow-landingpage-card-blue'
+                />
+              </picture>
+              <picture className='flex flex-col justify-center w-fit h-fit gap-2'>
+                <span className='self-center font-bold text-primaryColor'>MultipleChoice</span>
+                <Image
+                  src={isDarkMode ? '/photos/games/multiplechoice-dark.png' : '/photos/games/multiplechoice-light.png'}
+                  width={220}
+                  height={220}
+                  alt='multiplechoice game photo sample'
+                  className='rounded-[20px] shadow-landingpage-card-blue'
+                />
+              </picture>
+              <picture className='flex flex-col justify-center w-fit h-fit gap-2'>
+                <span className='self-center font-bold text-primaryColor'>Schreiben</span>
+                <Image
+                  src={isDarkMode ? '/photos/games/writing-dark.png' : '/photos/games/writing-light.png'}
+                  width={220}
+                  height={220}
+                  alt='writing game photo sample'
+                  className='rounded-[20px] shadow-landingpage-card-blue'
+                />
+              </picture>
+              <picture className='flex flex-col justify-center w-fit h-fit gap-2'>
+                <span className='self-center font-bold text-primaryColor'>Zuordnen</span>
+                <Image
+                  src={isDarkMode ? '/photos/games/multiplechoice-dark.png' : '/photos/games/multiplechoice-light.png'}
+                  width={220}
+                  height={220}
+                  alt='multiplechoice game photo sample'
+                  className='rounded-[20px] shadow-landingpage-card-blue'
+                />
+              </picture>
             </div>
           </div>
         </section>
