@@ -17,8 +17,9 @@ function Page({ params }: { params: { level: string, topic: string } }) {
   const [levelData, setlevelData] = useState<any>({})
   const [topicWords, setTopicWords] = useState<any>([])
   const [groupedWords, setGroupedWords] = useState<any>([])
-  const [randomOrderedWords, setRandomOrderedWords] = useState<any>([])
+  const [actualCardNumber, setActualCardNumber] = useState(1)
   const [wordsSelected, setWordsSelected] = useState<any>([])
+  const [isMatch, setIsMatch] = useState(false)
 
   useEffect(() => {
     if (levelsStore.length === 0) {
@@ -47,6 +48,7 @@ function Page({ params }: { params: { level: string, topic: string } }) {
 
   useEffect(() => {
     if (topicWords.length > 0) {
+      console.log('topicWords', topicWords)
       const result = []
       /* Dividir el array en grupos de 12 palabras, 6 traducicones (en español y 6 en alemán) */
       for (let i = 0; i < topicWords.length; i += 6) {
@@ -74,8 +76,10 @@ function Page({ params }: { params: { level: string, topic: string } }) {
         })
 
         if (matchFound) {
+          setIsMatch(true)
           console.log('Hay match')
         } else {
+          if (isMatch) setIsMatch(false)
           console.log('No hay match')
         }
 
@@ -83,13 +87,14 @@ function Page({ params }: { params: { level: string, topic: string } }) {
       }
       console.log(wordsSelected)
     }
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wordsSelected])
 
   return (
     <main className='flex flex-col w-full mt-1 gap-10'>
-      <div className='flex flex-col gap-2 items-start'>
+      <div className='flex flex-row gap-2 justify-between'>
         <SelectedLabels levelName={params.level} topicName={params.topic} />
+        <div className='pr-5'>{actualCardNumber}/{groupedWords?.length}</div>
       </div>
 
       <section
@@ -106,7 +111,7 @@ function Page({ params }: { params: { level: string, topic: string } }) {
       >
         {
           groupedWords.length > 0 &&
-          <MatchingCard wordsGroup={groupedWords[0]} setWordsSelected={setWordsSelected} />
+          <MatchingCard wordsGroup={groupedWords[actualCardNumber - 1]} setWordsSelected={setWordsSelected} isMatch={isMatch} setIsMatch={setIsMatch} />
         }
       </section>
     </main>
