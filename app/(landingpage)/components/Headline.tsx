@@ -12,9 +12,9 @@ function Headline() {
           </span>
           <span className='flex flex-col max-mobile:items-center max-laptop:justify-center laptop:flex-row'>
             <span className='text-center max-laptop:mb-2.5'>
-              lernen mit&nbsp;
+              lernen&nbsp;
               <span className='bg-primaryColor px-1.5 rounded-md'>
-                <span className="text-white">Spaß</span>
+                <span className="text-white">mit Spaß</span>
               </span>
             </span>
           </span>

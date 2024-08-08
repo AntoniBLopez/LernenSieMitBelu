@@ -22,13 +22,13 @@ export default function ThemeMode() {
       dismissOnClick={true}
       inline
     >
-      <Dropdown.Item onClick={() => setTheme('light')} className={`gap-2 pb-3 font-semibold dark:hover:bg-bgColorCardHoverDark`}>
+      <Dropdown.Item onClick={() => setTheme('light')} className={`gap-2 pb-3 font-semibold dark:hover:bg-selectedColorDark`}>
         Light
       </Dropdown.Item>
-      <Dropdown.Item onClick={() => setTheme('dark')} className={`gap-2 pb-3 font-semibold dark:hover:bg-bgColorCardHoverDark`}>
+      <Dropdown.Item onClick={() => setTheme('dark')} className={`gap-2 pb-3 font-semibold dark:hover:bg-selectedColorDark`}>
         Dark
       </Dropdown.Item>
-      <Dropdown.Item onClick={() => setTheme('system')} className={`gap-2 pb-3 font-semibold dark:hover:bg-bgColorCardHoverDark`}>
+      <Dropdown.Item onClick={() => setTheme('system')} className={`gap-2 pb-3 font-semibold dark:hover:bg-selectedColorDark`}>
         System
       </Dropdown.Item>
     </Dropdown>

@@ -52,7 +52,7 @@ export default function MenuIcon() {
       </Dropdown.Item>
       <div className='w-full h-[0.5px] bg-slate-300 dark:bg-gray-700 mb-1' />
       <Link href="/dashboard/profile">
-        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
+        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-selectedColorDark'>
           <div className='flex flex-row gap-2'>
             <UserIcon width={18} height={18} strokeWidth={1.8} />
             Profile
@@ -60,7 +60,7 @@ export default function MenuIcon() {
           {/* <ChevronRightIcon width={16} height={16} strokeWidth={1.5} className='' /> */}
         </Dropdown.Item>
       </Link>
-      <Dropdown.Item onClick={handleSpeaker} className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
+      <Dropdown.Item onClick={handleSpeaker} className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-selectedColorDark'>
         <div className='flex flex-row gap-2'>
           <SpeakerWaveIcon width={18} height={18} strokeWidth={1.5} />
           Sound
@@ -68,7 +68,7 @@ export default function MenuIcon() {
         <span className='font-medium text-grayColor'>{isSpeakerOn ? 'On' : 'Off'}</span>
       </Dropdown.Item>
       <Link href="/dashboard/settings">
-        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
+        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-selectedColorDark'>
           <div className='flex flex-row gap-2'>
             <Cog6ToothIcon width={18} height={18} strokeWidth={1.8} />
             Settings
@@ -78,7 +78,7 @@ export default function MenuIcon() {
       </Link>
       <Dropdown.Divider className='bg-gray-300 dark:bg-gray-700' />
       <Link href="/">
-        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-bgColorCardHoverDark'>
+        <Dropdown.Item className='flex flex-row justify-between font-semibold align-bottom dark:hover:bg-selectedColorDark'>
           <div className='flex flex-row gap-2'>
             <ArrowLeftStartOnRectangleIcon width={18} height={18} strokeWidth={2} className='text-red-500' />
             Sign out

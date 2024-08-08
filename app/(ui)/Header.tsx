@@ -11,10 +11,10 @@ export default function Header() {
   return (
     <>
       <header className="flex flex-row my-3 mx-6 laptop:mx-auto laptop:max-w-desktop justify-between items-center">
+        <ThemeMode />
         <div className="flex flex-row gap-10">
           <MenuIcon />
         </div>
-        <ThemeMode />
       </header>
       {
         pathname.includes('/levels')

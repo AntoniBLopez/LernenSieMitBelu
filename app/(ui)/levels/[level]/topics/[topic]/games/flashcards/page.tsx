@@ -141,8 +141,6 @@ function Page({ params }: { params: { level: string, topic: string } }) {
   }, [levelsStore])
 
   useEffect(() => {
-    console.log(params.level)
-    console.log(params.topic)
     if (levelsStore.length > 0 && Object.keys(levelData).length > 0) {
       const onlyWords = levelData.topics[decodeURI(params.topic)].map((wordObject: WordsTraduction) => wordObject.word)
 

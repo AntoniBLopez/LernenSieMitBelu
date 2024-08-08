@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react'
 import { usePathname } from 'next/navigation'
 
 export default function Breadcrumbs() {
+  const isBrowser = typeof window !== "undefined"
   const pathName = usePathname()
   const level = pathName.split('/')[2]
   const topic = pathName.split('/')[4]
@@ -73,7 +74,7 @@ export default function Breadcrumbs() {
   return (
     <div ref={mainRef} className='flex flex-row items-center gap-1 mx-6 mt-7 laptop:mx-auto laptop:max-w-desktop'>
       {endPoints.slice(0, position + 1).map(({ name, href }, index) => {
-        if (position > 3 && window.innerWidth <= 640) {
+        if (position > 3 && isBrowser && window.innerWidth <= 640) {
           if (index > 0 && index < endPoints.length - 2 && !isSizeReduced) {
             isSizeReduced = true
             return (
@@ -141,8 +142,10 @@ export default function Breadcrumbs() {
             )
           }
         } else {
+          /* Hide the games the user is not playing */
           if (position > 4 && index === 4) return
           if (position > 5 && index === 5) return
+          if (position > 6 && index === 6) return
           return (
             <React.Fragment key={index}>
               <Link href={href} className='flex items-center gap-2'>

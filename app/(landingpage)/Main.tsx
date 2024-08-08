@@ -64,7 +64,7 @@ export default function Main() {
             {/* <NextVideo src={DemoVideo} style={{}} accentColor='#50c9a4' className='w-full h-fit' /> */}
             <MuxPlayer
               streamType="on-demand"
-              playbackId="mEeasIlVAz0102nlL9c4DBayMmgj006vKAyRn4h7GbALRY"
+              playbackId="OGDNQsfomBd00iSh6OEXtIF72TpDncqCUl8bZaKS2bVs"
               metadataVideoTitle="Placeholder (optional)"
               metadataViewerUserId="Placeholder (optional)"
               accentColor="#50c9a4"

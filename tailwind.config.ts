@@ -29,10 +29,10 @@ const config: Config = {
         'bgColorLight': '#f2f2f2',
         'bgColorDark': '#141723',
         'bgColorCardDark': '#1f2937',
-        'bgColorCardHoverDark': '#181a1c',
+        'bgColorCardHoverDark': '#171d26',
         'selectedPrimaryColor': '#adf7e1',
-        'graySelectedColor': '#ebebeb',
         'selectedColor': '#e8f0fe',
+        'selectedColorDark': '#2c384a',
         /* Landing page */
         'LPPrimaryColor': '#68f2c8',
         'LPPrimaryColorHover': '#7ef7d2',

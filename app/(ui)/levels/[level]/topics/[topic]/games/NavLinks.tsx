@@ -28,7 +28,7 @@ export default function NavLinks() {
         return (
           <Link
             key={link.name}
-            href={link.name === 'Zuordnen' ? '' : link.href}
+            href={link.href}
             className={clsx(
               'flex flex-col h-fit py-3 px-6 items-center rounded-md drop-shadow-md text-sm font-medium whitespace-nowrap bg-gray-50 dark:bg-bgColorCardDark hover:bg-sky-100 dark:hover:bg-bgColorCardHoverDark hover:text-primaryDarkColor',
               // {
