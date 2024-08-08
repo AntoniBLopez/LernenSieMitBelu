@@ -20,16 +20,17 @@ export const plan = [
   },
 ]
 
-function PaymentButton({ size }: { size: string }) {
+function PaymentButton({ size, header = false, hidden = false }: { size: string, header?: boolean, hidden?: boolean }) {
   return (
     <Link
       className={`
+        ${hidden ? 'hidden' : ''}
         flex
         flex-row
         ${size}
         gap-2
         px-4
-        py-2
+        ${header ? 'py-1' : 'py-2'}
         justify-center
         text-center
         items-center
@@ -37,6 +38,7 @@ function PaymentButton({ size }: { size: string }) {
         bg-LPPrimaryColor
         dark:bg-primaryColor
         hover:bg-LPPrimaryColorHover
+        text-black
         filter
         rounded-lg
         hover:drop-shadow-md

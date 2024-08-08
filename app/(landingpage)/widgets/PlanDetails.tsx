@@ -4,7 +4,7 @@ import { CheckIcon } from "@heroicons/react/24/outline"
 
 function PlanDetails({ text }: { text: string }) {
   return (
-    <ul className='whitespace-nowrap'>
+    <ul>
       <CheckIcon
         width={15}
         height={15}

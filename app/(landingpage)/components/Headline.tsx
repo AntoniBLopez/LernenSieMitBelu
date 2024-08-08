@@ -6,12 +6,12 @@ function Headline() {
   return (
     <div id="headline" className="flex flex-col gap-10 w-full h-fit">
       <div className="flex flex-col gap-8">
-        <h1 className='flex flex-col gap-2 text-5xl font-extrabold'>
+        <h1 className='flex flex-col gap-2 text-3xl mobile:text-4xl tablet:text-6xl laptop:text-5xl font-extrabold'>
           <span className='max-laptop:text-center'>
             Spanische Vokabel
           </span>
           <span className='flex flex-col max-mobile:items-center max-laptop:justify-center laptop:flex-row'>
-            <span className='self-center max-laptop:mb-2.5'>
+            <span className='text-center max-laptop:mb-2.5'>
               lernen mit&nbsp;
               <span className='bg-primaryColor px-1.5 rounded-md'>
                 <span className="text-white">Spaß</span>

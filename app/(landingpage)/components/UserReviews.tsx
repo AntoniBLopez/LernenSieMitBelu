@@ -15,8 +15,6 @@ export default function UserReviews() {
     { name: '', reviewDate: '', reviewText: '' },
     { name: '', reviewDate: '', reviewText: '' },
     { name: '', reviewDate: '', reviewText: '' },
-    { name: '', reviewDate: '', reviewText: '' },
-    { name: '', reviewDate: '', reviewText: '' },
   ]
 
   return (
@@ -28,7 +26,7 @@ export default function UserReviews() {
       </div>
       <div className='flex flex-row gap-2'>
 
-        <IoIosArrowBack className='w-16 h-16 mt-[6.5rem] cursor-pointer text-primaryColor hover:text-primaryDarkColor' />
+        {/* <IoIosArrowBack className='w-16 h-16 mt-[6.5rem] cursor-pointer text-primaryColor hover:text-primaryDarkColor' /> */}
         <section className='flex flex-row gap-10 overflow-x-hidden'>
           {
             reviews.map((review, index) => (
